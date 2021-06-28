@@ -8,6 +8,8 @@ library(htmltools)
 library(shinyhelper)
 library(ggplot2)
 
+source("random_description.R")
+
 edges_full_data <- read.csv("./mock_data.csv") %>%
     mutate(from = sapply(strsplit(interactor_name, " "), last),
            to = sapply(strsplit(interactee_name, " "), last))
@@ -57,11 +59,12 @@ ui <- fluidPage(
         div(class = "ag-node-panel",
             conditionalPanel(condition = "input.selected_node != null",
                              div(class = "ag-node-info",
-                                 h3("Interactees"),
-                                 tableOutput("selected_node_interactees"),
-                                 h3("Interactors"),
-                                 tableOutput("selected_node_interactors")
-                                 )),
+                                 uiOutput("selected_node_info"),
+                                 tabsetPanel(
+                                     id = "selected_node_tabs",
+                                     tabPanel("Interactees", dataTableOutput("selected_node_interactees")),
+                                     tabPanel("Interactors", dataTableOutput("selected_node_interactors"))
+                                 ))),
             conditionalPanel(condition = "input.selected_node == null",
                              div(class = "ag-node-info",
                                  "select node to display info about it and interactions associated with it"))
@@ -153,18 +156,6 @@ server <- function(input, output) {
             scale_color_manual(values = unname(edge_legend()[["colors"]])) +
             theme_void()
     })
-    
-    # output[["node_info"]] <- reactive({
-    #     if (is.null(input$graph_selected_nodes)) "XDDD"
-    #     else "oh noes"
-    # })
-    #     renderPrint({
-    #     ic(nodes)
-    #     ic(input$graph_selected_nodes[[1]])
-    #     nodes %>%
-    #         filter(id == input$graph_selected_nodes[[1]][[1]])
-    # 
-    # })
 
     selected_node_id <- reactive({
         input$graph_selected_nodes[[1]]
@@ -179,22 +170,34 @@ server <- function(input, output) {
     selected_node_label <- reactive({
         selected_node_info()[["label"]]
     })
-
-    output[["selected_node_interactors"]] <- renderTable({
+    
+    output[["selected_node_info"]] <- renderUI({
+        req(selected_node_id())
+        div(class = "ag-protein-info",
+            HTML(random_description(selected_node_id())))
+    })
+    
+    output[["selected_node_interactors"]] <- renderDataTable({
         req(selected_node_id())
         edges_full_data %>%
             filter(to == selected_node_id()) %>%
             arrange(from, doi) %>%
-            select(from, doi)
-    })
-
-    output[["selected_node_interactees"]] <- renderTable({
+            select(from, doi, aggregation_speed, elongates_by_attaching, heterogenous_fibers)
+    }, options = list(
+        pageLength = 10,
+        lengthChange = FALSE
+    ))
+    
+    output[["selected_node_interactees"]] <- renderDataTable({
         req(selected_node_id())
         edges_full_data %>%
             filter(from == selected_node_id()) %>%
             arrange(to, doi) %>%
-            select(to, doi)
-    })
+            select(to, doi, aggregation_speed, elongates_by_attaching, heterogenous_fibers)
+    }, options = list(
+        pageLength = 10,
+        lengthChange = FALSE
+    ))
     
     observe({
         input$selected_node
