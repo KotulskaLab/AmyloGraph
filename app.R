@@ -32,44 +32,55 @@ ui <- fluidPage(
     # TODO: use varSelectizeInput instead to dynamically generate possible groups?
     theme = "amylograph.css",
     h2("AmyloGraph", class = "ag-title"),
-    div(class = "ag-page-content",
-        div(class = "ag-control-panel",
-            helper(selectInput(inputId = "label_group", label = "Group edges by",
+    tabsetPanel(
+        id = "graph-table-panel",
+        tabPanel(
+            title = "Graph",
+            div(class = "ag-page-content",
+                div(class = "ag-control-panel",
+                    helper(selectInput(
+                        inputId = "label_group", label = "Group edges by",
                         choices = list(none = "none",
                                        `interactee aggregation speed` = "aggregation_speed",
                                        `elongates by attaching` = "elongates_by_attaching",
                                        `heterogenous fibers` = "heterogenous_fibers"),
                         multiple = FALSE),
-                   type = "markdown",
-                   content = "label_group"),
-            conditionalPanel(
-                condition = "input.label_group != \"none\"",
-                helper(uiOutput("labels_shown_ui"),
-                       type = "markdown",
-                       content = "labels_shown")
-            ),
-            conditionalPanel(
-                condition = "input.label_group != \"none\"",
-                plotOutput("legend", )
+                        type = "markdown",
+                        content = "label_group"),
+                    conditionalPanel(
+                        condition = "input.label_group != \"none\"",
+                        helper(uiOutput("labels_shown_ui"),
+                               type = "markdown",
+                               content = "labels_shown")
+                    ),
+                    conditionalPanel(
+                        condition = "input.label_group != \"none\"",
+                        plotOutput("legend", )
+                    )
+                ),
+                div(class = "ag-graph-panel",
+                    visNetworkOutput("graph", height = "calc(100% - 10px)", width = "auto")
+                ),
+                div(class = "ag-node-panel",
+                    conditionalPanel(
+                        condition = "input.selected_node != null",
+                        div(class = "ag-node-info",
+                            uiOutput("selected_node_info"),
+                            tabsetPanel(
+                                id = "selected_node_tabs",
+                                tabPanel("Interactees", dataTableOutput("selected_node_interactees")),
+                                tabPanel("Interactors", dataTableOutput("selected_node_interactors"))
+                            ))),
+                    conditionalPanel(
+                        condition = "input.selected_node == null",
+                        div(class = "ag-node-info",
+                            "select node to display info about it and interactions associated with it"))
+                )
             )
         ),
-        div(class = "ag-graph-panel",
-            visNetworkOutput("graph", height = "calc(100% - 10px)", width = "auto")
-        ),
-        div(class = "ag-node-panel",
-            conditionalPanel(condition = "input.selected_node != null",
-                             div(class = "ag-node-info",
-                                 uiOutput("selected_node_info"),
-                                 tabsetPanel(
-                                     id = "selected_node_tabs",
-                                     tabPanel("Interactees", dataTableOutput("selected_node_interactees")),
-                                     tabPanel("Interactors", dataTableOutput("selected_node_interactors"))
-                                 ))),
-            conditionalPanel(condition = "input.selected_node == null",
-                             div(class = "ag-node-info",
-                                 "select node to display info about it and interactions associated with it"))
-            )
-            
+        tabPanel(
+            title = "Table"
+        )
     )
 )
 
@@ -112,7 +123,7 @@ server <- function(input, output) {
     nodes <- select(edges_full_data, interactor_name, interactee_name) %>% 
         unlist() %>% 
         unique() %>% 
-        data.frame(label = .) %>% 
+        tibble(label = .) %>% 
         mutate(id = sapply(strsplit(label, " "), last)) %>% 
         mutate(shape = "box")
     
@@ -156,17 +167,17 @@ server <- function(input, output) {
             scale_color_manual(values = edge_legend()[["colors"]]) +
             theme_void()
     })
-
+    
     selected_node_id <- reactive({
         input$graph_selected_nodes[[1]]
     })
-
+    
     selected_node_info <- reactive({
         req(selected_node_id())
         nodes %>%
             filter(id == selected_node_id())
     })
-
+    
     selected_node_label <- reactive({
         selected_node_info()[["label"]]
     })
