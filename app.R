@@ -82,9 +82,7 @@ ui <- fluidPage(
             title = "Table",
             div(id = "all_edges_data_div",
                 class = "ag-table-panel",
-                dataTableOutput("all_edges_data")),
-            includeScript("www/mresize-master/js/minified/mresize.min.js"),
-            includeScript("www/table_resize.js")
+                dataTableOutput("all_edges_data"))
         )
     )
 )
