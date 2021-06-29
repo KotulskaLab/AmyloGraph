@@ -42,6 +42,20 @@
   }
 }
 
+#labels_shown div.checkbox label {
+  width: 100%;
+  padding-left: 30px;
+}
+
+#labels_shown div.checkbox:nth-child(1) label { border: 5px solid #1B9E77; background-color: #1B9E7777; }
+#labels_shown div.checkbox:nth-child(2) label { border: 5px solid #D95F02; background-color: #D95F0277; }
+#labels_shown div.checkbox:nth-child(3) label { border: 5px solid #7570B3; background-color: #7570B377; }
+#labels_shown div.checkbox:nth-child(4) label { border: 5px solid #E7298A; background-color: #E7298A77; }
+#labels_shown div.checkbox:nth-child(5) label { border: 5px solid #66A61E; background-color: #66A61E77; }
+#labels_shown div.checkbox:nth-child(6) label { border: 5px solid #E6AB02; background-color: #E6AB0277; }
+#labels_shown div.checkbox:nth-child(7) label { border: 5px solid #A6761D; background-color: #A6761D77; }
+#labels_shown div.checkbox:nth-child(8) label { border: 5px solid #666666; background-color: #66666677; }
+
 .ag-title {
   height: 35px;
   text-align: center;

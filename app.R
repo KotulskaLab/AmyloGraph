@@ -52,10 +52,6 @@ ui <- fluidPage(
                         helper(uiOutput("labels_shown_ui"),
                                type = "markdown",
                                content = "labels_shown")
-                    ),
-                    conditionalPanel(
-                        condition = "input.label_group != \"none\"",
-                        plotOutput("legend", )
                     )
                 ),
                 div(class = "ag-graph-panel",
@@ -101,11 +97,11 @@ server <- function(input, output) {
     observeEvent(input[["label_group"]], {
         label_values <- label_data[[input[["label_group"]]]][["values"]]
         output[["labels_shown_ui"]] <- renderUI({
-            selectInput(inputId = "labels_shown",
-                        label = "Types of connections to display:",
-                        choices = label_values,
-                        selected = label_values,
-                        multiple = TRUE)
+            checkboxGroupInput(
+                inputId = "labels_shown",
+                label = "Types of connections to display:",
+                choices = label_values,
+                selected = label_values)
         })
     })
     
@@ -160,22 +156,6 @@ server <- function(input, output) {
                   }") %>%
             visIgraphLayout(smooth = TRUE) %>%
             visExport(type = "png", name = "AmyloGraph", label = "Export as png")
-    })
-    
-    edge_legend <- eventReactive(input[["labels_shown"]], {
-        # this may show incorrect colors if one group's labels are a subset of another's
-        label_data[[input[["label_group"]]]] %>%
-            filter(values %in% input[["labels_shown"]])
-    })
-    
-    output[["legend"]] <- renderPlot({
-        req(nrow(edge_legend()))
-        ggplot(edge_legend()) + 
-            geom_hline(aes(color = values, yintercept = -seq_along(values)),
-                       size = 10, show.legend = FALSE) +
-            geom_text(aes(label = values, y = -seq_along(values), x = 0)) +
-            scale_color_manual(values = edge_legend()[["colors"]]) +
-            theme_void()
     })
     
     selected_node_id <- reactive({
