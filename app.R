@@ -79,7 +79,12 @@ ui <- fluidPage(
             )
         ),
         tabPanel(
-            title = "Table"
+            title = "Table",
+            div(id = "all_edges_data_div",
+                class = "ag-table-panel",
+                dataTableOutput("all_edges_data")),
+            includeScript("www/mresize-master/js/minified/mresize.min.js"),
+            includeScript("www/table_resize.js")
         )
     )
 )
@@ -87,6 +92,13 @@ ui <- fluidPage(
 # Define server logic required to draw a histogram
 server <- function(input, output) {
     observe_helpers(help_dir = "manuals")
+    
+    output[["all_edges_data"]] <- renderDataTable(
+        edges_full_data,
+        options = list(
+            scrollY = "calc(100vh - 330px - var(--correction))",
+            scrollCollapse = TRUE
+        ))
     
     observeEvent(input[["label_group"]], {
         label_values <- label_data[[input[["label_group"]]]][["values"]]

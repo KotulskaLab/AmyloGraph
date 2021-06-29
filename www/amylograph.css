@@ -29,6 +29,19 @@
   width: 15%;
 }
 
+.ag-table-panel {
+  --correction: 0px;
+  height: calc(100vh - 130px - var(--correction));
+  width: 100%;
+  min-width: 768px;
+}
+
+@media (max-width: 819px) {
+  .ag-table-panel {
+    --correction: 60px;
+  }
+}
+
 .ag-title {
   height: 35px;
   text-align: center;
