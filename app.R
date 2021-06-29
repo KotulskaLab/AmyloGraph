@@ -2,7 +2,7 @@ library(shiny)
 library(rlang)
 library(visNetwork)
 library(dplyr)
-#library(icecream)
+# library(icecream)
 library(purrr)
 library(htmltools)
 library(shinyhelper)
@@ -150,10 +150,10 @@ server <- function(input, output) {
     output[["legend"]] <- renderPlot({
         req(nrow(edge_legend()))
         ggplot(edge_legend()) + 
-            geom_hline(aes(color = colors, yintercept = -seq_along(values)),
+            geom_hline(aes(color = values, yintercept = -seq_along(values)),
                        size = 10, show.legend = FALSE) +
             geom_text(aes(label = values, y = -seq_along(values), x = 0)) +
-            scale_color_manual(values = unname(edge_legend()[["colors"]])) +
+            scale_color_manual(values = edge_legend()[["colors"]]) +
             theme_void()
     })
 
