@@ -40,18 +40,20 @@ ui <- fluidPage(
                 div(class = "ag-control-panel",
                     helper(selectInput(
                         inputId = "label_group", label = "Group edges by",
-                        choices = list(none = "none",
-                                       `interactee aggregation speed` = "aggregation_speed",
-                                       `elongates by attaching` = "elongates_by_attaching",
-                                       `heterogenous fibers` = "heterogenous_fibers"),
+                        choices = list(
+                            none = "none",
+                            `interactee aggregation speed` = "aggregation_speed",
+                            `elongates by attaching` = "elongates_by_attaching",
+                            `heterogenous fibers` = "heterogenous_fibers"),
                         multiple = FALSE),
                         type = "markdown",
                         content = "label_group"),
                     conditionalPanel(
                         condition = "input.label_group != \"none\"",
-                        helper(uiOutput("labels_shown_ui"),
-                               type = "markdown",
-                               content = "labels_shown")
+                        helper(
+                            uiOutput("labels_shown_ui"),
+                            type = "markdown",
+                            content = "labels_shown")
                     )
                 ),
                 div(class = "ag-graph-panel",
@@ -83,7 +85,6 @@ ui <- fluidPage(
     )
 )
 
-# Define server logic required to draw a histogram
 server <- function(input, output) {
     observe_helpers(help_dir = "manuals")
     
@@ -92,7 +93,8 @@ server <- function(input, output) {
         options = list(
             scrollY = "calc(100vh - 330px - var(--correction))",
             scrollCollapse = TRUE
-        ))
+        )
+    )
     
     observeEvent(input[["label_group"]], {
         label_values <- label_data[[input[["label_group"]]]][["values"]]
@@ -109,18 +111,20 @@ server <- function(input, output) {
         if (input[["label_group"]] == "none") {
             edges_full_data %>%
                 group_by(to, from) %>%
-                summarize(title = do.call(paste, c(as.list(doi), sep = ",\n")),
-                          id = cur_group_id(),
-                          .groups = "drop") %>% 
+                summarize(
+                    title = do.call(paste, c(as.list(doi), sep = ",\n")),
+                    id = cur_group_id(),
+                    .groups = "drop") %>% 
                 select(id, from, to, title)
         } else {
             label_group <- rlang::sym(input[["label_group"]])
             edges_full_data %>%
                 filter(!!label_group %in% input[["labels_shown"]]) %>%
                 group_by(to, from, !!label_group) %>%
-                summarize(title = do.call(paste, c(as.list(doi), sep = ",\n")),
-                          id = cur_group_id(),
-                          .groups = "drop") %>% 
+                summarize(
+                    title = do.call(paste, c(as.list(doi), sep = ",\n")),
+                    id = cur_group_id(),
+                    .groups = "drop") %>% 
                 mutate(color = label_data[[input[["label_group"]]]][["colors"]][!!label_group]) %>%
                 select(id, from, to, title, color, !!label_group)
         }
@@ -136,22 +140,25 @@ server <- function(input, output) {
     output[["graph"]] <- renderVisNetwork({
         edges <- edges_full_data %>%
             group_by(to, from) %>%
-            summarize(title = do.call(paste, c(as.list(doi), sep = ",\n")),
-                      id = cur_group_id(),
-                      .groups = "drop") %>%
+            summarize(
+                title = do.call(paste, c(as.list(doi), sep = ",\n")),
+                id = cur_group_id(),
+                .groups = "drop") %>%
             select(id, from, to, title)
         
         net <- visNetwork(nodes, edges, width = 1600, height = 900) %>%
             visEdges(arrows = "to", width = 2)  %>% 
             visLayout(randomSeed = 1337) %>% 
-            visOptions(highlightNearest = list(enabled = TRUE, degree = 1,
-                                               labelOnly = FALSE, hover = TRUE),
-                       nodesIdSelection = list(enabled = TRUE)) %>%
+            visOptions(
+                highlightNearest = list(enabled = TRUE, degree = 1,
+                                        labelOnly = FALSE, hover = TRUE),
+                nodesIdSelection = list(enabled = TRUE)) %>%
             visInteraction(zoomView = TRUE) %>%
-            visEvents(selectNode = "function(nodes){
+            visEvents(
+                selectNode = "function(nodes){
                   Shiny.setInputValue('selected_node', nodes.nodes[0]);
                   }",
-                      deselectNode = "function(nodes){
+                deselectNode = "function(nodes){
                   Shiny.setInputValue('selected_node', null);
                   }") %>%
             visIgraphLayout(smooth = TRUE) %>%
