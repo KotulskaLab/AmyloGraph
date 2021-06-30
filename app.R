@@ -10,6 +10,7 @@ library(ggplot2)
 library(digest)
 
 source("R/edgeTable.R")
+source("R/graphControl.R")
 source("R/nodeInfo.R")
 
 edges_full_data <- read.csv("./interactions_data.csv") %>%
@@ -17,7 +18,11 @@ edges_full_data <- read.csv("./interactions_data.csv") %>%
            to_id = map_chr(interactee_name, digest))
 
 label_palette <- palette("Dark 2")
-label_groups <- c("aggregation_speed", "elongates_by_attaching", "heterogenous_fibers")
+label_groups <- list(
+    `interactee aggregation speed` = "aggregation_speed",
+    `elongates by attaching` = "elongates_by_attaching",
+    `heterogenous fibers` = "heterogenous_fibers"
+)
 
 label_data <- lapply(
     label_groups,
@@ -39,25 +44,7 @@ ui <- fluidPage(
         tabPanel(
             title = "Graph",
             div(class = "ag-page-content",
-                div(class = "ag-control-panel",
-                    helper(selectInput(
-                        inputId = "label_group", label = "Group edges by",
-                        choices = list(
-                            none = "none",
-                            `interactee aggregation speed` = "aggregation_speed",
-                            `elongates by attaching` = "elongates_by_attaching",
-                            `heterogenous fibers` = "heterogenous_fibers"),
-                        multiple = FALSE),
-                        type = "markdown",
-                        content = "label_group"),
-                    conditionalPanel(
-                        condition = "input.label_group != \"none\"",
-                        helper(
-                            uiOutput("labels_shown_ui"),
-                            type = "markdown",
-                            content = "labels_shown")
-                    )
-                ),
+                graphControlUI("graph_control", c(none = "none", label_groups)),
                 div(class = "ag-graph-panel",
                     visNetworkOutput("graph", height = "calc(100% - 10px)", width = "auto")
                 ),
@@ -76,19 +63,10 @@ server <- function(input, output) {
     
     edgeTableServer("all_edges", edges_full_data)
     
-    observeEvent(input[["label_group"]], {
-        label_values <- label_data[[input[["label_group"]]]][["values"]]
-        output[["labels_shown_ui"]] <- renderUI({
-            checkboxGroupInput(
-                inputId = "labels_shown",
-                label = "Types of connections to display:",
-                choices = label_values,
-                selected = label_values)
-        })
-    })
+    graphControlServer("graph_control", label_data)
     
     edges <- reactive({
-        if (input[["label_group"]] == "none") {
+        if (input[["graph_control-label_group"]] == "none") {
             edges_full_data %>%
                 group_by(to_id, from_id) %>%
                 summarize(
@@ -97,15 +75,15 @@ server <- function(input, output) {
                     .groups = "drop") %>% 
                 select(id, from = from_id, to = to_id, title)
         } else {
-            label_group <- rlang::sym(input[["label_group"]])
+            label_group <- rlang::sym(input[["graph_control-label_group"]])
             edges_full_data %>%
-                filter(!!label_group %in% input[["labels_shown"]]) %>%
+                filter(!!label_group %in% input[["graph_control-labels_shown"]]) %>%
                 group_by(to_id, from_id, !!label_group) %>%
                 summarize(
                     title = do.call(paste, c(as.list(doi), sep = ",\n")),
                     id = cur_group_id(),
                     .groups = "drop") %>% 
-                mutate(color = label_data[[input[["label_group"]]]][["colors"]][!!label_group]) %>%
+                mutate(color = label_data[[input[["graph_control-label_group"]]]][["colors"]][!!label_group]) %>%
                 select(id, from = from_id, to = to_id, title, color, !!label_group)
         }
     })
@@ -146,13 +124,13 @@ server <- function(input, output) {
     })
     
     selected_node_id <- reactive({
-        input$selected_node
+        input[["selected_node"]]
     })
     
     nodeInfoServer("node_info", edges_full_data, nodes, selected_node_id)
     
     observe({
-        input$selected_node
+        input[["selected_node"]]
         visNetworkProxy("graph") %>%
             visGetSelectedNodes("graph_selected_nodes")
     })
@@ -160,7 +138,7 @@ server <- function(input, output) {
     observe({
         visNetworkProxy("graph") %>% 
             visGetEdges("graph_edges") %>%
-            visRemoveEdges(seq_along(input$graph_edges)) %>%
+            visRemoveEdges(seq_along(input[["graph_edges"]])) %>%
             visUpdateEdges(edges())
     })
 }
