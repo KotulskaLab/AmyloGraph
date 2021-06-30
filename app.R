@@ -9,6 +9,7 @@ library(shinyhelper)
 library(ggplot2)
 
 source("random_description.R")
+source("edgeTable.R")
 
 edges_full_data <- read.csv("./mock_data.csv") %>%
     mutate(from = sapply(strsplit(interactor_name, " "), last),
@@ -80,7 +81,7 @@ ui <- fluidPage(
             title = "Table",
             div(id = "all_edges_data_div",
                 class = "ag-table-panel",
-                dataTableOutput("all_edges_data"))
+                edgeTableUI("all_edges"))
         )
     )
 )
@@ -88,13 +89,7 @@ ui <- fluidPage(
 server <- function(input, output) {
     observe_helpers(help_dir = "manuals")
     
-    output[["all_edges_data"]] <- renderDataTable(
-        edges_full_data,
-        options = list(
-            scrollY = "calc(100vh - 330px - var(--correction))",
-            scrollCollapse = TRUE
-        )
-    )
+    edgeTableServer("all_edges", edge_data = edges_full_data)
     
     observeEvent(input[["label_group"]], {
         label_values <- label_data[[input[["label_group"]]]][["values"]]
