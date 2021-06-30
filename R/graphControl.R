@@ -20,7 +20,7 @@ graphControlUI <- function(id, label_groups) {
   )
 }
 
-graphControlServer <- function(id, label_data) {
+graphControlServer <- function(id, edge_data, label_data) {
   moduleServer(id, function(input, output, session) {
     observeEvent(input[["label_group"]], {
       label_values <- label_data[[input[["label_group"]]]][["values"]]
@@ -31,6 +31,29 @@ graphControlServer <- function(id, label_data) {
           choices = label_values,
           selected = label_values)
       })
+    })
+    
+    reactive({
+      if (input[["label_group"]] == "none") {
+        edge_data %>%
+          group_by(to_id, from_id) %>%
+          summarize(
+            title = do.call(paste, c(as.list(doi), sep = ",\n")),
+            id = cur_group_id(),
+            .groups = "drop") %>% 
+          select(id, from = from_id, to = to_id, title)
+      } else {
+        label_group <- rlang::sym(input[["label_group"]])
+        edge_data %>%
+          filter(!!label_group %in% input[["labels_shown"]]) %>%
+          group_by(to_id, from_id, !!label_group) %>%
+          summarize(
+            title = do.call(paste, c(as.list(doi), sep = ",\n")),
+            id = cur_group_id(),
+            .groups = "drop") %>% 
+          mutate(color = label_data[[input[["label_group"]]]][["colors"]][!!label_group]) %>%
+          select(id, from = from_id, to = to_id, title, color, !!label_group)
+      }
     })
   })
 }

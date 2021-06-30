@@ -13,7 +13,7 @@ source("R/edgeTable.R")
 source("R/graphControl.R")
 source("R/nodeInfo.R")
 
-edges_full_data <- read.csv("./interactions_data.csv") %>%
+edge_data <- read.csv("./interactions_data.csv") %>%
     mutate(from_id = map_chr(interactor_name, digest),
            to_id = map_chr(interactee_name, digest))
 
@@ -29,7 +29,7 @@ label_data <- lapply(
     function(label_name) {
         tibble(
             # sort added because we can't set manual color scale that would reference to labels
-            values = sort(unique(edges_full_data[[label_name]])),
+            values = sort(unique(edge_data[[label_name]])),
             colors = set_names(label_palette[seq_along(values)], values)
         )
     }
@@ -61,34 +61,11 @@ ui <- fluidPage(
 server <- function(input, output) {
     observe_helpers(help_dir = "manuals")
     
-    edgeTableServer("all_edges", edges_full_data)
+    edgeTableServer("all_edges", edge_data)
     
-    graphControlServer("graph_control", label_data)
+    edges <- graphControlServer("graph_control", edge_data, label_data)
     
-    edges <- reactive({
-        if (input[["graph_control-label_group"]] == "none") {
-            edges_full_data %>%
-                group_by(to_id, from_id) %>%
-                summarize(
-                    title = do.call(paste, c(as.list(doi), sep = ",\n")),
-                    id = cur_group_id(),
-                    .groups = "drop") %>% 
-                select(id, from = from_id, to = to_id, title)
-        } else {
-            label_group <- rlang::sym(input[["graph_control-label_group"]])
-            edges_full_data %>%
-                filter(!!label_group %in% input[["graph_control-labels_shown"]]) %>%
-                group_by(to_id, from_id, !!label_group) %>%
-                summarize(
-                    title = do.call(paste, c(as.list(doi), sep = ",\n")),
-                    id = cur_group_id(),
-                    .groups = "drop") %>% 
-                mutate(color = label_data[[input[["graph_control-label_group"]]]][["colors"]][!!label_group]) %>%
-                select(id, from = from_id, to = to_id, title, color, !!label_group)
-        }
-    })
-    
-    nodes <- select(edges_full_data, interactor_name, interactee_name) %>% 
+    nodes <- select(edge_data, interactor_name, interactee_name) %>% 
         unlist() %>% 
         unique() %>% 
         tibble(label = .) %>% 
@@ -96,7 +73,7 @@ server <- function(input, output) {
         mutate(shape = "box")
     
     output[["graph"]] <- renderVisNetwork({
-        edges <- edges_full_data %>%
+        edges <- edge_data %>%
             group_by(to_id, from_id) %>%
             summarize(
                 title = do.call(paste, c(as.list(doi), sep = ",\n")),
@@ -127,7 +104,7 @@ server <- function(input, output) {
         input[["selected_node"]]
     })
     
-    nodeInfoServer("node_info", edges_full_data, nodes, selected_node_id)
+    nodeInfoServer("node_info", edge_data, nodes, selected_node_id)
     
     observe({
         input[["selected_node"]]
