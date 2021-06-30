@@ -61,16 +61,12 @@ ui <- fluidPage(
                 div(class = "ag-graph-panel",
                     visNetworkOutput("graph", height = "calc(100% - 10px)", width = "auto")
                 ),
-                div(class = "ag-node-panel",
-                    nodeInfoUI("node_info")
-                )
+                nodeInfoUI("node_info")
             )
         ),
         tabPanel(
             title = "Table",
-            div(id = "all_edges_data_div",
-                class = "ag-table-panel",
-                edgeTableUI("all_edges"))
+            edgeTableUI("all_edges")
         )
     )
 )

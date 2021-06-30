@@ -2,9 +2,12 @@ source("R/random_description.R")
 
 nodeInfoUI <- function(id) {
   tagList(
-    conditionalPanel(
-      condition = "input.selected_node != null",
-      div(class = "ag-node-info",
+    div(
+      class = "ag-node-panel",
+      conditionalPanel(
+        condition = "input.selected_node != null",
+        div(
+          class = "ag-node-info",
           uiOutput(NS(id, "info")),
           tabsetPanel(
             id = NS(id, "tabs"),
@@ -15,10 +18,12 @@ nodeInfoUI <- function(id) {
               title = "Interactors",
               dataTableOutput(NS(id, "interactors")))
           ))),
-    conditionalPanel(
-      condition = "input.selected_node == null",
-      div(class = "ag-node-info",
+      conditionalPanel(
+        condition = "input.selected_node == null",
+        div(
+          class = "ag-node-info",
           "select node to display info about it and interactions associated with it"))
+    )
   )
 }
 
