@@ -4,10 +4,10 @@ edgeTableUI <- function(id) {
   )
 }
 
-edgeTableServer <- function(id, edge_data) {
+edgeTableServer <- function(id, edges) {
   moduleServer(id, function(input, output, session) {
     output[["table"]] <- renderDataTable(
-      edge_data,
+      edges,
       options = list(
         scrollY = "calc(100vh - 330px - var(--correction))",
         scrollCollapse = TRUE
