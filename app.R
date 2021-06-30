@@ -7,12 +7,13 @@ library(purrr)
 library(htmltools)
 library(shinyhelper)
 library(ggplot2)
+library(digest)
 
 source("random_description.R")
 
-edges_full_data <- read.csv("./mock_data.csv") %>%
-    mutate(from = sapply(strsplit(interactor_name, " "), last),
-           to = sapply(strsplit(interactee_name, " "), last))
+edges_full_data <- read.csv("./interactions_data.csv") %>%
+    mutate(from_id = map_chr(interactor_name, digest),
+           to_id = map_chr(interactee_name, digest))
 
 label_palette <- palette("Dark 2")
 label_groups <- c("aggregation_speed", "elongates_by_attaching", "heterogenous_fibers")
@@ -110,23 +111,23 @@ server <- function(input, output) {
     edges <- reactive({
         if (input[["label_group"]] == "none") {
             edges_full_data %>%
-                group_by(to, from) %>%
+                group_by(to_id, from_id) %>%
                 summarize(
                     title = do.call(paste, c(as.list(doi), sep = ",\n")),
                     id = cur_group_id(),
                     .groups = "drop") %>% 
-                select(id, from, to, title)
+                select(id, from = from_id, to = to_id, title)
         } else {
             label_group <- rlang::sym(input[["label_group"]])
             edges_full_data %>%
                 filter(!!label_group %in% input[["labels_shown"]]) %>%
-                group_by(to, from, !!label_group) %>%
+                group_by(to_id, from_id, !!label_group) %>%
                 summarize(
                     title = do.call(paste, c(as.list(doi), sep = ",\n")),
                     id = cur_group_id(),
                     .groups = "drop") %>% 
                 mutate(color = label_data[[input[["label_group"]]]][["colors"]][!!label_group]) %>%
-                select(id, from, to, title, color, !!label_group)
+                select(id, from = from_id, to = to_id, title, color, !!label_group)
         }
     })
     
@@ -134,17 +135,17 @@ server <- function(input, output) {
         unlist() %>% 
         unique() %>% 
         tibble(label = .) %>% 
-        mutate(id = sapply(strsplit(label, " "), last)) %>% 
+        mutate(id = map_chr(label, digest)) %>% 
         mutate(shape = "box")
     
     output[["graph"]] <- renderVisNetwork({
         edges <- edges_full_data %>%
-            group_by(to, from) %>%
+            group_by(to_id, from_id) %>%
             summarize(
                 title = do.call(paste, c(as.list(doi), sep = ",\n")),
                 id = cur_group_id(),
                 .groups = "drop") %>%
-            select(id, from, to, title)
+            select(id, from = from_id, to = to_id, title)
         
         net <- visNetwork(nodes, edges, width = 1600, height = 900) %>%
             visEdges(arrows = "to", width = 2)  %>% 
@@ -188,9 +189,9 @@ server <- function(input, output) {
     output[["selected_node_interactors"]] <- renderDataTable({
         req(selected_node_id())
         edges_full_data %>%
-            filter(to == selected_node_id()) %>%
-            arrange(from, doi) %>%
-            select(from, doi, aggregation_speed, elongates_by_attaching, heterogenous_fibers)
+            filter(to_id == selected_node_id()) %>%
+            arrange(interactor_name, doi) %>%
+            select(interactor_name, doi, aggregation_speed, elongates_by_attaching, heterogenous_fibers)
     }, options = list(
         pageLength = 10,
         lengthChange = FALSE
@@ -199,9 +200,9 @@ server <- function(input, output) {
     output[["selected_node_interactees"]] <- renderDataTable({
         req(selected_node_id())
         edges_full_data %>%
-            filter(from == selected_node_id()) %>%
-            arrange(to, doi) %>%
-            select(to, doi, aggregation_speed, elongates_by_attaching, heterogenous_fibers)
+            filter(from_id == selected_node_id()) %>%
+            arrange(interactee_name, doi) %>%
+            select(interactee_name, doi, aggregation_speed, elongates_by_attaching, heterogenous_fibers)
     }, options = list(
         pageLength = 10,
         lengthChange = FALSE
