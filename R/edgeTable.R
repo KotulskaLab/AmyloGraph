@@ -1,8 +1,7 @@
 edgeTableUI <- function(id) {
-  tagList(
-    div(
-      class = "ag-table-panel",
-      dataTableOutput(NS(id, "table")))
+  div(
+    class = "ag-table-panel",
+    dataTableOutput(NS(id, "table"))
   )
 }
 

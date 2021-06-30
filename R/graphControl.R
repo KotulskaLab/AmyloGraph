@@ -1,23 +1,21 @@
 graphControlUI <- function(id, label_groups) {
-  tagList(
-    div(
-      class = "ag-control-panel",
+  div(
+    class = "ag-control-panel",
+    helper(
+      selectInput(
+        inputId = NS(id, "label_group"),
+        label = "Group edges by",
+        choices = label_groups,
+        multiple = FALSE),
+      type = "markdown",
+      content = "label_group"),
+    conditionalPanel(
+      condition = "input.label_group != \"none\"",
       helper(
-        selectInput(
-          inputId = NS(id, "label_group"),
-          label = "Group edges by",
-          choices = label_groups,
-          multiple = FALSE),
+        uiOutput(NS(id, "labels_shown_ui")),
         type = "markdown",
-        content = "label_group"),
-      conditionalPanel(
-        condition = "input.label_group != \"none\"",
-        helper(
-          uiOutput(NS(id, "labels_shown_ui")),
-          type = "markdown",
-          content = "labels_shown"),
-        ns = NS(id)
-      )
+        content = "labels_shown"),
+      ns = NS(id)
     )
   )
 }

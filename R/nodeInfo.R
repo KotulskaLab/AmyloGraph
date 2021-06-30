@@ -1,29 +1,27 @@
 source("R/random_description.R")
 
 nodeInfoUI <- function(id) {
-  tagList(
-    div(
-      class = "ag-node-panel",
-      conditionalPanel(
-        condition = "input.selected_node != null",
-        div(
-          class = "ag-node-info",
-          uiOutput(NS(id, "info")),
-          tabsetPanel(
-            id = NS(id, "tabs"),
-            tabPanel(
-              title = "Interactees",
-              dataTableOutput(NS(id, "interactees"))),
-            tabPanel(
-              title = "Interactors",
-              dataTableOutput(NS(id, "interactors")))
-          ))),
-      conditionalPanel(
-        condition = "input.selected_node == null",
-        div(
-          class = "ag-node-info",
-          "select node to display info about it and interactions associated with it"))
-    )
+  div(
+    class = "ag-node-panel",
+    conditionalPanel(
+      condition = "input.selected_node != null",
+      div(
+        class = "ag-node-info",
+        uiOutput(NS(id, "info")),
+        tabsetPanel(
+          id = NS(id, "tabs"),
+          tabPanel(
+            title = "Interactees",
+            dataTableOutput(NS(id, "interactees"))),
+          tabPanel(
+            title = "Interactors",
+            dataTableOutput(NS(id, "interactors")))
+        ))),
+    conditionalPanel(
+      condition = "input.selected_node == null",
+      div(
+        class = "ag-node-info",
+        "select node to display info about it and interactions associated with it"))
   )
 }
 
