@@ -9,8 +9,8 @@ library(shinyhelper)
 library(ggplot2)
 library(digest)
 
-source("random_description.R")
-source("edgeTable.R")
+source("R/random_description.R")
+source("R/edgeTable.R")
 
 edges_full_data <- read.csv("./interactions_data.csv") %>%
     mutate(from_id = map_chr(interactor_name, digest),
