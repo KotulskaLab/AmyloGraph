@@ -38,21 +38,29 @@ label_data <- lapply(
 ui <- fluidPage(
     theme = "amylograph.css",
     h2("AmyloGraph", class = "ag-title"),
-    tabsetPanel(
-        id = "graph-table-panel",
-        tabPanel(
-            title = "Graph",
-            div(class = "ag-page-content",
-                graphControlUI("graph_control", c(none = "none", label_groups)),
-                div(class = "ag-graph-panel",
-                    visNetworkOutput("graph", height = "calc(100% - 10px)", width = "auto")
-                ),
-                nodeInfoUI("node_info")
-            )
+    sidebarLayout(
+        sidebarPanel(
+            graphControlUI("graph_control", c(none = "none", label_groups)),
+            width = 2
         ),
-        tabPanel(
-            title = "Table",
-            edgeTableUI("all_edges")
+        mainPanel(
+            tabsetPanel(
+                id = "graph-table-panel",
+                tabPanel(
+                    title = "Graph",
+                    div(class = "ag-page-content",
+                        div(class = "ag-graph-panel",
+                            visNetworkOutput("graph", height = "calc(100% - 10px)", width = "auto")
+                        ),
+                        nodeInfoUI("node_info")
+                    )
+                ),
+                tabPanel(
+                    title = "Table",
+                    edgeTableUI("all_edges")
+                )
+            ),
+            width = 10
         )
     )
 )
