@@ -36,7 +36,6 @@ label_data <- lapply(
 ) %>% set_names(label_groups)
 
 ui <- fluidPage(
-    # TODO: use varSelectizeInput instead to dynamically generate possible groups?
     theme = "amylograph.css",
     h2("AmyloGraph", class = "ag-title"),
     tabsetPanel(
