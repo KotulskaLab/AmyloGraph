@@ -68,9 +68,9 @@ ui <- fluidPage(
 server <- function(input, output) {
     observe_helpers(help_dir = "manuals")
     
-    edgeTableServer("all_edges", edge_data)
-    
     edges <- graphControlServer("graph_control", edge_data, label_data)
+    
+    edgeTableServer("all_edges", edges)
     
     nodes <- select(edge_data, interactor_name, interactee_name) %>% 
         unlist() %>% 
@@ -123,7 +123,7 @@ server <- function(input, output) {
         visNetworkProxy("graph") %>% 
             visGetEdges("graph_edges") %>%
             visRemoveEdges(seq_along(input[["graph_edges"]])) %>%
-            visUpdateEdges(edges())
+            visUpdateEdges(edges()[["graph"]])
     })
 }
 

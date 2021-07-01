@@ -35,7 +35,8 @@ graphControlServer <- function(id, edge_data, label_data) {
     
     reactive({
       if (input[["label_group"]] == "none") {
-        edge_data %>%
+        table_edges <- edge_data
+        graph_edges <- table_edges %>%
           group_by(to_id, from_id) %>%
           summarize(
             title = do.call(paste, c(as.list(doi), sep = ",\n")),
@@ -44,8 +45,9 @@ graphControlServer <- function(id, edge_data, label_data) {
           select(id, from = from_id, to = to_id, title)
       } else {
         label_group <- rlang::sym(input[["label_group"]])
-        edge_data %>%
-          filter(!!label_group %in% input[["labels_shown"]]) %>%
+        table_edges <- edge_data %>%
+          filter(!!label_group %in% input[["labels_shown"]])
+        graph_edges <- table_edges %>%
           group_by(to_id, from_id, !!label_group) %>%
           summarize(
             title = do.call(paste, c(as.list(doi), sep = ",\n")),
@@ -54,6 +56,10 @@ graphControlServer <- function(id, edge_data, label_data) {
           mutate(color = label_data[[input[["label_group"]]]][["colors"]][!!label_group]) %>%
           select(id, from = from_id, to = to_id, title, color, !!label_group)
       }
+      list(
+        table = table_edges,
+        graph = graph_edges
+      )
     })
   })
 }
