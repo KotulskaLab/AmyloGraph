@@ -4,6 +4,7 @@ nodeInfoUI <- function(id) {
   div(
     class = "ag-node-panel",
     conditionalPanel(
+      id = "conditional_node_panel",
       condition = "input.selected_node != null",
       div(
         class = "ag-node-info",
@@ -39,8 +40,7 @@ nodeInfoServer <- function(id, edges, nodes, selected_node_id) {
     
     output[["info"]] <- renderUI({
       req(selected_node_id())
-      div(class = "ag-protein-info",
-          HTML(random_description(selected_node_label())))
+      HTML(random_description(selected_node_label()))
     })
     
     renderInteractionTable <- function(target_id, target_variable) {
