@@ -8,6 +8,7 @@ library(purrr)
 library(htmltools)
 library(shinyhelper)
 library(ggplot2)
+library(glue)
 library(digest)
 
 source("R/edgeTable.R")
