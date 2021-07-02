@@ -21,6 +21,11 @@ graphControlUI <- function(id, label_groups, label_data) {
 
 graphControlServer <- function(id, edge_data, label_data) {
   moduleServer(id, function(input, output, session) {
+    observe({
+      walk(names(label_data),
+           ~ toggleCssClass(NS(.x, "labels_shown"), "filter_checkbox_active", input[["label_group"]] == .x))
+    })
+    
     reactive({
       label_groups <- rlang::syms(names(label_data))
       table_edges <- edge_data %>%

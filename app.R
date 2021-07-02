@@ -1,4 +1,5 @@
 library(shiny)
+library(shinyjs)
 library(rlang)
 library(visNetwork)
 library(dplyr)
@@ -35,6 +36,8 @@ label_data <- imap(
 
 ui <- fluidPage(
     theme = "amylograph.css",
+    useShinyjs(),
+    
     h2("AmyloGraph", class = "ag-title"),
     sidebarLayout(
         sidebarPanel(
