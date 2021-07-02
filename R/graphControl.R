@@ -27,7 +27,7 @@ graphControlServer <- function(id, edge_data, label_data) {
         filter(!!!imap(
           label_data,
           ~ expr(!!rlang::sym(.y) %in%
-                   !!input[[glue("{.y}-labels_shown")]])) %>%
+                   !!input[[NS(.y, "labels_shown")]])) %>%
             set_names(NULL)
         )
       

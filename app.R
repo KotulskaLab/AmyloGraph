@@ -8,7 +8,6 @@ library(htmltools)
 library(shinyhelper)
 library(ggplot2)
 library(digest)
-library(glue)
 
 source("R/edgeTable.R")
 source("R/graphControl.R")
