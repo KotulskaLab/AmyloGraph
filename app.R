@@ -81,13 +81,9 @@ server <- function(input, output) {
         mutate(shape = "box")
     
     output[["graph"]] <- renderVisNetwork({
-        edges <- edge_data %>%
-            group_by(to_id, from_id) %>%
-            summarize(
-                title = do.call(paste, c(as.list(doi), sep = ",\n")),
-                id = cur_group_id(),
-                .groups = "drop") %>%
-            select(id, from = from_id, to = to_id, title)
+        # we don't want to render graph each time we modify edges
+        # instead we remove and update them in a separate observer
+        edges <- isolate(edges()[["graph"]])
         
         net <- visNetwork(nodes, edges, width = 1600, height = 900) %>%
             visEdges(arrows = "to", width = 2)  %>% 
