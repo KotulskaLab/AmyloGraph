@@ -2,12 +2,13 @@ library(shiny)
 library(rlang)
 library(visNetwork)
 library(dplyr)
-# library(icecream)
+library(icecream)
 library(purrr)
 library(htmltools)
 library(shinyhelper)
 library(ggplot2)
 library(digest)
+library(glue)
 
 source("R/edgeTable.R")
 source("R/graphControl.R")
@@ -24,15 +25,13 @@ label_groups <- list(
     `heterogenous fibers` = "heterogenous_fibers"
 )
 
-label_data <- lapply(
+label_data <- imap(
     label_groups,
-    function(label_name) {
-        tibble(
-            # sort added because we can't set manual color scale that would reference to labels
-            values = sort(unique(edge_data[[label_name]])),
-            colors = set_names(label_palette[seq_along(values)], values)
-        )
-    }
+    ~ structure(
+        tibble(values = sort(unique(edge_data[[.x]])),
+               colors = set_names(label_palette[seq_along(values)], values)),
+        display_name = .y
+    )
 ) %>% set_names(label_groups)
 
 ui <- fluidPage(
@@ -40,7 +39,7 @@ ui <- fluidPage(
     h2("AmyloGraph", class = "ag-title"),
     sidebarLayout(
         sidebarPanel(
-            graphControlUI("graph_control", c(none = "none", label_groups)),
+            graphControlUI("graph_control", label_groups, label_data),
             width = 2
         ),
         mainPanel(
