@@ -52,16 +52,19 @@
 .filter_checkbox div.checkbox label {
   width: 100%;
   padding-left: 30px;
+  --color: 160, 160, 160;
+  border: 5px solid rgba(var(--color), 1);
+  background-color: rgba(var(--color), 0.5);
 }
 
-.filter_checkbox div.checkbox:nth-child(1) label { border: 5px solid #1B9E77; background-color: #1B9E7777; }
-.filter_checkbox div.checkbox:nth-child(2) label { border: 5px solid #D95F02; background-color: #D95F0277; }
-.filter_checkbox div.checkbox:nth-child(3) label { border: 5px solid #7570B3; background-color: #7570B377; }
-.filter_checkbox div.checkbox:nth-child(4) label { border: 5px solid #E7298A; background-color: #E7298A77; }
-.filter_checkbox div.checkbox:nth-child(5) label { border: 5px solid #66A61E; background-color: #66A61E77; }
-.filter_checkbox div.checkbox:nth-child(6) label { border: 5px solid #E6AB02; background-color: #E6AB0277; }
-.filter_checkbox div.checkbox:nth-child(7) label { border: 5px solid #A6761D; background-color: #A6761D77; }
-.filter_checkbox div.checkbox:nth-child(8) label { border: 5px solid #666666; background-color: #66666677; }
+.filter_checkbox div.checkbox:nth-child(1) label { --color:  27, 158, 119; }
+.filter_checkbox div.checkbox:nth-child(2) label { --color: 217,  95,   2; }
+.filter_checkbox div.checkbox:nth-child(3) label { --color: 117, 112, 179; }
+.filter_checkbox div.checkbox:nth-child(4) label { --color: 231,  41, 138; }
+.filter_checkbox div.checkbox:nth-child(5) label { --color: 102, 166,  30; }
+.filter_checkbox div.checkbox:nth-child(6) label { --color: 230, 171,   2; }
+.filter_checkbox div.checkbox:nth-child(7) label { --color: 166, 118,  29; }
+.filter_checkbox div.checkbox:nth-child(8) label { --color: 102, 102, 102; }
 
 .ag-title {
   height: 35px;
