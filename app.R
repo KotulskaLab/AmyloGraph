@@ -108,7 +108,7 @@ server <- function(input, output) {
             visExport(type = "png", name = "AmyloGraph", label = "Export as png")
     })
     
-    nodeInfoServer("node_info", edge_data, nodes, reactive(input[["selected_node"]]))
+    nodeInfoServer("node_info", edges, nodes, reactive(input[["selected_node"]]))
     
     observe({
         input[["selected_node"]]
