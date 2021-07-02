@@ -23,41 +23,34 @@ graphControlServer <- function(id, edge_data, label_data) {
   moduleServer(id, function(input, output, session) {
     observe({
       walk(names(label_data),
-           ~ toggleCssClass(NS(.x, "labels_shown"), "filter_checkbox_active", input[["label_group"]] == .x))
+           ~ toggleCssClass(NS(.x, "labels_shown"),
+                            "filter_checkbox_active",
+                            input[["label_group"]] == .x))
     })
     
     reactive({
-      label_groups <- rlang::syms(names(label_data))
       table_edges <- edge_data %>%
-        filter(!!!imap(
-          label_data,
-          ~ expr(!!rlang::sym(.y) %in%
-                   !!input[[NS(.y, "labels_shown")]])) %>%
-            set_names(NULL)
+        filter(!!!map(
+          names(label_data),
+          ~ expr(!!rlang::sym(.) %in%
+                   !!input[[NS(., "labels_shown")]]))
         )
       
-      if (input[["label_group"]] == "none") {
-        # table_edges <- edge_data
-        graph_edges <- table_edges %>%
-          group_by(to_id, from_id) %>%
-          summarize(
-            title = do.call(paste, c(as.list(doi), sep = ",\n")),
-            id = cur_group_id(),
-            .groups = "drop") %>% 
-          select(id, from = from_id, to = to_id, title)
-      } else {
-        label_group <- rlang::sym(input[["label_group"]])
-        # table_edges <- edge_data %>%
-        #   filter(!!label_group %in% input[["labels_shown"]])
-        graph_edges <- table_edges %>%
-          group_by(to_id, from_id, !!label_group) %>%
-          summarize(
-            title = do.call(paste, c(as.list(doi), sep = ",\n")),
-            id = cur_group_id(),
-            .groups = "drop") %>% 
-          mutate(color = label_data[[input[["label_group"]]]][["colors"]][!!label_group]) %>%
-          select(id, from = from_id, to = to_id, title, color, !!label_group)
-      }
+      label_group <- input[["label_group"]] %>%
+        when(
+          . == "none" ~ "",
+          ~ .
+        )
+      
+      graph_edges <- table_edges %>%
+        group_by(to_id, from_id, !!sym(label_group)) %>%
+        summarize(
+          title = do.call(paste, c(as.list(doi), sep = ",\n")),
+          id = cur_group_id(),
+          .groups = "drop") %>% 
+        mutate(color = label_data[[label_group]][["colors"]][!!sym(label_group)]) %>%
+        select(id, from = from_id, to = to_id, title, any_of(c("color", label_group)))
+      
       list(
         table = table_edges,
         graph = graph_edges
