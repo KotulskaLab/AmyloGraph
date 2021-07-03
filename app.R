@@ -19,6 +19,13 @@ edge_data <- read.csv("./interactions_data.csv") %>%
     mutate(from_id = map_chr(interactor_name, digest),
            to_id = map_chr(interactee_name, digest))
 
+node_data <- select(edge_data, interactor_name, interactee_name) %>% 
+    unlist() %>% 
+    unique() %>% 
+    tibble(label = .,
+           id = map_chr(label, digest),
+           shape = "box")
+
 label_palette <- palette("Dark 2")
 label_groups <- list(
     `interactee aggregation speed` = "aggregation_speed",
@@ -74,19 +81,12 @@ server <- function(input, output) {
     
     edgeTableServer("all_edges", edges)
     
-    nodes <- select(edge_data, interactor_name, interactee_name) %>% 
-        unlist() %>% 
-        unique() %>% 
-        tibble(label = .) %>% 
-        mutate(id = map_chr(label, digest)) %>% 
-        mutate(shape = "box")
-    
     output[["graph"]] <- renderVisNetwork({
         # we don't want to render graph each time we modify edges
         # instead we remove and update them in a separate observer
         edges <- isolate(edges()[["graph"]])
         
-        net <- visNetwork(nodes, edges, width = 1600, height = 900) %>%
+        net <- visNetwork(node_data, edges, width = 1600, height = 900) %>%
             visEdges(arrows = "to", width = 2)  %>% 
             visLayout(randomSeed = 1337) %>% 
             visOptions(
@@ -105,7 +105,7 @@ server <- function(input, output) {
             visExport(type = "png", name = "AmyloGraph", label = "Export as png")
     })
     
-    nodeInfoServer("node_info", edges, nodes, reactive(input[["selected_node"]]))
+    nodeInfoServer("node_info", edges, node_data, reactive(input[["selected_node"]]))
     
     observe({
         input[["selected_node"]]
