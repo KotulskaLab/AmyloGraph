@@ -1,15 +1,19 @@
+# shiny-related packages
 library(shiny)
 library(shinyjs)
-library(rlang)
-library(visNetwork)
-library(dplyr)
-# library(icecream)
-library(purrr)
-library(htmltools)
 library(shinyhelper)
+library(htmltools)
+# rendering packages
+library(visNetwork)
 library(ggplot2)
+# data manipulation packages
+library(rlang)
+library(dplyr)
+library(purrr)
 library(glue)
 library(digest)
+# debug packages
+# library(icecream)
 
 source("R/edgeTable.R")
 source("R/graphControl.R")
