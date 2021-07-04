@@ -5,15 +5,15 @@ edgeTableUI <- function(id) {
   )
 }
 
-edgeTableServer <- function(id, edges) {
+edgeTableServer <- function(id, edge_data) {
   moduleServer(id, function(input, output, session) {
     output[["table"]] <- renderDataTable(
-      edges()[["table"]] %>% select(interactor_name,
-                                    interactee_name,
-                                    aggregation_speed,
-                                    elongates_by_attaching,
-                                    heterogenous_fibers,
-                                    doi),
+      edge_data()[["table"]] %>% select(interactor_name,
+                                        interactee_name,
+                                        aggregation_speed,
+                                        elongates_by_attaching,
+                                        heterogenous_fibers,
+                                        doi),
       options = list(
         scrollY = "calc(100vh - 330px - var(--correction))",
         scrollCollapse = TRUE

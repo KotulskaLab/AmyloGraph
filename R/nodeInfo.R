@@ -26,11 +26,11 @@ nodeInfoUI <- function(id) {
   )
 }
 
-nodeInfoServer <- function(id, edges, nodes, selected_node_id) {
+nodeInfoServer <- function(id, edge_data, node_data, selected_node_id) {
   moduleServer(id, function(input, output, session) {
     selected_node_info <- reactive({
       req(selected_node_id())
-      nodes %>%
+      node_data %>%
         filter(id == selected_node_id())
     })
     
@@ -46,7 +46,7 @@ nodeInfoServer <- function(id, edges, nodes, selected_node_id) {
     renderInteractionTable <- function(target_id, target_variable) {
       renderDataTable({
         req(selected_node_id())
-        edges()[["table"]] %>%
+        edge_data()[["table"]] %>%
           filter({{target_id}} == selected_node_id()) %>%
           arrange({{target_variable}}, doi) %>%
           select({{target_variable}}, doi, aggregation_speed, elongates_by_attaching, heterogenous_fibers)
