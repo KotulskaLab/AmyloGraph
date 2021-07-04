@@ -25,8 +25,7 @@ graphControlServer <- function(id, edge_data, label_data) {
   moduleServer(id, function(input, output, session) {
     observe({
       walk(ag_groups(label_data),
-           ~ toggleCssClass(NS(.x, "labels_shown"),
-                            "filter_checkbox_active",
+           ~ toggleCssClass(.x, "filter_checkbox_active",
                             input[["label_group"]] == .x))
     })
     
@@ -34,8 +33,7 @@ graphControlServer <- function(id, edge_data, label_data) {
       table_edges <- edge_data %>%
         filter(!!!map(
           ag_groups(label_data) %>% set_names(NULL),
-          ~ expr(!!rlang::sym(.) %in%
-                   !!input[[NS(., "labels_shown")]]))
+          ~ expr(!!rlang::sym(.) %in% !!input[[.]]))
         )
       
       label_group <- input[["label_group"]] %>%
