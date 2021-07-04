@@ -14,33 +14,7 @@ library(digest)
 source("R/edgeTable.R")
 source("R/graphControl.R")
 source("R/nodeInfo.R")
-
-edge_data <- read.csv("./interactions_data.csv") %>%
-    mutate(from_id = map_chr(interactor_name, digest),
-           to_id = map_chr(interactee_name, digest))
-
-node_data <- select(edge_data, interactor_name, interactee_name) %>% 
-    unlist() %>% 
-    unique() %>% 
-    tibble(label = .,
-           id = map_chr(label, digest),
-           shape = "box")
-
-label_palette <- palette("Dark 2")
-label_groups <- list(
-    `interactee aggregation speed` = "aggregation_speed",
-    `elongates by attaching` = "elongates_by_attaching",
-    `heterogenous fibers` = "heterogenous_fibers"
-)
-
-label_data <- imap(
-    label_groups,
-    ~ structure(
-        tibble(values = sort(unique(edge_data[[.x]])),
-               colors = set_names(label_palette[seq_along(values)], values)),
-        display_name = .y
-    )
-) %>% set_names(label_groups)
+source("R/prepareData.R")
 
 ui <- fluidPage(
     theme = "amylograph.css",
@@ -49,7 +23,7 @@ ui <- fluidPage(
     h2("AmyloGraph", class = "ag-title"),
     sidebarLayout(
         sidebarPanel(
-            graphControlUI("graph_control", label_groups, label_data),
+            graphControlUI("graph_control", label_data),
             width = 2
         ),
         mainPanel(

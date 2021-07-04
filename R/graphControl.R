@@ -1,20 +1,22 @@
 source("R/filterCheckbox.R")
 
-graphControlUI <- function(id, label_groups, label_data) {
+graphControlUI <- function(id, label_data) {
   div(
     class = "ag-control-panel",
     helper(
       selectInput(
         inputId = NS(id, "label_group"),
         label = "Group edges by",
-        choices = c(none = "none", label_groups),
+        choices = c(none = "none", ag_groups(label_data)),
         multiple = FALSE),
       type = "markdown",
       content = "label_group"),
     do.call(
       tagList,
-      imap(label_groups,
-           ~ filterCheckboxInput(NS(id, .x), label_data[[.x]][["values"]], .y))
+      imap(ag_groups(label_data),
+           ~ filterCheckboxInput(NS(id, .x),
+                                 ag_data(label_data, .x)[["values"]],
+                                 .y))
     )
   )
 }
@@ -22,7 +24,7 @@ graphControlUI <- function(id, label_groups, label_data) {
 graphControlServer <- function(id, edge_data, label_data) {
   moduleServer(id, function(input, output, session) {
     observe({
-      walk(names(label_data),
+      walk(ag_groups(label_data),
            ~ toggleCssClass(NS(.x, "labels_shown"),
                             "filter_checkbox_active",
                             input[["label_group"]] == .x))
@@ -31,7 +33,7 @@ graphControlServer <- function(id, edge_data, label_data) {
     reactive({
       table_edges <- edge_data %>%
         filter(!!!map(
-          names(label_data),
+          ag_groups(label_data) %>% set_names(NULL),
           ~ expr(!!rlang::sym(.) %in%
                    !!input[[NS(., "labels_shown")]]))
         )
@@ -48,7 +50,7 @@ graphControlServer <- function(id, edge_data, label_data) {
           title = do.call(paste, c(as.list(doi), sep = ",\n")),
           id = cur_group_id(),
           .groups = "drop") %>% 
-        mutate(color = label_data[[label_group]][["colors"]][!!sym(label_group)]) %>%
+        mutate(color = ag_data(label_data, label_group)[["colors"]][!!sym(label_group)]) %>%
         select(id, from = from_id, to = to_id, title, any_of(c("color", label_group)))
       
       list(
