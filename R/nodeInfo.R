@@ -1,12 +1,17 @@
+source("R/ifelsePanel.R")
 source("R/random_description.R")
 
 nodeInfoUI <- function(id) {
   div(
     class = "ag-node-panel",
-    conditionalPanel(
-      id = "conditional_node_panel",
-      condition = "input.selected_node != null",
-      div(
+    ifelsePanel(
+      id = NS(id, "ifelse"),
+      condition = "input.selected_node == null",
+      content_true = div(
+        class = "ag-node-info",
+        "select node to display info about it and interactions associated with it"
+      ),
+      content_false = div(
         class = "ag-node-info",
         uiOutput(NS(id, "info")),
         tabsetPanel(
@@ -17,12 +22,9 @@ nodeInfoUI <- function(id) {
           tabPanel(
             title = "Interactors",
             dataTableOutput(NS(id, "interactors")))
-        ))),
-    conditionalPanel(
-      condition = "input.selected_node == null",
-      div(
-        class = "ag-node-info",
-        "select node to display info about it and interactions associated with it"))
+        )
+      )
+    )
   )
 }
 
