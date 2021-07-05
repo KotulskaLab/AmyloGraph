@@ -62,7 +62,7 @@ server <- function(input, output) {
     output[["graph"]] <- renderVisNetwork({
         # we don't want to render graph each time we modify edges
         # instead we remove and update them in a separate observer
-        edges <- isolate(edges()[["graph"]])
+        edges <- isolate(edges[["graph"]])
         
         net <- visNetwork(node_data, edges, width = 1600, height = 900) %>%
             visEdges(arrows = "to", width = 2)  %>% 
@@ -95,7 +95,7 @@ server <- function(input, output) {
         visNetworkProxy("graph") %>% 
             visGetEdges("graph_edges") %>%
             visRemoveEdges(seq_along(input[["graph_edges"]])) %>%
-            visUpdateEdges(edges()[["graph"]])
+            visUpdateEdges(edges[["graph"]])
     })
 }
 
