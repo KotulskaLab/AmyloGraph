@@ -6,8 +6,10 @@ library(htmltools)
 # rendering packages
 library(visNetwork)
 library(ggplot2)
+require(igraph)
 # data manipulation packages
 library(rlang)
+library(tibble)
 library(dplyr)
 library(purrr)
 library(glue)
