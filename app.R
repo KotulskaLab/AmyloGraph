@@ -41,7 +41,7 @@ ui <- fluidPage(
                         div(class = "ag-graph-panel",
                             visNetworkOutput("graph", height = "calc(100% - 10px)", width = "auto")
                         ),
-                        nodeInfoUI("node_info")
+                        nodeInfoUI("node_info", edge_data)
                     )
                 ),
                 tabPanel(
@@ -71,8 +71,7 @@ server <- function(input, output) {
             visLayout(randomSeed = 1337) %>% 
             visOptions(
                 highlightNearest = list(enabled = TRUE, degree = 1,
-                                        labelOnly = FALSE, hover = TRUE),
-                nodesIdSelection = list(enabled = TRUE)) %>%
+                                        labelOnly = FALSE, hover = TRUE)) %>%
             visInteraction(zoomView = TRUE) %>%
             visEvents(
                 selectNode = "function(nodes){

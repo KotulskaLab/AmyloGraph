@@ -1,9 +1,18 @@
 source("R/ifelsePanel.R")
 source("R/random_description.R")
 
-nodeInfoUI <- function(id) {
+nodeInfoUI <- function(id, edge_data) {
   div(
     class = "ag-node-panel",
+    helper(
+      selectInput(
+        inputId = NS(id, "select_node"),
+        label = "Select node to display info about",
+        choices = c(none = "none", unique(c(edge_data[["interactor_name"]],
+                                            edge_data[["interactee_name"]]))),
+        multiple = FALSE),
+      type = "markdown",
+      content = "label_group"),
     ifelsePanel(
       id = NS(id, "ifelse"),
       condition = "input.selected_node == null",
