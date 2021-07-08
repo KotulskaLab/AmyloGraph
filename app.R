@@ -26,7 +26,10 @@ ui <- fluidPage(
     theme = "amylograph.css",
     useShinyjs(),
     
-    h2("AmyloGraph", class = "ag-title"),
+    div(
+        class = "ag-title",
+        img(src = "AGT5.png", class = "ag-logo")
+    ),
     sidebarLayout(
         sidebarPanel(
             graphControlUI("graph_control", label_data),

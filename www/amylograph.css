@@ -1,5 +1,11 @@
 :root {
-  --height-no-header: calc(100vh - 180px);
+  --height-no-header: calc(100vh - 200px);
+  --col-main-1: #7B1E7A;
+  --col-main-2: #F3C677;
+  --col-dark: #0C0A3E;
+  --col-accent: #FE5F55;
+  --col-bg-dark: #BDD5EA;
+  
 }
 
 /* SHINY CLASSES */
@@ -10,6 +16,21 @@
 
 .container-fluid {
   height: 100%;
+  padding: 0px;
+}
+
+.well {
+  background-color: var(--col-bg-dark);
+  border: none;
+  border-radius: 0px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+.row {
+  margin: 0px;
 }
 
 /* CUSTOM CLASSES */
@@ -67,10 +88,14 @@
 .filter_checkbox_active div.checkbox:nth-child(8) label { --color: 102, 102, 102; }
 
 .ag-title {
-  height: 35px;
-  text-align: center;
-  border-bottom: 10px solid gray;
-  padding-bottom: 50px;
+  height: 80px;
+  background-color: var(--col-accent);
+  
+}
+
+.ag-logo {    
+  height: 100%;
+  padding: 7px;
 }
 
 #node_info-info {    
