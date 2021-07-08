@@ -3,8 +3,8 @@ library(stringi)
 
 AG_data <- readRDS("AmyloGraph.RDS")
 
-greek_letters <- c("^α", "^β", "^κ", "α", "β", "κ")
-greek_letter_names <- c("Alpha", "Beta", "Kappa", "alpha", "beta", "kappa")
+greek_letters <- c("^α", "^β", "^δ", "^κ", "α", "β", "κ", "δ")
+greek_letter_names <- c("Alpha", "Beta", "Delta", "Kappa", "alpha", "beta", "delta", "kappa")
 degreekize <- function(names) stri_replace_all_regex(names, greek_letters, greek_letter_names, vectorize_all = FALSE)
 
 AG_data %>%
