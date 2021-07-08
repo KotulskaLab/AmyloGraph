@@ -3,12 +3,9 @@ library(stringi)
 
 AG_data <- readRDS("AmyloGraph.RDS")
 
-greek_letters <- c("α", "β", "κ")
-greek_letter_names <- c("alpha", "beta", "kappa")
-degreekize <- function(names) {
-  stri_replace_all_fixed(names, greek_letters, greek_letter_names, vectorize_all = FALSE) %>%
-    stri_trans_totitle(type = 'sentence')
-}
+greek_letters <- c("^α", "^β", "^κ", "α", "β", "κ")
+greek_letter_names <- c("Alpha", "Beta", "Kappa", "alpha", "beta", "kappa")
+degreekize <- function(names) stri_replace_all_regex(names, greek_letters, greek_letter_names, vectorize_all = FALSE)
 
 AG_data %>%
   select(interactor_name = `Interactor name`,
