@@ -1,5 +1,4 @@
 #' @importFrom shiny runApp
 #' @export
-AmyloGraph <- function() {
-  runApp("inst/AmyloGraph/")
-}
+AmyloGraph <- function()
+  runApp(system.file("AmyloGraph", package = "AmyloGraph"))
