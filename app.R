@@ -70,9 +70,8 @@ server <- function(input, output) {
     output[["graph"]] <- renderVisNetwork({
         # we don't want to render graph each time we modify edges
         # instead we remove and update them in a separate observer
-        edges <- isolate(edges[["graph"]])
-        
-        net <- visNetwork(node_data, edges, width = 1600, height = 900) %>%
+        visNetwork(node_data, isolate(edges[["graph"]]),
+                   width = 1600, height = 900) %>%
             visEdges(arrows = "to", width = 2)  %>% 
             visLayout(randomSeed = 1337) %>% 
             visOptions(
