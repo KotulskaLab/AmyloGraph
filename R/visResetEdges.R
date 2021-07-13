@@ -1,3 +1,5 @@
+#' @importFrom visNetwork visGetEdges visRemoveEdges visUpdateEdges
+#' @importFrom dplyr `%>%`
 visResetEdges <- function(graph, edges, input, legend = FALSE) {
   graph %>%
     visGetEdges("graph_edges_") %>%

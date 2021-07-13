@@ -1,3 +1,8 @@
+library(tibble)
+library(dplyr)
+library(purrr)
+library(digest)
+
 LabelData <- function(label_groups, label_palette, edge_data) {
   structure(
     list(
