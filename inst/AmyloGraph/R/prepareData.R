@@ -2,7 +2,7 @@ source("R/LabelData.R")
 
 DATA_PATH <- "./interactions_data.csv"
 LABEL_PALETTE <- palette("Dark 2")
-LABEL_GROUPS <- tribble(
+LABEL_GROUPS <- tibble::tribble(
   ~ id, ~ name,
   "aggregation_speed", "interactee aggregation speed",
   "elongates_by_attaching", "elongates by attaching",
