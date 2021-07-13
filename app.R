@@ -22,6 +22,7 @@ source("R/edgeTable.R")
 source("R/graphControl.R")
 source("R/nodeInfo.R")
 source("R/prepareData.R")
+source("R/visResetEdges.R")
 source("R/visToggleNodes.R")
 
 ui <- fluidPage(
@@ -103,9 +104,7 @@ server <- function(input, output) {
     
     observe({
         visNetworkProxy("graph") %>% 
-            visGetEdges("graph_edges") %>%
-            visRemoveEdges(seq_along(input[["graph_edges"]])) %>%
-            visUpdateEdges(edges[["graph"]])
+            visResetEdges(edges[["graph"]], input)
     })
 }
 
