@@ -22,6 +22,8 @@ source("R/edgeTable.R")
 source("R/graphControl.R")
 source("R/nodeInfo.R")
 source("R/prepareData.R")
+source("R/visResetEdges.R")
+source("R/visToggleNodes.R")
 
 ui <- fluidPage(
     theme = "amylograph.css",
@@ -92,9 +94,8 @@ server <- function(input, output) {
     
     observe({
         selected_node_id <- input[[NS("node_info", "select_node")]]
-        proxy <- visNetworkProxy("graph")
-        if (selected_node_id == STR_NULL) visUnselectAll(proxy)
-        else visSelectNodes(proxy, selected_node_id)
+        visNetworkProxy("graph") %>%
+            visToggleNodes(selected_node_id, STR_NULL)
         updateSelectInput(
             inputId = NS("node_info", "select_node"),
             selected = selected_node_id
@@ -103,9 +104,7 @@ server <- function(input, output) {
     
     observe({
         visNetworkProxy("graph") %>% 
-            visGetEdges("graph_edges") %>%
-            visRemoveEdges(seq_along(input[["graph_edges"]])) %>%
-            visUpdateEdges(edges[["graph"]])
+            visResetEdges(edges[["graph"]], input)
     })
 }
 
