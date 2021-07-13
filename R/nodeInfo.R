@@ -15,7 +15,7 @@ nodeInfoUI <- function(id, node_data) {
       content = "label_group"),
     ifelsePanel(
       id = NS(id, "ifelse"),
-      condition = glue("input['<<NS(id, 'select_node')>>'] == null", .open = "<<", .close = ">>"),
+      condition = "input.select_node == 'null'",
       content_true = div(
         class = "ag-node-info",
         "select node to display info about it and interactions associated with it"
@@ -32,7 +32,8 @@ nodeInfoUI <- function(id, node_data) {
             title = "Interactors",
             dataTableOutput(NS(id, "interactors")))
         )
-      )
+      ),
+      ns = NS(id)
     )
   )
 }
