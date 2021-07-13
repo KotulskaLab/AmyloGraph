@@ -74,7 +74,8 @@ server <- function(input, output) {
             visLayout(randomSeed = 1337) %>% 
             visOptions(
                 highlightNearest = list(enabled = TRUE, degree = 1,
-                                        labelOnly = FALSE, hover = TRUE)) %>%
+                                        labelOnly = FALSE, hover = TRUE,
+                                        algorithm = "hierarchical")) %>%
             visInteraction(zoomView = TRUE) %>%
             visEvents(
                 selectNode = glue("function(nodes){
