@@ -57,7 +57,7 @@ nodeInfoServer <- function(id, edge_data, node_data) {
     renderInteractionTable <- function(target_id, target_variable) {
       renderDataTable({
         req(input[["select_node"]])
-        edge_data[["table"]] %>%
+        edge_data[["node_info"]] %>%
           filter({{target_id}} == input[["select_node"]]) %>%
           arrange({{target_variable}}, doi) %>%
           select({{target_variable}}, doi, aggregation_speed, elongates_by_attaching, heterogenous_fibers)

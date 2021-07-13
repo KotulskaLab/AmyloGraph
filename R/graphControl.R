@@ -11,6 +11,8 @@ graphControlUI <- function(id, label_data) {
         multiple = FALSE),
       type = "markdown",
       content = "label_group"),
+    checkboxInput(NS(id, "filter_node_info"),
+                  "Filter node info data"),
     do.call(
       tagList,
       imap(ag_groups(label_data),
@@ -31,7 +33,8 @@ graphControlServer <- function(id, edge_data, label_data) {
     
     ret <- reactiveValues(
       table = NULL,
-      graph = NULL
+      graph = NULL,
+      node_info = edge_data
     )
     
     observe({
@@ -40,6 +43,14 @@ graphControlServer <- function(id, edge_data, label_data) {
           ag_groups(label_data) %>% set_names(NULL),
           ~ expr(!!rlang::sym(.) %in% !!input[[.]]))
         )
+    })
+    
+    observe({
+      if (input[["filter_node_info"]]) {
+        ret[["node_info"]] <- ret[["table"]]
+      } else {
+        ret[["node_info"]] <- edge_data
+      }
     })
     
     observe({
