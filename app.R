@@ -44,7 +44,7 @@ ui <- fluidPage(
                         div(class = "ag-graph-panel",
                             visNetworkOutput("graph", height = "calc(100% - 10px)", width = "auto")
                         ),
-                        nodeInfoUI("node_info", edge_data)
+                        nodeInfoUI("node_info", node_data)
                     )
                 ),
                 tabPanel(
@@ -77,22 +77,27 @@ server <- function(input, output) {
                                         labelOnly = FALSE, hover = TRUE)) %>%
             visInteraction(zoomView = TRUE) %>%
             visEvents(
-                selectNode = "function(nodes){
-                  Shiny.setInputValue('selected_node', nodes.nodes[0]);
-                  }",
-                deselectNode = "function(nodes){
-                  Shiny.setInputValue('selected_node', null);
-                  }") %>%
+                selectNode = glue("function(nodes){
+                  Shiny.setInputValue('<<NS('node_info', 'select_node')>>', nodes.nodes[0]);
+                  }", .open = "<<", .close = ">>"),
+                deselectNode = glue("function(nodes){
+                  Shiny.setInputValue('<<NS('node_info', 'select_node')>>', 'null');
+                  }", .open = "<<", .close = ">>")) %>%
             visIgraphLayout(smooth = TRUE) %>%
             visExport(type = "png", name = "AmyloGraph", label = "Export as png")
     })
     
-    nodeInfoServer("node_info", edges, node_data, reactive(input[["selected_node"]]))
+    nodeInfoServer("node_info", edges, node_data)
     
     observe({
-        input[["selected_node"]]
-        visNetworkProxy("graph") %>%
-            visGetSelectedNodes("graph_selected_nodes")
+        selected_node_id <- input[[NS("node_info", "select_node")]]
+        proxy <- visNetworkProxy("graph")
+        if (selected_node_id == "null") visUnselectAll(proxy)
+        else visSelectNodes(proxy, selected_node_id)
+        updateSelectInput(
+            inputId = NS("node_info", "select_node"),
+            selected = if (is.null(selected_node_id)) "none" else selected_node_id
+        )
     })
     
     observe({
