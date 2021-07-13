@@ -1,0 +1,2 @@
+STR_NULL <- "null"
+SIDE_PANEL_WIDTH <- 2

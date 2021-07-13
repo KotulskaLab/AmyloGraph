@@ -17,6 +17,7 @@ library(digest)
 # debug packages
 # library(icecream)
 
+source("R/constants.R")
 source("R/edgeTable.R")
 source("R/graphControl.R")
 source("R/nodeInfo.R")
@@ -33,7 +34,7 @@ ui <- fluidPage(
     sidebarLayout(
         sidebarPanel(
             graphControlUI("graph_control", label_data),
-            width = 2
+            width = SIDE_PANEL_WIDTH
         ),
         mainPanel(
             tabsetPanel(
@@ -52,7 +53,7 @@ ui <- fluidPage(
                     edgeTableUI("all_edges")
                 )
             ),
-            width = 10
+            width = 12 - SIDE_PANEL_WIDTH
         )
     )
 )
@@ -81,7 +82,7 @@ server <- function(input, output) {
                   Shiny.setInputValue('<<NS('node_info', 'select_node')>>', nodes.nodes[0]);
                   }", .open = "<<", .close = ">>"),
                 deselectNode = glue("function(nodes){
-                  Shiny.setInputValue('<<NS('node_info', 'select_node')>>', 'null');
+                  Shiny.setInputValue('<<NS('node_info', 'select_node')>>', '<<STR_NULL>>');
                   }", .open = "<<", .close = ">>")) %>%
             visIgraphLayout(smooth = TRUE) %>%
             visExport(type = "png", name = "AmyloGraph", label = "Export as png")
@@ -92,11 +93,11 @@ server <- function(input, output) {
     observe({
         selected_node_id <- input[[NS("node_info", "select_node")]]
         proxy <- visNetworkProxy("graph")
-        if (selected_node_id == "null") visUnselectAll(proxy)
+        if (selected_node_id == STR_NULL) visUnselectAll(proxy)
         else visSelectNodes(proxy, selected_node_id)
         updateSelectInput(
             inputId = NS("node_info", "select_node"),
-            selected = if (is.null(selected_node_id)) "none" else selected_node_id
+            selected = selected_node_id
         )
     })
     

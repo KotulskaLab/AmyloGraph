@@ -9,13 +9,13 @@ nodeInfoUI <- function(id, node_data) {
         inputId = NS(id, "select_node"),
         label = "Select node to display info about",
         #null value encoded as text, becase NULL value cannot be an element of a vector 
-        choices = c(none = "null", set_names(node_data[["id"]], node_data[["label"]])),
+        choices = c(none = STR_NULL, set_names(node_data[["id"]], node_data[["label"]])),
         multiple = FALSE),
       type = "markdown",
       content = "label_group"),
     ifelsePanel(
       id = NS(id, "ifelse"),
-      condition = "input.select_node == 'null'",
+      condition = glue("input.select_node == '{STR_NULL}'"),
       content_true = div(
         class = "ag-node-info",
         "select node to display info about it and interactions associated with it"
