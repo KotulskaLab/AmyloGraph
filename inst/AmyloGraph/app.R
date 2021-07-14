@@ -106,7 +106,8 @@ server <- function(input, output) {
     
     observe({
         visNetworkProxy("graph") %>% 
-            AmyloGraph:::visResetEdges(edges[["graph"]], input)
+            AmyloGraph:::visResetEdges(edges[["graph"]], input,
+                                       NS("node_info", "select_node"))
     })
 }
 
