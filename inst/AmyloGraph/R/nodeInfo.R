@@ -1,6 +1,3 @@
-source("R/ifelsePanel.R")
-source("R/random_description.R")
-
 nodeInfoUI <- function(id, node_data) {
   div(
     class = "ag-node-panel",
@@ -9,13 +6,13 @@ nodeInfoUI <- function(id, node_data) {
         inputId = NS(id, "select_node"),
         label = "Select node to display info about",
         #null value encoded as text, becase NULL value cannot be an element of a vector 
-        choices = c(none = STR_NULL, set_names(node_data[["id"]], node_data[["label"]])),
+        choices = c(none = getOption("ag_str_null"), set_names(node_data[["id"]], node_data[["label"]])),
         multiple = FALSE),
       type = "markdown",
       content = "label_group"),
-    ifelsePanel(
+    AmyloGraph:::ifelsePanel(
       id = NS(id, "ifelse"),
-      condition = glue("input.select_node == '{STR_NULL}'"),
+      condition = glue("input.select_node == '{getOption('ag_str_null')}'"),
       content_true = div(
         class = "ag-node-info",
         "select node to display info about it and interactions associated with it"
@@ -52,7 +49,7 @@ nodeInfoServer <- function(id, edge_data, node_data) {
     
     output[["info"]] <- renderUI({
       req(input[["select_node"]])
-      HTML(random_description(selected_node_label()))
+      HTML(AmyloGraph:::random_description(selected_node_label()))
     })
     
     renderInteractionTable <- function(target_id, target_variable) {

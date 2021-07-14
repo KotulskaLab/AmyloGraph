@@ -17,11 +17,15 @@ library(digest)
 # debug packages
 # library(icecream)
 
-source("R/constants.R")
-source("R/edgeTable.R")
+SIDE_PANEL_WIDTH <- 2
+
+source("R/interactionsTable.R")
 source("R/graphControl.R")
 source("R/nodeInfo.R")
-source("R/prepareData.R")
+
+ag_data_interactions <- AmyloGraph::ag_data_interactions()
+ag_data_groups <- AmyloGraph:::ag_data_groups()
+ag_data_nodes <- AmyloGraph:::ag_data_nodes()
 
 ui <- fluidPage(
     theme = "amylograph.css",
@@ -33,7 +37,7 @@ ui <- fluidPage(
     ),
     sidebarLayout(
         sidebarPanel(
-            graphControlUI("graph_control", label_data),
+            graphControlUI("graph_control", ag_data_groups),
             width = SIDE_PANEL_WIDTH
         ),
         mainPanel(
@@ -45,7 +49,7 @@ ui <- fluidPage(
                         div(class = "ag-graph-panel",
                             visNetworkOutput("graph", height = "calc(100% - 10px)", width = "auto")
                         ),
-                        nodeInfoUI("node_info", node_data)
+                        nodeInfoUI("node_info", ag_data_nodes)
                     )
                 ),
                 tabPanel(
@@ -61,14 +65,14 @@ ui <- fluidPage(
 server <- function(input, output) {
     observe_helpers(help_dir = "manuals")
     
-    edges <- graphControlServer("graph_control", edge_data, label_data)
+    edges <- graphControlServer("graph_control", ag_data_interactions, ag_data_groups)
     
-    edgeTableServer("all_edges", edges)
+    interactionsTableServer("all_edges", edges)
     
     output[["graph"]] <- renderVisNetwork({
         # we don't want to render graph each time we modify edges
         # instead we remove and update them in a separate observer
-        visNetwork(node_data, isolate(edges[["graph"]]),
+        visNetwork(ag_data_nodes, isolate(edges[["graph"]]),
                    width = 1600, height = 900) %>%
             visEdges(arrows = "to", width = 2)  %>% 
             visLayout(randomSeed = 1337) %>% 
@@ -88,7 +92,7 @@ server <- function(input, output) {
             visExport(type = "png", name = "AmyloGraph", label = "Export as png")
     })
     
-    nodeInfoServer("node_info", edges, node_data)
+    nodeInfoServer("node_info", edges, ag_data_nodes)
     
     observe({
         selected_node_id <- input[[NS("node_info", "select_node")]]

@@ -1,3 +1,5 @@
+#' @importFrom shiny conditionalPanel NS tagList
+#' @importFrom glue glue
 ifelsePanel <- function(id, condition, content_true, content_false,
                         ns = NS(NULL)) {
   tagList(

@@ -1,13 +1,14 @@
 source("R/filterCheckbox.R")
 
-graphControlUI <- function(id, label_data) {
+graphControlUI <- function(id, data_groups) {
   div(
     class = "ag-control-panel",
     helper(
       selectInput(
         inputId = NS(id, "label_group"),
         label = "Group edges by",
-        choices = c(none = STR_NULL, ag_groups(label_data)),
+        choices = c(none = getOption("ag_str_null"), 
+                    AmyloGraph:::ag_group_labels(data_groups)),
         multiple = FALSE),
       type = "markdown",
       content = "label_group"),
@@ -15,18 +16,18 @@ graphControlUI <- function(id, label_data) {
                   "Filter node info data"),
     do.call(
       tagList,
-      imap(ag_groups(label_data),
+      imap(AmyloGraph:::ag_group_labels(data_groups),
            ~ filterCheckboxInput(NS(id, .x),
-                                 ag_data(label_data, .x)[["values"]],
+                                 AmyloGraph:::ag_color_map(data_groups, .x)[["values"]],
                                  .y))
     )
   )
 }
 
-graphControlServer <- function(id, edge_data, label_data) {
+graphControlServer <- function(id, data_interactions, data_groups) {
   moduleServer(id, function(input, output, session) {
     observe({
-      walk(ag_groups(label_data),
+      walk(AmyloGraph:::ag_group_labels(data_groups),
            ~ toggleCssClass(.x, "filter_checkbox_active",
                             input[["label_group"]] == .x))
     })
@@ -34,14 +35,14 @@ graphControlServer <- function(id, edge_data, label_data) {
     ret <- reactiveValues(
       table = NULL,
       graph = NULL,
-      node_info = edge_data
+      node_info = data_interactions
     )
     
     observe({
-      ret[["table"]] <- edge_data %>%
+      ret[["table"]] <- data_interactions %>%
         filter(!!!map(
-          ag_groups(label_data) %>% set_names(NULL),
-          ~ expr(!!rlang::sym(.) %in% !!input[[.]]))
+          AmyloGraph:::ag_group_labels(data_groups) %>% set_names(NULL),
+          ~ expr(!!sym(.) %in% !!input[[.]]))
         )
     })
     
@@ -49,14 +50,14 @@ graphControlServer <- function(id, edge_data, label_data) {
       if (input[["filter_node_info"]]) {
         ret[["node_info"]] <- ret[["table"]]
       } else {
-        ret[["node_info"]] <- edge_data
+        ret[["node_info"]] <- data_interactions
       }
     })
     
     observe({
       label_group <- input[["label_group"]] %>%
         when(
-          . == STR_NULL ~ "",
+          . == getOption("ag_str_null") ~ "",
           ~ .
         )
       
@@ -66,7 +67,7 @@ graphControlServer <- function(id, edge_data, label_data) {
           title = do.call(paste, c(as.list(doi), sep = ",\n")),
           id = cur_group_id(),
           .groups = "drop") %>% 
-        mutate(color = ag_data(label_data, label_group)[["colors"]][!!sym(label_group)]) %>%
+        mutate(color = AmyloGraph:::ag_color_map(data_groups, label_group)[["colors"]][!!sym(label_group)]) %>%
         select(id, from = from_id, to = to_id, title, any_of(c("color", label_group)))
     })
     
