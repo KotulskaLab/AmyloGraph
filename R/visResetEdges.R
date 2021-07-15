@@ -1,10 +1,10 @@
 #' @importFrom visNetwork visGetEdges visRemoveEdges visUpdateEdges
 #' @importFrom dplyr `%>%`
-visResetEdges <- function(graph, edges, input, legend = FALSE) {
+visResetEdges <- function(graph, edges, input, selected_node_input_id,
+                          legend = FALSE) {
   graph %>%
     visGetEdges("graph_edges_") %>%
-    visGetSelectedNodes("graph_selected_nodes_") %>%
     visRemoveEdges(seq_along(input[["graph_edges_"]])) %>%
     visUpdateEdges(edges, legend) %>%
-    visToggleNodes(input[["graph_selected_nodes_"]])
+    visSelectNodes(input[[selected_node_input_id]])
 }
