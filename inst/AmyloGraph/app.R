@@ -19,10 +19,6 @@ library(digest)
 
 SIDE_PANEL_WIDTH <- 2
 
-source("R/interactionsTable.R")
-source("R/graphControl.R")
-source("R/nodeInfo.R")
-
 ag_data_interactions <- AmyloGraph::ag_data_interactions()
 ag_data_groups <- AmyloGraph:::ag_data_groups()
 ag_data_nodes <- AmyloGraph:::ag_data_nodes()
@@ -37,7 +33,7 @@ ui <- fluidPage(
     ),
     sidebarLayout(
         sidebarPanel(
-            graphControlUI("graph_control", ag_data_groups),
+            AmyloGraph:::graphControlUI("graph_control", ag_data_groups),
             width = SIDE_PANEL_WIDTH
         ),
         mainPanel(
@@ -49,12 +45,12 @@ ui <- fluidPage(
                         div(class = "ag-graph-panel",
                             visNetworkOutput("graph", height = "calc(100% - 10px)", width = "auto")
                         ),
-                        nodeInfoUI("node_info", ag_data_nodes)
+                        AmyloGraph:::nodeInfoUI("node_info", ag_data_nodes)
                     )
                 ),
                 tabPanel(
                     title = "Table",
-                    edgeTableUI("all_edges")
+                    AmyloGraph:::interactionsTableUI("all_edges")
                 )
             ),
             width = 12 - SIDE_PANEL_WIDTH
@@ -65,9 +61,9 @@ ui <- fluidPage(
 server <- function(input, output) {
     observe_helpers(help_dir = "manuals")
     
-    edges <- graphControlServer("graph_control", ag_data_interactions, ag_data_groups)
+    edges <- AmyloGraph:::graphControlServer("graph_control", ag_data_interactions, ag_data_groups)
     
-    interactionsTableServer("all_edges", edges)
+    AmyloGraph:::interactionsTableServer("all_edges", edges)
     
     output[["graph"]] <- renderVisNetwork({
         # we don't want to render graph each time we modify edges
@@ -86,13 +82,13 @@ server <- function(input, output) {
                   Shiny.setInputValue('<<NS('node_info', 'select_node')>>', nodes.nodes[0]);
                   }", .open = "<<", .close = ">>"),
                 deselectNode = glue("function(nodes){
-                  Shiny.setInputValue('<<NS('node_info', 'select_node')>>', '<<STR_NULL>>');
+                  Shiny.setInputValue('<<NS('node_info', 'select_node')>>', '<<getOption('ag_str_null')>>');
                   }", .open = "<<", .close = ">>")) %>%
             visIgraphLayout(smooth = TRUE) %>%
             visExport(type = "png", name = "AmyloGraph", label = "Export as png")
     })
     
-    nodeInfoServer("node_info", edges, ag_data_nodes)
+    AmyloGraph:::nodeInfoServer("node_info", edges, ag_data_nodes)
     
     observe({
         selected_node_id <- input[[NS("node_info", "select_node")]]

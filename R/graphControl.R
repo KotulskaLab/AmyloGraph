@@ -1,5 +1,7 @@
-source("R/filterCheckbox.R")
-
+#' @importFrom htmltools div
+#' @importFrom shinyhelper helper
+#' @importFrom shiny selectInput NS tagList
+#' @importFrom purrr imap
 graphControlUI <- function(id, data_groups) {
   div(
     class = "ag-control-panel",
@@ -8,7 +10,7 @@ graphControlUI <- function(id, data_groups) {
         inputId = NS(id, "label_group"),
         label = "Group edges by",
         choices = c(none = getOption("ag_str_null"), 
-                    AmyloGraph:::ag_group_labels(data_groups)),
+                    ag_group_labels(data_groups)),
         multiple = FALSE),
       type = "markdown",
       content = "label_group"),
@@ -16,18 +18,23 @@ graphControlUI <- function(id, data_groups) {
                   "Filter node info data"),
     do.call(
       tagList,
-      imap(AmyloGraph:::ag_group_labels(data_groups),
+      imap(ag_group_labels(data_groups),
            ~ filterCheckboxInput(NS(id, .x),
-                                 AmyloGraph:::ag_color_map(data_groups, .x)[["values"]],
+                                 ag_color_map(data_groups, .x)[["values"]],
                                  .y))
     )
   )
 }
 
+#' @importFrom shiny moduleServer observe reactiveValues
+#' @importFrom shinyjs toggleCssClass
+#' @importFrom purrr set_names map when walk
+#' @importFrom dplyr `%>%` filter group_by summarize cur_group_id mutate select
+#' @importFrom rlang sym expr
 graphControlServer <- function(id, data_interactions, data_groups) {
   moduleServer(id, function(input, output, session) {
     observe({
-      walk(AmyloGraph:::ag_group_labels(data_groups),
+      walk(ag_group_labels(data_groups),
            ~ toggleCssClass(.x, "filter_checkbox_active",
                             input[["label_group"]] == .x))
     })
@@ -41,7 +48,7 @@ graphControlServer <- function(id, data_interactions, data_groups) {
     observe({
       ret[["table"]] <- data_interactions %>%
         filter(!!!map(
-          AmyloGraph:::ag_group_labels(data_groups) %>% set_names(NULL),
+          ag_group_labels(data_groups) %>% set_names(NULL),
           ~ expr(!!sym(.) %in% !!input[[.]]))
         )
     })
@@ -67,7 +74,7 @@ graphControlServer <- function(id, data_interactions, data_groups) {
           title = do.call(paste, c(as.list(doi), sep = ",\n")),
           id = cur_group_id(),
           .groups = "drop") %>% 
-        mutate(color = AmyloGraph:::ag_color_map(data_groups, label_group)[["colors"]][!!sym(label_group)]) %>%
+        mutate(color = ag_color_map(data_groups, label_group)[["colors"]][!!sym(label_group)]) %>%
         select(id, from = from_id, to = to_id, title, any_of(c("color", label_group)))
     })
     

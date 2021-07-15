@@ -1,3 +1,5 @@
+#' @importFrom htmltools div
+#' @importFrom shiny NS dataTableOutput
 interactionsTableUI <- function(id) {
   div(
     class = "ag-table-panel",
@@ -5,6 +7,8 @@ interactionsTableUI <- function(id) {
   )
 }
 
+#' @importFrom shiny moduleServer renderDataTable
+#' @importFrom dplyr select `%>%`
 interactionsTableServer <- function(id, data_interactions) {
   moduleServer(id, function(input, output, session) {
     output[["table"]] <- renderDataTable(

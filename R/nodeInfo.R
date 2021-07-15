@@ -1,3 +1,8 @@
+#' @importFrom htmltools div
+#' @importFrom shinyhelper helper
+#' @importFrom shiny selectInput NS uiOutput tabsetPanel tabPanel dataTableOutput
+#' @importFrom purrr set_names
+#' @importFrom glue glue
 nodeInfoUI <- function(id, node_data) {
   div(
     class = "ag-node-panel",
@@ -5,12 +10,12 @@ nodeInfoUI <- function(id, node_data) {
       selectInput(
         inputId = NS(id, "select_node"),
         label = "Select node to display info about",
-        #null value encoded as text, becase NULL value cannot be an element of a vector 
+        #null value encoded as text, because NULL value cannot be an element of a vector 
         choices = c(none = getOption("ag_str_null"), set_names(node_data[["id"]], node_data[["label"]])),
         multiple = FALSE),
       type = "markdown",
       content = "label_group"),
-    AmyloGraph:::ifelsePanel(
+    ifelsePanel(
       id = NS(id, "ifelse"),
       condition = glue("input.select_node == '{getOption('ag_str_null')}'"),
       content_true = div(
@@ -35,6 +40,8 @@ nodeInfoUI <- function(id, node_data) {
   )
 }
 
+#' @importFrom shiny moduleServer reactive req renderUI HTML renderDataTable
+#' @importFrom dplyr `%>%` filter arrange select
 nodeInfoServer <- function(id, edge_data, node_data) {
   moduleServer(id, function(input, output, session) {
     selected_node_info <- reactive({
@@ -49,7 +56,7 @@ nodeInfoServer <- function(id, edge_data, node_data) {
     
     output[["info"]] <- renderUI({
       req(input[["select_node"]])
-      HTML(AmyloGraph:::random_description(selected_node_label()))
+      HTML(random_description(selected_node_label()))
     })
     
     renderInteractionTable <- function(target_id, target_variable) {
