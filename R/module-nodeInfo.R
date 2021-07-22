@@ -17,7 +17,7 @@ nodeInfoUI <- function(id, node_data) {
       content = "label_group"),
     ifelsePanel(
       id = NS(id, "ifelse"),
-      condition = glue("input.select_node == '{AmyloGraph:::ag_option('ag_str_null')}'"),
+      condition = glue("input.select_node == '{AmyloGraph:::ag_option('str_null')}'"),
       content_true = div(
         class = "ag-node-info",
         "select node to display info about it and interactions associated with it"
