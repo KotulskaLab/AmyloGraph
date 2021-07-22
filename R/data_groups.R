@@ -13,7 +13,7 @@ ag_data_groups <- function() {
       groups$id,
       ~ tibble(
         values = sort(unique(ag_data_interactions()[[.x]])),
-        colors = set_names(getOption("ag_palette")[seq_along(values)], 
+        colors = set_names(ag_option("palette")[seq_along(values)], 
                            values)
       )
     ) |> set_names(groups$id),

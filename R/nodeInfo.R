@@ -11,13 +11,13 @@ nodeInfoUI <- function(id, node_data) {
         inputId = NS(id, "select_node"),
         label = "Select node to display info about",
         #null value encoded as text, because NULL value cannot be an element of a vector 
-        choices = c(none = getOption("ag_str_null"), set_names(node_data[["id"]], node_data[["label"]])),
+        choices = c(none = ag_option("str_null"), set_names(node_data[["id"]], node_data[["label"]])),
         multiple = FALSE),
       type = "markdown",
       content = "label_group"),
     ifelsePanel(
       id = NS(id, "ifelse"),
-      condition = glue("input.select_node == '{getOption('ag_str_null')}'"),
+      condition = glue("input.select_node == '{AmyloGraph:::ag_option('ag_str_null')}'"),
       content_true = div(
         class = "ag-node-info",
         "select node to display info about it and interactions associated with it"

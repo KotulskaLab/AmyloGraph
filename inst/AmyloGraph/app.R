@@ -17,8 +17,6 @@ library(digest)
 # debug packages
 # library(icecream)
 
-SIDE_PANEL_WIDTH <- 2
-
 ag_data_interactions <- AmyloGraph::ag_data_interactions()
 ag_data_groups <- AmyloGraph:::ag_data_groups()
 ag_data_nodes <- AmyloGraph:::ag_data_nodes()
@@ -34,7 +32,7 @@ ui <- fluidPage(
     sidebarLayout(
         sidebarPanel(
             AmyloGraph:::graphControlUI("graph_control", ag_data_groups),
-            width = SIDE_PANEL_WIDTH
+            width = AmyloGraph:::ag_option("side_panel_width")
         ),
         mainPanel(
             tabsetPanel(
@@ -53,7 +51,7 @@ ui <- fluidPage(
                     AmyloGraph:::interactionsTableUI("all_edges")
                 )
             ),
-            width = 12 - SIDE_PANEL_WIDTH
+            width = 12 - AmyloGraph:::ag_option("side_panel_width")
         )
     )
 )
@@ -82,7 +80,7 @@ server <- function(input, output) {
                   Shiny.setInputValue('<<NS('node_info', 'select_node')>>', nodes.nodes[0]);
                   }", .open = "<<", .close = ">>"),
                 deselectNode = glue("function(nodes){
-                  Shiny.setInputValue('<<NS('node_info', 'select_node')>>', '<<getOption('ag_str_null')>>');
+                  Shiny.setInputValue('<<NS('node_info', 'select_node')>>', '<<AmyloGraph:::ag_option('str_null')>>');
                   }", .open = "<<", .close = ">>")) %>%
             visIgraphLayout(smooth = TRUE) %>%
             visExport(type = "png", name = "AmyloGraph", label = "Export as png")
