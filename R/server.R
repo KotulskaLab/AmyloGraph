@@ -8,8 +8,8 @@ ag_server <- function(ag_data) function(input, output) {
   interactionsTableServer("all_edges", edges)
   nodeInfoServer("node_info", edges, ag_data[["nodes"]])
   
-  output[["graph"]] <- render_network(ag_data[["nodes"]], edges[["graph"]])
+  output[["graph"]] <- render_network(ag_data[["nodes"]], edges)
   
   observe_node_selection(input)
-  observe_edges_change(input, edges[["graph"]])
+  observe_edges_change(input, edges)
 }

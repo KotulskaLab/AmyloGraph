@@ -1,9 +1,9 @@
 #' @importFrom shiny observe NS
 #' @importFrom visNetwork visNetworkProxy
-observe_edges_change <- function(input, edges_graph) {
+observe_edges_change <- function(input, edges) {
   observe({
     visNetworkProxy("graph") %>% 
-      visResetEdges(edges_graph, input,
+      visResetEdges(edges[["graph"]], input,
                     NS("node_info", "select_node"))
   })
 }

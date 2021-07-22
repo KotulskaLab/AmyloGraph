@@ -1,10 +1,10 @@
 #' @importFrom visNetwork renderVisNetwork visNetwork visEdges visLayout visOptions visInteraction
 #' @importFrom visNetwork visEvents visIgraphLayout visExport
-render_network <- function(ag_data_nodes, edges_graph) {
+render_network <- function(ag_data_nodes, edges) {
   renderVisNetwork({
     # we don't want to render graph each time we modify edges
     # instead we remove and update them in a separate observer
-    visNetwork(ag_data_nodes, isolate(edges_graph),
+    visNetwork(ag_data_nodes, isolate(edges[["graph"]]),
                width = 1600, height = 900) %>%
       visEdges(arrows = "to", width = 2)  %>% 
       visLayout(randomSeed = 1337) %>% 
