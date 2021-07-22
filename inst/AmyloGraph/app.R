@@ -1,7 +1,7 @@
 ag_data <- list(
-    ag_data_interactions = AmyloGraph::ag_data_interactions(),
-    ag_data_groups = AmyloGraph:::ag_data_groups(),
-    ag_data_nodes = AmyloGraph:::ag_data_nodes()
+    interactions = AmyloGraph::ag_data_interactions(),
+    groups = AmyloGraph:::ag_data_groups(),
+    nodes = AmyloGraph:::ag_data_nodes()
 )
 
 ui <- AmyloGraph:::ag_ui(ag_data)

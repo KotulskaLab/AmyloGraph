@@ -12,7 +12,7 @@ ag_ui <- function(ag_data) fluidPage(
   ),
   sidebarLayout(
     sidebarPanel(
-      graphControlUI("graph_control", ag_data[["ag_data_groups"]]),
+      graphControlUI("graph_control", ag_data[["groups"]]),
       width = ag_option("side_panel_width")
     ),
     mainPanel(
@@ -24,7 +24,7 @@ ag_ui <- function(ag_data) fluidPage(
               div(class = "ag-graph-panel",
                   visNetworkOutput("graph", height = "calc(100% - 10px)", width = "auto")
               ),
-              nodeInfoUI("node_info", ag_data[["ag_data_nodes"]])
+              nodeInfoUI("node_info", ag_data[["nodes"]])
           )
         ),
         tabPanel(
