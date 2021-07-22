@@ -9,7 +9,7 @@ graphControlUI <- function(id, data_groups) {
       selectInput(
         inputId = NS(id, "label_group"),
         label = "Group edges by",
-        choices = c(none = getOption("ag_str_null"), 
+        choices = c(none = ag_option("str_null"), 
                     ag_group_labels(data_groups)),
         multiple = FALSE),
       type = "markdown",
@@ -65,7 +65,7 @@ graphControlServer <- function(id, data_interactions, data_groups) {
     observe({
       label_group <- input[["label_group"]] %>%
         when(
-          . == getOption("ag_str_null") ~ "",
+          . == ag_option("str_null") ~ "",
           ~ .
         )
       
