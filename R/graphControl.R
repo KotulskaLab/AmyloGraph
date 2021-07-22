@@ -30,6 +30,7 @@ graphControlUI <- function(id, data_groups) {
 #' @importFrom shinyjs toggleCssClass
 #' @importFrom purrr set_names map when walk
 #' @importFrom dplyr `%>%` filter group_by summarize cur_group_id mutate select
+#' @importFrom glue glue_collapse
 #' @importFrom rlang sym expr
 graphControlServer <- function(id, data_interactions, data_groups) {
   moduleServer(id, function(input, output, session) {
@@ -71,7 +72,7 @@ graphControlServer <- function(id, data_interactions, data_groups) {
       ret[["graph"]] <- ret[["table"]] %>%
         group_by(to_id, from_id, !!sym(label_group)) %>%
         summarize(
-          title = do.call(paste, c(as.list(doi), sep = ",\n")),
+          title = glue_collapse(unique(doi), sep = ", ", last = " and "),
           id = cur_group_id(),
           .groups = "drop") %>% 
         mutate(color = ag_color_map(data_groups, label_group)[["colors"]][!!sym(label_group)]) %>%
