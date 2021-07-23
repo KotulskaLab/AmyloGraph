@@ -1,15 +1,11 @@
 library(shinytest, quietly = TRUE)
 
-ag_data <- list(
-  interactions = AmyloGraph::ag_data_interactions(),
-  groups = AmyloGraph:::ag_data_groups(),
-  nodes = AmyloGraph:::ag_data_nodes()
-)
+ag_data <- ag_load_data()
 
 skip("cannot locate data")
 
-ui <- AmyloGraph:::ag_ui(ag_data)
-server <- AmyloGraph:::ag_server(ag_data) 
+ui <- ag_ui(ag_data)
+server <- ag_server(ag_data) 
 app <- shinytest::ShinyDriver$new(shinyApp(ui, server))
 
 

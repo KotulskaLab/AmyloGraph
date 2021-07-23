@@ -1,8 +1,4 @@
-ag_data <- list(
-    interactions = AmyloGraph::ag_data_interactions(),
-    groups = AmyloGraph:::ag_data_groups(),
-    nodes = AmyloGraph:::ag_data_nodes()
-)
+ag_data <- AmyloGraph:::ag_load_data()
 
 ui <- AmyloGraph:::ag_ui(ag_data)
 server <- AmyloGraph:::ag_server(ag_data) 
