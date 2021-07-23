@@ -73,19 +73,22 @@
 .filter_checkbox div.checkbox label {
   width: 100%;
   padding-left: 30px;
-  --color: 160, 160, 160;
-  border: 5px solid rgba(var(--color), 1);
-  background-color: rgba(var(--color), 0.5);
+  --border-color: 140, 140, 140;
+  --background-alpha: 0.1;
+  border: 5px solid rgba(var(--border-color), 1);
+  background-color: rgba(var(--border-color), var(--background-alpha));
 }
 
-.filter_checkbox_active div.checkbox:nth-child(1) label { --color:  27, 158, 119; }
-.filter_checkbox_active div.checkbox:nth-child(2) label { --color: 217,  95,   2; }
-.filter_checkbox_active div.checkbox:nth-child(3) label { --color: 117, 112, 179; }
-.filter_checkbox_active div.checkbox:nth-child(4) label { --color: 231,  41, 138; }
-.filter_checkbox_active div.checkbox:nth-child(5) label { --color: 102, 166,  30; }
-.filter_checkbox_active div.checkbox:nth-child(6) label { --color: 230, 171,   2; }
-.filter_checkbox_active div.checkbox:nth-child(7) label { --color: 166, 118,  29; }
-.filter_checkbox_active div.checkbox:nth-child(8) label { --color: 102, 102, 102; }
+.filter_checkbox_active div.checkbox label { --background-alpha: 0.8; }
+
+.filter_checkbox_active div.checkbox:nth-child(1) label { --border-color:  27, 158, 119; }
+.filter_checkbox_active div.checkbox:nth-child(2) label { --border-color: 217,  95,   2; }
+.filter_checkbox_active div.checkbox:nth-child(3) label { --border-color: 117, 112, 179; }
+.filter_checkbox_active div.checkbox:nth-child(4) label { --border-color: 231,  41, 138; }
+.filter_checkbox_active div.checkbox:nth-child(5) label { --border-color: 102, 166,  30; }
+.filter_checkbox_active div.checkbox:nth-child(6) label { --border-color: 230, 171,   2; }
+.filter_checkbox_active div.checkbox:nth-child(7) label { --border-color: 166, 118,  29; }
+.filter_checkbox_active div.checkbox:nth-child(8) label { --border-color: 102, 102, 102; }
 
 .ag-title {
   height: 80px;
