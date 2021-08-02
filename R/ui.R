@@ -20,7 +20,8 @@ ag_ui <- function(ag_data) fluidPage(
         id = "graph-table-panel",
         tabPanel(
           title = "Graph",
-          div(class = "ag-page-content",
+          div(id = "page-content",
+              class = "ag-page-content",
               div(class = "ag-graph-panel",
                   visNetworkOutput("graph", height = "calc(100% - 10px)", width = "auto")
               ),

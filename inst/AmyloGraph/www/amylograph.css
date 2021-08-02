@@ -1,11 +1,11 @@
 :root {
+  --node-panel-width: 30%;
   --height-no-header: calc(100vh - 200px);
   --col-main-1: #7B1E7A;
   --col-main-2: #F3C677;
   --col-dark: #0C0A3E;
   --col-accent: #FE5F55;
   --col-bg-dark: #BDD5EA;
-  
 }
 
 /* SHINY CLASSES */
@@ -48,13 +48,17 @@
 }
 
 .ag-graph-panel {
-  width: 70%;
+  width: calc(100% - var(--node-panel-width));
   height: 100%;
 }
 
 .ag-node-panel {
-  width: 30%;
+  width: var(--node-panel-width);
   height: 100%;
+}
+
+.ag-node-panel-activated {
+  --node-panel-width: 55%;
 }
 
 .ag-table-panel {
