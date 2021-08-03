@@ -1,7 +1,9 @@
 library(dplyr)
 library(stringi)
+library(stringr)
+library(glue)
 
-AG_data <- readRDS("AmyloGraph.RDS")
+AG_data <- readRDS("inst/AmyloGraph/AmyloGraph.RDS")
 
 greek_letters <- c("^α", "^β", "^δ", "^κ", "α", "β", "κ", "δ")
 greek_letter_names <- c("Alpha", "Beta", "Delta", "Kappa", "alpha", "beta", "delta", "kappa")
@@ -15,6 +17,6 @@ AG_data %>%
          heterogenous_fibers = `Is interaction resulting in heterogeneous fibrils consisting of interactor and interactee molecules?`,
          doi = `DOI (only number, no the link, e.g., 10.1073/pnas.1610371113)`) %>%
   mutate(interactor_name = degreekize(interactor_name),
-         interactee_name = degreekize(interactee_name)) %>%
-  
-  write.csv("interactions_data.csv", row.names = FALSE)
+         interactee_name = degreekize(interactee_name),
+         AGID = glue("AG{str_pad(cur_group_rows(), 5, 'left', '0')}")) %>%
+  write.csv("inst/AmyloGraph/interactions_data.csv", row.names = FALSE)
