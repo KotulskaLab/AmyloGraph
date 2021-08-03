@@ -1,27 +1,14 @@
-#' @importFrom htmltools div
-#' @importFrom shiny NS dataTableOutput
+#' @importFrom shiny NS
 interactionsTableUI <- function(id) {
-  div(
-    class = "ag-table-panel",
-    dataTableOutput(NS(id, "table"))
-  )
+  ns <- NS(id)
+  elem_interactions_table(ns("table"))
 }
 
-#' @importFrom shiny moduleServer renderDataTable
-#' @importFrom dplyr select `%>%`
-interactionsTableServer <- function(id, data_interactions) {
+#' @importFrom shiny moduleServer
+interactionsTableServer <- function(id, edges) {
   moduleServer(id, function(input, output, session) {
-    output[["table"]] <- renderDataTable(
-      data_interactions[["table"]] %>% select(interactor_name,
-                                              interactee_name,
-                                              aggregation_speed,
-                                              elongates_by_attaching,
-                                              heterogenous_fibers,
-                                              doi),
-      options = list(
-        scrollY = "calc(100vh - 330px - var(--correction))",
-        scrollCollapse = TRUE
-      )
-    )
+    interactions_table <- reactive_select_table(edges) 
+    
+    output[["table"]] <- render_interactions_table(interactions_table)  
   })
 }
