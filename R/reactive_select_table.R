@@ -1,6 +1,7 @@
 #' @importFrom shiny reactive
 #' @importFrom dplyr select `%>%`
 reactive_select_table <- function(edges) reactive({
+  icecream::ic(edges[["table"]])
   edges[["table"]] %>% 
     mutate(doi = linkify_doi(doi)) %>% 
     select(AGID,

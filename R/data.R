@@ -5,12 +5,14 @@ ag_load_data <- \()
     nodes = AmyloGraph:::ag_data_nodes()
   )
 
+#' @importFrom readr read_csv
 #' @importFrom purrr map_chr
 #' @importFrom dplyr mutate
 #' @importFrom digest digest
 #' @export
 ag_data_interactions <- \()
-  read.csv(system.file("AmyloGraph", "interactions_data.csv", package = "AmyloGraph")) |>
+  read_csv(system.file("AmyloGraph", "interactions_data.csv", package = "AmyloGraph"),
+           col_types = "ccfffcc") |>
   mutate(from_id = map_chr(interactor_name, digest),
          to_id = map_chr(interactee_name, digest))
 
