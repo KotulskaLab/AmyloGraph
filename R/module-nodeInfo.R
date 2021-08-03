@@ -41,43 +41,14 @@ nodeInfoUI <- function(id, node_data) {
   )
 }
 
-#' @importFrom shiny moduleServer reactive req renderUI HTML renderDataTable
-#' @importFrom dplyr `%>%` filter arrange select
+#' @importFrom shiny moduleServer 
 nodeInfoServer <- function(id, edge_data, node_data) {
   moduleServer(id, function(input, output, session) {
-    selected_node_info <- reactive({
-      req(input[["select_node"]])
-      node_data %>%
-        filter(id == input[["select_node"]])
-    })
+    selected_node_info <- reactive_selected_node_info(input, node_data)
+    selected_node_label <- reactive_selected_node_label(selected_node_info)
     
-    selected_node_label <- reactive({
-      selected_node_info()[["label"]]
-    })
-    
-    output[["info"]] <- renderUI({
-      req(input[["select_node"]])
-      HTML(random_description(selected_node_label()))
-    })
-    
-    renderInteractionTable <- function(target_id, target_variable) {
-      renderDataTable({
-        req(input[["select_node"]])
-        edge_data[["node_info"]] %>%
-          filter({{target_id}} == input[["select_node"]]) %>%
-          arrange({{target_variable}}, doi) %>%
-          mutate(doi = linkify_doi(doi)) %>%
-          select({{target_variable}}, doi)
-      }, options = list(
-        pageLength = 10,
-        lengthChange = FALSE
-      ),
-      escape = FALSE
-      )
-    }
-    
-    output[["interactees"]] <- renderInteractionTable(from_id, interactee_name)
-    
-    output[["interactors"]] <- renderInteractionTable(to_id, interactor_name)
+    output[["info"]] <- render_protein_info(input, selected_node_label)
+    output[["interactees"]] <- render_interactions_subtable(input, edge_data, from_id, interactee_name)
+    output[["interactors"]] <- render_interactions_subtable(input, edge_data, to_id, interactor_name)
   })
 }
