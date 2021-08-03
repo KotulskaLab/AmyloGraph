@@ -1,3 +1,9 @@
+if(!require(shinytest, quietly = TRUE))
+  skip("There is no package 'shinytest' installed!")
+
+if(!shinytest::dependenciesInstalled())
+  skip("There are no external dependencies for 'shinytest' installed!")
+
 library(shinytest, quietly = TRUE)
 
 ag_data <- ag_load_data()
