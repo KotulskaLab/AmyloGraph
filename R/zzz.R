@@ -13,5 +13,6 @@
     options(new_options[unset_inds])
   }
   
+  icecream::ic_disable()
   invisible()
 }
