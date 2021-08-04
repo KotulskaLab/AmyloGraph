@@ -7,7 +7,7 @@ interactionsTableUI <- function(id) {
 #' @importFrom shiny moduleServer
 interactionsTableServer <- function(id, edges) {
   moduleServer(id, function(input, output, session) {
-    interactions_table <- reactive_select_table(edges) 
+    interactions_table <- reactive_interactions_table(edges) 
     
     output[["table"]] <- render_interactions_table(interactions_table)  
   })

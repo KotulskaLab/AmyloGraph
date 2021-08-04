@@ -1,7 +1,7 @@
 #' @importFrom shiny reactive
 #' @importFrom dplyr select `%>%`
 #' @importFrom icecream ic
-reactive_select_table <- function(edges) reactive({
+reactive_interactions_table <- function(edges) reactive({
   ic(edges[["table"]])
   edges[["table"]] %>% 
     mutate(doi = linkify_doi(doi)) %>% 
