@@ -11,7 +11,7 @@ observe_node_selection <- function(input) {
       selected = selected_node_id
     )
     toggleCssClass(class = "ag-node-panel-activated",
-                   condition = !is_node_selected(selected_node_id),
+                   condition = is_node_selected(selected_node_id),
                    selector = "#page-content > *")
   })
 }

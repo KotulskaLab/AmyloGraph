@@ -11,8 +11,8 @@ visResetEdges <- \(graph, edges, input, selected_node_input_id,
 #' @importFrom visNetwork visUnselectAll visSelectNodes
 visToggleNodes <- \(graph, id) {
   if (is_node_selected(id))
-    visUnselectAll(graph)
-  else
     visSelectNodes(graph, id)
+  else
+    visUnselectAll(graph)
   graph
 }

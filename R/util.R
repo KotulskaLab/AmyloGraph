@@ -4,5 +4,5 @@ ag_option <- function(option) {
 }
 
 is_node_selected <- function(id) {
-  length(id) == 0 || id == ag_option("str_null")
+  length(id) != 0 && id != ag_option("str_null")
 }
