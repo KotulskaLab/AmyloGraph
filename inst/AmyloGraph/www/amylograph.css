@@ -94,7 +94,7 @@
 .filter_checkbox_active div.checkbox:nth-child(7) label { --border-color: 166, 118,  29; }
 .filter_checkbox_active div.checkbox:nth-child(8) label { --border-color: 102, 102, 102; }
 
-.ag-title {
+.ag-title-bar {
   height: 80px;
   background-color: var(--col-accent);
   

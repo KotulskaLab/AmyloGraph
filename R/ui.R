@@ -6,10 +6,7 @@ ag_ui <- function(ag_data) fluidPage(
   theme = "amylograph.css",
   useShinyjs(),
   
-  div(
-    class = "ag-title",
-    img(src = "AGT5.png", class = "ag-logo")
-  ),
+  elem_title_bar("AGT5.png"),
   sidebarLayout(
     sidebarPanel(
       graphControlUI("graph_control", ag_data[["groups"]]),
