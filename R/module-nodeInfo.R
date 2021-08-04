@@ -1,6 +1,7 @@
 #' @importFrom htmltools div
 #' @importFrom shinyhelper helper
-#' @importFrom shiny selectInput NS uiOutput tabsetPanel tabPanel dataTableOutput
+#' @importFrom shiny selectInput NS uiOutput tabsetPanel tabPanel 
+#' @importFrom DT dataTableOutput
 #' @importFrom purrr set_names
 #' @importFrom glue glue
 nodeInfoUI <- function(id, node_data) {

@@ -1,4 +1,4 @@
-#' @importFrom shiny renderDataTable
+#' @importFrom DT renderDataTable
 #' @importFrom dplyr `%>%` filter arrange select mutate
 render_interactions_subtable <- function(input, edge_data, target_id, target_variable) {
   renderDataTable({
