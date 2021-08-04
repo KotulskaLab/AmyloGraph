@@ -5,40 +5,11 @@
 #' @importFrom purrr set_names
 #' @importFrom glue glue
 nodeInfoUI <- function(id, node_data) {
+  ns <- NS(id)
   div(
     class = "ag-node-panel",
-    helper(
-      selectInput(
-        inputId = NS(id, "select_node"),
-        label = "Select node to display info about",
-        #null value encoded as text, because NULL value cannot be an element of a vector 
-        choices = c(none = ag_option("str_null"),
-                    set_names(node_data[["id"]], node_data[["label"]])[order(node_data[["label"]])]),
-        multiple = FALSE),
-      type = "markdown",
-      content = "label_group"),
-    ifelsePanel(
-      id = NS(id, "ifelse"),
-      condition = glue("input.select_node == '{AmyloGraph:::ag_option('str_null')}'"),
-      content_true = div(
-        class = "ag-node-info",
-        "select node to display info about it and interactions associated with it"
-      ),
-      content_false = div(
-        class = "ag-node-info",
-        uiOutput(NS(id, "info")),
-        tabsetPanel(
-          id = NS(id, "tabs"),
-          tabPanel(
-            title = "Interactees",
-            dataTableOutput(NS(id, "interactees"))),
-          tabPanel(
-            title = "Interactors",
-            dataTableOutput(NS(id, "interactors")))
-        )
-      ),
-      ns = NS(id)
-    )
+    elem_select_node(ns("select_node"), node_data),
+    elem_info_panel(ns)
   )
 }
 
