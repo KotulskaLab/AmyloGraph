@@ -1,4 +1,6 @@
-elem_select_node <- \(id, node_data) helper(
+elem_select_node <- \(id, node_data) div(
+  class = "ag-select-node-container",
+  helper(
   selectInput(
     inputId = id,
     label = "Select node to display info about",
@@ -8,4 +10,4 @@ elem_select_node <- \(id, node_data) helper(
     multiple = FALSE),
   type = "markdown",
   content = "label_group"
-)
+))

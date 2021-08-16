@@ -7,6 +7,7 @@
 nodeInfoUI <- function(id, node_data) {
   ns <- NS(id)
   div(
+    id = "node-panel",
     class = "ag-node-panel",
     elem_select_node(ns("select_node"), node_data),
     elem_info_panel(ns)

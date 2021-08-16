@@ -44,21 +44,30 @@
 .ag-page-content {
   width: 100%;
   height: var(--height-no-header);
-  display: flex;
 }
 
 .ag-graph-panel {
-  width: calc(100% - var(--node-panel-width));
+  width: 100%;
   height: 100%;
 }
 
 .ag-node-panel {
-  width: var(--node-panel-width);
-  height: 100%;
+  position: relative;
+  top: -100%;
+  left: 60%;
+  width: 40%;
+  height: 200px;
+  background-color: var(--col-bg-dark);
+  margin-top: -20px;
+  padding: 20px
 }
 
 .ag-node-panel-activated {
-  --node-panel-width: 55%;
+  height: 100%;
+}
+
+.ag-select-node-container {
+  height: 90px;
 }
 
 .ag-table-panel {
@@ -116,7 +125,7 @@
 }
 
 .ag-node-info {
-  height: 100%;
+  height: calc(100% - 90px);
 }
 
 .ag-node-info > .tabbable {
