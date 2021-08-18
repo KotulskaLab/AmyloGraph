@@ -22,7 +22,8 @@ graphControlUI <- function(id, data_groups) {
            ~ filterCheckboxInput(NS(id, .x),
                                  ag_color_map(data_groups, .x)[["values"]],
                                  .y))
-    )
+    ),
+    textInput(NS(id, "motif"), "Motif which should be seen in either interactor or interactee", placeholder = "^LXXA")
   )
 }
 
@@ -32,6 +33,7 @@ graphControlUI <- function(id, data_groups) {
 #' @importFrom dplyr `%>%` filter group_by summarize cur_group_id mutate select
 #' @importFrom glue glue_collapse
 #' @importFrom rlang sym expr
+#' @importFrom tidysq `%has%`
 graphControlServer <- function(id, data_interactions, data_groups) {
   moduleServer(id, function(input, output, session) {
     observe({
@@ -47,11 +49,13 @@ graphControlServer <- function(id, data_interactions, data_groups) {
     )
     
     observe({
+      input[["motif"]]
       ret[["table"]] <- data_interactions %>%
         filter(!!!map(
           ag_group_labels(data_groups) %>% set_names(NULL),
           ~ expr(!!sym(.) %in% !!input[[.]]))
-        )
+        ) %>%
+        filter(ic(interactee_sequence %has% input[["motif"]] | interactor_sequence %has% input[["motif"]]))
     })
     
     observe({
