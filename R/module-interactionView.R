@@ -29,9 +29,9 @@ interactionViewServer <- function(id, interactions) {
         filter(AGID == input[["selected_interaction"]])
       
       output[["interactor_name"]] <- renderText(selected_interaction[["interactor_name"]])
-      output[["interactor_sequence"]] <- renderText(selected_interaction[["interactor_sequence"]])
+      output[["interactor_sequence"]] <- renderText(as.character(selected_interaction[["interactor_sequence"]]))
       output[["interactee_name"]] <- renderText(selected_interaction[["interactee_name"]])
-      output[["interactee_sequence"]] <- renderText(selected_interaction[["interactee_sequence"]])
+      output[["interactee_sequence"]] <- renderText(as.character(selected_interaction[["interactee_sequence"]]))
       output[["aggregation_speed"]] <- renderText(as.character(selected_interaction[["aggregation_speed"]]))
       output[["elongates_by_attaching"]] <- renderText(as.character(selected_interaction[["elongates_by_attaching"]]))
       output[["heterogenous_fibers"]] <- renderText(as.character(selected_interaction[["heterogenous_fibers"]]))
