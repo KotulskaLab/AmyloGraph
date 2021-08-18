@@ -4,10 +4,12 @@ interactionsTableUI <- function(id) {
   elem_interactions_table(ns("table"))
 }
 
-#' @importFrom shiny moduleServer
+#' @importFrom shiny moduleServer NS
 interactionsTableServer <- function(id, edges) {
   moduleServer(id, function(input, output, session) {
-    interactions_table <- reactive_interactions_table(edges) 
+    ns <- NS(id)
+    
+    interactions_table <- reactive_interactions_table(edges, ns) 
     
     output[["table"]] <- render_interactions_table(interactions_table)  
   })
