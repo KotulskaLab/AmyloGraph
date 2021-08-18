@@ -12,6 +12,8 @@ degreekize <- function(names) stri_replace_all_regex(names, greek_letters, greek
 AG_data %>%
   select(interactor_name = `Interactor name`,
          interactee_name = `Interactee name`,
+         interactor_sequence = Sequence,
+         interactee_sequence = `Sample sequence`,
          aggregation_speed = `Is the interactor affecting interactee’s aggregating speed`,
          elongates_by_attaching = `If interactee is still forming fibrils after the interaction, do fibrils of interactee elongates by attaching to monomers/oligomers/fibrils of interactor?`,
          heterogenous_fibers = `Is interaction resulting in heterogeneous fibrils consisting of interactor and interactee molecules?`,
