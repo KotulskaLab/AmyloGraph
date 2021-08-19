@@ -58,6 +58,7 @@ body {
 
 .ag_filter_control {
   height: 100%;
+  padding-right: 10px;
   overflow-y: auto;
   overflow-x: hidden;
 }
