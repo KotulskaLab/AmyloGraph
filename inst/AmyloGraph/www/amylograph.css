@@ -10,6 +10,11 @@
 
 html {
   overflow: hidden;
+  height: 100vh;
+}
+
+body {
+  height: 100%;
 }
 
 /* SHINY CLASSES */
