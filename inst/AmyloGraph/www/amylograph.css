@@ -73,13 +73,14 @@ body {
   left: 60%;
   width: 40%;
   height: 200px;
-  background-color: var(--col-bg-dark);
+  background-color: #BDD5EAC9;
   margin-top: -20px;
+  margin-left: 20px;
   padding: 20px
 }
 
 .ag_panel_single_protein_expanded {
-  height: 100%;
+  height: calc(100% + 20px);
 }
 
 .ag_node_selector_container {
