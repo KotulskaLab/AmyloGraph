@@ -7,12 +7,12 @@ elem_info_panel <- \(ns) ifelsePanel(
 )
 
 elem_info_no_node_selected <- \(ns) div(
-  class = "ag-node-info",
+  class = "ag_protein_details",
   "select node to display info about it and interactions associated with it"
 )
 
 elem_info_node_selected <- \(ns) div(
-  class = "ag-node-info",
+  class = "ag_protein_details",
   uiOutput(ns("info")),
   tabsetPanel(
     id = ns("tabs"),

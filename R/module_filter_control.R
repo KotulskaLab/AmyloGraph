@@ -2,9 +2,9 @@
 #' @importFrom shinyhelper helper
 #' @importFrom shiny selectInput NS tagList
 #' @importFrom purrr imap
-graphControlUI <- function(id, data_groups) {
+ui_filter_control <- function(id, data_groups) {
   div(
-    class = "ag-control-panel",
+    class = "ag_filter_control",
     helper(
       selectInput(
         inputId = NS(id, "label_group"),
@@ -34,7 +34,7 @@ graphControlUI <- function(id, data_groups) {
 #' @importFrom glue glue_collapse
 #' @importFrom rlang sym expr
 #' @importFrom tidysq `%has%`
-graphControlServer <- function(id, data_interactions, data_groups) {
+server_filter_control <- function(id, data_interactions, data_groups) {
   moduleServer(id, function(input, output, session) {
     observe({
       walk(ag_group_labels(data_groups),

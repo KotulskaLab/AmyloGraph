@@ -1,5 +1,5 @@
 #' @importFrom shiny NS
-interactionViewUI <- function(id) {
+ui_single_interaction <- function(id) {
   ns <- NS(id)
   div(
     h2("Interactor:"),
@@ -20,7 +20,7 @@ interactionViewUI <- function(id) {
 }
 
 #' @importFrom shiny moduleServer
-interactionViewServer <- function(id, interactions) {
+server_single_interaction <- function(id, interactions) {
   moduleServer(id, function(input, output, session) {
     observe({
       req(input[["selected_interaction"]])

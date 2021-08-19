@@ -4,10 +4,10 @@
 ag_server <- function(ag_data) function(input, output) {
   observe_helpers(help_dir = "manuals")
   
-  edges <- graphControlServer("graph_control", ag_data[["interactions"]], ag_data[["groups"]])
-  interactionsTableServer("all_edges", edges)
-  nodeInfoServer("node_info", edges, ag_data[["nodes"]])
-  interactionViewServer("interaction_view", ag_data[["interactions"]])
+  edges <- server_filter_control("filter_control", ag_data[["interactions"]], ag_data[["groups"]])
+  server_interactions_table("interactions_table", edges)
+  server_single_protein("single_protein", edges, ag_data[["nodes"]])
+  server_single_interaction("single_interaction", ag_data[["interactions"]])
   
   output[["graph"]] <- render_network(ag_data[["nodes"]], edges)
   

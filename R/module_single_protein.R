@@ -4,18 +4,18 @@
 #' @importFrom DT dataTableOutput
 #' @importFrom purrr set_names
 #' @importFrom glue glue
-nodeInfoUI <- function(id, node_data) {
+ui_single_protein <- function(id, node_data) {
   ns <- NS(id)
   div(
-    id = "node-panel",
-    class = "ag-node-panel",
+    id = "panel_single_protein",
+    class = "ag_panel_single_protein",
     elem_select_node(ns("select_node"), node_data),
     elem_info_panel(ns)
   )
 }
 
 #' @importFrom shiny moduleServer 
-nodeInfoServer <- function(id, edge_data, node_data) {
+server_single_protein <- function(id, edge_data, node_data) {
   moduleServer(id, function(input, output, session) {
     selected_node_info <- reactive_selected_node_info(input, node_data)
     selected_node_label <- reactive_selected_node_label(selected_node_info)

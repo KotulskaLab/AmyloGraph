@@ -51,18 +51,18 @@ html {
 
 /* CUSTOM CLASSES */
 
-.ag-control-panel {
+.ag_filter_control {
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
 }
 
-.ag-page-content, .ag-graph-panel {
+.ag_tab_interactions_graph, .ag_panel_interactions_graph {
   width: 100%;
   height: 100%;
 }
 
-.ag-node-panel {
+.ag_panel_single_protein {
   position: relative;
   top: -100%;
   left: 60%;
@@ -73,15 +73,15 @@ html {
   padding: 20px
 }
 
-.ag-node-panel-activated {
+.ag_panel_single_protein_expanded {
   height: 100%;
 }
 
-.ag-select-node-container {
+.ag_node_selector_container {
   height: 90px;
 }
 
-.ag-table-panel {
+.ag_interactions_table {
   --correction: 0px;
   height: calc(100vh - 130px - var(--correction));
   width: 100%;
@@ -89,7 +89,7 @@ html {
 }
 
 @media (max-width: 819px) {
-  .ag-table-panel {
+  .ag_tab_interactions_graph {
     --correction: 60px;
   }
 }
@@ -114,36 +114,36 @@ html {
 .filter_checkbox_active div.checkbox:nth-child(7) label { --border-color: 166, 118,  29; }
 .filter_checkbox_active div.checkbox:nth-child(8) label { --border-color: 102, 102, 102; }
 
-.ag-title-bar {
+.ag_title_bar {
   height: 80px;
   background-color: var(--col-accent);
   
 }
 
-.ag-logo {    
+.ag_logo {    
   height: 100%;
   padding: 7px;
 }
 
-#node_info-info {    
+#single_protein-info {    
   height: 30%;
   overflow-y: auto;
   padding: 15px;
 }
 
-#node_info-ifelse-neg {
+#single_protein-ifelse-neg {
   height: 100%;
 }
 
-#graph-table-panel {
+#app_main_panel {
   height: 42px;
 }
 
-.ag-node-info {
+.ag_protein_details {
   height: calc(100% - 90px);
 }
 
-.ag-node-info > .tabbable {
+.ag_protein_details > .tabbable {
   max-height: 70%;
   width: 100%;
   overflow: scroll;

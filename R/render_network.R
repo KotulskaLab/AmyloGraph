@@ -15,10 +15,10 @@ render_network <- function(ag_data_nodes, edges) {
       visInteraction(zoomView = TRUE) %>%
       visEvents(
         selectNode = glue("function(nodes){
-                  Shiny.setInputValue('<<NS('node_info', 'select_node')>>', nodes.nodes[0]);
+                  Shiny.setInputValue('<<NS('single_protein', 'select_node')>>', nodes.nodes[0]);
                   }", .open = "<<", .close = ">>"),
         deselectNode = glue("function(nodes){
-                  Shiny.setInputValue('<<NS('node_info', 'select_node')>>', '<<AmyloGraph:::ag_option('str_null')>>');
+                  Shiny.setInputValue('<<NS('single_protein', 'select_node')>>', '<<AmyloGraph:::ag_option('str_null')>>');
                   }", .open = "<<", .close = ">>")) %>%
       visIgraphLayout(smooth = TRUE) %>%
       visExport(type = "png", name = "AmyloGraph", label = "Export as png", float = "left", 

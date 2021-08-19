@@ -1,40 +1,40 @@
 elem_app_main_panel <- \(data_nodes) mainPanel(
   tabsetPanel(
-    id = "graph-table-panel",
-    elem_tab_graph(data_nodes),
-    elem_tab_table(),
-    elem_tab_interaction(),
+    id = "app_main_panel",
+    elem_tab_interactions_graph(data_nodes),
+    elem_tab_interactions_table(),
+    elem_tab_single_interaction(),
     elem_tab_about()
   ),
   width = 12 - ag_option("side_panel_width")
 )
 
-elem_tab_graph <- \(data_nodes) tabPanel(
+elem_tab_interactions_graph <- \(data_nodes) tabPanel(
   title = "Graph",
   div(
-    id = "page-content",
-    class = "ag-page-content",
-    elem_graph(),
-    elem_protein_view(data_nodes)
+    id = "tab_interactions_graph",
+    class = "ag_tab_interactions_graph",
+    elem_panel_interactions_graph(),
+    elem_panel_single_protein(data_nodes)
   )
 )
 
-elem_graph <- \() div(
-  class = "ag-graph-panel",
+elem_panel_interactions_graph <- \() div(
+  class = "ag_panel_interactions_graph",
   visNetworkOutput("graph", height = "calc(100% - 10px)", width = "100%")
 )
 
-elem_protein_view <- \(data_nodes) nodeInfoUI("node_info", data_nodes)
+elem_panel_single_protein <- \(data_nodes) ui_single_protein("single_protein", data_nodes)
 
-elem_tab_table <- \() tabPanel(
+elem_tab_interactions_table <- \() tabPanel(
   title = "Table",
-  interactionsTableUI("all_edges")
+  ui_interactions_table("interactions_table")
 )
 
-elem_tab_interaction <- \() tabPanel(
+elem_tab_single_interaction <- \() tabPanel(
   title = "Interaction",
-  value = "interaction_view",
-  interactionViewUI("interaction_view")
+  value = "single_interaction",
+  ui_single_interaction("single_interaction")
 )
 
 elem_tab_about <- \() tabPanel(

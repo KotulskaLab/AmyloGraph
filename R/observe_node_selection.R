@@ -3,15 +3,15 @@
 #' @importFrom visNetwork visNetworkProxy
 observe_node_selection <- function(input) {
   observe({
-    selected_node_id <- input[[NS("node_info", "select_node")]]
+    selected_node_id <- input[[NS("single_protein", "select_node")]]
     visNetworkProxy("graph") %>%
       visToggleNodes(selected_node_id)
     updateSelectInput(
-      inputId = NS("node_info", "select_node"),
+      inputId = NS("single_protein", "select_node"),
       selected = selected_node_id
     )
-    toggleCssClass(class = "ag-node-panel-activated",
+    toggleCssClass(class = "ag_panel_single_protein_expanded",
                    condition = is_node_selected(selected_node_id),
-                   selector = "#node-panel")
+                   selector = "#panel_single_protein")
   })
 }

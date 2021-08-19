@@ -7,5 +7,5 @@ details_button <- \(interaction_ids, id, ns, ...) {
             #should this values of id be generated manually with NS like this?
             actionButton(glue("ns(interaction_view_selector_{interaction_id})"), 
                          "Details",
-                         onclick = glue("Shiny.setInputValue('{NS('interaction_view', 'selected_interaction')}', '{interaction_id}')"))))
+                         onclick = glue("Shiny.setInputValue('{NS('single_interaction', 'selected_interaction')}', '{interaction_id}')"))))
 }

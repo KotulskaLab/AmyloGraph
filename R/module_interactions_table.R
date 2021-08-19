@@ -1,11 +1,11 @@
 #' @importFrom shiny NS
-interactionsTableUI <- function(id) {
+ui_interactions_table <- function(id) {
   ns <- NS(id)
   elem_interactions_table(ns("table"))
 }
 
 #' @importFrom shiny moduleServer NS
-interactionsTableServer <- function(id, edges) {
+server_interactions_table <- function(id, edges) {
   moduleServer(id, function(input, output, session) {
     ns <- NS(id)
     
