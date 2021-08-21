@@ -1,8 +1,14 @@
 ## About
 
+AmyloGraph is a database of interactions between amyloid proteins. Curators of AmyloGraph gather data manually from the the latest published research literature and community data submissions.
+
+## Contact
+
+For general questions or problems with the data or database, please email the AmyloGraph curator: michalburdukiewicz@gmail.com.
+
 ## Citation
 
-Burdukiewicz M, Rafacz D, Hubicka K, Bakala M, Lassota A, Stecko J, Szymanska N, Barbach A, Wojciechowski J, Kozakiewicz D, Szulc N, Jeskowiak I, Chilimoniuk J, Gasior-Glogowska M, Kotulska M (2020). AmyloGraph: A comprehensive database of amyloid-amyloid interactions. XXXYYY, doi.
+Burdukiewicz M, Rafacz D, Hubicka K, Bakala M, Lassota A, Stecko J, Szymanska N, Barbach A, Wojciechowski J, Kozakiewicz D, Szulc N, Chilimoniuk J, Jeskowiak I, Gasior-Glogowska M, Kotulska M (2020). AmyloGraph: A comprehensive database of amyloid-amyloid interactions. XXXYYY, doi.
 
 ## Acknowledgements
 
