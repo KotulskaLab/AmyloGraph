@@ -1,4 +1,4 @@
-### Aggregation speed
+### Fibrillization speed
 
 ***
 
