@@ -5,7 +5,5 @@
 ag_ui <- function(ag_data) fluidPage(
   theme = "amylograph.css",
   useShinyjs(),
-  
-  elem_title_bar("AGT5.png"),
   elem_app_body(ag_data[["nodes"]], ag_data[["groups"]])
 )

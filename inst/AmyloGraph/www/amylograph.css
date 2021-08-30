@@ -5,7 +5,7 @@
   --col-main-2: #F3C677;
   --col-dark: #0C0A3E;
   --col-accent: #FE5F55;
-  --col-bg-dark: #BDD5EA;
+  --col-bg: #FEF5EF;
 }
 
 html {
@@ -29,7 +29,7 @@ body {
 }
 
 .well {
-  background-color: var(--col-bg-dark);
+  background-color: var(--col-bg);
   border: none;
   border-radius: 0px;
   -webkit-box-shadow: none;
@@ -41,8 +41,7 @@ body {
 
 .row {
   margin: 0px;
-  /* 80 == height of header*/ 
-  height: calc(100% - 80px);
+  height: 100%;
 }
 
 .col-sm-2, .col-sm-10, .tabbable, .tab-pane {
@@ -57,7 +56,8 @@ body {
 /* CUSTOM CLASSES */
 
 .ag_filter_control {
-  height: 100%;
+  /* 120 px for logo*/
+  height: calc(100% - 120px);
   padding-right: 10px;
   overflow-y: auto;
   overflow-x: hidden;
@@ -121,14 +121,8 @@ body {
 .filter_checkbox_active div.checkbox:nth-child(7) label { --border-color: 166, 118,  29; }
 .filter_checkbox_active div.checkbox:nth-child(8) label { --border-color: 102, 102, 102; }
 
-.ag_title_bar {
-  height: 80px;
-  background-color: var(--col-accent);
-  
-}
-
 .ag_logo {    
-  height: 100%;
+  width: 100%;
   padding: 7px;
 }
 
