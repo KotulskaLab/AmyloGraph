@@ -11,3 +11,5 @@ Burdukiewicz M, Rafacz D, Hubicka K, Bakala M, Lassota A, Stecko J, Szymanska N,
 ### Acknowledgements
 
 AmyloGraph is supported by the grant no. [2019/35/B/NZ2/03997 (National Science Center)](https://projekty.ncn.gov.pl/index.php?projekt_id=459038) to Małgorzata Kotulska.
+
+<img src="../www/PWr.png" style="width: 300px">
