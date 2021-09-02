@@ -3,8 +3,8 @@
   
   new_options <- list(
     ag_str_null = "null", 
-    ag_palette = c("#1B9E77", "#D95F02", "#7570B3", "#E7298A",
-                   "#66A61E", "#E6AB02", "#A6761D", "gray40"),
+    ag_palette = c("#F9564F", "#A4B0F5", "#4F3824", "#00CC66",
+                   "#B33F62", "#F3C677", "#0C0A3E", "gray40"),
     ag_side_panel_width = 2
   )
   

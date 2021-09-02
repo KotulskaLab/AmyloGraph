@@ -112,13 +112,13 @@ body {
 
 .filter_checkbox_active div.checkbox label { --background-alpha: 0.8; }
 
-.filter_checkbox_active div.checkbox:nth-child(1) label { --border-color:  27, 158, 119; }
-.filter_checkbox_active div.checkbox:nth-child(2) label { --border-color: 217,  95,   2; }
-.filter_checkbox_active div.checkbox:nth-child(3) label { --border-color: 117, 112, 179; }
-.filter_checkbox_active div.checkbox:nth-child(4) label { --border-color: 231,  41, 138; }
-.filter_checkbox_active div.checkbox:nth-child(5) label { --border-color: 102, 166,  30; }
-.filter_checkbox_active div.checkbox:nth-child(6) label { --border-color: 230, 171,   2; }
-.filter_checkbox_active div.checkbox:nth-child(7) label { --border-color: 166, 118,  29; }
+.filter_checkbox_active div.checkbox:nth-child(1) label { --border-color: 249,  86,  79; }
+.filter_checkbox_active div.checkbox:nth-child(2) label { --border-color: 164, 176, 245; }
+.filter_checkbox_active div.checkbox:nth-child(3) label { --border-color:  79,  56,  36; }
+.filter_checkbox_active div.checkbox:nth-child(4) label { --border-color:   0, 204, 102; }
+.filter_checkbox_active div.checkbox:nth-child(5) label { --border-color: 179,  63,  98; }
+.filter_checkbox_active div.checkbox:nth-child(6) label { --border-color: 243, 198, 119; }
+.filter_checkbox_active div.checkbox:nth-child(7) label { --border-color:  12,  10,  62; }
 .filter_checkbox_active div.checkbox:nth-child(8) label { --border-color: 102, 102, 102; }
 
 .ag_logo {    
