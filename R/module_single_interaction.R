@@ -2,6 +2,7 @@
 ui_single_interaction <- function(id) {
   ns <- NS(id)
   div(
+    textOutput(ns("amylograph_id"), container = h2),
     h2("Interactor:"),
     textOutput(ns("interactor_name")),
     verbatimTextOutput(ns("interactor_sequence")),
@@ -9,14 +10,15 @@ ui_single_interaction <- function(id) {
     textOutput(ns("interactee_name")),
     verbatimTextOutput(ns("interactee_sequence")),
     h2("Properties:"),
-    h4("Is the interactor affecting interactee’s aggregating speed"),
+    h4("DOI"),
+    textOutput(ns("doi")),
+    h4("Is the interactor affecting interactee’s aggregating speed?"),
     textOutput(ns("aggregation_speed")),
     h4("If interactee is still forming fibrils after the interaction, do fibrils of interactee elongates by attaching to monomers/oligomers/fibrils of interactor?"),
     textOutput(ns("elongates_by_attaching")),
     h4("Is interaction resulting in heterogeneous fibrils consisting of interactor and interactee molecules?"),
     textOutput(ns("heterogenous_fibers"))
-    )
-  
+  )
 }
 
 #' @importFrom shiny moduleServer
@@ -28,6 +30,8 @@ server_single_interaction <- function(id, interactions) {
       selected_interaction <- interactions %>%
         filter(AGID == input[["selected_interaction"]])
       
+      output[["amylograph_id"]] <- renderText(selected_interaction[["AGID"]])
+      output[["doi"]] <- renderText(selected_interaction[["doi"]])
       output[["interactor_name"]] <- renderText(selected_interaction[["interactor_name"]])
       output[["interactor_sequence"]] <- renderText(as.character(selected_interaction[["interactor_sequence"]]))
       output[["interactee_name"]] <- renderText(selected_interaction[["interactee_name"]])
