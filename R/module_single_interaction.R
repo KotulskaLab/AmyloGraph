@@ -29,14 +29,9 @@ server_single_interaction <- function(id, interactions) {
       
       selected_interaction <- interactions %>%
         filter(AGID == input[["selected_interaction"]])
-      doi <- selected_interaction[["doi"]]
       
       output[["amylograph_id"]] <- renderText(selected_interaction[["AGID"]])
-      output[["doi"]] <- renderUI(
-        a(doi,
-          href = glue("https://doi.org/{doi}"),
-          target = "_blank",
-          rel = "noopener noreferer"))
+      output[["doi"]] <- renderUI(HTML(linkify_doi(selected_interaction[["doi"]], truncate = FALSE)))
       output[["interactor_name"]] <- renderText(selected_interaction[["interactor_name"]])
       output[["interactor_sequence"]] <- renderText(as.character(selected_interaction[["interactor_sequence"]]))
       output[["interactee_name"]] <- renderText(selected_interaction[["interactee_name"]])

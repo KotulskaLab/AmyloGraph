@@ -9,6 +9,6 @@ is_node_selected <- function(id) {
 
 #' @importFrom glue glue
 #' @importFrom stringr str_trunc
-linkify_doi <- function(doi) {
-  glue("<a href='https://doi.org/{doi}' target='_blank' rel='noopener noreferer'>{str_trunc(doi, 18)}</a>")
+linkify_doi <- function(doi, truncate = TRUE) {
+  glue("<a href='https://doi.org/{doi}' target='_blank' rel='noopener noreferer'>{if (truncate) str_trunc(doi, 18) else doi}</a>")
 }
