@@ -7,5 +7,6 @@ render_interactions_table <- function(interactions_table) renderDataTable(
     scrollCollapse = TRUE
   ),
   escape = FALSE,
-  filter = "top"
+  filter = "top",
+  rownames = FALSE
 )

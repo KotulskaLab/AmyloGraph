@@ -12,6 +12,7 @@ render_interactions_subtable <- function(input, edge_data, target_id, target_var
     pageLength = 10,
     lengthChange = FALSE
   ),
-  escape = FALSE
+  escape = FALSE,
+  rownames = FALSE
   )
 }
