@@ -5,7 +5,8 @@ render_interactions_table <- function(interactions_table)
     options = list(
       scrollY = "calc(100vh - 330px - var(--correction))",
       scrollX = TRUE,
-      scrollCollapse = TRUE
+      scrollCollapse = TRUE,
+      lengthMenu = list(c(10, 25, 50, 100, -1), c("10", "25", "50", "100", "All"))
     ),
     escape = FALSE,
     filter = "top",
