@@ -15,7 +15,8 @@ ui_filter_control <- function(id, data_groups) {
       type = "markdown",
       content = "label_group"),
     checkboxInput(NS(id, "filter_node_info"),
-                  "Filter node info data"),
+                  "Filter node info data",
+                  value = TRUE),
     do.call(
       tagList,
       imap(ag_group_labels(data_groups),
