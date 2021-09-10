@@ -17,3 +17,15 @@ is_node_selected <- function(id) {
 linkify_doi <- function(doi, truncate = TRUE) {
   glue("<a href='https://doi.org/{doi}' target='_blank' rel='noopener noreferer'>{if (truncate) str_trunc(doi, 18) else doi}</a>")
 }
+
+#' @importFrom glue glue
+#' @importFrom dplyr `%>%`
+prettify_sequence_output <- \(sequence) {
+  group_length <- 10
+  seq_length <- glue("Sequence length: {nchar(sequence)}")
+  indices <- seq(group_length, nchar(sequence), by = group_length) %>%
+    format(width = 10) %>%
+    paste0(collapse = " ")
+  sequence_w_spaces <- gsub(glue("(.{{{group_length}}})"), "\\1 ", sequence)
+  paste(seq_length, indices, sequence_w_spaces, sep = "\n")
+}
