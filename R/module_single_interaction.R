@@ -12,7 +12,7 @@ ui_single_interaction <- function(id) {
     h2("Properties:"),
     h4("DOI"),
     uiOutput(ns("doi")),
-    h4("Is the interactor affecting interactee’s aggregating speed?"),
+    h4("Is the interactor affecting interactee's aggregating speed?"),
     textOutput(ns("aggregation_speed")),
     h4("If interactee is still forming fibrils after the interaction, do fibrils of interactee elongates by attaching to monomers/oligomers/fibrils of interactor?"),
     textOutput(ns("elongates_by_attaching")),
