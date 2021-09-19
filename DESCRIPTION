@@ -9,14 +9,7 @@ Authors@R:
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Description: What the package does (one paragraph).
 License: MIT + file LICENSE
-Suggests: 
-    shinytest,
-    testthat (>= 3.0.0)
-Config/testthat/edition: 3
-Encoding: UTF-8
-LazyData: true
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+Depends: R (>= 3.5.0)
 Imports: 
     digest,
     dplyr,
@@ -36,3 +29,11 @@ Imports:
     tibble (>= 3.1.2),
     tidysq,
     visNetwork
+Suggests: 
+    shinytest,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
