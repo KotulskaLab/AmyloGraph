@@ -25,7 +25,7 @@ ui_filter_control <- function(id, data_groups) {
                                  .y))
     ),
     uiOutput(outputId = NS(id, "incorrect_motif_message")),
-    helper(textInput(NS(id, "motif"), "Motif which should be seen in either interactor or interactee", placeholder = "^LXXA"),
+    helper(textInput(NS(id, "motif"), "Filter by motif", placeholder = "^LXXA"),
            type = "markdown",
            content = "motif")
   )
