@@ -24,6 +24,7 @@ ui_filter_control <- function(id, data_groups) {
                                  ag_color_map(data_groups, .x)[["values"]],
                                  .y))
     ),
+    uiOutput(outputId = NS(id, "incorrect_motif_message")),
     helper(textInput(NS(id, "motif"), "Motif which should be seen in either interactor or interactee", placeholder = "^LXXA"),
            type = "markdown",
            content = "motif")
@@ -58,8 +59,12 @@ server_filter_control <- function(id, data_interactions, data_groups) {
         )
     })
     
+    is_motif_correct <- reactive({
+      correct_motif(input[["motif"]])
+    })
+    
     interactions_filtered_by_motif <- reactive({
-      if (correct_motif(input[["motif"]]) && nchar(input[["motif"]]) > 0) {
+      if (is_motif_correct() && nchar(input[["motif"]]) > 0) {
         interactions_filtered_by_group() %>%
           filter(contains_motif(interactor_sequence, input[["motif"]]) |
                  contains_motif(interactee_sequence, input[["motif"]]))
@@ -68,8 +73,12 @@ server_filter_control <- function(id, data_interactions, data_groups) {
       }
     })
     
+    output[["incorrect_motif_message"]] <- renderUI({
+      if (is_motif_correct()) HTML("") else HTML("Incorrect motif provided!")
+    })
+    
     observe({
-      ret[["table"]] <- interactions_filtered_by_motif()
+      ret[["table"]] <- ic(interactions_filtered_by_motif())
     })
     
     observe({
