@@ -19,6 +19,7 @@ Imports:
     htmltools,
     icecream (>= 0.1.1),
     igraph,
+    openxlsx,
     purrr,
     readr,
     rlang,
