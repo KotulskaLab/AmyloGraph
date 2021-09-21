@@ -22,7 +22,7 @@ Exemplary motifs:
 
 * "A" -- any sequence containing "A"
 * "GLAAALGA" -- any sequence containing "GLAAALGA"
-* "^AAAAA" -- any sequence starting with "AAAAA"
+* "\^AAAAA" -- any sequence starting with "AAAAA"
 * "AXXXA" -- any sequence containing "AXXXA", where "X" is any single aminoacid
 * "A*A" -- any sequence containing two "A" and any number of any aminoacids between them
 * "\^A*GG$" -- any sequence starting with single "A" and ending with double "G"
