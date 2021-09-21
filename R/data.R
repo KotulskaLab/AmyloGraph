@@ -9,13 +9,10 @@ ag_load_data <- \()
 #' @importFrom purrr map_chr
 #' @importFrom dplyr mutate
 #' @importFrom digest digest
-#' @importFrom tidysq sq
 #' @export
 ag_data_interactions <- \()
   read_csv(system.file("AmyloGraph", "interactions_data.csv", package = "AmyloGraph"),
            col_types = "ccccfffcc") |>
-    mutate(interactor_sequence = sq(interactor_sequence, alphabet = "AMI_BSC"),
-           interactee_sequence = sq(interactee_sequence, alphabet = "AMI_BSC")) |>
     mutate(from_id = map_chr(interactor_name, digest),
            to_id = map_chr(interactee_name, digest))
 

@@ -30,13 +30,12 @@ ui_filter_control <- function(id, data_groups) {
   )
 }
 
-#' @importFrom shiny moduleServer observe reactiveValues
+#' @importFrom shiny moduleServer observe reactiveValues validate need
 #' @importFrom shinyjs toggleCssClass
 #' @importFrom purrr set_names map when walk
 #' @importFrom dplyr `%>%` filter group_by summarize cur_group_id mutate select
 #' @importFrom glue glue_collapse
 #' @importFrom rlang sym expr
-#' @importFrom tidysq `%has%`
 server_filter_control <- function(id, data_interactions, data_groups) {
   moduleServer(id, function(input, output, session) {
     observe({
@@ -57,8 +56,7 @@ server_filter_control <- function(id, data_interactions, data_groups) {
         filter(!!!map(
           ag_group_labels(data_groups) %>% set_names(NULL),
           ~ expr(!!sym(.) %in% !!input[[.]]))
-        ) %>%
-        filter(ic(interactee_sequence %has% input[["motif"]] | interactor_sequence %has% input[["motif"]]))
+        ) 
     })
     
     observe({
