@@ -28,7 +28,8 @@ Imports:
     stringr,
     tibble (>= 3.1.2),
     tidysq,
-    visNetwork
+    visNetwork,
+    writexl
 Suggests: 
     shinytest,
     testthat (>= 3.0.0)
