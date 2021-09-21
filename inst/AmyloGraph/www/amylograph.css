@@ -51,6 +51,7 @@ body {
 .tab-content {
   /* 62 == height of tabbable (42) + 20 px of margin*/ 
   height: calc(100% - 62px);
+  overflow-y: auto;
 }
 
 /* CUSTOM CLASSES */
