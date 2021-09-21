@@ -10,7 +10,9 @@ ui_interactions_table <- function(id) {
 
 #' @importFrom shiny moduleServer NS
 #' @importFrom shinyjs hideElement
-#' @importFrom openxlsx write.xlsx
+#' @importFrom readr write_csv
+#' @importFrom dplyr `%>%` select
+#' @importFrom writexl write_xlsx
 server_interactions_table <- function(id, edges) {
   moduleServer(id, function(input, output, session) {
     ns <- NS(id)
@@ -21,11 +23,23 @@ server_interactions_table <- function(id, edges) {
     
     output[["download_csv"]] <- downloadHandler(
       filename = \() "AmyloGraph.csv",
-      content = \(file) write.csv(iris, file)
+      content = \(file) write_csv(
+        edges[["table"]] %>%
+          mutate(interactor_sequence = as.character(interactor_sequence),
+                 interactee_sequence = as.character(interactee_sequence)) %>%
+          select(-c(from_id, to_id)),
+        file
+      )
     )
     output[["download_xlsx"]] <- downloadHandler(
-      filename = \() "Amylograph.xlsx",
-      content = \(file) write.xlsx(iris, file)
+      filename = \() "AmyloGraph.xlsx",
+      content = \(file) write_xlsx(
+        edges[["table"]] %>%
+          mutate(interactor_sequence = as.character(interactor_sequence),
+                 interactee_sequence = as.character(interactee_sequence)) %>%
+          select(-c(from_id, to_id)),
+        file
+      )
     )
   })
 }
