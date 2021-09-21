@@ -36,9 +36,9 @@ server_single_interaction <- function(id, interactions) {
       output[["interactor_sequence"]] <- renderText(prettify_sequence_output(selected_interaction[["interactor_sequence"]]))
       output[["interactee_name"]] <- renderText(selected_interaction[["interactee_name"]])
       output[["interactee_sequence"]] <- renderText(prettify_sequence_output(selected_interaction[["interactee_sequence"]]))
-      output[["aggregation_speed"]] <- renderText(selected_interaction[["aggregation_speed"]])
-      output[["elongates_by_attaching"]] <- renderText(selected_interaction[["elongates_by_attaching"]])
-      output[["heterogenous_fibers"]] <- renderText(selected_interaction[["heterogenous_fibers"]])
+      output[["aggregation_speed"]] <- renderText(as.character(selected_interaction[["aggregation_speed"]]))
+      output[["elongates_by_attaching"]] <- renderText(as.character(selected_interaction[["elongates_by_attaching"]]))
+      output[["heterogenous_fibers"]] <- renderText(as.character(selected_interaction[["heterogenous_fibers"]]))
     })
   })
 }
