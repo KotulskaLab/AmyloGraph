@@ -2,28 +2,23 @@
 
 ***
 
-Motif that should appear in either interactor or interactee's sequence. Only interactions between 
-those sequences will be displayed on graph and in table.
+A motif that should appear in either interactor's or interactee's sequence. Only interactions between those sequences will be displayed on the graph and in the table.
 
-Motif should consist of letters representing aminoacids with possibility of using the following 
-ambiguous letters:
+A motif should consist of the letters representing amino acids with possibility of using the following ambiguous letters:
 * "B" -- either "D" or "N"
 * "J" -- either "I" or "L"
 * "Z" -- either "E" or "Q"
-* "X" -- any standard aminoacid
+* "X" -- any standard amino acid
 
-Additionally, character "*" may be used for a subsequence of any (possible distinct) aminoacids
-of any length. Character "\^" may be used as the first character of the motif to mark the beggining
-of the sequence. Similarily, "$" may be used as the last character of the motif to mark the end
-of the sequence.
+Additionally, the character "*" may be used for a subsequence of any (possibly distinct) amino acids of any length. The character "\^" may be used as the first character of a motif to mark the beginning of the sequence. Similarly, "$" may be used as the last character of a motif to mark the end of a sequence.
 
 
-Exemplary motifs:
+Some exemplary motifs:
 
 * "A" -- any sequence containing "A"
 * "GLAAALGA" -- any sequence containing "GLAAALGA"
 * "\^AAAAA" -- any sequence starting with "AAAAA"
-* "AXXXA" -- any sequence containing "AXXXA", where "X" is any single aminoacid
-* "A*A" -- any sequence containing two "A" and any number of any aminoacids between them
-* "\^A*GG$" -- any sequence starting with single "A" and ending with double "G"
-* "\^AG$" -- sequence that is exactly equal to "AG"
+* "AXXXA" -- any sequence containing two "A"s with exactly three amino acids between them
+* "A*A" -- any sequence containing two "A"s and any number of any amino acids between them
+* "\^A*GG$" -- any sequence starting with a single "A" and ending with a double "G"
+* "\^AG$" -- a sequence that is exactly "AG"
