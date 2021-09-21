@@ -26,6 +26,7 @@ Imports:
     shiny,
     shinyhelper,
     stringr,
+    stringi,
     tibble (>= 3.1.2),
     visNetwork
 Suggests: 

@@ -50,13 +50,26 @@ server_filter_control <- function(id, data_interactions, data_groups) {
       node_info = data_interactions
     )
     
-    observe({
-      input[["motif"]]
-      ret[["table"]] <- data_interactions %>%
+    interactions_filtered_by_group <- reactive({
+      data_interactions %>%
         filter(!!!map(
           ag_group_labels(data_groups) %>% set_names(NULL),
           ~ expr(!!sym(.) %in% !!input[[.]]))
-        ) 
+        )
+    })
+    
+    interactions_filtered_by_motif <- reactive({
+      if (correct_motif(input[["motif"]]) && nchar(input[["motif"]]) > 0) {
+        interactions_filtered_by_group() %>%
+          filter(contains_motif(interactor_sequence, input[["motif"]]) |
+                 contains_motif(interactee_sequence, input[["motif"]]))
+      } else {
+        interactions_filtered_by_group()
+      }
+    })
+    
+    observe({
+      ret[["table"]] <- interactions_filtered_by_motif()
     })
     
     observe({

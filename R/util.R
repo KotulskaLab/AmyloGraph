@@ -29,3 +29,21 @@ prettify_sequence_output <- \(sequence) {
   sequence_w_spaces <- gsub(glue("(.{{{group_length}}})"), "\\1 ", sequence)
   paste(seq_length, indices, sequence_w_spaces, sep = "\n")
 }
+
+#' @importFrom stringi stri_detect_regex
+correct_motif <- \(motif) {
+  stri_detect_regex(motif, "^\\^?[ABCDEFGHIJKLMNOPQRSTUVWXYZ\\*]*\\$?$")
+}
+
+#' @importFrom stringi stri_replace_all_regex
+patternize_motif <- \(motif) {
+  stri_replace_all_regex(motif, 
+                         c("B", "J", "Z", "X", "\\*"),
+                         c("[BDN]", "[JIL]", "[ZEQ]", "[ABCDEFGHIJKLMNOPQRSTUVWXYZ]", ".*"),
+                         vectorise_all = FALSE)
+}
+
+#' @importFrom stringi stri_detect_regex
+contains_motif <- \(sequences, motif) {
+  stri_detect_regex(sequences, patternize_motif(motif))
+}
