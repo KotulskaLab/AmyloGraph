@@ -157,3 +157,8 @@ body {
   width: 100%;
   overflow: scroll;
 }
+
+/* Mostly used so that there is no button visible before rendering the table */
+.ag_hidden_btn {
+  opacity: 0;
+}
