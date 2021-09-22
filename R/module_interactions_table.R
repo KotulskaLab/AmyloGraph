@@ -9,7 +9,6 @@ ui_interactions_table <- function(id) {
 }
 
 #' @importFrom shiny moduleServer NS
-#' @importFrom shinyjs hideElement
 #' @importFrom readr write_csv
 #' @importFrom dplyr `%>%` select
 #' @importFrom writexl write_xlsx
@@ -19,7 +18,9 @@ server_interactions_table <- function(id, edges) {
     
     interactions_table <- reactive_interactions_table(edges, ns)
     
-    output[["table"]] <- render_interactions_table(interactions_table, ns)
+    output[["table"]] <- render_interactions_table(
+      interactions_table, ns, session
+    )
     
     output[["download_csv"]] <- downloadHandler(
       filename = \() "AmyloGraph.csv",

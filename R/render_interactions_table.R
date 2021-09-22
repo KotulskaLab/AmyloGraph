@@ -1,5 +1,5 @@
 #' @importFrom glue glue
-download_button_callback <- function(ns, button_id, button_label)
+download_button_callback <- function(ns, session, button_id, button_label)
   glue(
     "var i = document.createElement('i');",
     "$(i).addClass('fa fa-download');",
@@ -10,7 +10,7 @@ download_button_callback <- function(ns, button_id, button_label)
     
     "var a = document.createElement('a');",
     "$(a).addClass('dt-button');",
-    "a.href = document.getElementById('{ns(button_id)}').href;",
+    "a.href = 'session/{session$token}/download/{ns(button_id)}?w=';",
     "a.download = '';",
     "$(a).attr('target', '_blank');",
     "$(a).attr('tabindex', 0);",
@@ -21,7 +21,7 @@ download_button_callback <- function(ns, button_id, button_label)
   )
 
 #' @importFrom DT renderDataTable JS
-render_interactions_table <- function(interactions_table, ns)
+render_interactions_table <- function(interactions_table, ns, session)
   renderDataTable(
     interactions_table(),
     options = list(
@@ -38,8 +38,8 @@ render_interactions_table <- function(interactions_table, ns)
     colnames = ag_colnames(interactions_table()),
     extensions = "Buttons",
     callback = JS(
-      download_button_callback(ns, "download_csv", "Download as CSV"),
-      download_button_callback(ns, "download_xlsx", "Download as Excel"),
+      download_button_callback(ns, session, "download_csv", "Download as CSV"),
+      download_button_callback(ns, session, "download_xlsx", "Download as Excel"),
       "$('.ag_hidden_btn').hide();"
     )
   )
