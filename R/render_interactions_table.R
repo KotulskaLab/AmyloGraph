@@ -17,7 +17,7 @@ download_button_callback <- function(ns, session, button_id, button_label)
     
     "$(a).append(i);",
     "$(a).append(span);",
-    "$('#{ns('table')} .dt-buttons').append(a);"
+    "$('#{ns('table')} .ag-buttons').append(a);"
   )
 
 #' @importFrom DT renderDataTable JS
@@ -25,7 +25,7 @@ render_interactions_table <- function(interactions_table, ns, session)
   renderDataTable(
     interactions_table(),
     options = list(
-      dom = glue('lBfrtip'),
+      dom = 'B<"ag-buttons">lfrtip',
       scrollY = "calc(100vh - 330px - var(--correction))",
       scrollX = TRUE,
       scrollCollapse = TRUE,
