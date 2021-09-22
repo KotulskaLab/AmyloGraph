@@ -12,11 +12,17 @@ render_interactions_subtable <- function(input, edge_data, target_id, target_var
   renderDataTable(
     rendered_data(),
     options = list(
+      dom = 'Brtip',
       pageLength = 10,
-      lengthChange = FALSE
+      lengthChange = FALSE,
+      buttons = c("selectAll", "selectNone"),
+      select = list(style = "multi+shift", items = "row")
     ),
     escape = FALSE,
     rownames = FALSE,
-    colnames = ag_colnames(rendered_data())
+    colnames = ag_colnames(rendered_data()),
+    extensions = c("Select", "Buttons"),
+    selection = "none",
+    server = FALSE
   )
 }
