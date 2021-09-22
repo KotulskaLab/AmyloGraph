@@ -12,6 +12,7 @@ elem_app_main_panel <- \(data_nodes) mainPanel(
 
 elem_tab_interactions_graph <- \(data_nodes) tabPanel(
   title = "Graph",
+  value = "graph",
   div(
     id = "tab_interactions_graph",
     class = "ag_tab_interactions_graph",
@@ -32,9 +33,15 @@ elem_tab_interactions_table <- \() tabPanel(
   ui_interactions_table("interactions_table")
 )
 
+#' @importFrom glue glue
 elem_tab_single_interaction <- \() tabPanel(
   title = "Interaction",
   value = "single_interaction",
+  actionButton(
+    "close_interaction", "Close",
+    class = "ag_close_button",
+    onclick = glue("Shiny.setInputValue('{NS('single_interaction', 'selected_interaction')}', null)")
+  ),
   ui_single_interaction("single_interaction")
 )
 

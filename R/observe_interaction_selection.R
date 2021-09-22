@@ -1,10 +1,15 @@
 #' @importFrom shiny observe req updateTabsetPanel hideTab showTab
 observe_interaction_selection <- \(input) {
   observe({
-    if (is.null(input[[NS("single_interaction", "selected_interaction")]]))
+    if (is.null(input[[NS("single_interaction", "selected_interaction")]])) {
+      updateTabsetPanel(inputId = "app_main_panel",
+                        selected = "graph")
       hideTab(inputId = "app_main_panel", target = "single_interaction")
-    else
+    } else {
       showTab(inputId = "app_main_panel", target = "single_interaction")
+      updateTabsetPanel(inputId = "app_main_panel",
+                        selected = "single_interaction")
+    }
   })
   
   observe({
