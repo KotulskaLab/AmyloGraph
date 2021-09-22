@@ -158,6 +158,11 @@ body {
   overflow: scroll;
 }
 
+.ag_close_button {
+  float: right;
+  z-index: 1;
+}
+
 /* Mostly used so that there is no button visible before rendering the table */
 .ag_hidden_btn {
   opacity: 0;
