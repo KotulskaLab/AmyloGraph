@@ -1,6 +1,7 @@
 elem_app_main_panel <- \(data_nodes) mainPanel(
   tabsetPanel(
     id = "app_main_panel",
+    type = "pills",
     elem_tab_interactions_graph(data_nodes),
     elem_tab_interactions_table(),
     elem_tab_single_interaction(),
