@@ -41,8 +41,8 @@ render_interactions_table <- function(interactions_table, ns, session)
     selection = "none",
     server = FALSE,
     callback = JS(
-      download_button_callback(ns, session, "download_csv", "Download as CSV"),
-      download_button_callback(ns, session, "download_xlsx", "Download as Excel"),
+      download_button_callback(ns, session, "download_csv", "Download selected as CSV"),
+      download_button_callback(ns, session, "download_xlsx", "Download selected as Excel"),
       "$('.ag_hidden_btn').hide();"
     )
   )
