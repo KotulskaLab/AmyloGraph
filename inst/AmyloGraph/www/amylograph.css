@@ -141,6 +141,13 @@ body {
   height: 42px;
 }
 
+#filter_control-incorrect_motif_message {
+  text-align: center;
+  background: red;
+  color: white;
+  font-weight: bold;
+}
+
 .ag_protein_details {
   height: calc(100% - 90px);
 }
@@ -149,4 +156,9 @@ body {
   max-height: 70%;
   width: 100%;
   overflow: scroll;
+}
+
+/* Mostly used so that there is no button visible before rendering the table */
+.ag_hidden_btn {
+  opacity: 0;
 }

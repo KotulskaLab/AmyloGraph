@@ -24,19 +24,19 @@ ui_filter_control <- function(id, data_groups) {
                                  ag_color_map(data_groups, .x)[["values"]],
                                  .y))
     ),
-    helper(textInput(NS(id, "motif"), "Motif which should be seen in either interactor or interactee", placeholder = "^LXXA"),
+    uiOutput(outputId = NS(id, "incorrect_motif_message")),
+    helper(textInput(NS(id, "motif"), "Filter by motif", placeholder = "^LXXA"),
            type = "markdown",
            content = "motif")
   )
 }
 
-#' @importFrom shiny moduleServer observe reactiveValues
+#' @importFrom shiny moduleServer observe reactiveValues validate need
 #' @importFrom shinyjs toggleCssClass
 #' @importFrom purrr set_names map when walk
 #' @importFrom dplyr `%>%` filter group_by summarize cur_group_id mutate select
 #' @importFrom glue glue_collapse
 #' @importFrom rlang sym expr
-#' @importFrom tidysq `%has%`
 server_filter_control <- function(id, data_interactions, data_groups) {
   moduleServer(id, function(input, output, session) {
     observe({
@@ -51,14 +51,34 @@ server_filter_control <- function(id, data_interactions, data_groups) {
       node_info = data_interactions
     )
     
-    observe({
-      input[["motif"]]
-      ret[["table"]] <- data_interactions %>%
+    interactions_filtered_by_group <- reactive({
+      data_interactions %>%
         filter(!!!map(
           ag_group_labels(data_groups) %>% set_names(NULL),
           ~ expr(!!sym(.) %in% !!input[[.]]))
-        ) %>%
-        filter(ic(interactee_sequence %has% input[["motif"]] | interactor_sequence %has% input[["motif"]]))
+        )
+    })
+    
+    is_motif_correct <- reactive({
+      correct_motif(input[["motif"]])
+    })
+    
+    interactions_filtered_by_motif <- reactive({
+      if (is_motif_correct() && nchar(input[["motif"]]) > 0) {
+        interactions_filtered_by_group() %>%
+          filter(contains_motif(interactor_sequence, input[["motif"]]) |
+                 contains_motif(interactee_sequence, input[["motif"]]))
+      } else {
+        interactions_filtered_by_group()
+      }
+    })
+    
+    output[["incorrect_motif_message"]] <- renderUI({
+      if (is_motif_correct()) HTML("") else HTML("Incorrect motif provided!")
+    })
+    
+    observe({
+      ret[["table"]] <- ic(interactions_filtered_by_motif())
     })
     
     observe({
