@@ -25,12 +25,12 @@ render_interactions_table <- function(interactions_table, ns, session)
   renderDataTable(
     interactions_table(),
     options = list(
-      dom = 'B<"ag-buttons">lfrtip',
+      dom = 'B<"ag-buttons">frtip',
       scrollY = "calc(100vh - 330px - var(--correction))",
       scrollX = TRUE,
       scrollCollapse = TRUE,
       lengthMenu = list(c(10, 25, 50, 100, -1), c("10", "25", "50", "100", "All")),
-      buttons = c("selectAll", "selectNone", "colvis"),
+      buttons = c("pageLength", "selectAll", "selectNone", "colvis"),
       select = list(style = "multi+shift", items = "row")
     ),
     escape = FALSE,
