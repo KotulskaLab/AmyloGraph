@@ -30,6 +30,7 @@ elem_panel_single_protein <- \(data_nodes) ui_single_protein("single_protein", d
 
 elem_tab_interactions_table <- \() tabPanel(
   title = "Table",
+  value = "table",
   ui_interactions_table("interactions_table")
 )
 
@@ -47,5 +48,6 @@ elem_tab_single_interaction <- \() tabPanel(
 
 elem_tab_about <- \() tabPanel(
   title = "About",
+  value = "about",
   includeMarkdown("manuals/about.md")
 )
