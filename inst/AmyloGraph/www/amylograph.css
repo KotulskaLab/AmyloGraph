@@ -1,6 +1,4 @@
 :root {
-  --node-panel-width: 30%;
-  --height-no-header: calc(100vh - 200px);
   --col-main-1: #7B1E7A;
   --col-main-2: #F3C677;
   --col-dark: #0C0A3E;
@@ -70,19 +68,18 @@ body {
 }
 
 .ag_panel_single_protein {
-  position: relative;
-  top: -100%;
-  left: 60%;
+  position: absolute;
+  top: 0px;
+  left: calc(60% - 15px);
   width: 40%;
   height: 200px;
   background-color: #BDD5EAC9;
-  margin-top: -20px;
-  margin-left: 20px;
+  margin-top: 42px; /*height of the navbar*/
   padding: 20px
 }
 
 .ag_panel_single_protein_expanded {
-  height: calc(100% + 20px);
+  height: 100%;
 }
 
 .ag_node_selector_container {
