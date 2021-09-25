@@ -18,9 +18,11 @@ body {
 /* SHINY CLASSES */
 
 .tab-content {
-  /* 62 == height of tabbable (42) + 20 px of margin*/ 
-  height: calc(100% - 62px);
+  /* 52 == height of tabbable (52) + 10 px of margin*/ 
+  height: calc(100% - 52px);
   overflow-y: auto;
+  margin: 10px 0px;
+  padding: 0px 10px;
 }
 
 .tab-content > * {
