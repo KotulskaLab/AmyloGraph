@@ -26,7 +26,8 @@ body {
 }
 
 .tab-content > * {
-  height: 100%;
+  /* 20px because margins; 2px remains a mystery  */
+  height: calc(100% - 22px);
 }
 
 /* CUSTOM CLASSES */
