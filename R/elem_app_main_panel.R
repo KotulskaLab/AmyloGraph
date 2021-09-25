@@ -1,13 +1,13 @@
-elem_app_main_panel <- \(data_nodes) mainPanel(
+elem_app_main_panel <- \(data_nodes) fillCol(
   tabsetPanel(
-    id = "app_main_panel",
+    id = "tabset_panel",
     type = "pills",
     elem_tab_interactions_graph(data_nodes),
     elem_tab_interactions_table(),
     elem_tab_single_interaction(),
     elem_tab_about()
   ),
-  width = 12 - ag_option("side_panel_width")
+  id = "main_panel"
 )
 
 elem_tab_interactions_graph <- \(data_nodes) tabPanel(

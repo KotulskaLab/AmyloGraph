@@ -17,49 +17,27 @@ body {
 
 /* SHINY CLASSES */
 
-.vsc-initialized {
-  height: 100vh;
-}
-
-.container-fluid {
-  height: 100%;
-  padding: 0px;
-}
-
-.well {
-  background-color: var(--col-bg);
-  border: none;
-  border-radius: 0px;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  margin-left: -15px;
-  margin-right: -15px;
-  height: 100%;
-}
-
-.row {
-  margin: 0px;
-  height: 100%;
-}
-
-.col-sm-2, .col-sm-10, .tabbable, .tab-pane {
-  height: 100%;
-}
-
 .tab-content {
   /* 62 == height of tabbable (42) + 20 px of margin*/ 
   height: calc(100% - 62px);
   overflow-y: auto;
 }
 
+.tab-content > * {
+  height: 100%;
+}
+
 /* CUSTOM CLASSES */
 
 .ag_filter_control {
-  /* 120 px for logo*/
-  height: calc(100% - 120px);
   padding-right: 10px;
   overflow-y: auto;
   overflow-x: hidden;
+}
+
+#filter_control_panel {
+  background-color: var(--col-bg);
+  padding: 10px;
 }
 
 .ag_tab_interactions_graph, .ag_panel_interactions_graph {
@@ -121,7 +99,7 @@ body {
 
 .ag_logo {    
   width: 100%;
-  padding: 7px;
+  margin-bottom: 10px;
 }
 
 #single_protein-info {    
@@ -134,8 +112,16 @@ body {
   height: 100%;
 }
 
-#app_main_panel {
+#main_panel {
+  padding: 10px;
+}
+
+#tabset_panel {
   height: 42px;
+}
+
+#main_panel > * > * > .tabbable {
+  height: 100%;
 }
 
 #filter_control-incorrect_motif_message {
