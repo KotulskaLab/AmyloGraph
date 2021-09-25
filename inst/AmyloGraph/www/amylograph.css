@@ -51,17 +51,18 @@ body {
 
 .ag_panel_single_protein {
   position: absolute;
-  top: 0px;
-  left: calc(60% - 15px);
+  top: 30px; /* dfq? */
+  left: calc(60% - 10px);
   width: 40%;
   height: 200px;
   background-color: #BDD5EAC9;
-  margin-top: 42px; /*height of the navbar*/
-  padding: 20px
+  margin-top: 42px; /* height of the navbar */  
+  padding: 20px;
+  border-radius: 5px;
 }
 
 .ag_panel_single_protein_expanded {
-  height: 100%;
+  height: calc(100% - 72px);
 }
 
 .ag_node_selector_container {
