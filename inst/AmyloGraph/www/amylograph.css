@@ -121,6 +121,8 @@ body {
 
 #tabset_panel {
   height: 42px;
+  background-color: var(--col-bg);
+  border-radius: 5px;
 }
 
 #main_panel > * > * > .tabbable {
