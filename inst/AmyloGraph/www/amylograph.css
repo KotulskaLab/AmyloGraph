@@ -6,15 +6,6 @@
   --col-bg: #FEF5EF;
 }
 
-html {
-  overflow: hidden;
-  height: 100vh;
-}
-
-body {
-  height: 100%;
-}
-
 /* SHINY CLASSES */
 
 .tab-content {
