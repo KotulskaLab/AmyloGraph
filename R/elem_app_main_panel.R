@@ -15,14 +15,13 @@ elem_tab_interactions_graph <- \(data_nodes) tabPanel(
   value = "graph",
   div(
     id = "tab_interactions_graph",
-    class = "ag_tab_interactions_graph",
     elem_panel_interactions_graph(),
     elem_panel_single_protein(data_nodes)
   )
 )
 
 elem_panel_interactions_graph <- \() div(
-  class = "ag_panel_interactions_graph",
+  id = "panel_interactions_graph",
   visNetworkOutput("graph", height = "calc(100% - 10px)", width = "100%")
 )
 

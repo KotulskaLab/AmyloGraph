@@ -35,7 +35,7 @@
   padding: 10px;
 }
 
-.ag_tab_interactions_graph, .ag_panel_interactions_graph {
+#tab_interactions_graph, #panel_interactions_graph {
   width: 100%;
   height: 100%;
 }
@@ -68,7 +68,7 @@
 }
 
 @media (max-width: 819px) {
-  .ag_tab_interactions_graph {
+  #tab_interactions_graph {
     --correction: 60px;
   }
 }
