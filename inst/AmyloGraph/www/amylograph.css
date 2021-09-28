@@ -23,7 +23,7 @@
 
 /* CUSTOM CLASSES */
 
-.ag_filter_control {
+#filter_control {
   padding-right: 10px;
   height: 100%;
   overflow-y: auto;
