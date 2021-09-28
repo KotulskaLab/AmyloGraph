@@ -93,7 +93,7 @@
 .filter_checkbox_active div.checkbox:nth-child(7) label { --border-color:  12,  10,  62; }
 .filter_checkbox_active div.checkbox:nth-child(8) label { --border-color: 102, 102, 102; }
 
-.ag_logo {    
+#logo {    
   width: 100%;
   margin-bottom: 10px;
 }
