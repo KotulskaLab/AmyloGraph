@@ -40,19 +40,22 @@
   height: 100%;
 }
 
-.ag_panel_single_protein {
+#panel_single_protein {
   position: absolute;
   top: 30px; /* dfq? */
   left: calc(60% - 10px);
   width: 40%;
-  height: 200px;
   background-color: #BDD5EAC9;
   margin-top: 42px; /* height of the navbar */  
   padding: 20px;
   border-radius: 5px;
 }
 
-.ag_panel_single_protein_expanded {
+.panel_contracted {
+  height: 200px;
+}
+
+.panel_expanded {
   height: calc(100% - 72px);
 }
 
