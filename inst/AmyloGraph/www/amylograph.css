@@ -108,7 +108,8 @@
 }
 
 #single_protein-ifelse-neg {
-  height: 100%;
+  /* 90 px -- size left for selector of protein */
+  height: calc(100% - 90px);
 }
 
 #main_panel {
@@ -132,14 +133,8 @@
   font-weight: bold;
 }
 
-.ag_protein_details {
-  height: calc(100% - 90px);
-}
-
-.ag_protein_details > .tabbable {
-  max-height: 70%;
-  width: 100%;
-  overflow: scroll;
+#protein_details > * {
+  overflow: auto;
 }
 
 .ag_close_button {

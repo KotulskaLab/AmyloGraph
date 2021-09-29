@@ -6,13 +6,13 @@ elem_info_panel <- \(ns) ifelsePanel(
   ns = ns
 )
 
-elem_info_no_node_selected <- \(ns) div(
-  class = "ag_protein_details",
+elem_info_no_node_selected <- \(ns) fillCol(
+  class = "#protein_details",
   "select node to display info about it and interactions associated with it"
 )
 
-elem_info_node_selected <- \(ns) div(
-  class = "ag_protein_details",
+elem_info_node_selected <- \(ns) fillCol(
+  id = "protein_details",
   uiOutput(ns("info")),
   tabsetPanel(
     id = ns("tabs"),
@@ -22,5 +22,6 @@ elem_info_node_selected <- \(ns) div(
     tabPanel(
       title = "Interactors",
       dataTableOutput(ns("interactors")))
-  )
+  ),
+  flex = c(1, 4)
 )
