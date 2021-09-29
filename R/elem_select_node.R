@@ -1,5 +1,5 @@
 elem_select_node <- \(id, node_data) div(
-  id = "#node_selector_container",
+  id = "node_selector_container",
   helper(
   selectInput(
     inputId = id,

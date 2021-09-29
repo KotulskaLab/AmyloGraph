@@ -7,7 +7,7 @@ elem_info_panel <- \(ns) ifelsePanel(
 )
 
 elem_info_no_node_selected <- \(ns) fillCol(
-  class = "#protein_details",
+  id = "protein_details",
   "select node to display info about it and interactions associated with it"
 )
 
