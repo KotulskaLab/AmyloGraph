@@ -38,8 +38,8 @@ elem_tab_single_interaction <- \() tabPanel(
   title = "Interaction",
   value = "single_interaction",
   actionButton(
-    "close_interaction", "Close",
-    id = "btn_close_tab",
+    inputId = "btn_close_tab",
+    label = "Close",
     onclick = glue("Shiny.setInputValue('{NS('single_interaction', 'selected_interaction')}', null)")
   ),
   ui_single_interaction("single_interaction")
