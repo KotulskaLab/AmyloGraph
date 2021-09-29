@@ -4,6 +4,7 @@
   --col-dark: #0C0A3E;
   --col-accent: #FE5F55;
   --col-bg: #FEF5EF;
+  --col-detail: #BDD5EAC9;
 }
 
 /* SHINY CLASSES */
@@ -45,7 +46,7 @@
   top: 30px; /* dfq? */
   left: calc(60% - 10px);
   width: 40%;
-  background-color: #BDD5EAC9;
+  background-color: var(--col-detail);
   margin-top: 42px; /* height of the navbar */  
   padding: 20px;
   border-radius: 5px;
