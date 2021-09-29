@@ -137,12 +137,12 @@
   overflow: auto;
 }
 
-.ag_close_button {
+#btn_close_tab {
   float: right;
   z-index: 1;
 }
 
 /* Mostly used so that there is no button visible before rendering the table */
-.ag_hidden_btn {
+.btn_hidden {
   opacity: 0;
 }
