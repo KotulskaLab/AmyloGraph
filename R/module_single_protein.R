@@ -8,7 +8,7 @@ ui_single_protein <- function(id, node_data) {
   ns <- NS(id)
   div(
     id = "panel_single_protein",
-    class = "ag_panel_single_protein",
+    class = "panel_contracted",
     elem_select_node(ns("select_node"), node_data),
     elem_info_panel(ns)
   )

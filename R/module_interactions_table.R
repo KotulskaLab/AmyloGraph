@@ -2,8 +2,8 @@
 ui_interactions_table <- function(id) {
   ns <- NS(id)
   tagList(
-    downloadButton(ns("download_csv"), "", "ag_hidden_btn"),
-    downloadButton(ns("download_xlsx"), "", "ag_hidden_btn"),
+    downloadButton(ns("download_csv"), "", "btn_hidden"),
+    downloadButton(ns("download_xlsx"), "", "btn_hidden"),
     elem_interactions_table(ns("table"))
   )
 }
