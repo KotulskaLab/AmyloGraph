@@ -59,7 +59,7 @@
   height: calc(100% - 72px);
 }
 
-.ag_node_selector_container {
+#node_selector_container {
   height: 90px;
 }
 
