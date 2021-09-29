@@ -63,7 +63,7 @@
   height: 90px;
 }
 
-.ag_interactions_table {
+#interactions_table {
   --correction: 0px;
   height: calc(100vh - 130px - var(--correction));
   width: 100%;
