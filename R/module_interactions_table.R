@@ -23,6 +23,22 @@ server_interactions_table <- function(id, edges) {
       interactions_table, ns, session
     )
     
+    any_record_selected <- reactive({
+      !is.null(input[["table_rows_selected"]])
+    })
+    
+    observe({
+      toggleState(
+        selector = glue("#{ns('table')} .ag-download-button"),
+        condition = any_record_selected()
+      )
+      toggleCssClass(
+        class = "ag-download-button-disabled",
+        selector = glue("#{ns('table')} .ag-download-button"),
+        condition = !any_record_selected()
+      )
+    })
+    
     output[["download_csv"]] <- downloadHandler(
       filename = \() "AmyloGraph.csv",
       content = \(file) write_csv(
