@@ -1,16 +1,17 @@
 #' @importFrom shiny NS
+#' @importFrom shinyjs hidden
 ui_interactions_table <- function(id) {
   ns <- NS(id)
   tagList(
-    downloadButton(ns("download_csv"), "", "btn_hidden"),
-    downloadButton(ns("download_xlsx"), "", "btn_hidden"),
+    hidden(downloadButton(ns("download_csv"))),
+    hidden(downloadButton(ns("download_xlsx"))),
     elem_interactions_table(ns("table"))
   )
 }
 
 #' @importFrom shiny moduleServer NS
-#' @importFrom readr write_csv
 #' @importFrom dplyr `%>%` select slice
+#' @importFrom readr write_csv
 #' @importFrom writexl write_xlsx
 server_interactions_table <- function(id, edges) {
   moduleServer(id, function(input, output, session) {
@@ -31,6 +32,8 @@ server_interactions_table <- function(id, edges) {
         file
       )
     )
+    outputOptions(output, "download_csv", suspendWhenHidden = FALSE)
+    
     output[["download_xlsx"]] <- downloadHandler(
       filename = \() "AmyloGraph.xlsx",
       content = \(file) write_xlsx(
@@ -40,5 +43,6 @@ server_interactions_table <- function(id, edges) {
         file
       )
     )
+    outputOptions(output, "download_xlsx", suspendWhenHidden = FALSE)
   })
 }

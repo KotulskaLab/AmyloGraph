@@ -142,8 +142,3 @@
   float: right;
   z-index: 1;
 }
-
-/* Mostly used so that there is no button visible before rendering the table */
-.btn_hidden {
-  opacity: 0;
-}
