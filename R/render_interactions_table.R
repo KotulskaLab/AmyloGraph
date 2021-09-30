@@ -9,14 +9,16 @@ download_button_callback <- function(ns, session, button_id, button_label)
     "$(span).text(' {button_label}');",
     
     "var a = document.createElement('a');",
-    "$(a).addClass('dt-button');",
+    "$(a).addClass('dt-button ag-download-button');",
+    "a.id = '{ns(button_id)}' + '_real';",
     "a.href = 'session/{session$token}/download/{ns(button_id)}?w=';",
     "a.download = '';",
-    "$(a).attr('target', '_blank');",
-    "$(a).attr('tabindex', 0);",
+    "$(a).attr({{",
+    "  target: '_blank',",
+    "  tabindex: 0",
+    "}});",
     
-    "$(a).append(i);",
-    "$(a).append(span);",
+    "$(a).append(i, span);",
     "$('#{ns('table')} .ag-buttons').append(a);"
   )
 
