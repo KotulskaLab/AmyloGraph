@@ -32,6 +32,7 @@ server_interactions_table <- function(id, edges) {
         file
       )
     )
+    # must be executed after assignment to the corresponding output
     outputOptions(output, "download_csv", suspendWhenHidden = FALSE)
     
     output[["download_xlsx"]] <- downloadHandler(
@@ -43,6 +44,7 @@ server_interactions_table <- function(id, edges) {
         file
       )
     )
+    # must be executed after assignment to the corresponding output
     outputOptions(output, "download_xlsx", suspendWhenHidden = FALSE)
   })
 }
