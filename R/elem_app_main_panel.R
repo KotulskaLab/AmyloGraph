@@ -48,5 +48,6 @@ elem_tab_single_interaction <- \() tabPanel(
 elem_tab_about <- \() tabPanel(
   title = "About",
   value = "about",
+  textOutput("ag_version"),
   includeMarkdown("manuals/about.md")
 )
