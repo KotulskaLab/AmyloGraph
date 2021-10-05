@@ -10,8 +10,11 @@ observe_node_selection <- function(input) {
       inputId = NS("single_protein", "select_node"),
       selected = selected_node_id
     )
-    toggleCssClass(class = "ag_panel_single_protein_expanded",
+    toggleCssClass(class = "panel_expanded",
                    condition = is_node_selected(selected_node_id),
+                   selector = "#panel_single_protein")
+    toggleCssClass(class = "panel_contracted",
+                   condition = !is_node_selected(selected_node_id),
                    selector = "#panel_single_protein")
   })
 }

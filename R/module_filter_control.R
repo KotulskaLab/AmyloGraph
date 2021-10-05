@@ -4,7 +4,7 @@
 #' @importFrom purrr imap
 ui_filter_control <- function(id, data_groups) {
   div(
-    class = "ag_filter_control",
+    id = "filter_control",
     helper(
       selectInput(
         inputId = NS(id, "label_group"),

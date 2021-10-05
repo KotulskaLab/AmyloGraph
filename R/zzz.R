@@ -6,6 +6,7 @@
     ag_palette = c("#F9564F", "#A4B0F5", "#4F3824", "#00CC66",
                    "#B33F62", "#F3C677", "#0C0A3E", "gray40"),
     ag_side_panel_width = 2,
+    ag_main_panel_width = 10,
     ag_colnames = c(`Interactee name` = "interactee_name",
                     `Interactor name` = "interactor_name",
                     `AG_ID` = "AGID",

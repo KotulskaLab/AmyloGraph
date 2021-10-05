@@ -1,9 +1,10 @@
 #' @importFrom shinyjs useShinyjs
 #' @importFrom htmltools div img
-#' @importFrom shiny sidebarLayout sidebarPanel tabsetPanel tabPanel fluidPage
+#' @importFrom shiny sidebarLayout sidebarPanel tabsetPanel tabPanel fillPage fillCol fillRow
 #' @importFrom visNetwork visNetworkOutput
-ag_ui <- function(ag_data) fluidPage(
-  theme = "amylograph.css",
+ag_ui <- function(ag_data) fillPage(
   useShinyjs(),
-  elem_app_body(ag_data[["nodes"]], ag_data[["groups"]])
+  elem_app_body(ag_data[["nodes"]], ag_data[["groups"]]),
+  theme = "amylograph.css",
+  title = "AmyloGraph"
 )

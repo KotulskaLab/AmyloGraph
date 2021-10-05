@@ -1,17 +1,19 @@
 #' @importFrom shiny NS
+#' @importFrom shinyjs hidden
 ui_interactions_table <- function(id) {
   ns <- NS(id)
   tagList(
-    downloadButton(ns("download_csv"), "", "ag_hidden_btn"),
-    downloadButton(ns("download_xlsx"), "", "ag_hidden_btn"),
+    hidden(downloadButton(ns("download_csv"))),
+    hidden(downloadButton(ns("download_xlsx"))),
     elem_interactions_table(ns("table"))
   )
 }
 
 #' @importFrom shiny moduleServer NS
-#' @importFrom readr write_csv
 #' @importFrom dplyr `%>%` select slice
+#' @importFrom readr write_csv
 #' @importFrom writexl write_xlsx
+#' @importFrom shinyjs toggleState
 server_interactions_table <- function(id, edges) {
   moduleServer(id, function(input, output, session) {
     ns <- NS(id)
@@ -22,6 +24,22 @@ server_interactions_table <- function(id, edges) {
       interactions_table, ns, session
     )
     
+    any_record_selected <- reactive({
+      !is.null(input[["table_rows_selected"]])
+    })
+    
+    observe({
+      toggleState(
+        selector = glue("#{ns('table')} .ag-download-button"),
+        condition = any_record_selected()
+      )
+      toggleCssClass(
+        class = "ag-download-button-disabled",
+        selector = glue("#{ns('table')} .ag-download-button"),
+        condition = !any_record_selected()
+      )
+    })
+    
     output[["download_csv"]] <- downloadHandler(
       filename = \() "AmyloGraph.csv",
       content = \(file) write_csv(
@@ -31,6 +49,9 @@ server_interactions_table <- function(id, edges) {
         file
       )
     )
+    # must be executed after assignment to the corresponding output
+    outputOptions(output, "download_csv", suspendWhenHidden = FALSE)
+    
     output[["download_xlsx"]] <- downloadHandler(
       filename = \() "AmyloGraph.xlsx",
       content = \(file) write_xlsx(
@@ -40,5 +61,7 @@ server_interactions_table <- function(id, edges) {
         file
       )
     )
+    # must be executed after assignment to the corresponding output
+    outputOptions(output, "download_xlsx", suspendWhenHidden = FALSE)
   })
 }
