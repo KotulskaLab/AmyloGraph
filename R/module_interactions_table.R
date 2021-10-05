@@ -13,6 +13,7 @@ ui_interactions_table <- function(id) {
 #' @importFrom dplyr `%>%` select slice
 #' @importFrom readr write_csv
 #' @importFrom writexl write_xlsx
+#' @importFrom shinyjs toggleState
 server_interactions_table <- function(id, edges) {
   moduleServer(id, function(input, output, session) {
     ns <- NS(id)
