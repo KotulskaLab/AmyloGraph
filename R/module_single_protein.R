@@ -10,6 +10,7 @@ ui_single_protein <- function(id, node_data) {
     id = "panel_single_protein",
     class = "panel_contracted",
     elem_select_node(ns("select_node"), node_data),
+    checkboxInput(ns("ignore_filters"), "Ignore filters", value = FALSE),
     elem_info_panel(ns)
   )
 }
