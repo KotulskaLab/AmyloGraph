@@ -14,6 +14,9 @@ elem_info_no_node_selected <- \(ns) fillCol(
 elem_info_node_selected <- \(ns) fillCol(
   id = "protein_details",
   uiOutput(ns("info")),
+  checkboxInput(ns("ignore_filters"),
+                "Ignore filters in the tables below",
+                value = FALSE),
   tabsetPanel(
     id = ns("tabs"),
     tabPanel(
@@ -23,5 +26,5 @@ elem_info_node_selected <- \(ns) fillCol(
       title = "Interactors",
       dataTableOutput(ns("interactors")))
   ),
-  flex = c(1, 4)
+  flex = c(2, 1, 9)
 )
