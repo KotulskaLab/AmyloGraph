@@ -14,9 +14,6 @@ ui_filter_control <- function(id, data_groups) {
         multiple = FALSE),
       type = "markdown",
       content = "label_group"),
-    checkboxInput(NS(id, "filter_node_info"),
-                  "Filter node info data",
-                  value = TRUE),
     do.call(
       tagList,
       imap(ag_group_labels(data_groups),
@@ -48,7 +45,7 @@ server_filter_control <- function(id, data_interactions, data_groups) {
     ret <- reactiveValues(
       table = NULL,
       graph = NULL,
-      node_info = data_interactions
+      all = data_interactions
     )
     
     interactions_filtered_by_group <- reactive({
@@ -79,14 +76,6 @@ server_filter_control <- function(id, data_interactions, data_groups) {
     
     observe({
       ret[["table"]] <- ic(interactions_filtered_by_motif())
-    })
-    
-    observe({
-      if (input[["filter_node_info"]]) {
-        ret[["node_info"]] <- ret[["table"]]
-      } else {
-        ret[["node_info"]] <- data_interactions
-      }
     })
     
     observe({
