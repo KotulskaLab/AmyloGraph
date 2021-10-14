@@ -16,7 +16,8 @@ render_network <- function(ag_data_nodes, edges) {
         highlightNearest = list(enabled = TRUE, degree = 1,
                                 labelOnly = FALSE, hover = TRUE,
                                 algorithm = "hierarchical")) %>%
-      visInteraction(zoomView = TRUE) %>%
+      visInteraction(zoomView = TRUE) %>% 
+      visInteraction(navigationButtons = TRUE) %>%
       visEvents(
         selectNode = glue("function(nodes){
                   Shiny.setInputValue('<<NS('single_protein', 'select_node')>>', nodes.nodes[0]);
