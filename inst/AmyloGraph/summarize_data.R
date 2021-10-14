@@ -1,4 +1,5 @@
 library(ggplot2)
+library(dplyr)
 
 dat <- readr::read_csv(system.file("AmyloGraph", "interactions_data.csv", package = "AmyloGraph"),
          col_types = "ccccfffcc")
