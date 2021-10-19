@@ -8,7 +8,7 @@ ag_server <- function(ag_data) function(input, output) {
   server_interactions_table("interactions_table", edges)
   server_single_protein("single_protein", edges, ag_data[["nodes"]])
   server_single_interaction("single_interaction", ag_data[["interactions"]])
-  server_db_statistics("db_statistics", ag_data[["interactions"]])
+  server_db_statistics("db_statistics", ag_data[["interactions"]], ag_data[["nodes"]])
   
   output[["graph"]] <- render_network(ag_data[["nodes"]], edges)
   output[["ag_version"]] <- render_ag_version()
