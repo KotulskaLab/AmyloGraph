@@ -27,6 +27,6 @@ render_network <- function(ag_data_nodes, edges) {
                   }", .open = "<<", .close = ">>")) %>%
       visIgraphLayout(smooth = TRUE) %>%
       visExport(type = "png", name = "AmyloGraph", label = "Export as png", float = "left", 
-                style = "background: var(--col-main-2); color: var(--col-main-1);")
+                style = "")
   })
 }
