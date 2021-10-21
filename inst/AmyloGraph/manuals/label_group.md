@@ -1,6 +1,6 @@
-### Label group
+### Group and color edges by
 
 ***
 
-Words, words
+Use colors to show different classes of edges
 

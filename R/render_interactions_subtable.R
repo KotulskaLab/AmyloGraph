@@ -2,7 +2,8 @@
 #' @importFrom dplyr `%>%` filter arrange select mutate
 render_interactions_subtable <- function(input, edge_data, target_id, target_variable) {
   rendered_data <- reactive(
-    edge_data[["node_info"]] %>%
+    (if (input[["ignore_filters"]]) edge_data[["all"]]
+     else edge_data[["table"]]) %>%
       filter({{target_id}} == input[["select_node"]]) %>%
       arrange({{target_variable}}, doi) %>%
       mutate(doi = linkify_doi(doi),

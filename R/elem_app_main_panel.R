@@ -5,6 +5,7 @@ elem_app_main_panel <- \(data_nodes) fillCol(
     elem_tab_interactions_graph(data_nodes),
     elem_tab_interactions_table(),
     elem_tab_single_interaction(),
+    elem_tab_db_statistics(),
     elem_tab_about()
   ),
   id = "main_panel"
@@ -43,6 +44,12 @@ elem_tab_single_interaction <- \() tabPanel(
     onclick = glue("Shiny.setInputValue('{NS('single_interaction', 'selected_interaction')}', null)")
   ),
   ui_single_interaction("single_interaction")
+)
+
+elem_tab_db_statistics <- \() tabPanel(
+  title = "Database statistics",
+  value = "db_statistics",
+  ui_db_statistics("db_statistics")
 )
 
 elem_tab_about <- \() tabPanel(
