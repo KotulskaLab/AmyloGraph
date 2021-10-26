@@ -47,3 +47,7 @@ patternize_motif <- \(motif) {
 contains_motif <- \(sequences, motif) {
   stri_detect_regex(sequences, patternize_motif(motif))
 }
+
+pluralize <- \(value, plural, singular = "") {
+  ifelse(value == 1, singular, plural)
+}
