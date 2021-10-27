@@ -11,7 +11,10 @@ render_network <- function(ag_data_nodes, edges) {
                color = "#3674AB") %>% 
       visNodes(color = "#F3C677",
                font = list(color = "#0C0A3E")) %>%  
-      visLayout(randomSeed = 1337) %>% 
+      # visLayout(randomSeed = 1337, improvedLayout = TRUE) %>%
+      # visPhysics(enabled = FALSE) %>% 
+      visIgraphLayout(smooth = TRUE, physics = FALSE, randomSeed = 1337) %>%
+      visPhysics(enabled = FALSE) %>%
       visOptions(
         highlightNearest = list(enabled = TRUE, degree = 1,
                                 labelOnly = FALSE, hover = TRUE,
@@ -24,7 +27,6 @@ render_network <- function(ag_data_nodes, edges) {
         deselectNode = glue("function(nodes){
                   Shiny.setInputValue('<<NS('single_protein', 'select_node')>>', '<<AmyloGraph:::ag_option('str_null')>>');
                   }", .open = "<<", .close = ">>")) %>%
-      visIgraphLayout(smooth = TRUE) %>%
       visExport(type = "png", name = "AmyloGraph", label = "Export as png", float = "left", 
                 style = "")
   })
