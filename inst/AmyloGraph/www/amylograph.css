@@ -182,7 +182,8 @@ button.dt-button.active:not(.disabled) {
   padding: 10px;
 }
 
-#tabset_panel {
+#tabset_panel,
+#single_protein-tabs {
   height: 42px;
   background-color: var(--col-bg);
   border-radius: 5px;
