@@ -4,3 +4,6 @@
 ^cran-comments\.md$
 ^\.github$
 ^.*\.Rproj$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
