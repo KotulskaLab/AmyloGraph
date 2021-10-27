@@ -167,8 +167,7 @@ button.dt-button.active:not(.disabled) {
   margin-bottom: 10px;
 }
 
-#single_protein-info {    
-  height: 30%;
+#single_protein-info {
   overflow-y: auto;
   padding: 15px;
 }
@@ -182,7 +181,8 @@ button.dt-button.active:not(.disabled) {
   padding: 10px;
 }
 
-#tabset_panel {
+#tabset_panel,
+#single_protein-tabs {
   height: 42px;
   background-color: var(--col-bg);
   border-radius: 5px;

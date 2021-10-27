@@ -24,7 +24,8 @@ elem_info_node_selected <- \(ns) fillCol(
       dataTableOutput(ns("interactees"))),
     tabPanel(
       title = "Interactors",
-      dataTableOutput(ns("interactors")))
+      dataTableOutput(ns("interactors"))),
+    type = "pills"
   ),
   flex = c(2, 1, 9)
 )

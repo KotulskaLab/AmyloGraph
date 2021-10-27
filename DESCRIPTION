@@ -1,6 +1,6 @@
 Package: AmyloGraph
 Title: What the Package Does (One Line, Title Case)
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: 
     person(given = "First",
            family = "Last",
@@ -31,6 +31,8 @@ Imports:
     visNetwork,
     writexl
 Suggests: 
+    rmarkdown,
+    knitr,
     shinytest,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
@@ -38,3 +40,4 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
+VignetteBuilder: knitr
