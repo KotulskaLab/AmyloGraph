@@ -17,7 +17,7 @@ elem_info_node_selected <- \(ns) fillCol(
   checkboxInput(ns("ignore_filters"),
                 "Ignore filters in the tables below",
                 value = FALSE),
-  actionButton(ns("show_in_table"), "Show in interactions table", class = "ag-button"),
+  actionButton(ns("select_in_table"), "Select in interactions table", class = "ag-button"),
   tabsetPanel(
     id = ns("tabs"),
     tabPanel(
