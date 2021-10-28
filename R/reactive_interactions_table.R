@@ -5,6 +5,7 @@ reactive_interactions_table <- function(edges, ns) reactive({
   ic(edges[["table"]])
   edges[["table"]] %>% 
     mutate(doi = linkify_doi(doi),
+           original_AGID = AGID,
            AGID = AGID_button(AGID, "interaction_detail", ns)) %>% 
     select(AGID,
            interactor_name,
@@ -12,5 +13,6 @@ reactive_interactions_table <- function(edges, ns) reactive({
            aggregation_speed,
            elongates_by_attaching,
            heterogenous_fibers,
-           doi)
+           doi,
+           original_AGID)
 })
