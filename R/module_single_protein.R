@@ -35,6 +35,23 @@ server_single_protein <- function(id, edge_data, node_data) {
     output[["interactees"]] <- render_interactions_subtable(subtables[["interactees"]])
     output[["interactors"]] <- render_interactions_subtable(subtables[["interactors"]])
     
+    any_record_selected <- reactive({
+      !is.null(input[["interactees_rows_selected"]]) || !is.null(input[["interactors_rows_selected"]])
+    })
+    
+    observe({
+      ic(any_record_selected())
+      toggleState(
+        id = "select_in_table",
+        condition = any_record_selected()
+      )
+      toggleCssClass(
+        class = "ag-download-button-disabled",
+        selector = glue("#{ns('select_in_table')} .ag-button"),
+        condition = !any_record_selected()
+      )
+    })
+    
     subtables
   })
 }
