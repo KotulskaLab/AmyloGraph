@@ -53,8 +53,8 @@ Additional glossary:
 This question refers only to kinetic assays. If there are no such assays, select **no information**.
 
 Sufficient experimental techniques: 
- - ThT
- - FTIR
- - Congo Red
- - turbidity measurements followed with microscopy (turbidity on its own is not specific towards amyloid fibrils, but rather to all kinds of aggregates)
- - Far-UV CD spectroscopy
+ - ThT,
+ - FTIR,
+ - Congo Red,
+ - turbidity measurements followed with microscopy (turbidity on its own is not specific towards amyloid fibrils, but rather to all kinds of aggregates),
+ - Far-UV CD spectroscopy.
