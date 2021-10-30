@@ -1,13 +1,19 @@
 Package: AmyloGraph
-Title: What the Package Does (One Line, Title Case)
+Title: AmyloGraph: a comprehensive database of amyloid-amyloid interactions
 Version: 0.1.1
-Authors@R: 
-    person(given = "First",
-           family = "Last",
-           role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+Authors@R: c(person("Michal", "Burdukiewicz", 
+           email = "michalburdukiewicz@gmail.com", 
+           comment = c(ORCID = "0000-0001-8926-582X"),
+           role = c("cre", "aut")),
+           person("Dominik", "Rafacz", 
+           email = "dominikrafacz@gmail.com",
+           role = c("ctb"),
+           comment = c(ORCID = "0000-0003-0925-1909")),
+           person("Mateusz", "Bakala", 
+           email = "erdaradun.gaztea@gmail.com",
+           comment = c(ORCID = "0000-0002-3213-2484"),
+           role = c("ctb")))
+Description: An interactive database on interactions between amyloid proteins.
 License: MIT + file LICENSE
 Depends: R (>= 3.5.0)
 Imports: 
