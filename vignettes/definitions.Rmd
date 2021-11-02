@@ -53,9 +53,15 @@ Additional glossary:
 
 # Questions
 
-## Q1. Is the interactor affecting the interactee's aggregating speed?
+## Q1. Is the interactor affecting the interactee's fibrillization speed?
 
 **_General remarks:_** this question can be fully answered based on the kinetics or any kinetic data. Here, we mean aggregation to the level of mature fibril (fibrillization). If the interactor accelerates the speed of the oligomer formation, but they never aggregate into the level of mature fibrils (fibrillization does not occur), it is not an acceleration as we understand it. Therefore, check the resulting kinetics and search for microscopy images (or any similar confirmation of the fibrillization). If authors state that it is fibrillization, go with their interpretation. 
+
+1. **Faster aggregation**: a) the maximum ThT emission observed at the end of the reaction of the interactee and interactor is higher than maximum ThT emission for interactee alone OR b) if the slope of the kinetic curve is steeper OR c) the lag phase is shorter OR d) T50 is lower. This is OR operator, so we need only one of these three things to happen. Make sure that fibrillization still happens. Comment: ThT is not always quantitative, i.e. a higher (or lower) ThT level - under different conditions (e.g. the presence of the interactor) - can be caused by changes to the fibril structure rather than the amount of fibrils.
+2. **Slower aggregation**: a) the maximum ThT emission observed at the end of the reaction of the interactee and interactor is lower than maximum ThT emission for interactee alone AND b) the slope of the kinetic curve is less steep) OR c) the lag phase is longer. So we need (a AND b) OR c. Make sure that fibrillization still happens.
+3. **No aggregation**: There is no confirmed fibrilization after the interaction.
+4. **No effect**: a) The slopes of kinetic curves are visibly similar AND b) the maximum ThT emission is similar AND c) the lag phase is similar.
+5. **No information**: There were no kinetic assays.
 
 This question refers only to kinetic assays. If there are no such assays, select **no information**.
 
@@ -129,11 +135,11 @@ Sufficient experimental techniques (direct evidence only):
 
 ##  Q3. Is interaction resulting in heterogeneous fibrils consisting of interactor and interactee molecules?
 
-General remarks: This is one of the most complicated to test features of fibrils. If authors imply that the difference in structure of mature fibrils is suggesting heterogeneous fibrils, we rely on their interpretation. In this situation, be sure to provide the appropriate quotation from the manuscript. 
+**_General remarks:_** This is one of the most complicated to test features of fibrils. If authors imply that the difference in structure of mature fibrils is suggesting heterogeneous fibrils, we rely on their interpretation. In this situation, be sure to provide the appropriate quotation from the manuscript. 
 
-**Yes:** this answer applies when a) there is experimental evidence that fibrils consist of two different amyloids (labeling; immunolabeling) AND b) the mature fibrils are structurally different than fibrils formed in the presence of interactor c) the term co-aggregation/ heterogeneous fibrils/ hybrid fibrils is used to describe the aggregation process. 
-**No:** if the resulting amyloid fibrils have the dimension matching that of the aggregating interactee alone. a) the mature fibrils are confirmed to have the same structure (e.g., TEM) as fibrils formed by the interactee without the presence of the interactor  OR b) there is no fibrillar product at all OR c) an interactee and an interactor are the same protein.
-**No information**.
+1. **Yes:** this answer applies when a) there is experimental evidence that fibrils consist of two different amyloids (labeling; immunolabeling) AND b) the mature fibrils are structurally different than fibrils formed in the presence of interactor c) the term co-aggregation/ heterogeneous fibrils/ hybrid fibrils is used to describe the aggregation process. 
+2. **No:** if the resulting amyloid fibrils have the dimension matching that of the aggregating interactee alone. a) the mature fibrils are confirmed to have the same structure (e.g., TEM) as fibrils formed by the interactee without the presence of the interactor  OR b) there is no fibrillar product at all OR c) an interactee and an interactor are the same protein.
+3. **No information**.
 
 
 
