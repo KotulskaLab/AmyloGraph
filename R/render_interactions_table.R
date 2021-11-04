@@ -30,17 +30,12 @@ render_interactions_table <- function(interactions_table, ns, session)
       dom = 'B<"ag-buttons">frtip',
       scrollY = "calc(100vh - 330px - var(--correction))",
       scrollX = TRUE,
-      scrollCollapse = TRUE,
-      lengthMenu = list(c(10, 25, 50, 100, -1), c("10", "25", "50", "100", "All")),
-      buttons = c("pageLength", "selectAll", "selectNone", "colvis"),
-      select = list(style = "multi+shift", items = "row")
+      scrollCollapse = TRUE
     ),
     escape = FALSE,
     filter = "top",
     rownames = FALSE,
     colnames = ag_colnames(interactions_table()),
-    extensions = c("Select", "Buttons"),
-    selection = "none",
     server = FALSE,
     callback = JS(
       download_button_callback(ns, session, "download_csv", "Download selected as CSV"),
