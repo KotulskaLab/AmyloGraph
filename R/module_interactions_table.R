@@ -3,6 +3,8 @@
 ui_interactions_table <- function(id) {
   ns <- NS(id)
   tagList(
+    actionButton(ns("select_all"), "Select all"),
+    actionButton(ns("deselect_all"), "Deselect all"),
     hidden(downloadButton(ns("download_csv"))),
     hidden(downloadButton(ns("download_xlsx"))),
     elem_interactions_table(ns("table"))
@@ -14,34 +16,22 @@ ui_interactions_table <- function(id) {
 #' @importFrom readr write_csv
 #' @importFrom writexl write_xlsx
 #' @importFrom shinyjs toggleState
+#' @importFrom DT dataTableProxy
 server_interactions_table <- function(id, edges) {
   moduleServer(id, function(input, output, session) {
     ns <- NS(id)
     
     interactions_table <- reactive_interactions_table(edges, ns)
     
-    output[["table"]] <- render_interactions_table(
-      interactions_table, ns, session
-    )
+    output[["table"]] <- render_interactions_table(interactions_table, ns, session)
     
-    any_record_selected <- reactive({
-      !is.null(input[["table_rows_selected"]])
-    })
+    table_proxy <- dataTableProxy("table")
     
     any_row_selected <- reactive({!is.null(input[["table_rows_selected"]])})
-    observe_row_selection(ns, any_row_selected)
-    observe({
-      toggleState(
-        selector = glue("#{ns('table')} .ag-download-button"),
-        condition = any_row_selected()
-      )
-      toggleCssClass(
-        class = "ag-download-button-disabled",
-        selector = glue("#{ns('table')} .ag-download-button"),
-        condition = !any_row_selected()
-      )
-    })
     
+    observe_row_selection(ns, any_row_selected)
+    observe_selecting_all(input, table_proxy)
+    observe_deselecting_all(input, table_proxy, interactions_table)
     
     output[["download_csv"]] <- download_handler(input, edges, write_csv, "csv")
     output[["download_xlsx"]] <- download_handler(input, edges, write_xslx, "xlsx")
