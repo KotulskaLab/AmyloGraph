@@ -28,15 +28,17 @@ server_interactions_table <- function(id, edges) {
       !is.null(input[["table_rows_selected"]])
     })
     
+    any_row_selected <- reactive({!is.null(input[["table_rows_selected"]])})
+    observe_row_selection(ns, any_row_selected)
     observe({
       toggleState(
         selector = glue("#{ns('table')} .ag-download-button"),
-        condition = any_record_selected()
+        condition = any_row_selected()
       )
       toggleCssClass(
         class = "ag-download-button-disabled",
         selector = glue("#{ns('table')} .ag-download-button"),
-        condition = !any_record_selected()
+        condition = !any_row_selected()
       )
     })
     
