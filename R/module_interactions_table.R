@@ -42,28 +42,14 @@ server_interactions_table <- function(id, edges) {
       )
     })
     
-    output[["download_csv"]] <- downloadHandler(
-      filename = \() "AmyloGraph.csv",
-      content = \(file) write_csv(
-        edges[["table"]] %>%
-          slice(input[["table_rows_selected"]]) %>%
-          select(-c(from_id, to_id)),
-        file
-      )
-    )
+    
+    output[["download_csv"]] <- download_handler(input, edges, write_csv, "csv")
+    output[["download_xlsx"]] <- download_handler(input, edges, write_xslx, "xlsx")
+    
     # must be executed after assignment to the corresponding output
     outputOptions(output, "download_csv", suspendWhenHidden = FALSE)
-    
-    output[["download_xlsx"]] <- downloadHandler(
-      filename = \() "AmyloGraph.xlsx",
-      content = \(file) write_xlsx(
-        edges[["table"]] %>%
-          slice(input[["table_rows_selected"]]) %>%
-          select(-c(from_id, to_id)),
-        file
-      )
-    )
-    # must be executed after assignment to the corresponding output
     outputOptions(output, "download_xlsx", suspendWhenHidden = FALSE)
+    
+    table_proxy
   })
 }
