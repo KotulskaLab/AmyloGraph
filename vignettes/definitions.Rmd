@@ -2,7 +2,7 @@
 title: "Terms and definitions"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{terms}
+  %\VignetteIndexEntry{Terms and definitions}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -12,25 +12,163 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+
+library(chipPCR)
+library(dplyr)
+library(ggplot2)
+library(patchwork)
 ```
 
 # Main assumptions
 
+<img src="figures/interaction-scenarios.png">
+
 1. General logic:
     1. Operator OR is valid for a and b means: I) a, II) b, III) a and b
-    1. Operator AND is valid for a and b only when we have a and b at the same time.
+    1. Operator AND is valid for a and b only when we have a and b simultaneously.
 2. Authors’ interpretation always supersedes ours.
 3. Interactee and interactor
-    1. An interactee is always acted upon by an interactor. If the publication uses words like “co-incubation” and from the text itself it is not clear how to distinct between interactor and interactor and the authors study the effect on Protein A on Protein B and vice versa, create two separate interactions in the questionnaire: one where A is an interactor over B and another one, where B is an interactor over A.
-    1. Database contains only interactions between two amyloids. The form already contains a list of appropriate amyloid proteins. If one of the participants of the interaction is a non-amyloid protein, it shouldn’t be included in the database. The only exceptions are: a) non-aggregating homologues of known amyloid proteins b) non-aggregating mutants of amyloid proteins c) non-aggregating fragments of amyloid proteins.
-    1. If the interactee or interactor is a) a mutant of an amyloid protein OR b) a fragment of an amyloid protein OR c) a taxonomic variant of an amyloid protein, we still add them to the database under the name of the original protein. However, in this case be extremely precise with the actual sequence of the interactee/interactor.
+    1. An interactee is always acted upon by an interactor. Suppose the publication uses words like 'co-incubation' and from the text itself it is not clear how to distinguish between interactor and interactor. Additionally, the authors study the effect of Protein A on Protein B and vice versa. In this case, create two separate interactions in the questionnaire: A is an interactor over B and B, where B is an interactor over A.
+    1. Database contains only interactions between two amyloids. The form already contains a list of appropriate amyloid proteins. If one of the interaction participants is a non-amyloid protein, it should not be included in the database. The only exceptions are: a) non-aggregating homologs of known amyloid proteins b) non-aggregating mutants of amyloid proteins c) non-aggregating fragments of amyloid proteins.
+    1. If the interactee or interactor is a) a mutant of an amyloid protein OR b) a fragment of an amyloid protein OR c) a taxonomic variant of an amyloid protein, we still add them to the database under the name of the original protein. However, in this case, be extremely precise with the actual sequence of the interactee/interactor.
 If the sequence of the interactor or the interactee contains modified amino acid residues, we do not supply this information in the sequential data. Instead, this information should be present in the general remarks field.
     1. If the sequence of the interactor or the interactee contains (due to modifications) non-amino acids or nonbiogenic amino acids, this interaction is rejected.
 4. Interaction
-    1. Many questions and definitions employ the term aggregation. For the purpose of the manuscript curation, we understood aggregation as the aggregation to the level of mature fibril (fibrillization). If the interactor accelerates the speed of the oligomer formation, but they never aggregate into the level of mature fibrils (fibrillization does not occur), it is not an acceleration in our understanding. Therefore, check not only the resulting kinetics, but search also for microscopy images (or any similar confirmation of the fibrillization).
-    1. In the case of different interaction of the same two amyloids, when these differences stem from the different amyloid formation level (monomer, oligomer, fiber), pH, concentration, temperature or other conditions, we note this information as an unstructured comment in the general remarks section. Nevertheless, submit these aggregations as two (or more) different aggregations highlighting the different effects.
-    1. Seeding means the induction of interactee’s aggregation by adding interactor’s molecules. Therefore, seeding should be considered as: positive answers for questions Q1 AND (Q2 OR Q3) AND Q4 AND Q5. Seeding does not exclude heterogeneous fibrils (Q6), but cannot imply it.
-    1. We focus only on interactions studied in vitro.
-    1. We consider only two-party interactions. The database does not contain interactions with more than two participants. The only exception is when two out of three participants are the same protein in a different aggregation level.
-We assume that there are six main scenarios that can occur during the interaction of two amyloid proteins (see the figure below). We design the questions to discriminate between these scenarios. Q1 differentiates between scenarios I (no effect on kinetics) II and III (inhibited aggregation) as well as IV, V and VI (acceleration). Q2 discriminates between scenarios IV and V/VI. Q3 discriminate between scenarios V and VI.
+    1. Many questions and definitions employ the term aggregation. For the manuscript curation, we understood aggregation to the level of mature fibril (fibrillization). If the interactor accelerates the speed of the oligomer formation, but they never aggregate into the level of mature fibrils (fibrillization does not occur), it is not an acceleration in our understanding. Therefore, check the resulting kinetics and search for microscopy images (or any similar confirmation of the fibrillization).
+    1. In the case of different interactions of the same two amyloids, when these differences stem from the different amyloid formation levels (monomer, oligomer, fiber), pH, concentration, temperature or other conditions, we note this information as an unstructured comment in the general remarks section. Nevertheless, submit these aggregations as two (or more) different aggregations highlighting the different effects.
+    1. Seeding means the induction of interactee’s aggregation by adding interactor’s molecules. Therefore, seeding should be considered positive answers for questions Q1 AND (Q2 OR Q3) AND Q4 AND Q5. Seeding does not exclude heterogeneous fibrils (Q6), but cannot imply it.
+    1. We focus only on interactions studied *in vitro*.
+    1. We consider only two-party interactions. The database does not contain interactions with more than two participants, and the only exception is when two out of three participants are the same protein in a different aggregation level.
+1. We assume that six main scenarios can occur during the interaction of two amyloid proteins (see the figure below). We design the questions to discriminate between these scenarios. Q1 differentiates between scenarios I (no effect on kinetics) II and III (inhibited aggregation) as well as IV, V and VI (acceleration). Q2 discriminates between scenarios IV and V/VI. Q3 discriminate between scenarios V and VI.
 
+
+
+# Glossary
+
+Please rely on glossary provided by [MIRRAGGE – Minimum Information Required for Reproducible AGGregation Experiments (doi: 10.3389/fnmol.2020.582488)](https://doi.org/10.3389/fnmol.2020.582488).
+
+Additional glossary:
+
+ - **T50**: the time required for the amyloid reaction to reach 50% of the final fluorescence intensity.
+
+# Questions
+
+## Q1. Is the interactor affecting the interactee's fibrillization speed?
+
+**_General remarks:_** this question can be fully answered based on the kinetics or any kinetic data. Here, we mean aggregation to the level of mature fibril (fibrillization). If the interactor accelerates the speed of the oligomer formation, but they never aggregate into the level of mature fibrils (fibrillization does not occur), it is not an acceleration as we understand it. Therefore, check the resulting kinetics and search for microscopy images (or any similar confirmation of the fibrillization). If authors state that it is fibrillization, go with their interpretation. 
+
+1. **Faster aggregation**: a) the maximum ThT emission observed at the end of the reaction of the interactee and interactor is higher than maximum ThT emission for interactee alone OR b) if the slope of the kinetic curve is steeper OR c) the lag phase is shorter OR d) T50 is lower. This is OR operator, so we need only one of these three things to happen. Make sure that fibrillization still happens. Comment: ThT is not always quantitative, i.e. a higher (or lower) ThT level - under different conditions (e.g. the presence of the interactor) - can be caused by changes to the fibril structure rather than the amount of fibrils.
+2. **Slower aggregation**: a) the maximum ThT emission observed at the end of the reaction of the interactee and interactor is lower than maximum ThT emission for interactee alone AND b) the slope of the kinetic curve is less steep) OR c) the lag phase is longer. So we need (a AND b) OR c. Make sure that fibrillization still happens.
+3. **No aggregation**: There is no confirmed fibrilization after the interaction.
+4. **No effect**: a) The slopes of kinetic curves are visibly similar AND b) the maximum ThT emission is similar AND c) the lag phase is similar.
+5. **No information**: There were no kinetic assays.
+
+This question refers only to kinetic assays. If there are no such assays, select **no information**.
+
+Sufficient experimental techniques: 
+
+ - ThT,
+ - FTIR,
+ - Congo Red,
+ - turbidity measurements followed with microscopy (turbidity on its own is not specific towards amyloid fibrils, but rather to all kinds of aggregates),
+ - Far-UV CD spectroscopy.
+ 
+```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.width=8,fig.cap="Comparison of ThT curves."}
+set.seed(1)
+
+p1 <- rbind(mutate(AmpSim(cyc = 1:40), curve_type = "faster fibrillization (steeper slope)"),
+      mutate(AmpSim(cyc = 1:40, b.eff = -8), curve_type = "slower fibrillization")) %>% 
+  ggplot(aes(x = cyc, y = fluo, color = curve_type)) + 
+  geom_line() +
+  scale_x_continuous("Time") +
+  scale_y_continuous("ThT fluorescence") +
+  scale_color_manual("", values = c("#D79B00", "#6C8EBF")) +
+  ggtitle("Slope")
+
+
+p2 <- rbind(mutate(AmpSim(cyc = 1:40), curve_type = "faster fibrillization (shorter lag phase)"),
+      mutate(AmpSim(cyc = 1:40, Cq = 30), curve_type = "slower fibrillization")) %>% 
+  ggplot(aes(x = cyc, y = fluo, color = curve_type)) + 
+  geom_line() +
+  scale_x_continuous("Time") +
+  scale_y_continuous("ThT fluorescence") +
+  scale_color_manual("", values = c("#D79B00", "#6C8EBF")) +
+  ggtitle("Lag phase")
+
+p3 <- rbind(mutate(AmpSim(cyc = 1:40, ampl = 1.5), curve_type = "faster fibrillization (higher maximum ThT emission)"),
+            mutate(AmpSim(cyc = 1:40), curve_type = "slower fibrillization")) %>% 
+  ggplot(aes(x = cyc, y = fluo, color = curve_type)) + 
+  geom_line() +
+  scale_x_continuous("Time") +
+  scale_y_continuous("ThT fluorescence") +
+  scale_color_manual("", values = c("#D79B00", "#6C8EBF")) +
+  ggtitle("Maximum ThT emission")
+
+
+(p1 + p2 + p3)*(theme_bw(base_size = 9) +
+  theme(legend.position = "bottom",
+        legend.direction = "vertical",
+        plot.background = element_rect(fill = NA),
+        axis.text = element_blank()))
+```
+ 
+## Q2. Do fibrils of the interactee elongate by attaching to monomers/oligomers/fibrils of the interactor? 
+
+1. **Yes, direct evidence**: experimental evidence that fibrils consist of two different amyloids (labeling; immunolabeling). It also applies if we have a visible colocalization of an interactee and an interactor visible in the microscopic images.
+2. **Yes, implied by kinetics**: if seeding is implied by kinetic experiments (ThT, ATR-FTIR) results and as such it is interpreted by authors of the publication. It also applies if CD (circular dichroism) experiments follow kinetic experiments. In principle, this answer covers every acceleration of the fibrillization confirmed by kinetic experiments.
+3. **No**: no effect on the elongation of interactee’s fibrils.
+4. **No information**.
+5. **Formation of fibrils by the interactee is inhibited**: the formation of interactee’s aggregates was slowed or completely halted by the interactor.
+
+Sufficient experimental techniques (direct evidence only): 
+
+ - microscopy (TEM OR AFM) in conjunction with isotope labeling with MS OR immunolabeling;
+ - dot blot OR Western blot (immunoblot) OR ELISA followed by microscopy; 
+ - Surface Enhanced Raman Spectroscopy followed by microscopy;
+ - AFM-IR;
+ - Mass spectrometry for fibril heterogeneity identification (e.g., ESI-MS) followed by microscopy;
+ - NMR with labeling,
+ - Scintillation proximity assay followed by microscopy.
+ - electron paramagnetic resonance (EPR) spectroscopy followed by microscopy.
+ - SPR
+
+
+##  Q3. Is interaction resulting in heterogeneous fibrils consisting of interactor and interactee molecules?
+
+**_General remarks:_** This is one of the most complicated to test features of fibrils. If authors imply that the difference in structure of mature fibrils is suggesting heterogeneous fibrils, we rely on their interpretation. In this situation, be sure to provide the appropriate quotation from the manuscript. 
+
+1. **Yes:** this answer applies when a) there is experimental evidence that fibrils consist of two different amyloids (labeling; immunolabeling) AND b) the mature fibrils are structurally different than fibrils formed in the presence of interactor c) the term co-aggregation/ heterogeneous fibrils/ hybrid fibrils is used to describe the aggregation process. 
+2. **No:** if the resulting amyloid fibrils have the dimension matching that of the aggregating interactee alone. a) the mature fibrils are confirmed to have the same structure (e.g., TEM) as fibrils formed by the interactee without the presence of the interactor  OR b) there is no fibrillar product at all OR c) an interactee and an interactor are the same protein.
+3. **No information**.
+
+
+
+## QSequence (interactor and interactee)
+
+**Name of the interactor**: the name has to be chosen from a list of available names. Every protein on the list has confirmed amyloid-like properties.
+**Sequence:** The sequence is a vector of amino acids. For example, a sequence of insulin is:  
+
+> MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAED
+> LQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN
+
+Be careful to NOT include:
+
+ - fasta header
+ - DNA/RNA sequences
+ - Any comments
+ - Multiple sequences
+ - N- or C-termini
+ - Positions of amino acids
+
+In the case when the exact sequence is not known, we provide the largest possible precursor.
+
+If there is no precise information about the sequence, check the manufacturer. Some of the amyloid proteins are derivatives of proteins listed in the questionnaire, e.g. pro-IAPP is a derivative of IAPP and its sequence is defined on the webpage of the manufacturer.
+If interactee or interactor are mutants/fragments of an amyloid protein, here we provide only the sequence of the mutant/fragment and not the wild type protein.
+We consider sequences that have modified amino acids (e.g., methylated), but we do not include this information in the sequence.
+We do NOT consider mutants that have instead of standard amino acids a) non-biogenic amino acids (e.g., tyramine) b) non-amino acid linkers. 
+
+**Source sequence:** here we provide the sequence of an original protein by its uniprot ID:
+Remember that the AmyloGraph database treats as a single protein a protein that can occur in many taxonomic variants or after modifications (e.g., we have human and bovine precursor albumins, P02768 and P02769 as well as the products of the post-translational modifications, Q56G89). 
+Instead of mature proteins, try to use precursors (if available).
+Make sure that you are selecting the right organism as the source sequence. If you are working with human IAPP, the source sequence is human IAPP (P10997). However, in the case of of rat IAPP, the source sequence is rat IAPP (P12969)
+Remember that the source sequence may be not identical to the interactor’s or interactee’s sequence. However, interactor or interactee might be a part of the source sequence (as human Amyloid beta 1-40 is a part of the P05067) or a mutated variant of a source sequence (when some amino acids are altered compared to the original sequence).
