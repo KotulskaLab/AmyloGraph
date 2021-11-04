@@ -35,7 +35,7 @@ server_interactions_table <- function(id, edges) {
     
     output[["download_csv"]] <- download_handler(input, edges, write_csv, "csv")
     output[["download_xlsx"]] <- download_handler(input, edges, write_xslx, "xlsx")
-    
+
     # must be executed after assignment to the corresponding output
     outputOptions(output, "download_csv", suspendWhenHidden = FALSE)
     outputOptions(output, "download_xlsx", suspendWhenHidden = FALSE)
