@@ -35,6 +35,21 @@ server_single_protein <- function(id, edge_data, node_data) {
     output[["interactees"]] <- render_interactions_subtable(subtables[["interactees"]])
     output[["interactors"]] <- render_interactions_subtable(subtables[["interactors"]])
     
+    interactees_proxy <- dataTableProxy("interactees")
+    interactors_proxy <- dataTableProxy("interactors")
+    
+    interactees_any_row_selected <- reactive({!is.null(input[["interactees_rows_selected"]])})
+    interactors_any_row_selected <- reactive({!is.null(input[["interactors_rows_selected"]])})
+    
+    observe_row_selection(ns, "interactees_deselect_all", interactees_any_row_selected)
+    observe_row_selection(ns, "interactors_deselect_all", interactors_any_row_selected)
+    
+    observe_deselecting_all(input, "interactees_deselect_all", interactees_proxy)
+    observe_deselecting_all(input, "interactors_deselect_all", interactors_proxy)
+    
+    observe_selecting_all(input, "interactees_select_all", interactees_proxy, subtables[["interactees"]])
+    observe_selecting_all(input, "interactors_select_all", interactors_proxy, subtables[["interactors"]])
+    
     any_record_selected <- reactive({
       !is.null(input[["interactees_rows_selected"]]) || !is.null(input[["interactors_rows_selected"]])
     })
