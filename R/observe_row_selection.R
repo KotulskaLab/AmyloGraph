@@ -1,4 +1,4 @@
-observe_row_selection <- function(ns, any_row_selected) {
+observe_row_selection <- function(ns, button_id, any_row_selected) {
   observe({
     toggleState(
       selector = glue("#{ns('table')} .ag-download-button"),
@@ -11,12 +11,12 @@ observe_row_selection <- function(ns, any_row_selected) {
     )
     
     toggleState(
-      selector = glue("#{ns('deselect_all')}"),
+      selector = glue("#{ns(button_id)}"),
       condition = any_row_selected()
     )
     toggleCssClass(
       class = "ag-selection-button-disabled",
-      selector = glue("#{ns('deselect_all')}"),
+      selector = glue("#{ns(button_id)}"),
       condition = !any_row_selected()
     )
   })

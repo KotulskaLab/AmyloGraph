@@ -29,9 +29,9 @@ server_interactions_table <- function(id, edges) {
     
     any_row_selected <- reactive({!is.null(input[["table_rows_selected"]])})
     
-    observe_row_selection(ns, any_row_selected)
-    observe_selecting_all(input, table_proxy)
-    observe_deselecting_all(input, table_proxy, interactions_table)
+    observe_row_selection(ns, "deselect_all", any_row_selected)
+    observe_deselecting_all(input, "deselect_all", table_proxy)
+    observe_selecting_all(input, "select_all", table_proxy, interactions_table)
     
     output[["download_csv"]] <- download_handler(input, edges, write_csv, "csv")
     output[["download_xlsx"]] <- download_handler(input, edges, write_xslx, "xlsx")
