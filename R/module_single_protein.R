@@ -50,11 +50,9 @@ server_single_protein <- function(id, edge_data, node_data) {
     observe_selecting_all(input, "interactees_select_all", interactees_proxy, subtables[["interactees"]])
     observe_selecting_all(input, "interactors_select_all", interactors_proxy, subtables[["interactors"]])
     
-    any_row_selected <- reactive({
-      !is.null(input[["interactees_rows_selected"]]) || !is.null(input[["interactors_rows_selected"]])
-    })
+    any_row_selected_and_filters_applied <- reactive_selecting_in_main_applicable(input)
     
-    observe_select_in_table_button(ns, any_row_selected)
+    observe_select_in_table_button(ns, any_row_selected_and_filters_applied)
     
     subtables
   })
