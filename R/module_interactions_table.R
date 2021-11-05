@@ -29,7 +29,8 @@ server_interactions_table <- function(id, edges) {
     
     any_row_selected <- reactive({!is.null(input[["table_rows_selected"]])})
     
-    observe_row_selection(ns, "deselect_all", any_row_selected)
+    observe_download_button(ns, any_row_selected)
+    observe_deselect_button(ns, "deselect_all", any_row_selected)
     observe_deselecting_all(input, "deselect_all", table_proxy)
     observe_selecting_all(input, "select_all", table_proxy, interactions_table)
     
