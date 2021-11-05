@@ -1,0 +1,3 @@
+If this option is unchecked, tables below are filtered alongside the graph. In other words, only interactions currently visible on the graph and in the "Table" tab are listed below.
+
+If the option is checked, tables below display all interactions collected in the database associated with the selected protein. Interactions are displayed regardless of filters applied to the graph. This option disables button "Select in interactions table".
