@@ -1,5 +1,6 @@
 ---
 title: "Terms and definitions"
+author: "Michał Burdukiewicz"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Terms and definitions}
