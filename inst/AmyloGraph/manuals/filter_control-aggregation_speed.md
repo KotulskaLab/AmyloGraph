@@ -10,4 +10,4 @@ This field contains the information on the kinetics of interactee's fibrillizati
 4. **No effect**: a) The slopes of kinetic curves are visibly similar AND b) the maximum ThT emission is similar AND c) the lag phase is similar.
 5. **No information**: There were no kinetic assays.
 
-For more information, check [https://kotulskalab.github.io/AmyloGraph/articles/definitions.html#q1-is-the-interactor-affecting-the-interactee-s-aggregating-speed-](our detailed guide).
+For more information, check [our detailed guide](https://kotulskalab.github.io/AmyloGraph/articles/definitions.html#q1-is-the-interactor-affecting-the-interactee-s-aggregating-speed-).
