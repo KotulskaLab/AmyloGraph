@@ -49,35 +49,6 @@ server_db_statistics <- function(id, interactions, data_nodes) {
       colnames = c("Protein" = "label", "Interaction count" = "n")
     )
     
-    # renderDataTable(
-    #   rendered_data(),
-    #   options = list(
-    #     dom = 'Brtip',
-    #     pageLength = 10,
-    #     lengthChange = FALSE,
-    #     buttons = c("selectAll", "selectNone"),
-    #     select = list(style = "multi+shift", items = "row")
-    #   ),
-    #   escape = FALSE,
-    #   rownames = FALSE,
-    #   colnames = ag_colnames(rendered_data()),
-    #   extensions = c("Select", "Buttons"),
-    #   selection = "none",
-    #   server = FALSE
-    # )
-    
-    # output[["num_interactions_by_protein"]] <- renderText({
-    #   ret <- bind_cols(data_nodes, n = map_int(
-    #     data_nodes[["id"]],
-    #     \(id) interactions %>%
-    #       filter(from_id == id | to_id == id) %>%
-    #       nrow()
-    #   )) %>%
-    #     arrange(label)
-    #   glue("<b>{ret[['label']]}</b>: {ret[['n']]} ",
-    #        "interaction{pluralize(ret[['n']], 's')}<br>")
-    # })
-    
     output[["num_interactions_by_paper"]] <- renderPlot(
       ag_data_interactions() %>%
         count(doi) %>%
