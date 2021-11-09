@@ -3,20 +3,23 @@ library(stringi)
 library(stringr)
 library(glue)
 
-AG_data <- readRDS("inst/AmyloGraph/AmyloGraph.RDS")
+greek_letters <- c("^α", "^β", "^γ", "^δ", "^κ",
+                   "α", "β", "γ", "δ", "κ")
+greek_letter_names <- c("Alpha", "Beta", "Gamma", "Delta", "Kappa",
+                        "alpha", "beta", "gamma", "delta", "kappa")
+degreekize <- function(names)
+  stri_replace_all_regex(names, greek_letters, greek_letter_names, vectorize_all = FALSE)
 
-greek_letters <- c("^α", "^β", "^δ", "^κ", "α", "β", "κ", "δ")
-greek_letter_names <- c("Alpha", "Beta", "Delta", "Kappa", "alpha", "beta", "delta", "kappa")
-degreekize <- function(names) stri_replace_all_regex(names, greek_letters, greek_letter_names, vectorize_all = FALSE)
-
-sequentize <- function(sequences) 
-  stri_replace_all_regex(sequences, "\n", "", ) %>%
+sequentize <- function(sequences)
+  sequences %>%
+  stri_replace_all_regex("\n", "") %>%
   stri_replace_all_regex("[0-9]", "") %>%
   stri_trans_toupper %>%
   stri_extract_last_regex("[A-Z]+$")
-  
 
-AG_data %>%
+# interaction data ----
+
+readRDS("inst/AmyloGraph/AmyloGraph.RDS") %>%
   select(interactor_name = `Interactor name`,
          interactee_name = `Interactee name`,
          interactor_sequence = Sequence,
@@ -30,4 +33,15 @@ AG_data %>%
          interactor_sequence = sequentize(interactor_sequence),
          interactee_sequence = sequentize(interactee_sequence),
          AGID = glue("AG{str_pad(cur_group_rows(), 5, 'left', '0')}")) %>%
-  write.csv("inst/AmyloGraph/interactions_data.csv", row.names = FALSE)
+  write.csv("inst/AmyloGraph/interactions_data.csv",
+            row.names = FALSE, fileEncoding = "UTF-8")
+
+# protein data ----
+
+readRDS("inst/AmyloGraph/AmyloGraph_proteins.RDS") %>%
+  select(name = `Protein name`,
+         source = `Additional information`,
+         uniprot_id = `Uniprot ID`) %>%
+  mutate(name = degreekize(name)) %>%
+  write.csv("inst/AmyloGraph/protein_data.csv",
+            row.names = FALSE, fileEncoding = "UTF-8")
