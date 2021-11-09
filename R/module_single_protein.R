@@ -15,12 +15,12 @@ ui_single_protein <- function(id, node_data) {
 }
 
 #' @importFrom shiny moduleServer 
-server_single_protein <- function(id, edge_data, node_data) {
+server_single_protein <- function(id, edge_data, node_data, protein_data) {
   moduleServer(id, function(input, output, session) {
     selected_node_info <- reactive_selected_node_info(input, node_data)
     selected_node_label <- reactive_selected_node_label(selected_node_info)
     
-    output[["info"]] <- render_protein_info(input, selected_node_label)
+    output[["info"]] <- render_protein_info(protein_data, selected_node_label)
     output[["interactees"]] <- render_interactions_subtable(input, edge_data, from_id, interactee_name)
     output[["interactors"]] <- render_interactions_subtable(input, edge_data, to_id, interactor_name)
   })
