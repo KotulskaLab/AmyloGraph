@@ -19,6 +19,11 @@ linkify_doi <- function(doi, truncate = TRUE) {
 }
 
 #' @importFrom glue glue
+linkify_uniprot <- function(uniprot_id) {
+  glue("<a href='https://uniprot.org/uniprot/{uniprot_id}' target='_blank' rel='noopener noreferer''>{uniprot_id}</a>")
+}
+
+#' @importFrom glue glue
 #' @importFrom dplyr `%>%`
 prettify_sequence_output <- \(sequence) {
   group_length <- 10
