@@ -1,4 +1,4 @@
-observe_moving_selection <- \(input, subtables, edges, table_proxy) observeEvent(
+observe_moving_selection <- \(input, subtables, edges, table_proxy, rvals) observeEvent(
   input[[NS("single_protein", "select_in_table")]],
   {
     ns <- NS("single_protein")
@@ -17,8 +17,11 @@ observe_moving_selection <- \(input, subtables, edges, table_proxy) observeEvent
         filter(AGID %in% indices) %>%
         pull(rownr) 
       
-      table_proxy %>%
-        selectRows(new_selection)
+      if (ic(rvals[["table_visited"]])) {
+        selectRows(table_proxy, new_selection)
+      } else {
+        rvals[["initially_selected"]] <- new_selection
+      }
       
       updateTabsetPanel(inputId = "tabset_panel",
                         selected = "table")
