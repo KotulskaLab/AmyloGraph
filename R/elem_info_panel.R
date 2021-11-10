@@ -13,7 +13,7 @@ elem_info_no_node_selected <- \(ns) fillCol(
 
 elem_info_node_selected <- \(ns) fillCol(
   id = "protein_details",
-  uiOutput(ns("info")),
+  htmlOutput(ns("info")),
   helper(
     checkboxInput(
       ns("ignore_filters"),
