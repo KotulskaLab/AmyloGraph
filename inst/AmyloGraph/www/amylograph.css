@@ -87,6 +87,10 @@ button.dt-button.active:not(.disabled) {
   height: calc(100% - 22px);
 }
 
+.shinyhelper-container {
+  right: 15px !important;
+}
+
 /* CUSTOM CLASSES */
 
 #filter_control {

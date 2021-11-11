@@ -6,13 +6,14 @@ ui_db_statistics <- function(id) {
     textOutput(ns("num_publications")),
     textOutput(ns("num_interactions")),
     h3("Interactions by protein"),
-    htmlOutput(ns("num_interactions_by_protein")),
+    dataTableOutput(ns("num_interactions_by_protein")),
     h3("Interactions by paper"),
     plotOutput(ns("num_interactions_by_paper"))
   )
 }
 
 #' @importFrom shiny moduleServer
+#' @importFrom DT renderDataTable
 #' @importFrom glue glue
 #' @importFrom purrr map_int
 #' @importFrom dplyr bind_cols count
@@ -27,17 +28,26 @@ server_db_statistics <- function(id, interactions, data_nodes) {
       glue("Number of interactions: {nrow(interactions)}")
     )
     
-    output[["num_interactions_by_protein"]] <- renderText({
-      ret <- bind_cols(data_nodes, n = map_int(
-        data_nodes[["id"]],
-        \(id) interactions %>%
-          filter(from_id == id | to_id == id) %>%
-          nrow()
-      )) %>%
-        arrange(label)
-      glue("<b>{ret[['label']]}</b>: {ret[['n']]} ",
-           "interaction{pluralize(ret[['n']], 's')}<br>")
-    })
+    # TODO: extract to render_num_interactions_table.R
+    
+    interactions_by_protein_table <- bind_cols(data_nodes, n = map_int(
+      data_nodes[["id"]],
+      \(id) interactions %>%
+        filter(from_id == id | to_id == id) %>%
+        nrow()
+    )) %>%
+      arrange(label) %>%
+      select(label, n)
+    
+    output[["num_interactions_by_protein"]] <- renderDataTable(
+      interactions_by_protein_table,
+      options = list(
+        dom = 't',
+        paging = FALSE
+      ),
+      rownames = FALSE,
+      colnames = c("Protein" = "label", "Interaction count" = "n")
+    )
     
     output[["num_interactions_by_paper"]] <- renderPlot(
       ag_data_interactions() %>%

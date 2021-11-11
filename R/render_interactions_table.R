@@ -23,25 +23,21 @@ download_button_callback <- function(ns, session, button_id, button_label)
   )
 
 #' @importFrom DT renderDataTable JS
-render_interactions_table <- function(interactions_table, ns, session)
+render_interactions_table <- function(interactions_table, ns, session, rvals)
   renderDataTable(
     interactions_table(),
     options = list(
       dom = 'B<"ag-buttons">frtip',
       scrollY = "calc(100vh - 330px - var(--correction))",
       scrollX = TRUE,
-      scrollCollapse = TRUE,
-      lengthMenu = list(c(10, 25, 50, 100, -1), c("10", "25", "50", "100", "All")),
-      buttons = c("pageLength", "selectAll", "selectNone", "colvis"),
-      select = list(style = "multi+shift", items = "row")
+      scrollCollapse = TRUE
     ),
     escape = FALSE,
     filter = "top",
     rownames = FALSE,
     colnames = ag_colnames(interactions_table()),
-    extensions = c("Select", "Buttons"),
-    selection = "none",
     server = FALSE,
+    selection = if (ic(rvals[["table_visited"]])) list(mode = "multiple", selected = rvals[["initially_selected"]], target = "row") else "multiple",
     callback = JS(
       download_button_callback(ns, session, "download_csv", "Download selected as CSV"),
       download_button_callback(ns, session, "download_xlsx", "Download selected as Excel")

@@ -3,6 +3,8 @@
 ui_interactions_table <- function(id) {
   ns <- NS(id)
   tagList(
+    actionButton(ns("select_all"), "Select all"),
+    actionButton(ns("deselect_all"), "Deselect all"),
     hidden(downloadButton(ns("download_csv"))),
     hidden(downloadButton(ns("download_xlsx"))),
     elem_interactions_table(ns("table"))
@@ -14,54 +16,31 @@ ui_interactions_table <- function(id) {
 #' @importFrom readr write_csv
 #' @importFrom writexl write_xlsx
 #' @importFrom shinyjs toggleState
-server_interactions_table <- function(id, edges) {
+#' @importFrom DT dataTableProxy
+server_interactions_table <- function(id, edges, rvals) {
   moduleServer(id, function(input, output, session) {
     ns <- NS(id)
     
     interactions_table <- reactive_interactions_table(edges, ns)
     
-    output[["table"]] <- render_interactions_table(
-      interactions_table, ns, session
-    )
+    output[["table"]] <- render_interactions_table(interactions_table, ns, session, rvals)
     
-    any_record_selected <- reactive({
-      !is.null(input[["table_rows_selected"]])
-    })
+    table_proxy <- dataTableProxy("table")
     
-    observe({
-      toggleState(
-        selector = glue("#{ns('table')} .ag-download-button"),
-        condition = any_record_selected()
-      )
-      toggleCssClass(
-        class = "ag-download-button-disabled",
-        selector = glue("#{ns('table')} .ag-download-button"),
-        condition = !any_record_selected()
-      )
-    })
+    any_row_selected <- reactive({!is.null(input[["table_rows_selected"]])})
     
-    output[["download_csv"]] <- downloadHandler(
-      filename = \() "AmyloGraph.csv",
-      content = \(file) write_csv(
-        edges[["table"]] %>%
-          slice(input[["table_rows_selected"]]) %>%
-          select(-c(from_id, to_id)),
-        file
-      )
-    )
+    observe_download_button(ns, any_row_selected)
+    observe_deselect_button(ns, "deselect_all", any_row_selected)
+    observe_deselecting_all(input, "deselect_all", table_proxy)
+    observe_selecting_all(input, "select_all", table_proxy, interactions_table)
+    
+    output[["download_csv"]] <- download_handler(input, edges, write_csv, "csv")
+    output[["download_xlsx"]] <- download_handler(input, edges, write_xslx, "xlsx")
+
     # must be executed after assignment to the corresponding output
     outputOptions(output, "download_csv", suspendWhenHidden = FALSE)
-    
-    output[["download_xlsx"]] <- downloadHandler(
-      filename = \() "AmyloGraph.xlsx",
-      content = \(file) write_xlsx(
-        edges[["table"]] %>%
-          slice(input[["table_rows_selected"]]) %>%
-          select(-c(from_id, to_id)),
-        file
-      )
-    )
-    # must be executed after assignment to the corresponding output
     outputOptions(output, "download_xlsx", suspendWhenHidden = FALSE)
+    
+    table_proxy
   })
 }

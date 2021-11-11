@@ -15,13 +15,45 @@ ui_single_protein <- function(id, node_data) {
 }
 
 #' @importFrom shiny moduleServer 
-server_single_protein <- function(id, edge_data, node_data) {
+server_single_protein <- function(id, edge_data, node_data, protein_data) {
   moduleServer(id, function(input, output, session) {
+    ns <- NS(id)
+    
+    subtables <- reactiveValues(
+      interactees = NULL,
+      interactors = NULL
+    )
+    
     selected_node_info <- reactive_selected_node_info(input, node_data)
     selected_node_label <- reactive_selected_node_label(selected_node_info)
     
-    output[["info"]] <- render_protein_info(input, selected_node_label)
-    output[["interactees"]] <- render_interactions_subtable(input, edge_data, from_id, interactee_name)
-    output[["interactors"]] <- render_interactions_subtable(input, edge_data, to_id, interactor_name)
+    output[["info"]] <- render_protein_info(protein_data, selected_node_label)
+  
+    subtables[["interactees"]] <- reactive_interactions_subtable(input, edge_data, from_id, interactee_name)
+    subtables[["interactors"]] <- reactive_interactions_subtable(input, edge_data, to_id, interactor_name)
+    
+    output[["interactees"]] <- render_interactions_subtable(subtables[["interactees"]])
+    output[["interactors"]] <- render_interactions_subtable(subtables[["interactors"]])
+    
+    interactees_proxy <- dataTableProxy("interactees")
+    interactors_proxy <- dataTableProxy("interactors")
+    
+    interactees_any_row_selected <- reactive({!is.null(input[["interactees_rows_selected"]])})
+    interactors_any_row_selected <- reactive({!is.null(input[["interactors_rows_selected"]])})
+    
+    observe_deselect_button(ns, "interactees_deselect_all", interactees_any_row_selected)
+    observe_deselect_button(ns, "interactors_deselect_all", interactors_any_row_selected)
+    
+    observe_deselecting_all(input, "interactees_deselect_all", interactees_proxy)
+    observe_deselecting_all(input, "interactors_deselect_all", interactors_proxy)
+    
+    observe_selecting_all(input, "interactees_select_all", interactees_proxy, subtables[["interactees"]])
+    observe_selecting_all(input, "interactors_select_all", interactors_proxy, subtables[["interactors"]])
+    
+    any_row_selected_and_filters_applied <- reactive_selecting_in_main_applicable(input)
+    
+    observe_select_in_table_button(ns, any_row_selected_and_filters_applied)
+    
+    subtables
   })
 }
