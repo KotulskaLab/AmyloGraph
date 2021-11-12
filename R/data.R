@@ -2,7 +2,8 @@ ag_load_data <- \()
   list(
     interactions = AmyloGraph::ag_data_interactions(),
     groups = AmyloGraph:::ag_data_groups(),
-    nodes = AmyloGraph:::ag_data_nodes()
+    nodes = AmyloGraph:::ag_data_nodes(),
+    proteins = AmyloGraph:::ag_data_proteins()
   )
 
 #' @importFrom readr read_csv
@@ -22,12 +23,21 @@ ag_data_interactions <- \()
 #' @importFrom digest digest
 ag_data_nodes <- \()
   ag_data_interactions() %>%
-  select(interactor_name, interactee_name) %>% 
-  unlist() %>% 
-  unique() %>% 
-  tibble(label = .,
-         id = map_chr(label, digest),
-         shape = "box")
+    select(interactor_name, interactee_name) %>% 
+    unlist() %>% 
+    unique() %>% 
+    tibble(label = .,
+           id = map_chr(label, digest),
+           shape = "box")
+
+#' @importFrom readr read_csv
+#' @importFrom dplyr mutate
+#' @importFrom purrr map_chr
+#' @importFrom digest digest
+ag_data_proteins <- \()
+  read_csv(system.file("AmyloGraph", "protein_data.csv", package = "AmyloGraph"),
+           col_types = "ccc") |>
+    mutate(id = map_chr(name, digest))
 
 #' @importFrom purrr set_names map
 #' @importFrom tibble tibble tribble

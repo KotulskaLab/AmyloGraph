@@ -1,29 +1,16 @@
 #' @importFrom DT renderDataTable
 #' @importFrom dplyr `%>%` filter arrange select mutate
-render_interactions_subtable <- function(input, edge_data, target_id, target_variable) {
-  rendered_data <- reactive(
-    (if (input[["ignore_filters"]]) edge_data[["all"]]
-     else edge_data[["table"]]) %>%
-      filter({{target_id}} == input[["select_node"]]) %>%
-      arrange({{target_variable}}, doi) %>%
-      mutate(doi = linkify_doi(doi),
-             AGID = AGID_button(AGID)) %>%
-      select(AGID, {{target_variable}}, doi)
-  )
+render_interactions_subtable <- function(interactions_subtable) {
   renderDataTable(
-    rendered_data(),
+    interactions_subtable(),
     options = list(
       dom = 'Brtip',
       pageLength = 10,
-      lengthChange = FALSE,
-      buttons = c("selectAll", "selectNone"),
-      select = list(style = "multi+shift", items = "row")
+      lengthChange = FALSE
     ),
     escape = FALSE,
     rownames = FALSE,
-    colnames = ag_colnames(rendered_data()),
-    extensions = c("Select", "Buttons"),
-    selection = "none",
+    colnames = ag_colnames(interactions_subtable()),
     server = FALSE
   )
 }
