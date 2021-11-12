@@ -15,4 +15,5 @@ reactive_interactions_table <- function(edges, ns) reactive({
            heterogenous_fibers,
            doi,
            original_AGID)
+  # original_AGID must be last for column invisibility to work correctly
 })

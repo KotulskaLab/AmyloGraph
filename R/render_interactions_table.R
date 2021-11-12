@@ -30,7 +30,9 @@ render_interactions_table <- function(interactions_table, ns, session, rvals)
       dom = 'B<"ag-buttons">frtip',
       scrollY = "calc(100vh - 330px - var(--correction))",
       scrollX = TRUE,
-      scrollCollapse = TRUE
+      scrollCollapse = TRUE,
+      # it's either index or header class, and we don't use header classes
+      columnDefs = list(list(visible = FALSE, targets = -1))
     ),
     escape = FALSE,
     filter = "top",
