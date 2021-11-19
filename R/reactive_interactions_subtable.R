@@ -10,4 +10,5 @@ reactive_interactions_subtable <- function(input, edge_data, target_id, target_v
            original_AGID = AGID,
            AGID = AGID_button(AGID)) %>%
     select(AGID, {{target_variable}}, doi, original_AGID)
+  # original_AGID must be last for column invisibility to work correctly
 })
