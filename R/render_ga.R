@@ -1,9 +1,9 @@
 # adapted from: https://github.com/DataScienceScotland/shiny_cookies
 
 render_ga <- function() {
-  tagList(tags$head(HTML("<script src='https://cc.cdn.civiccomputing.com/8/cookieControl-8.x.min.js'></script>")),
-          tags$head(HTML("<script async src='https://www.googletagmanager.com/gtag/js?id=G-0WVLM2F4MJ-1'></script>")),
-          tags$head(HTML(
+  tagList(HTML("<script src='https://cc.cdn.civiccomputing.com/8/cookieControl-8.x.min.js'></script>"),
+          HTML("<script async src='https://www.googletagmanager.com/gtag/js?id=G-0WVLM2F4MJ-1'></script>"),
+          HTML(
             "<script>
 var config = {
     apiKey: '77d76ea90a9efadff2fb240e10e5af8680a529ae',
@@ -38,6 +38,6 @@ var config = {
 CookieControl.load( config );
       
       </script>"
-          ))
+          )
   )
 }
