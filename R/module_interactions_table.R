@@ -1,5 +1,4 @@
 #' @importFrom shiny NS
-#' @importFrom shinyjs hidden
 ui_interactions_table <- function(id) {
   ns <- NS(id)
   tagList(
