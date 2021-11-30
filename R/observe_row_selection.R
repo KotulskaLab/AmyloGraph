@@ -11,7 +11,7 @@ toggle_state_and_css <- function(selector, class, condition) observe({
 })
 
 observe_download_button <- function(ns, any_row_selected) toggle_state_and_css(
-  glue("#{ns('table')} .ag-download-button"),
+  glue("#{ns('button_bar')} .ag-download-button"),
   "ag-download-button-disabled",
   any_row_selected
 )

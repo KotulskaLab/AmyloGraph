@@ -3,10 +3,19 @@
 ui_interactions_table <- function(id) {
   ns <- NS(id)
   tagList(
-    actionButton(ns("select_all"), "Select all"),
-    actionButton(ns("deselect_all"), "Deselect all"),
-    hidden(downloadButton(ns("download_csv"))),
-    hidden(downloadButton(ns("download_xlsx"))),
+    div(id = ns("button_bar"),
+        actionButton(ns("select_all"),
+                     label = "Select all",
+                     class = "ag-select-all-button"),
+        actionButton(ns("deselect_all"),
+                     label = "Deselect all",
+                     class = "ag-deselect-all-button"),
+        downloadButton(ns("download_csv"),
+                       label = "Download selected as CSV",
+                       class = "ag-download-button"),
+        downloadButton(ns("download_xlsx"), 
+                       label = "Download selected as Excel",
+                       class = "ag-download-button")),
     elem_interactions_table(ns("table"))
   )
 }
@@ -36,10 +45,6 @@ server_interactions_table <- function(id, edges, rvals) {
     
     output[["download_csv"]] <- download_handler(input, edges, write_csv, "csv")
     output[["download_xlsx"]] <- download_handler(input, edges, write_xslx, "xlsx")
-
-    # must be executed after assignment to the corresponding output
-    outputOptions(output, "download_csv", suspendWhenHidden = FALSE)
-    outputOptions(output, "download_xlsx", suspendWhenHidden = FALSE)
     
     table_proxy
   })
