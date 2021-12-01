@@ -16,5 +16,7 @@ render_interactions_table <- function(interactions_table, rvals)
     rownames = FALSE,
     colnames = ag_colnames(interactions_table()),
     server = FALSE,
-    selection = if (ic(rvals[["table_visited"]])) list(mode = "multiple", selected = rvals[["initially_selected"]], target = "row") else "multiple"
+    selection = list(mode = "multiple",
+                     selected = rvals[["initially_selected"]],
+                     target = "row")
   )
