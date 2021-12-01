@@ -3,7 +3,7 @@ render_interactions_table <- function(interactions_table, rvals)
   renderDataTable(
     interactions_table(),
     options = list(
-      dom = 'Bfrtip',
+      dom = 'lfrtip',
       scrollY = "calc(100vh - 330px - var(--correction))",
       scrollX = TRUE,
       scrollCollapse = TRUE,
