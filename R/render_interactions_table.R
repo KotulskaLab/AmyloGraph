@@ -1,9 +1,9 @@
 #' @importFrom DT renderDataTable JS
-render_interactions_table <- function(interactions_table, ns, session, rvals)
+render_interactions_table <- function(interactions_table, rvals)
   renderDataTable(
     interactions_table(),
     options = list(
-      dom = 'B<"ag-buttons">frtip',
+      dom = 'Bfrtip',
       scrollY = "calc(100vh - 330px - var(--correction))",
       scrollX = TRUE,
       scrollCollapse = TRUE,
