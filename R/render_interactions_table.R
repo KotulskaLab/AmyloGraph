@@ -7,6 +7,7 @@ render_interactions_table <- function(interactions_table, rvals)
       scrollY = "calc(100vh - 330px - var(--correction))",
       scrollX = TRUE,
       scrollCollapse = TRUE,
+      lengthMenu = list(c(10, 25, 50, 100, -1), c("10", "25", "50", "100", "All")),
       # it's either index or header class, and we don't use header classes
       columnDefs = list(list(visible = FALSE, targets = -1))
     ),
