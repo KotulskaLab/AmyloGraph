@@ -16,7 +16,7 @@ ui_db_statistics <- function(id) {
 #' @importFrom DT renderDataTable
 #' @importFrom glue glue
 #' @importFrom purrr map_int
-#' @importFrom dplyr bind_cols count
+#' @importFrom dplyr bind_cols count arrange select
 #' @importFrom ggplot2 aes ggplot geom_col scale_x_continuous scale_y_continuous 
 #' theme_bw
 server_db_statistics <- function(id, interactions, data_nodes) {
