@@ -5,8 +5,8 @@ render_interactions_subtable <- function(interactions_subtable) {
     interactions_subtable(),
     options = list(
       dom = 'rtip',
-      pageLength = 10,
-      lengthChange = FALSE,
+      scrollX = TRUE,
+      scrollCollapse = TRUE,
       # it's either index or header class, and we don't use header classes
       columnDefs = list(list(visible = FALSE, targets = -1))
     ),
