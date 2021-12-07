@@ -31,7 +31,8 @@ elem_panel_single_protein <- \(data_nodes) ui_single_protein("single_protein", d
 elem_tab_interactions_table <- \() tabPanel(
   title = "Table",
   value = "table",
-  ui_interactions_table("interactions_table")
+  ui_table("interactions_table",
+           BUTTONS[c("SELECT_ALL", "DESELECT_ALL", "DOWNLOAD_CSV", "DOWNLOAD_XSLX")])
 )
 
 #' @importFrom glue glue
