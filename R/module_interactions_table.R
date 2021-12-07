@@ -31,7 +31,7 @@ server_interactions_table <- function(id, edges, rvals) {
     
     interactions_table <- reactive_interactions_table(edges, ns)
     
-    output[["table"]] <- render_interactions_table(interactions_table, rvals)
+    output[["table"]] <- render_interactions_table(interactions_table, rvals = rvals)
     
     table_proxy <- dataTableProxy("table")
     
