@@ -10,8 +10,8 @@ BUTTONS <- list(
       label = "Download selected as CSV",
       class = "ag-download-button"
     ),
-    server = \(ns, input, output, table_proxy, ..., edges, any_row_selected) {
-      output[["download_csv"]] <- download_handler(input, edges, write_csv, "csv")
+    server = \(input, output, ..., table_data) {
+      output[["download_csv"]] <- download_handler(input, table_data, write_csv, "csv")
     },
     tags = "DOWNLOAD"
   ),
@@ -21,8 +21,8 @@ BUTTONS <- list(
       label = "Download selected as Excel",
       class = "ag-download-button"
     ),
-    server = \(ns, input, output, table_proxy, ..., edges, any_row_selected) {
-      output[["download_xlsx"]] <- download_handler(input, edges, write_xslx, "xlsx")
+    server = \(input, output, ..., table_data) {
+      output[["download_xlsx"]] <- download_handler(input, table_data, write_xslx, "xlsx")
     },
     tags = "DOWNLOAD"
   ),
@@ -32,7 +32,7 @@ BUTTONS <- list(
       label = "Select all",
       class = "ag-selection-button"
     ),
-    server = \(ns, input, output, table_proxy, table_data, ...) {
+    server = \(input, output, ..., table_proxy) {
       observe_selecting_all(input, "select_all", table_proxy, "table")
     },
     tags = "SELECT"
@@ -43,7 +43,7 @@ BUTTONS <- list(
       label = "Deselect all",
       class = "ag-deselection-button"
     ),
-    server = \(ns, input, output, table_proxy, ...) {
+    server = \(input, output, ..., table_proxy) {
       observe_deselecting_all(input, "deselect_all", table_proxy)
     },
     tags = "DESELECT"
@@ -57,5 +57,5 @@ BUTTON_TAGS <- list(
   DESELECT = \(ns, ..., any_row_selected) {
     observe_deselect_buttons(ns, any_row_selected)
   },
-  SELECT = \(ns, ..., any_row_selected) {}
+  SELECT = \(ns, ...) {}
 )
