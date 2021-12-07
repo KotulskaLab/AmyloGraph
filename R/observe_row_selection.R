@@ -22,13 +22,7 @@ observe_deselect_buttons <- function(ns, any_row_selected) toggle_state_and_css(
   any_row_selected
 )
 
-# TODO: remove 2 observers below
-observe_download_button <- function(ns, any_row_selected) toggle_state_and_css(
-  glue("#{ns('button_bar')} .ag-download-button"),
-  "ag-download-button-disabled",
-  any_row_selected
-)
-
+# TODO: remove observer below
 observe_deselect_button <- function(ns, button_id, any_row_selected) toggle_state_and_css(
   glue("#{ns(button_id)}"),
   "ag-deselection-button-disabled",
