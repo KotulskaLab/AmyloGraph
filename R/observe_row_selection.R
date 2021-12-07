@@ -10,6 +10,19 @@ toggle_state_and_css <- function(selector, class, condition) observe({
   )
 })
 
+observe_download_buttons <- function(ns, any_row_selected) toggle_state_and_css(
+  glue("#{ns('button_bar')} .ag-download-button"),
+  "ag-download-button-disabled",
+  any_row_selected
+)
+
+observe_deselect_buttons <- function(ns, any_row_selected) toggle_state_and_css(
+  glue("#{ns('button_bar')} .ag-deselection-button"),
+  "ag-deselection-button-disabled",
+  any_row_selected
+)
+
+# TODO: remove 2 observers below
 observe_download_button <- function(ns, any_row_selected) toggle_state_and_css(
   glue("#{ns('button_bar')} .ag-download-button"),
   "ag-download-button-disabled",
