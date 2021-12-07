@@ -1,7 +1,7 @@
-download_handler <- \(input, edges, write_function, extension)  downloadHandler(
+download_handler <- \(input, table_data, write_function, extension)  downloadHandler(
   filename = \() glue("AmyloGraph.{extension}"),
   content = \(file) write_function(
-    edges[["table"]] %>%
+    table_data() %>%
       slice(input[["table_rows_selected"]]) %>%
       select(-c(from_id, to_id)),
     file
