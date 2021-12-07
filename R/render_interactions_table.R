@@ -35,7 +35,7 @@ render_table <- function(data, options, ...)
 #   )
 # }
 
-render_interactions_subtable <- function(data) {
+render_interactions_subtable <- function(data, ...) {
   render_table(
     data,
     options = list(
@@ -46,7 +46,7 @@ render_interactions_subtable <- function(data) {
 }
 
 #' @importFrom DT renderDataTable JS
-render_interactions_table <- function(data, rvals)
+render_interactions_table <- function(data, ..., rvals)
   renderDataTable(
     data(),
     options = list_modify(default_table_options,
