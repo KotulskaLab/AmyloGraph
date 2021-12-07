@@ -1,3 +1,4 @@
+#' @importFrom shinyjs toggleState toggleCssClass
 toggle_state_and_css <- function(selector, class, condition) observe({
   toggleState(
     selector = selector,
