@@ -32,8 +32,8 @@ BUTTONS <- list(
       label = "Select all",
       class = "ag-selection-button"
     ),
-    server = \(ns, input, output, table_proxy, ..., interactions_table) {
-      observe_selecting_all(input, "select_all", table_proxy, interactions_table)
+    server = \(ns, input, output, table_proxy, table_data, ...) {
+      observe_selecting_all(input, "select_all", table_proxy, "table")
     },
     tags = "SELECT"
   ),

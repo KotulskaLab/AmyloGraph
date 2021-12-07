@@ -47,8 +47,8 @@ server_single_protein <- function(id, edge_data, node_data, protein_data) {
     observe_deselecting_all(input, "interactees_deselect_all", interactees_proxy)
     observe_deselecting_all(input, "interactors_deselect_all", interactors_proxy)
     
-    observe_selecting_all(input, "interactees_select_all", interactees_proxy, subtables[["interactees"]])
-    observe_selecting_all(input, "interactors_select_all", interactors_proxy, subtables[["interactors"]])
+    observe_selecting_all(input, "interactees_select_all", interactees_proxy, "interactees")
+    observe_selecting_all(input, "interactors_select_all", interactors_proxy, "interactors")
     
     any_row_selected_and_filters_applied <- reactive_selecting_in_main_applicable(input)
     
