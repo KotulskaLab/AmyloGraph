@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">AmyloGraph</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.0.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -76,7 +72,7 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Terms and definitions</h1>
-                        <h4 class="author">Michał Burdukiewicz</h4>
+                        <h4 data-toc-skip class="author">Michał Burdukiewicz</h4>
             
       
       
@@ -86,9 +82,9 @@
 
     
     
-<div id="main-assumptions" class="section level1">
-<h1 class="hasAnchor">
-<a href="#main-assumptions" class="anchor"></a>Main assumptions</h1>
+<div class="section level1">
+<h1 id="main-assumptions">Main assumptions<a class="anchor" aria-label="anchor" href="#main-assumptions"></a>
+</h1>
 <p><img src="figures/interaction-scenarios.png"></p>
 <ol style="list-style-type: decimal">
 <li>General logic:
@@ -118,22 +114,22 @@
 <li>We assume that six main scenarios can occur during the interaction of two amyloid proteins (see the figure below). We design the questions to discriminate between these scenarios. Q1 differentiates between scenarios I (no effect on kinetics) II and III (inhibited aggregation) as well as IV, V and VI (acceleration). Q2 discriminates between scenarios IV and V/VI. Q3 discriminate between scenarios V and VI.</li>
 </ol>
 </div>
-<div id="glossary" class="section level1">
-<h1 class="hasAnchor">
-<a href="#glossary" class="anchor"></a>Glossary</h1>
-<p>Please rely on glossary provided by <a href="https://doi.org/10.3389/fnmol.2020.582488">MIRRAGGE – Minimum Information Required for Reproducible AGGregation Experiments (doi: 10.3389/fnmol.2020.582488)</a>.</p>
+<div class="section level1">
+<h1 id="glossary">Glossary<a class="anchor" aria-label="anchor" href="#glossary"></a>
+</h1>
+<p>Please rely on glossary provided by <a href="https://doi.org/10.3389/fnmol.2020.582488" class="external-link">MIRRAGGE – Minimum Information Required for Reproducible AGGregation Experiments (doi: 10.3389/fnmol.2020.582488)</a>.</p>
 <p>Additional glossary:</p>
 <ul>
 <li>
 <strong>T50</strong>: the time required for the amyloid reaction to reach 50% of the final fluorescence intensity.</li>
 </ul>
 </div>
-<div id="questions" class="section level1">
-<h1 class="hasAnchor">
-<a href="#questions" class="anchor"></a>Questions</h1>
-<div id="q1--is-the-interactor-affecting-the-interactees-fibrillization-speed" class="section level2">
-<h2 class="hasAnchor">
-<a href="#q1--is-the-interactor-affecting-the-interactees-fibrillization-speed" class="anchor"></a>Q1. Is the interactor affecting the interactee’s fibrillization speed?</h2>
+<div class="section level1">
+<h1 id="questions">Questions<a class="anchor" aria-label="anchor" href="#questions"></a>
+</h1>
+<div class="section level2">
+<h2 id="q1--is-the-interactor-affecting-the-interactees-fibrillization-speed">Q1. Is the interactor affecting the interactee’s fibrillization speed?<a class="anchor" aria-label="anchor" href="#q1--is-the-interactor-affecting-the-interactees-fibrillization-speed"></a>
+</h2>
 <p><strong><em>General remarks:</em></strong> this question can be fully answered based on the kinetics or any kinetic data. Here, we mean aggregation to the level of mature fibril (fibrillization). If the interactor accelerates the speed of the oligomer formation, but they never aggregate into the level of mature fibrils (fibrillization does not occur), it is not an acceleration as we understand it. Therefore, check the resulting kinetics and search for microscopy images (or any similar confirmation of the fibrillization). If authors state that it is fibrillization, go with their interpretation.</p>
 <ol style="list-style-type: decimal">
 <li>
@@ -162,9 +158,9 @@ Comparison of ThT curves.
 </p>
 </div>
 </div>
-<div id="q2--do-fibrils-of-the-interactee-elongate-by-attaching-to-monomersoligomersfibrils-of-the-interactor" class="section level2">
-<h2 class="hasAnchor">
-<a href="#q2--do-fibrils-of-the-interactee-elongate-by-attaching-to-monomersoligomersfibrils-of-the-interactor" class="anchor"></a>Q2. Do fibrils of the interactee elongate by attaching to monomers/oligomers/fibrils of the interactor?</h2>
+<div class="section level2">
+<h2 id="q2--do-fibrils-of-the-interactee-elongate-by-attaching-to-monomersoligomersfibrils-of-the-interactor">Q2. Do fibrils of the interactee elongate by attaching to monomers/oligomers/fibrils of the interactor?<a class="anchor" aria-label="anchor" href="#q2--do-fibrils-of-the-interactee-elongate-by-attaching-to-monomersoligomersfibrils-of-the-interactor"></a>
+</h2>
 <ol style="list-style-type: decimal">
 <li>
 <strong>Yes, direct evidence</strong>: experimental evidence that fibrils consist of two different amyloids (labeling; immunolabeling). It also applies if we have a visible colocalization of an interactee and an interactor visible in the microscopic images.</li>
@@ -190,9 +186,9 @@ Comparison of ThT curves.
 <li>SPR</li>
 </ul>
 </div>
-<div id="q3--is-interaction-resulting-in-heterogeneous-fibrils-consisting-of-interactor-and-interactee-molecules" class="section level2">
-<h2 class="hasAnchor">
-<a href="#q3--is-interaction-resulting-in-heterogeneous-fibrils-consisting-of-interactor-and-interactee-molecules" class="anchor"></a>Q3. Is interaction resulting in heterogeneous fibrils consisting of interactor and interactee molecules?</h2>
+<div class="section level2">
+<h2 id="q3--is-interaction-resulting-in-heterogeneous-fibrils-consisting-of-interactor-and-interactee-molecules">Q3. Is interaction resulting in heterogeneous fibrils consisting of interactor and interactee molecules?<a class="anchor" aria-label="anchor" href="#q3--is-interaction-resulting-in-heterogeneous-fibrils-consisting-of-interactor-and-interactee-molecules"></a>
+</h2>
 <p><strong><em>General remarks:</em></strong> This is one of the most complicated to test features of fibrils. If authors imply that the difference in structure of mature fibrils is suggesting heterogeneous fibrils, we rely on their interpretation. In this situation, be sure to provide the appropriate quotation from the manuscript.</p>
 <ol style="list-style-type: decimal">
 <li>
@@ -203,9 +199,9 @@ Comparison of ThT curves.
 <strong>No information</strong>.</li>
 </ol>
 </div>
-<div id="qsequence-interactor-and-interactee" class="section level2">
-<h2 class="hasAnchor">
-<a href="#qsequence-interactor-and-interactee" class="anchor"></a>QSequence (interactor and interactee)</h2>
+<div class="section level2">
+<h2 id="qsequence-interactor-and-interactee">QSequence (interactor and interactee)<a class="anchor" aria-label="anchor" href="#qsequence-interactor-and-interactee"></a>
+</h2>
 <p><strong>Name of the interactor</strong>: the name has to be chosen from a list of available names. Every protein on the list has confirmed amyloid-like properties. <strong>Sequence:</strong> The sequence is a vector of amino acids. For example, a sequence of insulin is:</p>
 <blockquote>
 <p>MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAED LQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN</p>
@@ -237,11 +233,13 @@ Comparison of ThT curves.
 
 
       <footer><div class="copyright">
-  <p>Developed by Michal Burdukiewicz.</p>
+  <p></p>
+<p>Developed by Michal Burdukiewicz.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -249,6 +247,8 @@ Comparison of ThT curves.
 
   
 
+
+  
 
   </body>
 </html>
