@@ -27,19 +27,23 @@ as_logical <- function(vector) {
 readRDS("inst/AmyloGraph/AmyloGraph.RDS") %>%
   filter(!as_logical(AmyloGraph$invalid_record),
          !as_logical(AmyloGraph$invalid_value)) %>%
-  select(interactor_name, interactor_sequence,
-         interactee_name, interactee_sequence,
+  select(interactor_name, interactee_name,
+         interactor_sequence, interactee_sequence,
          aggregation_speed = q1_answer,
-         aggregation_speed_details = q1_text,
          elongates_by_attaching = q2_answer,
-         elongates_by_attaching_details = q2_text,
          heterogenous_fibers = q3_answer,
+         aggregation_speed_details = q1_text,
+         elongates_by_attaching_details = q2_text,
          heterogenous_fibers_details = q3_text,
          general_remarks_field, doi) %>%
   mutate(interactor_name = degreekize(interactor_name),
-         interactor_sequence = sequentize(interactor_sequence),
          interactee_name = degreekize(interactee_name),
+         interactor_sequence = sequentize(interactor_sequence),
          interactee_sequence = sequentize(interactee_sequence),
+         aggregation_speed_details = degreekize(aggregation_speed_details),
+         elongates_by_attaching_details = degreekize(elongates_by_attaching_details),
+         heterogenous_fibers_details = degreekize(heterogenous_fibers_details),
+         general_remarks_field = degreekize(general_remarks_field),
          AGID = glue("AG{str_pad(cur_group_rows(), 5, 'left', '0')}")) %>%
   write.csv("inst/AmyloGraph/interactions_data.csv",
             row.names = FALSE, fileEncoding = "UTF-8")
