@@ -13,7 +13,7 @@ ag_load_data <- \()
 #' @export
 ag_data_interactions <- \()
   read_csv(system.file("AmyloGraph", "interactions_data.csv", package = "AmyloGraph"),
-           col_types = "ccccfffcc") |>
+           col_types = "ccccfffcccccc") |>
     mutate(from_id = map_chr(interactor_name, digest),
            to_id = map_chr(interactee_name, digest))
 
