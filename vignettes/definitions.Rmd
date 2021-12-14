@@ -118,8 +118,8 @@ p3 <- rbind(mutate(AmpSim(cyc = 1:40, ampl = 1.5), curve_type = "faster fibrilli
 1. **Yes, direct evidence**: experimental evidence that fibrils consist of two different amyloids (labeling; immunolabeling). It also applies if we have a visible colocalization of an interactee and an interactor visible in the microscopic images.
 2. **Yes, implied by kinetics**: if seeding is implied by kinetic experiments (ThT, ATR-FTIR) results and as such it is interpreted by authors of the publication. It also applies if CD (circular dichroism) experiments follow kinetic experiments. In principle, this answer covers every acceleration of the fibrillization confirmed by kinetic experiments.
 3. **No**: no effect on the elongation of interactee’s fibrils.
-4. **No information**.
-5. **Formation of fibrils by the interactee is inhibited**: the formation of interactee’s aggregates was slowed or completely halted by the interactor.
+4. **Formation of fibrils by the interactee is inhibited**: the formation of interactee’s aggregates was slowed or completely halted by the interactor.
+5. **No information**: There is no experimental evidence and seeding is not implied by kinetics experiments (ThT, ATR-FTIR) results.
 
 Sufficient experimental techniques (direct evidence only): 
 
@@ -140,7 +140,7 @@ Sufficient experimental techniques (direct evidence only):
 
 1. **Yes:** this answer applies when a) there is experimental evidence that fibrils consist of two different amyloids (labeling; immunolabeling) AND b) the mature fibrils are structurally different than fibrils formed in the presence of interactor c) the term co-aggregation/ heterogeneous fibrils/ hybrid fibrils is used to describe the aggregation process. 
 2. **No:** if the resulting amyloid fibrils have the dimension matching that of the aggregating interactee alone. a) the mature fibrils are confirmed to have the same structure (e.g., TEM) as fibrils formed by the interactee without the presence of the interactor  OR b) there is no fibrillar product at all OR c) an interactee and an interactor are the same protein.
-3. **No information**.
+3. **No information**: There is no experimental evidence and seeding is not implied by kinetics experiments (ThT, ATR-FTIR) results.
 
 
 
