@@ -20,6 +20,9 @@ ag_server <- function(ag_data) function(input, output) {
   subtables <- server_single_protein("single_protein", edges, ag_data[["nodes"]], ag_data[["proteins"]])
   table_proxy <- server_interactions_table("interactions_table", edges, rvals)
   
+  # TODO: place it somewhere else
+  output[["download_xgmml"]] <- XGMML_download_handler(edges)
+  
   server_single_interaction("single_interaction", ag_data[["interactions"]])
   server_db_statistics("db_statistics", ag_data[["interactions"]], ag_data[["nodes"]])
   
