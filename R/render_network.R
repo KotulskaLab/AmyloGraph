@@ -43,7 +43,7 @@ render_network <- function(ag_data_nodes, edges) {
         deselectNode = glue("function(nodes){
                   Shiny.setInputValue('<<NS('single_protein', 'select_node')>>', '<<AmyloGraph:::ag_option('str_null')>>');
                   }", .open = "<<", .close = ">>"),
-        release = awaiting_fun) %>%
+        release = if (ag_option("center_network")) awaiting_fun else NULL) %>%
       visExport(type = "png", name = "AmyloGraph", label = "Export as png", float = "left", 
                 style = "")
   })
