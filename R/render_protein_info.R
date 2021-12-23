@@ -6,7 +6,7 @@ render_protein_info <- \(protein_data, selected_node_label) renderText({
   filtered_data <- protein_data %>%
     filter(name == selected_node_label())
   c(
-    glue("{nrow(filtered_data)} source{pluralize(nrow(filtered_data))} found:<br>"),
+    glue("{nrow(filtered_data)} source{pluralize(nrow(filtered_data))} found in UniProt:<br>"),
     filtered_data %>%
       glue_data("<b>{source}</b>: {linkify_uniprot(uniprot_id)}<br>")
   )
