@@ -1,4 +1,4 @@
-download_handler <- \(input, edges, write_function, extension)  downloadHandler(
+table_download_handler <- \(input, edges, write_function, extension)  downloadHandler(
   filename = \() glue("AmyloGraph.{extension}"),
   content = \(file) write_function(
     edges[["table"]] %>%
