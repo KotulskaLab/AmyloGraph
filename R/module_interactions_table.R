@@ -35,7 +35,7 @@ server_interactions_table <- function(id, edges, rvals) {
     observe_selecting_all(input, "select_all", table_proxy, interactions_table)
     
     output[["download_csv"]] <- table_download_handler(input, edges, write_csv, "csv")
-    output[["download_xlsx"]] <- table_download_handler(input, edges, write_xslx, "xlsx")
+    output[["download_xlsx"]] <- table_download_handler(input, edges, write_xlsx, "xlsx")
 
     # must be executed after assignment to the corresponding output
     outputOptions(output, "download_csv", suspendWhenHidden = FALSE)
