@@ -1,3 +1,5 @@
+library(shiny, quietly = TRUE)
+
 ag_data <- ag_load_data()
 
 rvals <- reactiveValues(
