@@ -20,37 +20,42 @@ library(ggplot2)
 library(patchwork)
 ```
 
-# Main assumptions
+# General assumptions
 
-<img src="figures/interaction-scenarios.png">
+## Main definitions
 
-1. General logic:
+1. An **interactee** is always acted upon by an **interactor**. Suppose the publication uses words like 'co-incubation' and from the text itself it is not clear how to distinguish between interactor and interactor. Additionally, the authors study the effect of Protein A on Protein B and vice versa. In this case, we annotate it as two separate interactions: A is an interactor over B and B, where B is an interactor over A.
+2. General logic:
     1. Operator OR is valid for a and b means: I) a, II) b, III) a and b
     1. Operator AND is valid for a and b only when we have a and b simultaneously.
-2. Authors’ interpretation always supersedes ours.
-3. Interactee and interactor
-    1. An interactee is always acted upon by an interactor. Suppose the publication uses words like 'co-incubation' and from the text itself it is not clear how to distinguish between interactor and interactor. Additionally, the authors study the effect of Protein A on Protein B and vice versa. In this case, create two separate interactions in the questionnaire: A is an interactor over B and B, where B is an interactor over A.
-    1. Database contains only interactions between two amyloids. The form already contains a list of appropriate amyloid proteins. If one of the interaction participants is a non-amyloid protein, it should not be included in the database. The only exceptions are: a) non-aggregating homologs of known amyloid proteins b) non-aggregating mutants of amyloid proteins c) non-aggregating fragments of amyloid proteins.
-    1. If the interactee or interactor is a) a mutant of an amyloid protein OR b) a fragment of an amyloid protein OR c) a taxonomic variant of an amyloid protein, we still add them to the database under the name of the original protein. However, in this case, be extremely precise with the actual sequence of the interactee/interactor.
-If the sequence of the interactor or the interactee contains modified amino acid residues, we do not supply this information in the sequential data. Instead, this information should be present in the general remarks field.
+3. Authors’ interpretation always supersedes ours.
+4. We refrain from using vague terms as seeding or cross-seeding. Instead, we describe the interaction using three descriptors (described in the section XYZ).
+5. We refer to glossary provided by [MIRRAGGE – Minimum Information Required for Reproducible AGGregation Experiments (doi: 10.3389/fnmol.2020.582488)](https://doi.org/10.3389/fnmol.2020.582488).
+    1. Additional terms: 
+        * **T50**: the time required for the amyloid reaction to reach 50% of the final fluorescence intensity.
+
+## General interaction scenarios 
+ 
+<img src="figures/interaction-scenarios.png">
+
+We assume that six main scenarios can occur during the interaction of two amyloid proteins (see the figure below). We design the questions to discriminate between these scenarios. Q1 differentiates between scenarios I (no effect on kinetics) II and III (inhibited aggregation) as well as IV, V and VI (acceleration). Q2 discriminates between scenarios IV and V/VI. Q3 discriminate between scenarios V and VI.
+
+## Manuscript collection AmyloGraph requirements for manuscripts reporting interactions between amyloid proteins
+
+During the step of collecting publications, we limited our scope by imposing following rules:
+
+1. The manuscript has to be published after 2000.
+2. The manuscript has to report directly experimental results (this excludes review papers and simulations).
+3. The manuscript has to report experiments conducted *in vitro*.
+4. The manuscript has to report interactions leading to fibrillization.
+    1. If the interactor accelerates the speed of the oligomer formation, but they never aggregate into the level of mature fibrils (fibrillization does not occur), it is not an acceleration in our understanding, but inhibition. 
+    1. In the case of different interactions of the same two amyloids, when these differences stem from the different amyloid formation levels (monomer, oligomer, fiber), pH, concentration, temperature or other experimental conditions, we showcase these interactions as two (or more) different interactions.
+5. The manuscript has to report interactions between two amyloid proteins. The list of amyloid proteins considered by us is available [here](https://github.com/KotulskaLab/AmyloGraph/blob/main/inst/AmyloGraph/protein_data.csv).
+    1. If one of the interaction participants is a non-amyloid protein, it should not be included in the database. The only exceptions are: a) non-aggregating homologs of known amyloid proteins b) non-aggregating mutants of amyloid proteins c) non-aggregating fragments of amyloid proteins.
+    1. If the interactee or interactor is a) a mutant of an amyloid protein OR b) a fragment of an amyloid protein OR c) a taxonomic variant of an amyloid protein, we still add them to the database under the name of the original protein. However, in this case, we provide the exact sequence of the interactee/interactor and not the original protein.
     1. If the sequence of the interactor or the interactee contains (due to modifications) non-amino acids or nonbiogenic amino acids, this interaction is rejected.
-4. Interaction
-    1. Many questions and definitions employ the term aggregation. For the manuscript curation, we understood aggregation to the level of mature fibril (fibrillization). If the interactor accelerates the speed of the oligomer formation, but they never aggregate into the level of mature fibrils (fibrillization does not occur), it is not an acceleration in our understanding. Therefore, check the resulting kinetics and search for microscopy images (or any similar confirmation of the fibrillization).
-    1. In the case of different interactions of the same two amyloids, when these differences stem from the different amyloid formation levels (monomer, oligomer, fiber), pH, concentration, temperature or other conditions, we note this information as an unstructured comment in the general remarks section. Nevertheless, submit these aggregations as two (or more) different aggregations highlighting the different effects.
-    1. Seeding means the induction of interactee’s aggregation by adding interactor’s molecules. Therefore, seeding should be considered positive answers for questions Q1 AND (Q2 OR Q3) AND Q4 AND Q5. Seeding does not exclude heterogeneous fibrils (Q6), but cannot imply it.
-    1. We focus only on interactions studied *in vitro*.
-    1. We consider only two-party interactions. The database does not contain interactions with more than two participants, and the only exception is when two out of three participants are the same protein in a different aggregation level.
-1. We assume that six main scenarios can occur during the interaction of two amyloid proteins (see the figure below). We design the questions to discriminate between these scenarios. Q1 differentiates between scenarios I (no effect on kinetics) II and III (inhibited aggregation) as well as IV, V and VI (acceleration). Q2 discriminates between scenarios IV and V/VI. Q3 discriminate between scenarios V and VI.
+6. The manuscript has to report  only two-party interactions. The database does not contain interactions with more than two participants, and the only exception is when two out of three participants are the same protein in a different aggregation level.
 
-
-
-# Glossary
-
-Please rely on glossary provided by [MIRRAGGE – Minimum Information Required for Reproducible AGGregation Experiments (doi: 10.3389/fnmol.2020.582488)](https://doi.org/10.3389/fnmol.2020.582488).
-
-Additional glossary:
-
- - **T50**: the time required for the amyloid reaction to reach 50% of the final fluorescence intensity.
 
 # Questions
 
@@ -173,3 +178,5 @@ Remember that the AmyloGraph database treats as a single protein a protein that 
 Instead of mature proteins, try to use precursors (if available).
 Make sure that you are selecting the right organism as the source sequence. If you are working with human IAPP, the source sequence is human IAPP (P10997). However, in the case of of rat IAPP, the source sequence is rat IAPP (P12969)
 Remember that the source sequence may be not identical to the interactor’s or interactee’s sequence. However, interactor or interactee might be a part of the source sequence (as human Amyloid beta 1-40 is a part of the P05067) or a mutated variant of a source sequence (when some amino acids are altered compared to the original sequence).
+
+If the sequence of the interactor or the interactee contains modified amino acid residues, we do not supply this information in the sequential data. Instead, this information should be present in the general remarks field.
