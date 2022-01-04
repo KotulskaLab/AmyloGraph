@@ -38,38 +38,22 @@ library(patchwork)
  
 <img src="figures/interaction-scenarios.png">
 
-We assume that six main scenarios can occur during the interaction of two amyloid proteins (see the figure below). We design the questions to discriminate between these scenarios. Q1 differentiates between scenarios I (no effect on kinetics) II and III (inhibited aggregation) as well as IV, V and VI (acceleration). Q2 discriminates between scenarios IV and V/VI. Q3 discriminate between scenarios V and VI.
+We assume that six main scenarios can occur during the interaction of two amyloid proteins (see the figure above). The scenarios are discrete but rather points of the continuum (e.g., depending on the concentration of the interactor we can have no effect or acceleration of the fibrillization). Therefore, we do not imply that each interaction follows strictly one of these scenarios, but rather presents most dominantly one of them. To distinguish between these interaction scenarios we design three descriptors (described below). Descriptor 1. differentiates between scenarios I (no effect on kinetics) II and III (inhibited aggregation) as well as IV, V and VI (acceleration). Descriptor 2. discriminates between scenarios IV and V/VI. Descriptor 3. differentiates between scenarios V and VI.
 
-## Manuscript collection AmyloGraph requirements for manuscripts reporting interactions between amyloid proteins
-
-During the step of collecting publications, we limited our scope by imposing following rules:
-
-1. The manuscript has to be published after 2000.
-2. The manuscript has to report directly experimental results (this excludes review papers and simulations).
-3. The manuscript has to report experiments conducted *in vitro*.
-4. The manuscript has to report interactions leading to fibrillization.
-    1. If the interactor accelerates the speed of the oligomer formation, but they never aggregate into the level of mature fibrils (fibrillization does not occur), it is not an acceleration in our understanding, but inhibition. 
-    1. In the case of different interactions of the same two amyloids, when these differences stem from the different amyloid formation levels (monomer, oligomer, fiber), pH, concentration, temperature or other experimental conditions, we showcase these interactions as two (or more) different interactions.
-5. The manuscript has to report interactions between two amyloid proteins. The list of amyloid proteins considered by us is available [here](https://github.com/KotulskaLab/AmyloGraph/blob/main/inst/AmyloGraph/protein_data.csv).
-    1. If one of the interaction participants is a non-amyloid protein, it should not be included in the database. The only exceptions are: a) non-aggregating homologs of known amyloid proteins b) non-aggregating mutants of amyloid proteins c) non-aggregating fragments of amyloid proteins.
-    1. If the interactee or interactor is a) a mutant of an amyloid protein OR b) a fragment of an amyloid protein OR c) a taxonomic variant of an amyloid protein, we still add them to the database under the name of the original protein. However, in this case, we provide the exact sequence of the interactee/interactor and not the original protein.
-    1. If the sequence of the interactor or the interactee contains (due to modifications) non-amino acids or nonbiogenic amino acids, this interaction is rejected.
-6. The manuscript has to report  only two-party interactions. The database does not contain interactions with more than two participants, and the only exception is when two out of three participants are the same protein in a different aggregation level.
+For example, if descriptor 1 is **faster aggregation**, descriptor 2 - **yes, direct evidence** and descriptor 3 - **yes**, they describe cross-seeding.
 
 
-# Questions
+### Descriptors:
 
-## Q1. Is the interactor affecting the interactee's fibrillization speed?
+### Descriptor 1. Is the interactor affecting the interactee's fibrillization speed? / The impact on the speed of the interactee' fibrillization.
 
-**_General remarks:_** this question can be fully answered based on the kinetics or any kinetic data. Here, we mean aggregation to the level of mature fibril (fibrillization). If the interactor accelerates the speed of the oligomer formation, but they never aggregate into the level of mature fibrils (fibrillization does not occur), it is not an acceleration as we understand it. Therefore, check the resulting kinetics and search for microscopy images (or any similar confirmation of the fibrillization). If authors state that it is fibrillization, go with their interpretation. 
+**_General remarks:_** this descriptor is fully based on the kinetics or any kinetic data. Here, we mean aggregation to the level of mature fibril (fibrillization) confirmed by e.g., microscopy images. If the interactor accelerates the speed of the oligomer formation, but they never aggregate into the level of mature fibrils (fibrillization does not occur), it is not an acceleration as we understand it.
 
 1. **Faster aggregation**: a) the maximum ThT emission observed at the end of the reaction of the interactee and interactor is higher than maximum ThT emission for interactee alone OR b) if the slope of the kinetic curve is steeper OR c) the lag phase is shorter OR d) T50 is lower. This is OR operator, so we need only one of these three things to happen. Make sure that fibrillization still happens. Comment: ThT is not always quantitative, i.e. a higher (or lower) ThT level - under different conditions (e.g. the presence of the interactor) - can be caused by changes to the fibril structure rather than the amount of fibrils.
 2. **Slower aggregation**: a) the maximum ThT emission observed at the end of the reaction of the interactee and interactor is lower than maximum ThT emission for interactee alone AND b) the slope of the kinetic curve is less steep) OR c) the lag phase is longer. So we need (a AND b) OR c. Make sure that fibrillization still happens.
-3. **No aggregation**: There is no confirmed fibrilization after the interaction.
+3. **No aggregation**: there is no confirmed fibrilization after the interaction.
 4. **No effect**: a) The slopes of kinetic curves are visibly similar AND b) the maximum ThT emission is similar AND c) the lag phase is similar.
-5. **No information**: There were no kinetic assays.
-
-This question refers only to kinetic assays. If there are no such assays, select **no information**.
+5. **No information**: there were no kinetic assays.
 
 Sufficient experimental techniques: 
 
@@ -118,13 +102,13 @@ p3 <- rbind(mutate(AmpSim(cyc = 1:40, ampl = 1.5), curve_type = "faster fibrilli
         axis.text = element_blank()))
 ```
  
-## Q2. Do fibrils of the interactee elongate by attaching to monomers/oligomers/fibrils of the interactor? 
+### Descriptor 2. Do fibrils of the interactee elongate by attaching to monomers/oligomers/fibrils of the interactor?  / Physical binding between interactee and interactor.
 
-1. **Yes, direct evidence**: experimental evidence that fibrils consist of two different amyloids (labeling; immunolabeling). It also applies if we have a visible colocalization of an interactee and an interactor visible in the microscopic images.
+1. **Yes, direct evidence**: there is an experimental evidence that fibrils consist of two different amyloids (labeling; immunolabeling). It also applies if we have a visible colocalization of an interactee and an interactor visible in the microscopic images.
 2. **Yes, implied by kinetics**: if seeding is implied by kinetic experiments (ThT, ATR-FTIR) results and as such it is interpreted by authors of the publication. It also applies if CD (circular dichroism) experiments follow kinetic experiments. In principle, this answer covers every acceleration of the fibrillization confirmed by kinetic experiments.
 3. **No**: no effect on the elongation of interactee’s fibrils.
 4. **Formation of fibrils by the interactee is inhibited**: the formation of interactee’s aggregates was slowed or completely halted by the interactor.
-5. **No information**: There is no experimental evidence and seeding is not implied by kinetics experiments (ThT, ATR-FTIR) results.
+5. **No information**: there is no experimental evidence and seeding is not implied by kinetics experiments (ThT, ATR-FTIR) results.
 
 Sufficient experimental techniques (direct evidence only): 
 
@@ -139,25 +123,24 @@ Sufficient experimental techniques (direct evidence only):
  - SPR
 
 
-##  Q3. Is interaction resulting in heterogeneous fibrils consisting of interactor and interactee molecules?
+### Descriptor 3. Is interaction resulting in heterogeneous fibrils consisting of interactor and interactee molecules? / Presence of the heterogenous fibrils consisting of interactor and interactee molecules.
 
-**_General remarks:_** This is one of the most complicated to test features of fibrils. If authors imply that the difference in structure of mature fibrils is suggesting heterogeneous fibrils, we rely on their interpretation. In this situation, be sure to provide the appropriate quotation from the manuscript. 
+**_General remarks:_** this is one of the most complicated to test features of fibrils.
 
-1. **Yes:** this answer applies when a) there is experimental evidence that fibrils consist of two different amyloids (labeling; immunolabeling) AND b) the mature fibrils are structurally different than fibrils formed in the presence of interactor c) the term co-aggregation/ heterogeneous fibrils/ hybrid fibrils is used to describe the aggregation process. 
+1. **Yes:** applies when a) there is experimental evidence that fibrils consist of two different amyloids (labeling; immunolabeling) AND b) the mature fibrils are structurally different than fibrils formed in the presence of interactor c) the term co-aggregation/ heterogeneous fibrils/ hybrid fibrils is used to describe the aggregation process. 
 2. **No:** if the resulting amyloid fibrils have the dimension matching that of the aggregating interactee alone. a) the mature fibrils are confirmed to have the same structure (e.g., TEM) as fibrils formed by the interactee without the presence of the interactor  OR b) there is no fibrillar product at all OR c) an interactee and an interactor are the same protein.
-3. **No information**: There is no experimental evidence and seeding is not implied by kinetics experiments (ThT, ATR-FTIR) results.
+3. **No information**: there is no experimental evidence and seeding is not implied by kinetics experiments (ThT, ATR-FTIR) results.
 
 
+## Information on the sequence of interactor and interactee
 
-## QSequence (interactor and interactee)
-
-**Name of the interactor**: the name has to be chosen from a list of available names. Every protein on the list has confirmed amyloid-like properties.
+**Name of the amyloid protein**: was chosen from a list of available names. Every protein on the list has confirmed amyloid-like properties.
 **Sequence:** The sequence is a vector of amino acids. For example, a sequence of insulin is:  
 
 > MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAED
 > LQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN
 
-Be careful to NOT include:
+We NOT include:
 
  - fasta header
  - DNA/RNA sequences
@@ -166,17 +149,56 @@ Be careful to NOT include:
  - N- or C-termini
  - Positions of amino acids
 
-In the case when the exact sequence is not known, we provide the largest possible precursor.
-
-If there is no precise information about the sequence, check the manufacturer. Some of the amyloid proteins are derivatives of proteins listed in the questionnaire, e.g. pro-IAPP is a derivative of IAPP and its sequence is defined on the webpage of the manufacturer.
-If interactee or interactor are mutants/fragments of an amyloid protein, here we provide only the sequence of the mutant/fragment and not the wild type protein.
-We consider sequences that have modified amino acids (e.g., methylated), but we do not include this information in the sequence.
-We do NOT consider mutants that have instead of standard amino acids a) non-biogenic amino acids (e.g., tyramine) b) non-amino acid linkers. 
+1. In the case when the exact sequence is not known, we provide the largest possible precursor.
+2. If there is no precise information about the sequence, we check the manufacturer. Some of the amyloid proteins are derivatives of proteins listed in the questionnaire, e.g. pro-IAPP is a derivative of IAPP and its sequence is defined on the webpage of the manufacturer.
+3. If interactee or interactor are mutants/fragments of an amyloid protein, here we provide only the sequence of the mutant/fragment and not the wild type protein.
+4. We consider sequences that have modified amino acids (e.g., methylated), but we do not include this information in the sequence.
+5. We do NOT consider mutants that have instead of standard amino acids a) non-biogenic amino acids (e.g., tyramine) b) non-amino acid linkers. 
 
 **Source sequence:** here we provide the sequence of an original protein by its uniprot ID:
 Remember that the AmyloGraph database treats as a single protein a protein that can occur in many taxonomic variants or after modifications (e.g., we have human and bovine precursor albumins, P02768 and P02769 as well as the products of the post-translational modifications, Q56G89). 
 Instead of mature proteins, try to use precursors (if available).
-Make sure that you are selecting the right organism as the source sequence. If you are working with human IAPP, the source sequence is human IAPP (P10997). However, in the case of of rat IAPP, the source sequence is rat IAPP (P12969)
+Make sure that you are selecting the right organism as the source sequence.
 Remember that the source sequence may be not identical to the interactor’s or interactee’s sequence. However, interactor or interactee might be a part of the source sequence (as human Amyloid beta 1-40 is a part of the P05067) or a mutated variant of a source sequence (when some amino acids are altered compared to the original sequence).
 
-If the sequence of the interactor or the interactee contains modified amino acid residues, we do not supply this information in the sequential data. Instead, this information should be present in the general remarks field.
+If the sequence of the interactor or the interactee contains modified amino acid residues, we do not supply this information in the sequential data.
+
+# Data acquisition
+
+## Manuscript collection AmyloGraph requirements for manuscripts reporting interactions between amyloid proteins
+
+We started our manuscript collection on amyloid-amyloid interactions by defining the eligibility criteria. We have focused on original experimental results of amyloid-amyloid interaction studies *in vitro* published after 2020. We have analyzed 24 manuscripts in our in-house collection of publications as a starting point. Next, we have expanded our search by repeatedly adding manuscripts cited by manuscripts in our collection or referencing manuscripts in our collections. The final collection had 364 manuscripts.
+
+During the step of collecting publications, we limited our scope by imposing following rules:
+
+1. The manuscript has to be published after 2000.
+2. The manuscript has to report directly experimental results (this excludes review papers and simulations).
+3. The manuscript has to report experiments conducted *in vitro*.
+4. The manuscript has to report interactions leading to fibrillization.
+    1. If the interactor accelerates the speed of the oligomer formation, but they never aggregate into the level of mature fibrils (fibrillization does not occur), it is not an acceleration in our understanding, but inhibition. 
+    1. In the case of different interactions of the same two amyloids, when these differences stem from the different amyloid formation levels (monomer, oligomer, fiber), pH, concentration, temperature or other experimental conditions, we showcase these interactions as two (or more) different interactions.
+5. The manuscript has to report interactions between two amyloid proteins. The list of amyloid proteins considered by us is available [here](https://github.com/KotulskaLab/AmyloGraph/blob/main/inst/AmyloGraph/protein_data.csv).
+    1. If one of the interaction participants is a non-amyloid protein, it should not be included in the database. The only exceptions are: a) non-aggregating homologs of known amyloid proteins b) non-aggregating mutants of amyloid proteins c) non-aggregating fragments of amyloid proteins.
+    1. If the interactee or interactor is a) a mutant of an amyloid protein OR b) a fragment of an amyloid protein OR c) a taxonomic variant of an amyloid protein, we still add them to the database under the name of the original protein. However, in this case, we provide the exact sequence of the interactee/interactor and not the original protein.
+    1. If the sequence of the interactor or the interactee contains (due to modifications) non-amino acids or nonbiogenic amino acids, this interaction is rejected.
+6. The manuscript has to report  only two-party interactions. The database does not contain interactions with more than two participants, and the only exception is when two out of three participants are the same protein in a different aggregation level.
+
+We curate the information in collected publications using a two-step procedure: **initial curation** and **validation**. Dedicated forms support both initial curation and validation.
+
+
+## Initial curation
+During the initial curation, a curator reviewed all interactions described in the manuscripts and annotated them considering three AmyloGraph descriptors (described in the section XYZ). Moreover, we collect information on the sequence of amyloid proteins involved in the interaction.
+
+Controlled vocabulary: list of possible amyloids:
+The list of amyloid proteins considered by us is available [here](https://github.com/KotulskaLab/AmyloGraph/blob/main/inst/AmyloGraph/protein_data.csv).
+
+## Validation
+During this procedure, a curator has independently reviewed the reported interaction record. The semi-random assignment procedure ensured that the curator who validated a specific record was not involved in its initial curation. Dedicated forms (schemes available in the supplementary materials) supported both initial curation and validation. The final list covers 863 interactions from 180 manuscripts.
+
+## Contact with authors
+We consult the final result of the validation with the authors of manuscripts reporting given interactions.
+
+Looking for the current e-mail of the corresponding author. If there is no contact with the corresponding author or they passed away, we looked at other authors.
+
+130 - deceased (3)
+In the case of more than two corresponding authors, we take the last author.
