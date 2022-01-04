@@ -47,21 +47,14 @@ For example, if descriptor 1 is **faster aggregation**, descriptor 2 - **yes, di
 
 ### Descriptor 1. Is the interactor affecting the interactee's fibrillization speed? / The impact on the speed of the interactee' fibrillization.
 
-**_General remarks:_** this descriptor is fully based on the kinetics or any kinetic data. Here, we mean aggregation to the level of mature fibril (fibrillization) confirmed by e.g., microscopy images. If the interactor accelerates the speed of the oligomer formation, but they never aggregate into the level of mature fibrils (fibrillization does not occur), it is not an acceleration as we understand it.
+**_General remarks:_** this descriptor is fully based on the kinetics or any kinetic data. Here, we mean aggregation to the level of mature fibril (fibrillization) confirmed by e.g., microscopy images. If the interactor accelerates the speed of the oligomer formation, but they never aggregate into the level of mature fibrils (fibrillization does not occur), it is not an acceleration as we understand it. The commonly used technique here is Thioflavin T (ThT) assay [CITATION NEEDED]. We are aware of the fact ThT is not always quantitative, i.e. a higher (or lower) ThT level - under different conditions (e.g. the presence of the interactor) - can be caused by changes to the fibril structure rather than the amount of fibrils, but for the purpose of simplification, we are ignoring it and always follow the interpretation of authors.
 
-1. **Faster aggregation**: a) the maximum ThT emission observed at the end of the reaction of the interactee and interactor is higher than maximum ThT emission for interactee alone OR b) if the slope of the kinetic curve is steeper OR c) the lag phase is shorter OR d) T50 is lower. This is OR operator, so we need only one of these three things to happen. Make sure that fibrillization still happens. Comment: ThT is not always quantitative, i.e. a higher (or lower) ThT level - under different conditions (e.g. the presence of the interactor) - can be caused by changes to the fibril structure rather than the amount of fibrils.
-2. **Slower aggregation**: a) the maximum ThT emission observed at the end of the reaction of the interactee and interactor is lower than maximum ThT emission for interactee alone AND b) the slope of the kinetic curve is less steep) OR c) the lag phase is longer. So we need (a AND b) OR c. Make sure that fibrillization still happens.
+1. **Faster aggregation**: a) the maximum ThT emission observed at the end of the reaction of the interactee and interactor is higher than maximum ThT emission for interactee alone OR b) if the slope of the kinetic curve is steeper OR c) the lag phase is shorter OR d) T50 is lower. The fibrillization still occurred. 
+2. **Slower aggregation**: a) the maximum ThT emission observed at the end of the reaction of the interactee and interactor is lower than maximum ThT emission for interactee alone AND b) the slope of the kinetic curve is less steep) OR c) the lag phase is longer. So we need (a AND b) OR c. The fibrillization still occurred. 
 3. **No aggregation**: there is no confirmed fibrilization after the interaction.
 4. **No effect**: a) The slopes of kinetic curves are visibly similar AND b) the maximum ThT emission is similar AND c) the lag phase is similar.
 5. **No information**: there were no kinetic assays.
 
-Sufficient experimental techniques: 
-
- - ThT,
- - FTIR,
- - Congo Red,
- - turbidity measurements followed with microscopy (turbidity on its own is not specific towards amyloid fibrils, but rather to all kinds of aggregates),
- - Far-UV CD spectroscopy.
  
 ```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.width=8,fig.cap="Comparison of ThT curves."}
 set.seed(1)
@@ -105,63 +98,35 @@ p3 <- rbind(mutate(AmpSim(cyc = 1:40, ampl = 1.5), curve_type = "faster fibrilli
 ### Descriptor 2. Do fibrils of the interactee elongate by attaching to monomers/oligomers/fibrils of the interactor?  / Physical binding between interactee and interactor.
 
 1. **Yes, direct evidence**: there is an experimental evidence that fibrils consist of two different amyloids (labeling; immunolabeling). It also applies if we have a visible colocalization of an interactee and an interactor visible in the microscopic images.
-2. **Yes, implied by kinetics**: if seeding is implied by kinetic experiments (ThT, ATR-FTIR) results and as such it is interpreted by authors of the publication. It also applies if CD (circular dichroism) experiments follow kinetic experiments. In principle, this answer covers every acceleration of the fibrillization confirmed by kinetic experiments.
+2. **Yes, implied by kinetics**: if seeding is implied by kinetic experiments results and as such it is interpreted by authors of the publication. In principle, this answer covers every acceleration of the fibrillization confirmed by kinetic experiments.
 3. **No**: no effect on the elongation of interactee’s fibrils.
 4. **Formation of fibrils by the interactee is inhibited**: the formation of interactee’s aggregates was slowed or completely halted by the interactor.
-5. **No information**: there is no experimental evidence and seeding is not implied by kinetics experiments (ThT, ATR-FTIR) results.
-
-Sufficient experimental techniques (direct evidence only): 
-
- - microscopy (TEM OR AFM) in conjunction with isotope labeling with MS OR immunolabeling;
- - dot blot OR Western blot (immunoblot) OR ELISA followed by microscopy; 
- - Surface Enhanced Raman Spectroscopy followed by microscopy;
- - AFM-IR;
- - Mass spectrometry for fibril heterogeneity identification (e.g., ESI-MS) followed by microscopy;
- - NMR with labeling,
- - Scintillation proximity assay followed by microscopy.
- - electron paramagnetic resonance (EPR) spectroscopy followed by microscopy.
- - SPR
+5. **No information**: there is no experimental evidence and seeding is not implied by kinetics experiments results.
 
 
 ### Descriptor 3. Is interaction resulting in heterogeneous fibrils consisting of interactor and interactee molecules? / Presence of the heterogenous fibrils consisting of interactor and interactee molecules.
 
-**_General remarks:_** this is one of the most complicated to test features of fibrils.
-
 1. **Yes:** applies when a) there is experimental evidence that fibrils consist of two different amyloids (labeling; immunolabeling) AND b) the mature fibrils are structurally different than fibrils formed in the presence of interactor c) the term co-aggregation/ heterogeneous fibrils/ hybrid fibrils is used to describe the aggregation process. 
-2. **No:** if the resulting amyloid fibrils have the dimension matching that of the aggregating interactee alone. a) the mature fibrils are confirmed to have the same structure (e.g., TEM) as fibrils formed by the interactee without the presence of the interactor  OR b) there is no fibrillar product at all OR c) an interactee and an interactor are the same protein.
-3. **No information**: there is no experimental evidence and seeding is not implied by kinetics experiments (ThT, ATR-FTIR) results.
+2. **No:** if the resulting amyloid fibrils have the dimension matching that of the aggregating interactee alone. a) the mature fibrils are confirmed by a microscopy technique to have the same structure as fibrils formed by the interactee without the presence of the interactor  OR b) there is no fibrillar product at all OR c) an interactee and an interactor are the same protein.
+3. **No information**: there is no experimental evidence and seeding is not implied by kinetics experiments results.
 
 
 ## Information on the sequence of interactor and interactee
 
 **Name of the amyloid protein**: was chosen from a list of available names. Every protein on the list has confirmed amyloid-like properties.
-**Sequence:** The sequence is a vector of amino acids. For example, a sequence of insulin is:  
-
-> MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTRREAED
-> LQVGQVELGGGPGAGSLQPLALEGSLQKRGIVEQCCTSICSLYQLENYCN
-
-We NOT include:
-
- - fasta header
- - DNA/RNA sequences
- - Any comments
- - Multiple sequences
- - N- or C-termini
- - Positions of amino acids
+**Sequence:** The sequence is a vector of amino acids. 
 
 1. In the case when the exact sequence is not known, we provide the largest possible precursor.
-2. If there is no precise information about the sequence, we check the manufacturer. Some of the amyloid proteins are derivatives of proteins listed in the questionnaire, e.g. pro-IAPP is a derivative of IAPP and its sequence is defined on the webpage of the manufacturer.
-3. If interactee or interactor are mutants/fragments of an amyloid protein, here we provide only the sequence of the mutant/fragment and not the wild type protein.
+3. If interactee or interactor are mutants/fragments of an amyloid protein, we provide only the sequence of the mutant/fragment and not the wild type protein.
 4. We consider sequences that have modified amino acids (e.g., methylated), but we do not include this information in the sequence.
 5. We do NOT consider mutants that have instead of standard amino acids a) non-biogenic amino acids (e.g., tyramine) b) non-amino acid linkers. 
 
 **Source sequence:** here we provide the sequence of an original protein by its uniprot ID:
-Remember that the AmyloGraph database treats as a single protein a protein that can occur in many taxonomic variants or after modifications (e.g., we have human and bovine precursor albumins, P02768 and P02769 as well as the products of the post-translational modifications, Q56G89). 
-Instead of mature proteins, try to use precursors (if available).
-Make sure that you are selecting the right organism as the source sequence.
-Remember that the source sequence may be not identical to the interactor’s or interactee’s sequence. However, interactor or interactee might be a part of the source sequence (as human Amyloid beta 1-40 is a part of the P05067) or a mutated variant of a source sequence (when some amino acids are altered compared to the original sequence).
+The AmyloGraph database treats as a single protein a protein that can occur in many taxonomic variants or after modifications (e.g., we have human and bovine precursor albumins, P02768 and P02769 as well as the products of the post-translational modifications, Q56G89). 
 
-If the sequence of the interactor or the interactee contains modified amino acid residues, we do not supply this information in the sequential data.
+The source sequence may be not identical to the interactor’s or interactee’s sequence. However, interactor or interactee might be a part of the source sequence (as human Amyloid beta 1-40 is a part of the P05067) or a mutated variant of a source sequence (when some amino acids are altered compared to the original sequence).
+
+If the sequence of the interactor or the interactee contains modified amino acid residues (e.g., phosporylated), we do not supply this information in the sequential data.
 
 # Data acquisition
 
