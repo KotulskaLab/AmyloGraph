@@ -14,7 +14,8 @@
                     `Fibrillization speed` = "aggregation_speed",
                     `Physical binding` = "elongates_by_attaching",
                     `Heterogenous fibers` = "heterogenous_fibers",
-                    Details = "details")
+                    Details = "details"),
+    ag_center_network = TRUE
   )
   
   unset_inds <- !(names(new_options) %in% names(prev_options))

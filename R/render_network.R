@@ -1,6 +1,11 @@
+
+
+
 #' @importFrom visNetwork renderVisNetwork visNetwork visEdges visOptions visInteraction
 #' @importFrom visNetwork visEvents visIgraphLayout visExport visNodes visPhysics
 render_network <- function(ag_data_nodes, edges) {
+  initial_center <- load_js_code("initial_center")
+  
   renderVisNetwork({
     # we don't want to render graph each time we modify edges
     # instead we remove and update them in a separate observer
@@ -11,7 +16,7 @@ render_network <- function(ag_data_nodes, edges) {
                color = "#3674AB") %>% 
       visNodes(color = "#F3C677",
                font = list(color = "#0C0A3E")) %>%
-      visIgraphLayout(smooth = TRUE, physics = FALSE, randomSeed = 1337) %>%
+      visIgraphLayout(smooth = TRUE, physics = FALSE, randomSeed = 1338) %>%
       visPhysics(maxVelocity = 50, minVelocity = 49, timestep = 0.3) %>%
       visOptions(
         highlightNearest = list(enabled = TRUE, degree = 1,
@@ -24,7 +29,8 @@ render_network <- function(ag_data_nodes, edges) {
                   }", .open = "<<", .close = ">>"),
         deselectNode = glue("function(nodes){
                   Shiny.setInputValue('<<NS('single_protein', 'select_node')>>', '<<AmyloGraph:::ag_option('str_null')>>');
-                  }", .open = "<<", .close = ">>")) %>%
+                  }", .open = "<<", .close = ">>"),
+        release = if (ag_option("center_network")) initial_center else NULL) %>%
       visExport(type = "png", name = "AmyloGraph", label = "Export as png", float = "left", 
                 style = "")
   })
