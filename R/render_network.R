@@ -1,24 +1,11 @@
-awaiting_fun  = "
-function await_for_change() {
-  if(!document.getElementById('graph').hasOwnProperty('htmlwidget_data_init_result')) {
-    setTimeout(await_for_change, 50); //wait 50 millisecnds then recheck
-    return;
-  }
-  
-  function change()  {
-    document.getElementById('graph').htmlwidget_data_init_result.network.body.view.translation.x = 500;
-    document.getElementById('graph').htmlwidget_data_init_result.network.redraw();
-  }
-  setTimeout(change, 100); // waiting is necessary, because otherwise it doesn't work
-}
 
-await_for_change();
-"
 
 
 #' @importFrom visNetwork renderVisNetwork visNetwork visEdges visOptions visInteraction
 #' @importFrom visNetwork visEvents visIgraphLayout visExport visNodes visPhysics
 render_network <- function(ag_data_nodes, edges) {
+  initial_center <- load_js_code("initial_center")
+  
   renderVisNetwork({
     # we don't want to render graph each time we modify edges
     # instead we remove and update them in a separate observer
@@ -43,7 +30,7 @@ render_network <- function(ag_data_nodes, edges) {
         deselectNode = glue("function(nodes){
                   Shiny.setInputValue('<<NS('single_protein', 'select_node')>>', '<<AmyloGraph:::ag_option('str_null')>>');
                   }", .open = "<<", .close = ">>"),
-        release = if (ag_option("center_network")) awaiting_fun else NULL) %>%
+        release = if (ag_option("center_network")) initial_center else NULL) %>%
       visExport(type = "png", name = "AmyloGraph", label = "Export as png", float = "left", 
                 style = "")
   })
