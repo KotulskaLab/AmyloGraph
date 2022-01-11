@@ -122,7 +122,7 @@ button.dt-button.active:not(.disabled) {
 }
 
 .panel_contracted {
-  height: 200px;
+  height: 100px;
 }
 
 .panel_expanded {
@@ -130,7 +130,7 @@ button.dt-button.active:not(.disabled) {
 }
 
 #node_selector_container {
-  height: 90px;
+  height: 60px;
 }
 
 #interactions_table {
@@ -177,8 +177,8 @@ button.dt-button.active:not(.disabled) {
 }
 
 #single_protein-ifelse-neg {
-  /* 90 px -- size left for selector of protein */
-  height: calc(100% - 90px);
+  /* 60 px -- size left for selector of protein */
+  height: calc(100% - 60px);
 }
 
 #main_panel {

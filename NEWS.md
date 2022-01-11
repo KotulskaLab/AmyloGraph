@@ -1,6 +1,21 @@
-# AmyloGraph 0.1.2.1
+# AmyloGraph 0.3.0
 
-* Added a `NEWS.md` file to track changes to the package.
+Functionalities:
+
+* Added XGMML export.
+
+Improvements:
+
+* Adjustment of centering of the graph.
+* Displaying information that ID is from UniProt.
+* Updates of definitions in the documentation.
+* Lots of other changes in documentation.
+
+Fixes:
+
+* Update to the source data to the newest version (probably the final one) and fixes of some bugs in data transformation.
+* Update existing tests.
+* Update pkgdown workflows.
 
 # AmyloGraph 0.2.0
 
@@ -17,3 +32,6 @@ Improvements:
 * Added helpers for right-panel-filter-checkbox and the new button.
 * Some refactor of the server code.
 
+# AmyloGraph 0.1.2.1
+
+* Added a `NEWS.md` file to track changes to the package.

@@ -56,3 +56,9 @@ contains_motif <- \(sequences, motif) {
 pluralize <- \(value, plural = "s", singular = "") {
   ifelse(value == 1, singular, plural)
 }
+
+#' @importFrom glue glue
+load_js_code <- \(name) {
+  path <- system.file(c("inst", "js", glue("{name}.js")), package = "AmyloGraph")
+  paste(readLines(glue("{path}/{name}.js")))
+}
