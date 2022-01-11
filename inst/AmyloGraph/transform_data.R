@@ -10,23 +10,26 @@ greek_letter_names <- c("Alpha", "Beta", "Gamma", "Delta", "Kappa",
 degreekize <- function(names)
   stri_replace_all_regex(names, greek_letters, greek_letter_names, vectorize_all = FALSE)
 
-sequentize <- function(sequences)
-  sequences %>%
-  stri_replace_all_regex("\n", "") %>%
-  stri_replace_all_regex("[0-9]", "") %>%
-  stri_trans_toupper %>%
-  stri_extract_last_regex("[A-Z]+$")
+remove_breaklines <- function(text) stri_replace_all_fixed(text, "\n", " ")
 
-as_logical <- function(vector) {
+sequentize <- function(sequences) sequences %>%
+  stri_replace_all_regex("[0-9]| ", "") %>%
+  stri_trans_toupper
+
+substitute_with_na <- function(sequences) sequences %>%
+  ifelse(. %in% c("sequence unavailable (protein complex)", "sequence unavailable"),
+         NA_character_, .)
+
+as_logical <- function(vector)
   ifelse(vector %in% c("TRUE", "PRAWDA"), TRUE,
          ifelse(vector %in% c("FALSE", "FAŁSZ"), FALSE, NA))
-}
 
 # interaction data ----
 
 readRDS("inst/AmyloGraph/AmyloGraph.RDS") %>%
-  filter(!as_logical(AmyloGraph$invalid_record),
-         !as_logical(AmyloGraph$invalid_value)) %>%
+  filter(!as_logical(invalid_record),
+         !as_logical(invalid_value)) %>%
+  mutate(across(everything(), remove_breaklines)) %>%
   select(interactor_name, interactee_name,
          interactor_sequence, interactee_sequence,
          aggregation_speed = q1_answer,
@@ -36,6 +39,7 @@ readRDS("inst/AmyloGraph/AmyloGraph.RDS") %>%
          elongates_by_attaching_details = q2_text,
          heterogenous_fibers_details = q3_text,
          general_remarks_field, doi) %>%
+  mutate(across(ends_with("sequence"), substitute_with_na)) %>%
   mutate(interactor_name = degreekize(interactor_name),
          interactee_name = degreekize(interactee_name),
          interactor_sequence = sequentize(interactor_sequence),
@@ -50,7 +54,7 @@ readRDS("inst/AmyloGraph/AmyloGraph.RDS") %>%
 
 # protein data ----
 
-readRDS("inst/AmyloGraph/AmyloGraph_proteins.RDS") %>%
+tmp <- readRDS("inst/AmyloGraph/AmyloGraph_proteins.RDS") %>%
   select(name = `Protein name`,
          source = `Additional information`,
          uniprot_id = `Uniprot ID`) %>%
