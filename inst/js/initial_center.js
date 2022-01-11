@@ -1,7 +1,7 @@
-function await_for_change() {
+function initial_center() {
   graph = document.getElementById('graph');
   if(!graph.hasOwnProperty('htmlwidget_data_init_result')) {
-    setTimeout(await_for_change, 50); //wait 50 millisecnds then recheck
+    setTimeout(initial_center, 50); //wait 50 millisecnds then recheck
     return;
   }
   
@@ -14,4 +14,4 @@ function await_for_change() {
   setTimeout(center, 100); // waiting is necessary, because otherwise it doesn't work
 }
 
-await_for_change();
+initial_center();
