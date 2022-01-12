@@ -3,8 +3,8 @@ observe_moving_selection <- \(input, subtables, edges, table_proxy, rvals) obser
   {
     ns <- NS("single_protein")
     if (input[[ns("select_in_table")]] > 0) {
-      interactees_rows_selected <- input[[ns("interactees_rows_selected")]]
-      interactors_rows_selected <- input[[ns("interactors_rows_selected")]]
+      interactees_rows_selected <- input[[ns("interactees-table_rows_selected")]]
+      interactors_rows_selected <- input[[ns("interactors-table_rows_selected")]]
       
       indices <- unique(c(
         subtables[["interactees"]]()[interactees_rows_selected, "original_AGID", drop = TRUE],

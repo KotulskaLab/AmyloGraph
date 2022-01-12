@@ -34,12 +34,12 @@ elem_info_node_selected <- \(ns) fillCol(
       title = "Interactees",
       actionButton(ns("interactees_select_all"), "Select all"),
       actionButton(ns("interactees_deselect_all"), "Deselect all"),
-      dataTableOutput(ns("interactees"))),
+      dataTableOutput(NS(ns("interactees"), "table"))),
     tabPanel(
       actionButton(ns("interactors_select_all"), "Select all"),
       actionButton(ns("interactors_deselect_all"), "Deselect all"),
       title = "Interactors",
-      dataTableOutput(ns("interactors"))),
+      dataTableOutput(NS(ns("interactors"), "table"))),
     type = "pills"
   ),
   flex = c(2, 1, NA, 9)
