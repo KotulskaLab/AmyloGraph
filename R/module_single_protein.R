@@ -41,14 +41,14 @@ server_single_protein <- function(id, edge_data, node_data, protein_data) {
     interactees_any_row_selected <- reactive({!is.null(input[["interactees-table_rows_selected"]])})
     interactors_any_row_selected <- reactive({!is.null(input[["interactors-table_rows_selected"]])})
     
-    observe_deselect_button(ns, "interactees_deselect_all", interactees_any_row_selected)
-    observe_deselect_button(ns, "interactors_deselect_all", interactors_any_row_selected)
+    observe_deselect_button(ns, "interactees-deselect_all", interactees_any_row_selected)
+    observe_deselect_button(ns, "interactors-deselect_all", interactors_any_row_selected)
     
-    observe_deselecting_all(input, "interactees_deselect_all", interactees_proxy)
-    observe_deselecting_all(input, "interactors_deselect_all", interactors_proxy)
+    observe_deselecting_all(input, "interactees-deselect_all", interactees_proxy)
+    observe_deselecting_all(input, "interactors-deselect_all", interactors_proxy)
     
-    observe_selecting_all(input, "interactees_select_all", interactees_proxy, NS("interactees", "table"))
-    observe_selecting_all(input, "interactors_select_all", interactors_proxy, NS("interactors", "table"))
+    observe_selecting_all(input, "interactees-select_all", interactees_proxy, NS("interactees", "table"))
+    observe_selecting_all(input, "interactors-select_all", interactors_proxy, NS("interactors", "table"))
     
     any_row_selected_and_filters_applied <- reactive_selecting_in_main_applicable(input)
     

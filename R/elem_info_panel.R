@@ -30,17 +30,19 @@ elem_info_node_selected <- \(ns) fillCol(
   ),
   tabsetPanel(
     id = ns("tabs"),
-    tabPanel(
-      title = "Interactees",
-      actionButton(ns("interactees_select_all"), "Select all"),
-      actionButton(ns("interactees_deselect_all"), "Deselect all"),
-      dataTableOutput(NS(ns("interactees"), "table"))),
-    tabPanel(
-      actionButton(ns("interactors_select_all"), "Select all"),
-      actionButton(ns("interactors_deselect_all"), "Deselect all"),
-      title = "Interactors",
-      dataTableOutput(NS(ns("interactors"), "table"))),
+    elem_info_table_panel(ns("interactees"), "Interactees"),
+    elem_info_table_panel(ns("interactors"), "Interactors"),
     type = "pills"
   ),
   flex = c(2, 1, NA, 9)
 )
+
+elem_info_table_panel <- \(id, title) {
+  ns = NS(id)
+  tabPanel(
+    title = title,
+    actionButton(ns("select_all"), "Select all"),
+    actionButton(ns("deselect_all"), "Deselect all"),
+    dataTableOutput(ns("table"))
+  )
+}
