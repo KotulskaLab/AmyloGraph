@@ -140,7 +140,7 @@ The source sequence may be not identical to the interactor’s or interactee’s
 
 # Data acquisition
 
-```{r}
+```{r,echo=FALSE}
 dat <- AmyloGraph::ag_data_interactions()
 
 total_number_pubs <- length(unique(dat[["doi"]]))
