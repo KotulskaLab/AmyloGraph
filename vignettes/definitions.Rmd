@@ -140,6 +140,16 @@ The source sequence may be not identical to the interactor’s or interactee’s
 
 # Data acquisition
 
+```{r,echo=FALSE}
+dat <- AmyloGraph::ag_data_interactions()
+
+total_number_pubs <- length(unique(dat[["doi"]]))
+total_number_int <- nrow(dat)
+total_number_prot <- length(unique(c(dat[["interactee_name"]], dat[["interactor_name"]])))
+
+```
+
+
 ## Manuscript collection 
 
 We started our manuscript collection on amyloid-amyloid interactions by defining the eligibility criteria:
@@ -162,9 +172,9 @@ We have curated the information in collected publications using a two-step proce
 
 ## Initial curation
 
-During this procedure, a curator reviewed all interactions described in the manuscripts and annotated them in the dedicated form considering three AmyloGraph descriptors: descriptor 1. the impact on the speed of the fibrillization; descriptor 2. physical binding between interactee and interactors; descriptor 3. presence of the heterogenous fibrils (described in detail in the section [Descriptors](https://kotulskalab.github.io/AmyloGraph/articles/definitions.html#descriptors)). They chose names of amyloid proteins involved in the interaction from a [list] (https://github.com/KotulskaLab/AmyloGraph/blob/main/inst/AmyloGraph/protein_data.csv) and collected information on the amyloids' sequence. Each record was associated with manuscript's doi.
+During this procedure, a curator reviewed all interactions described in the manuscripts and annotated them in the dedicated form considering three AmyloGraph descriptors: descriptor 1. the impact on the speed of the fibrillization; descriptor 2. physical binding between interactee and interactors; descriptor 3. presence of the heterogenous fibrils (described in detail in the section [Descriptors](https://kotulskalab.github.io/AmyloGraph/articles/definitions.html#descriptors)). They chose names of amyloid proteins involved in the interaction from a [list](https://github.com/KotulskaLab/AmyloGraph/blob/main/inst/AmyloGraph/protein_data.csv) and collected information on the amyloids' sequence. Each record was associated with manuscript's doi.
 
-The final list covered 814 interactions from 184 manuscripts.
+The final list of interactions after the initial curation covered 863 interactions 49 proteins described in 185 manuscripts. 
 
 ## Validation
 
@@ -172,7 +182,7 @@ During this procedure, a curator has independently reviewed the reported interac
 
 They reviewed interaction records similarly to during the initial curation step. A curator considered three AmyloGraph descriptors: descriptor 1. the impact on the speed of the fibrillization; descriptor 2. physical binding between interactee and interactors; descriptor 3. presence of the heterogenous fibrils [Descriptors](https://kotulskalab.github.io/AmyloGraph/articles/definitions.html#descriptors). They chose amyloid proteins' names from a list, collected information on the sequence of amyloid proteins involved in the interaction, and provided the sequence of an original protein by its UniProt ID. They could also add in missing interaction records or remove false ones.
 
-The final list covers 863 interactions from 180 manuscripts.
+The final list covers `r total_number_int` interactions between `r total_number_prot` proteins described in `r total_number_pubs` manuscripts. 
 
 ## Contact with authors
 
