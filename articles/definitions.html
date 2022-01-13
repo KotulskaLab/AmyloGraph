@@ -82,12 +82,12 @@
 
     
     
-<div class="section level1">
-<h1 id="general-assumptions">General assumptions<a class="anchor" aria-label="anchor" href="#general-assumptions"></a>
-</h1>
 <div class="section level2">
-<h2 id="main-definitions">Main definitions<a class="anchor" aria-label="anchor" href="#main-definitions"></a>
+<h2 id="general-assumptions">General assumptions<a class="anchor" aria-label="anchor" href="#general-assumptions"></a>
 </h2>
+<div class="section level3">
+<h3 id="main-definitions">Main definitions<a class="anchor" aria-label="anchor" href="#main-definitions"></a>
+</h3>
 <ol style="list-style-type: decimal">
 <li>An <strong>interactee</strong> is always acted upon by an <strong>interactor</strong>. Suppose the publication uses words like ‘co-incubation’ and from the text itself it is not clear how to distinguish between interactor and interactor. Additionally, the authors study the effect of Protein A on Protein B and vice versa. In this case, we annotate it as two separate interactions: A is an interactor over B and B, where B is an interactor over A.</li>
 <li>General logic. We use following operators AND and OR which are defined in the following way:
@@ -110,21 +110,21 @@
 </li>
 </ol>
 </div>
-<div class="section level2">
-<h2 id="general-interaction-scenarios">General interaction scenarios<a class="anchor" aria-label="anchor" href="#general-interaction-scenarios"></a>
-</h2>
+<div class="section level3">
+<h3 id="general-interaction-scenarios">General interaction scenarios<a class="anchor" aria-label="anchor" href="#general-interaction-scenarios"></a>
+</h3>
 <p><img src="figures/interaction-scenarios.png"></p>
 <p>We assume that six main scenarios can occur during the interaction of two amyloid proteins (see the figure above). Scenarios depend on the stability (permanent/transient) of the binding between interactor and interactee and the impact on the interactee’s fibrillization speed (acceleration/inhibition). If there is no interaction between interactor and interactee, amyloid proteins are forming fibrils independently - scenario I occurs. If there is transient contact between interactor and interactee along with fibrillation inhibition - scenario II takes place, but if interactee’s fibrillation is accelerated - scenario IV. If the physical binding between interactor and interactee occurs together with fibrillation inhibition - scenario III happens, but if interactee’s fibrillation is accelerated - scenario V or VI takes place.</p>
 <p>scenario I: no interaction between interactor and interactee &amp; amyloid proteins are forming fibrils independently scenario II: transient contact between interactor and interactee &amp; inhibition of homofibril fibrillization scenario III: physical binding between interactor and interactee &amp; inhibition of homofibril fibrillization scenario IV: transient contact between interactor and interactee &amp; acceleration of homofibril fibrillization scenario V: physical binding between interactor and interactee &amp; acceleration of homofibril fibrillization scenario VI: physical binding between interactor and interactee &amp; acceleration of heterofibril fibrillization</p>
 <p>The scenarios are discrete but they represent points in the continuum rather than the real phenomenons. We are aware that depending on the experimental conditions an interaction can vary between scenario III and IV. Therefore, we do not imply that each interaction follows strictly one of these scenarios, but rather presents most dominantly one of them. To distinguish between these interaction scenarios we design three descriptors (described below). Descriptor 1. differentiates between scenarios I (no effect on kinetics) II and III (inhibited aggregation) as well as IV, V and VI (acceleration). Descriptor 2. discriminates between scenarios IV and V/VI. Descriptor 3. differentiates between scenarios V and VI.</p>
 <p>For example, if descriptor 1 is <strong>faster aggregation</strong>, descriptor 2 - <strong>yes, direct evidence</strong> and descriptor 3 - <strong>yes</strong>, <strong>no</strong> or <strong>no information</strong>, they describe cross-seeding.</p>
-<div class="section level3">
-<h3 id="descriptors">Descriptors:<a class="anchor" aria-label="anchor" href="#descriptors"></a>
-</h3>
+<div class="section level4">
+<h4 id="descriptors">Descriptors:<a class="anchor" aria-label="anchor" href="#descriptors"></a>
+</h4>
 </div>
-<div class="section level3">
-<h3 id="descriptor-1--the-impact-on-the-speed-of-the-interactee-fibrillization-">Descriptor 1. The impact on the speed of the interactee’ fibrillization.<a class="anchor" aria-label="anchor" href="#descriptor-1--the-impact-on-the-speed-of-the-interactee-fibrillization-"></a>
-</h3>
+<div class="section level4">
+<h4 id="descriptor-1--the-impact-on-the-speed-of-the-interactee-fibrillization-">Descriptor 1. The impact on the speed of the interactee’ fibrillization.<a class="anchor" aria-label="anchor" href="#descriptor-1--the-impact-on-the-speed-of-the-interactee-fibrillization-"></a>
+</h4>
 <p><strong><em>General remarks:</em></strong> this descriptor is fully based on the kinetics or any kinetic data. Here, we mean aggregation to the level of mature fibril (fibrillization) confirmed by e.g., microscopy images. If the interactor accelerates the speed of the oligomer formation, but they never aggregate into the level of mature fibrils (fibrillization does not occur), it is not an acceleration as we understand it. The commonly used technique here is Thioflavin T (ThT) assay [CITATION NEEDED]. We are aware of the fact ThT is not always quantitative, i.e. a higher (or lower) ThT level - under different conditions (e.g. the presence of the interactor) - can be caused by changes to the fibril structure rather than the amount of fibrils, but for the purpose of simplification, we are ignoring it and always follow the interpretation of authors.</p>
 <ol style="list-style-type: decimal">
 <li>
@@ -144,9 +144,9 @@ Comparison of ThT curves.
 </p>
 </div>
 </div>
-<div class="section level3">
-<h3 id="descriptor-2--physical-binding-between-interactee-and-interactor-">Descriptor 2. Physical binding between interactee and interactor.<a class="anchor" aria-label="anchor" href="#descriptor-2--physical-binding-between-interactee-and-interactor-"></a>
-</h3>
+<div class="section level4">
+<h4 id="descriptor-2--physical-binding-between-interactee-and-interactor-">Descriptor 2. Physical binding between interactee and interactor.<a class="anchor" aria-label="anchor" href="#descriptor-2--physical-binding-between-interactee-and-interactor-"></a>
+</h4>
 <ol style="list-style-type: decimal">
 <li>
 <strong>Yes, direct evidence</strong>: there is an experimental evidence that fibrils consist of two different amyloids (labeling; immunolabeling). It also applies if we have a visible colocalization of an interactee and an interactor visible in the microscopic images.</li>
@@ -160,9 +160,9 @@ Comparison of ThT curves.
 <strong>No information</strong>: there is no experimental evidence and seeding is not implied by kinetics experiments results.</li>
 </ol>
 </div>
-<div class="section level3">
-<h3 id="descriptor-3--presence-of-the-heterogenous-fibrils-consisting-of-interactor-and-interactee-molecules-">Descriptor 3. Presence of the heterogenous fibrils consisting of interactor and interactee molecules.<a class="anchor" aria-label="anchor" href="#descriptor-3--presence-of-the-heterogenous-fibrils-consisting-of-interactor-and-interactee-molecules-"></a>
-</h3>
+<div class="section level4">
+<h4 id="descriptor-3--presence-of-the-heterogenous-fibrils-consisting-of-interactor-and-interactee-molecules-">Descriptor 3. Presence of the heterogenous fibrils consisting of interactor and interactee molecules.<a class="anchor" aria-label="anchor" href="#descriptor-3--presence-of-the-heterogenous-fibrils-consisting-of-interactor-and-interactee-molecules-"></a>
+</h4>
 <ol style="list-style-type: decimal">
 <li>
 <strong>Yes:</strong> applies when a) there is experimental evidence that fibrils consist of two different amyloids (labeling; immunolabeling) AND b) the mature fibrils are structurally different than fibrils formed in the presence of interactor c) the term co-aggregation/ heterogeneous fibrils/ hybrid fibrils is used to describe the aggregation process.</li>
@@ -173,9 +173,9 @@ Comparison of ThT curves.
 </ol>
 </div>
 </div>
-<div class="section level2">
-<h2 id="information-on-the-sequence-of-interactor-and-interactee">Information on the sequence of interactor and interactee<a class="anchor" aria-label="anchor" href="#information-on-the-sequence-of-interactor-and-interactee"></a>
-</h2>
+<div class="section level3">
+<h3 id="information-on-the-sequence-of-interactor-and-interactee">Information on the sequence of interactor and interactee<a class="anchor" aria-label="anchor" href="#information-on-the-sequence-of-interactor-and-interactee"></a>
+</h3>
 <p><strong>Name of the amyloid protein</strong>: was chosen from a [list of amyloid proteins] (<a href="https://github.com/KotulskaLab/AmyloGraph/blob/main/inst/AmyloGraph/protein_data.csv" class="external-link uri">https://github.com/KotulskaLab/AmyloGraph/blob/main/inst/AmyloGraph/protein_data.csv</a>) considered by us. Every protein on the list has confirmed amyloid-like properties.</p>
 <p><strong>Sequence:</strong> The sequence is a vector of amino acids.</p>
 <ol style="list-style-type: decimal">
@@ -190,12 +190,12 @@ Comparison of ThT curves.
 <p>The source sequence may be not identical to the interactor’s or interactee’s sequence. However, interactor or interactee might be a part of the source sequence (as human Amyloid beta 1-40 is a part of the <a href="https://www.uniprot.org/uniprot/P05067" class="external-link">P05067</a>) or a mutated variant of a source sequence (when some amino acids are altered compared to the original sequence).</p>
 </div>
 </div>
-<div class="section level1">
-<h1 id="data-acquisition">Data acquisition<a class="anchor" aria-label="anchor" href="#data-acquisition"></a>
-</h1>
 <div class="section level2">
-<h2 id="manuscript-collection">Manuscript collection<a class="anchor" aria-label="anchor" href="#manuscript-collection"></a>
+<h2 id="data-acquisition">Data acquisition<a class="anchor" aria-label="anchor" href="#data-acquisition"></a>
 </h2>
+<div class="section level3">
+<h3 id="manuscript-collection">Manuscript collection<a class="anchor" aria-label="anchor" href="#manuscript-collection"></a>
+</h3>
 <p>We started our manuscript collection on amyloid-amyloid interactions by defining the eligibility criteria:</p>
 <ol style="list-style-type: decimal">
 <li>The manuscript has to be published after 2000.</li>
@@ -219,22 +219,22 @@ Comparison of ThT curves.
 <p>We have started our search with the analysis of 24 manuscripts in our in-house collection of publications. Next, we have expanded our search by repeatedly adding manuscripts cited by manuscripts in our collection or referencing manuscripts in our collections. The final collection had 364 manuscripts.</p>
 <p>We have curated the information in collected publications using a two-step procedure: <strong>initial curation</strong> and <strong>validation</strong>.</p>
 </div>
-<div class="section level2">
-<h2 id="initial-curation">Initial curation<a class="anchor" aria-label="anchor" href="#initial-curation"></a>
-</h2>
+<div class="section level3">
+<h3 id="initial-curation">Initial curation<a class="anchor" aria-label="anchor" href="#initial-curation"></a>
+</h3>
 <p>During this procedure, a curator reviewed all interactions described in the manuscripts and annotated them in the dedicated form considering three AmyloGraph descriptors: descriptor 1. the impact on the speed of the fibrillization; descriptor 2. physical binding between interactee and interactors; descriptor 3. presence of the heterogenous fibrils (described in detail in the section <a href="https://kotulskalab.github.io/AmyloGraph/articles/definitions.html#descriptors" class="external-link">Descriptors</a>). They chose names of amyloid proteins involved in the interaction from a <a href="https://github.com/KotulskaLab/AmyloGraph/blob/main/inst/AmyloGraph/protein_data.csv" class="external-link">list</a> and collected information on the amyloids’ sequence. Each record was associated with manuscript’s doi.</p>
 <p>The final list of interactions after the initial curation covered 863 interactions 49 proteins described in 185 manuscripts.</p>
 </div>
-<div class="section level2">
-<h2 id="validation">Validation<a class="anchor" aria-label="anchor" href="#validation"></a>
-</h2>
+<div class="section level3">
+<h3 id="validation">Validation<a class="anchor" aria-label="anchor" href="#validation"></a>
+</h3>
 <p>During this procedure, a curator has independently reviewed the reported interaction records from assigned manuscripts in the dedicated form. The semi-random assignment procedure ensured that the curator who validated a specific record was not involved in its initial curation.</p>
 <p>They reviewed interaction records similarly to during the initial curation step. A curator considered three AmyloGraph descriptors: descriptor 1. the impact on the speed of the fibrillization; descriptor 2. physical binding between interactee and interactors; descriptor 3. presence of the heterogenous fibrils <a href="https://kotulskalab.github.io/AmyloGraph/articles/definitions.html#descriptors" class="external-link">Descriptors</a>. They chose amyloid proteins’ names from a list, collected information on the sequence of amyloid proteins involved in the interaction, and provided the sequence of an original protein by its UniProt ID. They could also add in missing interaction records or remove false ones.</p>
 <p>The final list covers 869 interactions between 47 proteins described in 172 manuscripts.</p>
 </div>
-<div class="section level2">
-<h2 id="contact-with-authors">Contact with authors<a class="anchor" aria-label="anchor" href="#contact-with-authors"></a>
-</h2>
+<div class="section level3">
+<h3 id="contact-with-authors">Contact with authors<a class="anchor" aria-label="anchor" href="#contact-with-authors"></a>
+</h3>
 <p>We consulted the final result of the validation with the authors of manuscripts reporting given interactions. To do so, we contacted corresponding author. In the case of more than two corresponding authors, we took the very last author of the publication. If the corresponding author was not available, we tried to contact the first authors’ of the publication. If somebody authored more then one manuscript we contacted this author about all of the reported interactions.</p>
 <p>We contacted 127 authors and out of the XYZ responded and confirmed XYZ interactions in XYZ manuscripts.</p>
 </div>
@@ -258,7 +258,7 @@ Comparison of ThT curves.
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
