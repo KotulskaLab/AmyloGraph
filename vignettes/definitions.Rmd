@@ -188,4 +188,4 @@ The final list covers `r total_number_int` interactions between `r total_number_
 
 We consulted the final result of the validation with the authors of manuscripts reporting given interactions. To do so, we contacted corresponding author. In the case of more than two corresponding authors, we took the very last author of the publication. If the corresponding author was not available, we tried to contact the first authors' of the publication. If somebody authored more then one manuscript we contacted this author about all of the reported interactions. 
 
-We contacted 127 authors and out of the XYZ responded and confirmed XYZ interactions in XYZ manuscripts.
+We contacted 125 authors and out of the XYZ responded and confirmed XYZ interactions in XYZ manuscripts.
