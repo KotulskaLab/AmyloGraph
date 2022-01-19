@@ -134,9 +134,9 @@ p3 <- rbind(mutate(AmpSim(cyc = 1:40, ampl = 1.5), curve_type = "faster fibrilli
 
 **Source sequence:** the UniProt ID of the original protein.
 
-The AmyloGraph database treats as a single protein a protein that can occur in many taxonomic variants or after modifications (e.g., we have human and bovine precursor albumins, [P02768](https://www.uniprot.org/uniprot/P02768) and [P02769](https://www.uniprot.org/uniprot/P02769) as well as the products of the post-translational modifications, [Q56G89](https://www.uniprot.org/uniprot/Q56G89)). Therefore,
+The AmyloGraph database treats as a single protein a protein that can occur in many taxonomic variants or after modifications (e.g., we have human and bovine precursor albumins, [P02768](https://www.uniprot.org/uniprot/P02768) and [P02769](https://www.uniprot.org/uniprot/P02769) as well as the products of the post-translational modifications, [Q56G89](https://www.uniprot.org/uniprot/Q56G89)).
 
-The source sequence may be not identical to the interactor’s or interactee’s sequence. However, interactor or interactee might be a part of the source sequence (as human Amyloid beta 1-40 is a part of the [P05067](https://www.uniprot.org/uniprot/P05067)) or a mutated variant of a source sequence (when some amino acids are altered compared to the original sequence).
+The source sequence may be not identical to the interactor’s or interactee’s sequence. However, interactor or interactee might be a part of the source sequence (as human amyloid beta 1-40 is a part of the [P05067](https://www.uniprot.org/uniprot/P05067)) or a mutated variant of a source sequence (when some amino acids are altered compared to the original sequence). For example, in AmyloGraph database human amyloid beta can occur as one of 28 variants, including amyloid beta 1-40 and amyloid beta 1-42.
 
 # Data acquisition
 
