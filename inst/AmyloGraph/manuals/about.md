@@ -1,4 +1,4 @@
-AmyloGraph is a database of interactions between amyloid proteins. Curators of AmyloGraph gather data manually from the the latest published research literature and community data submissions.
+AmyloGraph is a database of interactions between amyloid proteins. Curators of AmyloGraph gather data manually from the the latest published research literature and community data submissions. To learn more about AmyloGraph and its usage, visit our [online manual](https://kotulskalab.github.io/AmyloGraph/).
 
 ### Contact
 
