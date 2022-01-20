@@ -16,7 +16,7 @@ We try our best by implementing [a rigorous and transparent two-step data curati
 
 ### Citation (coming soon)
 
-Burdukiewicz M, Rafacz D, Hubicka K, Bakala M, Lassota A, Stecko J, Szymanska N, Barbach A, Wojciechowski J, Kozakiewicz D, Szulc N, Chilimoniuk J, Jeskowiak I, Gasior-Glogowska M, Kotulska M (2020). AmyloGraph: A comprehensive database of amyloid-amyloid interactions. XXXYYY, doi.
+Burdukiewicz M, Rafacz D, Barbach A, Hubicka K, Bakala M, Lassota A, Stecko J, Szymanska N, Wojciechowski J, Kozakiewicz D, Szulc N, Chilimoniuk J, Jeskowiak I, Gasior-Glogowska M, Kotulska M (2020). AmyloGraph: A comprehensive database of amyloid-amyloid interactions. XXXYYY, doi.
 
 ### Acknowledgements
 
