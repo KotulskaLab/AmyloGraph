@@ -44,8 +44,8 @@ ag_data_proteins <- \()
 ag_data_groups <- \() {
   groups <- tribble(
     ~ id,                     ~ name,
-    "aggregation_speed",      "interactee aggregation speed",
-    "elongates_by_attaching", "elongates by attaching",
+    "aggregation_speed",      "fibrillization speed",
+    "elongates_by_attaching", "physical binding",
     "heterogenous_fibers",    "heterogenous fibers"
   )
   

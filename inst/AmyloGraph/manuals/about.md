@@ -1,12 +1,22 @@
-AmyloGraph is a database of interactions between amyloid proteins. Curators of AmyloGraph gather data manually from the the latest published research literature and community data submissions. To learn more about AmyloGraph and its usage, visit our [online manual](https://kotulskalab.github.io/AmyloGraph/).
+AmyloGraph is a database of interactions between amyloid proteins. Curators of AmyloGraph manually gather data from the the published research literature and community data submissions. To learn more about AmyloGraph, its usage and the process of data curation, visit our [online manual](https://kotulskalab.github.io/AmyloGraph/).
 
 ### Contact
 
 For general questions or problems with the data or database, please email [Michal Burdukiewicz](mailto:michalburdukiewicz@gmail.com).
 
-### Citation
+### Frequently asked questions
 
-Burdukiewicz M, Rafacz D, Hubicka K, Bakala M, Lassota A, Stecko J, Szymanska N, Barbach A, Wojciechowski J, Kozakiewicz D, Szulc N, Chilimoniuk J, Jeskowiak I, Gasior-Glogowska M, Kotulska M (2020). AmyloGraph: A comprehensive database of amyloid-amyloid interactions. XXXYYY, doi.
+#### How can I submit my own data?
+
+The submission form will be released soon, along with the documentation for submitters.
+
+#### Why interactions reported in my publications are wrongly annotated?
+
+We try our best by implementing [a rigorous and transparent two-step data curation procedure](https://kotulskalab.github.io/AmyloGraph/articles/definitions.html#initial-curation), but despite these measures, we are still prone to errors. Please send an email to [Michal Burdukiewicz](mailto:michalburdukiewicz@gmail.com) with correctly annotated interactions. Remember to mention their AmyloGraph IDs. 
+
+### Citation (coming soon)
+
+Burdukiewicz M, Rafacz D, Barbach A, Hubicka K, Bakala M, Lassota A, Stecko J, Szymanska N, Wojciechowski J, Kozakiewicz D, Szulc N, Chilimoniuk J, Jeskowiak I, Gasior-Glogowska M, Kotulska M (2020). AmyloGraph: A comprehensive database of amyloid-amyloid interactions. XXXYYY, doi.
 
 ### Acknowledgements
 
