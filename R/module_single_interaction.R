@@ -47,7 +47,6 @@ server_single_interaction <- function(id, interactions) {
         output, selected_interaction, "heterogenous_fibers",
         "Is interaction resulting in heterogeneous fibrils consisting of interactor and interactee molecules?"
       )
-      output[["additional_info"]] <- renderText(selected_interaction[["general_remarks_field"]])
     })
   })
 }
