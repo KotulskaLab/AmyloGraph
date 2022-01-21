@@ -8,7 +8,7 @@ For general questions or problems with the data or database, please email [Micha
 
 #### How can I submit my own data?
 
-The submission form will be released soon, along with the documentation for submitters.
+The submission form is [available online](https://forms.gle/7sJCBQdhkCxHdBhD7).
 
 #### Why interactions reported in my publications are wrongly annotated?
 
