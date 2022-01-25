@@ -49,8 +49,11 @@ readRDS("inst/AmyloGraph/AmyloGraph.RDS") %>%
          heterogenous_fibers_details = degreekize(heterogenous_fibers_details),
          general_remarks_field = degreekize(general_remarks_field),
          AGID = glue("AG{str_pad(cur_group_rows(), 5, 'left', '0')}")) %>%
+  filter(doi != "10.1101/2021.01.04.425177") %>% 
   write.csv("inst/AmyloGraph/interactions_data.csv",
             row.names = FALSE, fileEncoding = "UTF-8")
+
+# the publication 10.1101/2021.01.04.425177 is removed in this very naive manner as we cannot alter the AGIDs right now
 
 # protein data ----
 
