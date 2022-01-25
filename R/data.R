@@ -42,24 +42,22 @@ ag_data_proteins <- \()
 #' @importFrom purrr set_names map
 #' @importFrom tibble tibble tribble
 ag_data_groups <- \() {
-  groups <- tribble(
-    ~ id,                     ~ name,
-    "aggregation_speed",      "fibrillization speed",
-    "elongates_by_attaching", "physical binding",
-    "heterogenous_fibers",    "heterogenous fibers"
-  )
+  groups <- set_names(
+    names(ag_option("colnames")),
+    ag_option("colnames")
+  )[ag_option("interaction_attrs")]
   
   list(
     data = map(
-      groups$id,
+      ag_option("interaction_attrs"),
       ~ tibble(
         values = sort(unique(ag_data_interactions()[[.x]])),
         colors = set_names(ag_option("palette")[seq_along(values)], 
                            values)
       )
-    ) |> set_names(groups$id),
-    groups = as.list(groups$id) |>
-      set_names(groups$name)
+    ) |> set_names(ag_option("interaction_attrs")),
+    groups = as.list(ag_option("interaction_attrs")) |>
+      set_names(tolower(groups))
   )
 }
 
