@@ -24,12 +24,12 @@ library(patchwork)
 
 ## Main definitions
 
-1. An **interactee** is always acted upon by an **interactor**. Suppose the publication uses words like 'co-incubation' and from the text itself it is not clear how to distinguish between interactor and interactor. Additionally, the authors study the effect of Protein A on Protein B and vice versa. In this case, we annotate it as two separate interactions: A is an interactor over B and B, where B is an interactor over A.
+1. An **interactee** is always acted upon by an **interactor**. This is the AmyloGraph terminology and it is not used in analyzed manuscripts. Suppose the publication uses words like 'co-incubation' and from the text itself it is not clear how to distinguish between interactor and interactor. Additionally, the authors study the effect of Protein A on Protein B and vice versa. In this case, we annotate it as two separate interactions: I) A is an interactor over B and II) B is an interactor over A.
 2. General logic. We use following operators AND and OR which are defined in the following way:
-    1. Operator OR is valid for a and b means: I) a, II) b, III) a and b
-    1. Operator AND is valid for a and b only when we have a and b simultaneously.
+    1. Operator OR applied to $a$ and $b$ means: I) $a$, II) $b$, III) $a$ and $b$.
+    1. Operator AND applied to $a$ and $b$ only when we have $a$ and $b$ simultaneously.
 3. Authors’ interpretation always supersedes ours.
-4. We refrain from using vague terms as seeding or cross-seeding. Instead, we describe the interaction using three descriptors (described in the section XYZ).
+4. We refrain from using vague terms as seeding or cross-seeding. Instead, we describe the interaction using three descriptors (described in the [section Descriptors](https://kotulskalab.github.io/AmyloGraph/articles/definitions.html#descriptors)).
 5. We refer to glossary provided by [MIRRAGGE – Minimum Information Required for Reproducible AGGregation Experiments (doi: 10.3389/fnmol.2020.582488)](https://doi.org/10.3389/fnmol.2020.582488).
     1. Additional terms: 
         * **T50**: the time required for the amyloid reaction to reach 50% of the final fluorescence intensity.
@@ -56,7 +56,7 @@ For example, if descriptor 1 is **faster aggregation**, descriptor 2 - **yes, di
 
 ### Descriptor 1. The impact on the speed of the interactee' fibrillization.
 
-**_General remarks:_** this descriptor is fully based on the kinetics or any kinetic data. Here, we mean aggregation to the level of mature fibril (fibrillization) confirmed by e.g., microscopy images. If the interactor accelerates the speed of the oligomer formation, but they never aggregate into the level of mature fibrils (fibrillization does not occur), it is not an acceleration as we understand it. The commonly used technique here is Thioflavin T (ThT) assay [CITATION NEEDED]. We are aware of the fact ThT is not always quantitative, i.e. a higher (or lower) ThT level - under different conditions (e.g. the presence of the interactor) - can be caused by changes to the fibril structure rather than the amount of fibrils, but for the purpose of simplification, we are ignoring it and always follow the interpretation of authors.
+**_General remarks:_** this descriptor is fully based on the kinetics or any kinetic data. Here, by fibrillization we mean aggregation from low-organisation levels to mature fibrils confirmed by e.g., microscopy images. If the interactor accelerates the speed of the oligomer formation, but they never aggregate into the level of mature fibrils (fibrillization does not occur), it is not an acceleration as we understand it. The commonly used technique to measure the kinetics of fibrillization is Thioflavin T (ThT) assay [CITATION NEEDED]. We are aware of the fact ThT is not always quantitative, i.e. a higher (or lower) ThT level - under different conditions (e.g., the presence of the interactor) - can be caused by changes to the fibril structure rather than the amount of fibrils. For the purpose of simplification, we ignore it and always follow the interpretation of authors.
 
 1. **Faster aggregation**: a) the maximum ThT emission observed at the end of the reaction of the interactee and interactor is higher than maximum ThT emission for interactee alone OR b) if the slope of the kinetic curve is steeper OR c) the lag phase is shorter OR d) T50 is lower. The fibrillization still occurred. 
 2. **Slower aggregation**: a) the maximum ThT emission observed at the end of the reaction of the interactee and interactor is lower than maximum ThT emission for interactee alone AND b) the slope of the kinetic curve is less steep) OR c) the lag phase is longer. So we need (a AND b) OR c. The fibrillization still occurred. 
@@ -126,15 +126,15 @@ p3 <- rbind(mutate(AmpSim(cyc = 1:40, ampl = 1.5), curve_type = "faster fibrilli
  
 **Sequence:** The sequence is a vector of amino acids. 
 
-1. In the case when the exact sequence is not known, we provide the largest possible precursor.
+1. In the case when the exact sequence is not known, we provide the longest possible precursor from UniProt.
 3. If interactee or interactor are mutants/fragments of an amyloid protein, we provide only the sequence of the mutant/fragment and not the wild type protein.
 4. We consider sequences that have modified amino acids (e.g., methylated), but we do not include this information in the sequence.
-5. We do NOT consider mutants that have instead of standard amino acids a) non-biogenic amino acids (e.g., tyramine) b) non-amino acid linkers. 
+5. We do NOT consider mutants that instead of standard amino acids have a) non-biogenic amino acids (e.g., tyramine) b) non-amino acid linkers. 
 6. If the sequence of the interactor or the interactee contains modified amino acid residues (e.g., phosporylated), we do not supply this information in the sequential data.
 
 **Source sequence:** the UniProt ID of the original protein.
 
-The AmyloGraph database treats as a single protein a protein that can occur in many taxonomic variants or after modifications (e.g., we have human and bovine precursor albumins, [P02768](https://www.uniprot.org/uniprot/P02768) and [P02769](https://www.uniprot.org/uniprot/P02769) as well as the products of the post-translational modifications, [Q56G89](https://www.uniprot.org/uniprot/Q56G89)).
+The AmyloGraph database as a single protein treats a protein that can occur in many taxonomic variants or after modifications (e.g., we have human and bovine precursor albumins, [P02768](https://www.uniprot.org/uniprot/P02768) and [P02769](https://www.uniprot.org/uniprot/P02769) as well as the products of the post-translational modifications, [Q56G89](https://www.uniprot.org/uniprot/Q56G89)).
 
 The source sequence may be not identical to the interactor’s or interactee’s sequence. However, interactor or interactee might be a part of the source sequence (as human amyloid beta 1-40 is a part of the [P05067](https://www.uniprot.org/uniprot/P05067)) or a mutated variant of a source sequence (when some amino acids are altered compared to the original sequence). For example, in AmyloGraph database human amyloid beta can occur as one of 28 variants, including amyloid beta 1-40 and amyloid beta 1-42.
 
