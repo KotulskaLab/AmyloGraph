@@ -89,15 +89,15 @@
 <h3 id="main-definitions">Main definitions<a class="anchor" aria-label="anchor" href="#main-definitions"></a>
 </h3>
 <ol style="list-style-type: decimal">
-<li>An <strong>interactee</strong> is always acted upon by an <strong>interactor</strong>. Suppose the publication uses words like ‘co-incubation’ and from the text itself it is not clear how to distinguish between interactor and interactor. Additionally, the authors study the effect of Protein A on Protein B and vice versa. In this case, we annotate it as two separate interactions: A is an interactor over B and B, where B is an interactor over A.</li>
+<li>An <strong>interactee</strong> is always acted upon by an <strong>interactor</strong>. This is the AmyloGraph terminology and it is not used in analyzed manuscripts. Suppose the publication uses words like ‘co-incubation’ and from the text itself it is not clear how to distinguish between interactor and interactor. Additionally, the authors study the effect of Protein A on Protein B and vice versa. In this case, we annotate it as two separate interactions: I) A is an interactor over B and II) B is an interactor over A.</li>
 <li>General logic. We use following operators AND and OR which are defined in the following way:
 <ol style="list-style-type: decimal">
-<li>Operator OR is valid for a and b means: I) a, II) b, III) a and b</li>
-<li>Operator AND is valid for a and b only when we have a and b simultaneously.</li>
+<li>Operator OR applied to <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> means: I) <span class="math inline">\(a\)</span>, II) <span class="math inline">\(b\)</span>, III) <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>.</li>
+<li>Operator AND applied to <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> only when we have <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> simultaneously.</li>
 </ol>
 </li>
 <li>Authors’ interpretation always supersedes ours.</li>
-<li>We refrain from using vague terms as seeding or cross-seeding. Instead, we describe the interaction using three descriptors (described in the section XYZ).</li>
+<li>We refrain from using vague terms as seeding or cross-seeding. Instead, we describe the interaction using three descriptors (described in the <a href="https://kotulskalab.github.io/AmyloGraph/articles/definitions.html#descriptors" class="external-link">section Descriptors</a>).</li>
 <li>We refer to glossary provided by <a href="https://doi.org/10.3389/fnmol.2020.582488" class="external-link">MIRRAGGE – Minimum Information Required for Reproducible AGGregation Experiments (doi: 10.3389/fnmol.2020.582488)</a>.
 <ol style="list-style-type: decimal">
 <li>Additional terms:
@@ -125,7 +125,7 @@
 <div class="section level4">
 <h4 id="descriptor-1--the-impact-on-the-speed-of-the-interactee-fibrillization-">Descriptor 1. The impact on the speed of the interactee’ fibrillization.<a class="anchor" aria-label="anchor" href="#descriptor-1--the-impact-on-the-speed-of-the-interactee-fibrillization-"></a>
 </h4>
-<p><strong><em>General remarks:</em></strong> this descriptor is fully based on the kinetics or any kinetic data. Here, we mean aggregation to the level of mature fibril (fibrillization) confirmed by e.g., microscopy images. If the interactor accelerates the speed of the oligomer formation, but they never aggregate into the level of mature fibrils (fibrillization does not occur), it is not an acceleration as we understand it. The commonly used technique here is Thioflavin T (ThT) assay [CITATION NEEDED]. We are aware of the fact ThT is not always quantitative, i.e. a higher (or lower) ThT level - under different conditions (e.g. the presence of the interactor) - can be caused by changes to the fibril structure rather than the amount of fibrils, but for the purpose of simplification, we are ignoring it and always follow the interpretation of authors.</p>
+<p><strong><em>General remarks:</em></strong> this descriptor is fully based on the kinetics or any kinetic data. Here, by fibrillization we mean aggregation from low-organisation levels to mature fibrils confirmed by e.g., microscopy images. If the interactor accelerates the speed of the oligomer formation, but they never aggregate into the level of mature fibrils (fibrillization does not occur), it is not an acceleration as we understand it. The commonly used technique to measure the kinetics of fibrillization is Thioflavin T (ThT) assay [CITATION NEEDED]. We are aware of the fact ThT is not always quantitative, i.e. a higher (or lower) ThT level - under different conditions (e.g., the presence of the interactor) - can be caused by changes to the fibril structure rather than the amount of fibrils. For the purpose of simplification, we ignore it and always follow the interpretation of authors.</p>
 <ol style="list-style-type: decimal">
 <li>
 <strong>Faster aggregation</strong>: a) the maximum ThT emission observed at the end of the reaction of the interactee and interactor is higher than maximum ThT emission for interactee alone OR b) if the slope of the kinetic curve is steeper OR c) the lag phase is shorter OR d) T50 is lower. The fibrillization still occurred.</li>
@@ -179,14 +179,14 @@ Comparison of ThT curves.
 <p><strong>Name of the amyloid protein</strong>: was chosen from a [list of amyloid proteins] (<a href="https://github.com/KotulskaLab/AmyloGraph/blob/main/inst/AmyloGraph/protein_data.csv" class="external-link uri">https://github.com/KotulskaLab/AmyloGraph/blob/main/inst/AmyloGraph/protein_data.csv</a>) considered by us. Every protein on the list has confirmed amyloid-like properties.</p>
 <p><strong>Sequence:</strong> The sequence is a vector of amino acids.</p>
 <ol style="list-style-type: decimal">
-<li>In the case when the exact sequence is not known, we provide the largest possible precursor.</li>
+<li>In the case when the exact sequence is not known, we provide the longest possible precursor from UniProt.</li>
 <li>If interactee or interactor are mutants/fragments of an amyloid protein, we provide only the sequence of the mutant/fragment and not the wild type protein.</li>
 <li>We consider sequences that have modified amino acids (e.g., methylated), but we do not include this information in the sequence.</li>
-<li>We do NOT consider mutants that have instead of standard amino acids a) non-biogenic amino acids (e.g., tyramine) b) non-amino acid linkers.</li>
+<li>We do NOT consider mutants that instead of standard amino acids have a) non-biogenic amino acids (e.g., tyramine) b) non-amino acid linkers.</li>
 <li>If the sequence of the interactor or the interactee contains modified amino acid residues (e.g., phosporylated), we do not supply this information in the sequential data.</li>
 </ol>
 <p><strong>Source sequence:</strong> the UniProt ID of the original protein.</p>
-<p>The AmyloGraph database treats as a single protein a protein that can occur in many taxonomic variants or after modifications (e.g., we have human and bovine precursor albumins, <a href="https://www.uniprot.org/uniprot/P02768" class="external-link">P02768</a> and <a href="https://www.uniprot.org/uniprot/P02769" class="external-link">P02769</a> as well as the products of the post-translational modifications, <a href="https://www.uniprot.org/uniprot/Q56G89" class="external-link">Q56G89</a>).</p>
+<p>The AmyloGraph database as a single protein treats a protein that can occur in many taxonomic variants or after modifications (e.g., we have human and bovine precursor albumins, <a href="https://www.uniprot.org/uniprot/P02768" class="external-link">P02768</a> and <a href="https://www.uniprot.org/uniprot/P02769" class="external-link">P02769</a> as well as the products of the post-translational modifications, <a href="https://www.uniprot.org/uniprot/Q56G89" class="external-link">Q56G89</a>).</p>
 <p>The source sequence may be not identical to the interactor’s or interactee’s sequence. However, interactor or interactee might be a part of the source sequence (as human amyloid beta 1-40 is a part of the <a href="https://www.uniprot.org/uniprot/P05067" class="external-link">P05067</a>) or a mutated variant of a source sequence (when some amino acids are altered compared to the original sequence). For example, in AmyloGraph database human amyloid beta can occur as one of 28 variants, including amyloid beta 1-40 and amyloid beta 1-42.</p>
 </div>
 </div>
