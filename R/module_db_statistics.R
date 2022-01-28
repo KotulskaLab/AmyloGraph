@@ -49,7 +49,8 @@ server_db_statistics <- function(id, interactions, data_nodes) {
       colnames = c("Protein" = "label", "Interaction count" = "n")
     )
     
-    output[["num_interactions_by_paper"]] <- renderPlot(
+    output[["num_interactions_by_paper"]] <- renderPlot({
+
       ag_data_interactions() %>%
         count(doi) %>%
         count(n, name = "frequency") %>%
@@ -57,7 +58,8 @@ server_db_statistics <- function(id, interactions, data_nodes) {
         geom_col() +
         scale_x_continuous("Number of interactions per publication") +
         scale_y_continuous("Number of publications") +
-        theme_bw(base_size = 14),
+        theme_bw(base_size = 14)
+    },
       height = 440,
       width = 840
     )

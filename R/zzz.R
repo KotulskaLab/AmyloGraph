@@ -15,6 +15,9 @@
                     `Physical binding` = "elongates_by_attaching",
                     `Heterogenous fibers` = "heterogenous_fibers",
                     Details = "details"),
+    ag_interaction_attrs = c("aggregation_speed",
+                             "elongates_by_attaching",
+                             "heterogenous_fibers"),
     ag_center_network = TRUE
   )
   
