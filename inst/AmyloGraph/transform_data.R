@@ -83,7 +83,7 @@ all_names <- sapply(doi_df[["data"]][["author"]], function(x) {
 data.frame(doi = doi_df[["data"]][["doi"]],
            nm = sapply(nms, function(i) i[["family"]]),
            all_names = all_names, 
-           title = doi_df[["data"]][["title"]],
+           title = remove_breaklines(doi_df[["data"]][["title"]]),
            journal = doi_df[["data"]][["container.title"]],
            year = doi_df[["data"]][["deposited"]]) %>% 
   mutate(year = as.numeric(sapply(strsplit(year, "-"), function(i) i[[1]]))) %>%

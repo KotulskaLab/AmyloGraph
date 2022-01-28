@@ -197,8 +197,8 @@ The articles listed below are the sources of curated data in the AmyloGraph data
 ```{r,echo=FALSE,results='asis'}
 all_refs <- arrange(AmyloGraph::ag_references(), nm)
 
-lapply(1L:nrow(all_refs), function(ith_ref_id) {
-  cat(all_refs[ith_ref_id, "all_names", drop = TRUE], ", **", all_refs[ith_ref_id, "title", drop = TRUE], "**, ", 
+tmp <- lapply(1L:nrow(all_refs), function(ith_ref_id) {
+  cat("1. ", all_refs[ith_ref_id, "all_names", drop = TRUE], ", **", all_refs[ith_ref_id, "title", drop = TRUE], "**, ", 
       all_refs[ith_ref_id, "journal", drop = TRUE], ", ", all_refs[ith_ref_id, "year", drop = TRUE], 
       " (doi: [", all_refs[ith_ref_id, "doi", drop = TRUE], "](https://doi.org/", all_refs[ith_ref_id, "doi", drop = TRUE], 
       ")).\n\n", sep = "")
