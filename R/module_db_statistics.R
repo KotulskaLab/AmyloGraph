@@ -50,7 +50,7 @@ server_db_statistics <- function(id, interactions, data_nodes) {
     )
     
     output[["num_interactions_by_paper"]] <- renderPlot({
-      browser()
+
       ag_data_interactions() %>%
         count(doi) %>%
         count(n, name = "frequency") %>%
