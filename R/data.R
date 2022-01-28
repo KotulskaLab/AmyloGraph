@@ -16,6 +16,12 @@ ag_data_interactions <- \()
            col_types = "ccccfffcccccc") |>
     mutate(from_id = map_chr(interactor_name, digest),
            to_id = map_chr(interactee_name, digest))
+  
+#' @importFrom readr read_csv
+#' @export
+ag_references <- \()
+  read_csv(system.file("AmyloGraph", "reference_table.csv", package = "AmyloGraph"),
+           col_types = "cccccn") 
 
 #' @importFrom dplyr `%>%` select 
 #' @importFrom purrr map_chr

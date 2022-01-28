@@ -2,6 +2,7 @@ library(dplyr)
 library(stringi)
 library(stringr)
 library(glue)
+library(rcrossref)
 
 greek_letters <- c("^α", "^β", "^γ", "^δ", "^κ",
                    "α", "β", "γ", "δ", "κ")
@@ -64,3 +65,30 @@ tmp <- readRDS("inst/AmyloGraph/AmyloGraph_proteins.RDS") %>%
   mutate(name = degreekize(name)) %>%
   write.csv("inst/AmyloGraph/protein_data.csv",
             row.names = FALSE, fileEncoding = "UTF-8")
+
+read.csv("inst/AmyloGraph/interactions_data.csv")[["doi"]]
+
+
+all_dois <- unique(read.csv("inst/AmyloGraph/interactions_data.csv")[["doi"]])
+
+doi_df <- cr_works(all_dois)
+
+nms <- lapply(doi_df[["data"]][["author"]], function(x) filter(x, sequence == "first"))
+
+all_names <- sapply(doi_df[["data"]][["author"]], function(x) {
+  paste0(apply(x, 1, function(ith_row) paste0(ith_row["given"], " ", ith_row["family"])), collapse = ", ")
+})
+#sapply(nms, function(i) paste0(substr(i[["given"]], 0, 1), " ", i[["family"]], " et al."))) %>% 
+
+data.frame(doi = doi_df[["data"]][["doi"]],
+           nm = sapply(nms, function(i) i[["family"]]),
+           all_names = all_names, 
+           title = doi_df[["data"]][["title"]],
+           journal = doi_df[["data"]][["container.title"]],
+           year = doi_df[["data"]][["deposited"]]) %>% 
+  mutate(year = as.numeric(sapply(strsplit(year, "-"), function(i) i[[1]]))) %>%
+  write.csv("inst/AmyloGraph/reference_table.csv",
+            row.names = FALSE, fileEncoding = "UTF-8")
+
+
+
