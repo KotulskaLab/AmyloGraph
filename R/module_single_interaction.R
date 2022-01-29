@@ -10,16 +10,15 @@ ui_single_interaction <- function(id) {
     textOutput(ns("interactee_name")),
     verbatimTextOutput(ns("interactee_sequence")),
     h2("Properties:"),
-    h4("DOI"),
-    uiOutput(ns("doi")),
     uiOutput(ns("aggregation_speed")),
     uiOutput(ns("elongates_by_attaching")),
     uiOutput(ns("heterogenous_fibers")),
-    h4("Additional info"),
-    textOutput(ns("additional_info"))
+    h4("Reference"),
+    uiOutput(ns("reference")),
   )
 }
 
+#' @importFrom markdown renderMarkdown
 #' @importFrom shiny moduleServer
 server_single_interaction <- function(id, interactions) {
   moduleServer(id, function(input, output, session) {
@@ -29,8 +28,11 @@ server_single_interaction <- function(id, interactions) {
       selected_interaction <- interactions %>%
         filter(AGID == input[["selected_interaction"]])
       
+      reference_data <- filter(ag_references(), doi == selected_interaction[["doi"]]) %>% 
+        slice(1)
+      
       output[["amylograph_id"]] <- renderText(selected_interaction[["AGID"]])
-      output[["doi"]] <- renderUI(HTML(linkify_doi(selected_interaction[["doi"]], truncate = FALSE)))
+      output[["reference"]] <- renderUI(HTML(renderMarkdown(text = citify(reference_data))))
       output[["interactor_name"]] <- renderText(selected_interaction[["interactor_name"]])
       output[["interactor_sequence"]] <- renderText(prettify_sequence_output(selected_interaction[["interactor_sequence"]]))
       output[["interactee_name"]] <- renderText(selected_interaction[["interactee_name"]])

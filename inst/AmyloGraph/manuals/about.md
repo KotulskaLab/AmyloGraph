@@ -20,7 +20,7 @@ Burdukiewicz M, Rafacz D, Barbach A, Hubicka K, Bakala M, Lassota A, Stecko J, S
 
 ### Acknowledgements
 
-AmyloGraph is supported by the grant no. [2019/35/B/NZ2/03997 (National Science Center)](https://projekty.ncn.gov.pl/index.php?projekt_id=459038) to Małgorzata Kotulska.
+AmyloGraph is partially supported by the grant no. [2019/35/B/NZ2/03997 (National Science Center)](https://projekty.ncn.gov.pl/index.php?projekt_id=459038) to Małgorzata Kotulska. Access to Wroclaw Centre for Networking and Supercomputing at Wroclaw University of Science and Technology is greatly acknowledged. We also thank Daniel Otzen (Aarhus University, Denmark) and Vytautas Smirnovas (University of Vilnus, Lithuania) for fruitful discussions.
 
 <img src="../www/PWr-eng.png" style="width: 500px">
 

@@ -18,6 +18,20 @@ linkify_doi <- function(doi, truncate = TRUE) {
   glue("<a href='https://doi.org/{doi}' target='_blank' rel='noopener noreferer'>{if (truncate) str_trunc(doi, 18) else doi}</a>")
 }
 
+
+#' @importFrom glue glue
+#' @importFrom stringr str_trunc
+#' @export
+citify <- function(reference_row) {
+  all_names <- reference_row[1, "all_names", drop = TRUE]
+  title <- reference_row[1, "title", drop = TRUE]
+  journal <- reference_row[1, "journal", drop = TRUE]
+  year <- reference_row[1, "year", drop = TRUE]
+  doi <- reference_row[1, "doi", drop = TRUE]
+  glue("{all_names}, **{title}**, {journal} {year} (doi: <a href='https://doi.org/{doi}' target='_blank' rel='noopener noreferer'>{doi}</a>)")
+}
+
+
 #' @importFrom glue glue
 linkify_uniprot <- function(uniprot_id) {
   glue("<a href='https://uniprot.org/uniprot/{uniprot_id}' target='_blank' rel='noopener noreferer''>{uniprot_id}</a>")

@@ -2,6 +2,7 @@ library(dplyr)
 library(stringi)
 library(stringr)
 library(glue)
+library(rcrossref)
 
 greek_letters <- c("^α", "^β", "^γ", "^δ", "^κ",
                    "α", "β", "γ", "δ", "κ")
@@ -49,8 +50,11 @@ readRDS("inst/AmyloGraph/AmyloGraph.RDS") %>%
          heterogenous_fibers_details = degreekize(heterogenous_fibers_details),
          general_remarks_field = degreekize(general_remarks_field),
          AGID = glue("AG{str_pad(cur_group_rows(), 5, 'left', '0')}")) %>%
+  filter(doi != "10.1101/2021.01.04.425177") %>% 
   write.csv("inst/AmyloGraph/interactions_data.csv",
             row.names = FALSE, fileEncoding = "UTF-8")
+
+# the publication 10.1101/2021.01.04.425177 is removed in this very naive manner as we cannot alter the AGIDs right now
 
 # protein data ----
 
@@ -60,4 +64,36 @@ tmp <- readRDS("inst/AmyloGraph/AmyloGraph_proteins.RDS") %>%
          uniprot_id = `Uniprot ID`) %>%
   mutate(name = degreekize(name)) %>%
   write.csv("inst/AmyloGraph/protein_data.csv",
+            row.names = FALSE, fileEncoding = "UTF-8")
+
+
+all_dois <- unique(read.csv("inst/AmyloGraph/interactions_data.csv")[["doi"]])
+
+doi_df <- cr_works(all_dois)
+
+nms <- lapply(doi_df[["data"]][["author"]], function(x) filter(x, sequence == "first"))
+
+all_names <- sapply(doi_df[["data"]][["author"]], function(x) {
+  paste0(apply(x, 1, function(ith_row) paste0(ith_row["given"], " ", ith_row["family"])), collapse = ", ")
+})
+#sapply(nms, function(i) paste0(substr(i[["given"]], 0, 1), " ", i[["family"]], " et al."))) %>% 
+
+# for some reason, crossref fails to return 10.3109/13506129.2011.630761 and it has to be added manually
+
+Larsson_df <- data.frame(doi = "10.3109/13506129.2011.630761",
+           nm = "Larsson",
+           all_names = "Annika Larsson, Susanna Malmström, Per Westermark",
+           title = "Signs of cross-seeding: aortic medin amyloid as a trigger for protein AA deposition",
+           journal = "Amyloid",
+           year = 2011)
+
+data.frame(doi = doi_df[["data"]][["doi"]],
+           nm = sapply(nms, function(i) i[["family"]]),
+           all_names = all_names, 
+           title = remove_breaklines(doi_df[["data"]][["title"]]),
+           journal = doi_df[["data"]][["container.title"]],
+           year = doi_df[["data"]][["deposited"]]) %>% 
+  mutate(year = as.numeric(sapply(strsplit(year, "-"), function(i) i[[1]]))) %>% 
+  rbind(Larsson_df) %>% 
+  write.csv("inst/AmyloGraph/reference_table.csv",
             row.names = FALSE, fileEncoding = "UTF-8")
