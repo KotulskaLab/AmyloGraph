@@ -18,6 +18,7 @@ library(chipPCR)
 library(dplyr)
 library(ggplot2)
 library(patchwork)
+library(tidyr)
 ```
 
 # General assumptions
@@ -186,9 +187,9 @@ The final list covers `r total_number_int` interactions between `r total_number_
 
 ```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.width=8,fig.cap="Number of manuscripts, proteins and interactions during the different stages of data curation."}
 data.frame(interactions = c(NA, 863, 883),
-                              proteins = c(NA, 49, 47),
-                              manuscripts = c(364, 185, 173),
-                              stage = c("Manuscript\ncollection", "Initial\ncuration", "Validation")) %>% 
+           proteins = c(NA, 49, 47),
+           manuscripts = c(364, 185, 173),
+           stage = c("Manuscript\ncollection", "Initial\ncuration", "Validation")) %>% 
   mutate(stage = factor(stage, levels = unique(stage))) %>% 
   pivot_longer(cols = -stage) %>% 
   na.omit() %>% 
@@ -209,7 +210,7 @@ data.frame(interactions = c(NA, 863, 883),
 
 We consulted the final result of the validation with the authors of manuscripts reporting given interactions. To do so, we contacted corresponding author. In the case of more than two corresponding authors, we took the very last author of the publication. If the corresponding author was not available, we tried to contact the first authors' of the publication. If somebody authored more then one manuscript we contacted this author about all of the reported interactions. 
 
-We contacted 122 authors. 11 authors confirmed 81 interactions (`r 81/total_number_int` %) in 21 manuscripts (`r 21/total_number_pubs` %). Despite our efforts, we could not find a way to contact the authors of 3 manuscripts.
+We contacted 122 authors. 11 authors confirmed 81 interactions (`r round(81/total_number_int, 4)*100` %) in 21 manuscripts (`r round(21/total_number_pubs, 4)*100` %). Despite our efforts, we could not find a way to contact the authors of three manuscripts.
 
 # Supplementary references
 
