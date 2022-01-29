@@ -136,7 +136,7 @@ p3 <- rbind(mutate(AmpSim(cyc = 1:40, ampl = 1.5), curve_type = "faster fibrilli
 
 The AmyloGraph database as a single protein treats a protein that can occur in many taxonomic variants or after modifications (e.g., we have human and bovine precursor albumins, [P02768](https://www.uniprot.org/uniprot/P02768) and [P02769](https://www.uniprot.org/uniprot/P02769) as well as the products of the post-translational modifications, [Q56G89](https://www.uniprot.org/uniprot/Q56G89)).
 
-The source sequence may be not identical to the interactor’s or interactee’s sequence. However, interactor or interactee might be a part of the source sequence (as human amyloid beta 1-40 is a part of the [P05067](https://www.uniprot.org/uniprot/P05067)) or a mutated variant of a source sequence (when some amino acids are altered compared to the original sequence). For example, in AmyloGraph database CsgA can occur as one of 6 variants, including 4 homologues and 2 mutants.
+The source sequence may be not identical to the interactor’s or interactee’s sequence. However, interactor or interactee might be a part of the source sequence (as human amyloid beta 1-40 is a part of the [P05067](https://www.uniprot.org/uniprot/P05067)) or a mutated variant of a source sequence (when some amino acids are altered compared to the original sequence). For example, in AmyloGraph database the CsgA protein can occur as one of 6 variants, including 4 homologues and 2 mutants.
 
 # Data acquisition
 
@@ -184,11 +184,32 @@ They reviewed interaction records similarly to during the initial curation step.
 
 The final list covers `r total_number_int` interactions between `r total_number_prot` proteins described in `r total_number_pubs` manuscripts. 
 
+```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.width=8,fig.cap="Number of manuscripts, proteins and interactions during the different stages of data curation."}
+data.frame(interactions = c(NA, 863, 883),
+                              proteins = c(NA, 49, 47),
+                              manuscripts = c(364, 185, 173),
+                              stage = c("Manuscript\ncollection", "Initial\ncuration", "Validation")) %>% 
+  mutate(stage = factor(stage, levels = unique(stage))) %>% 
+  pivot_longer(cols = -stage) %>% 
+  na.omit() %>% 
+  mutate(name = factor(name, 
+                       levels = c("manuscripts", "proteins", "interactions"),
+                       labels = c("Manuscripts", "Proteins", "Interactions"))) %>% 
+  ggplot(aes(x = stage, y = value, label = value)) +
+  geom_col() +
+  geom_label(aes(y = value*0.5)) +
+  scale_x_discrete("Stage of curation", na.translate = FALSE) +
+  scale_y_continuous("Count") +
+  facet_wrap(~ name, scales = "free") +
+  theme_bw()
+```
+
+
 ## Contact with authors
 
 We consulted the final result of the validation with the authors of manuscripts reporting given interactions. To do so, we contacted corresponding author. In the case of more than two corresponding authors, we took the very last author of the publication. If the corresponding author was not available, we tried to contact the first authors' of the publication. If somebody authored more then one manuscript we contacted this author about all of the reported interactions. 
 
-We contacted 122 authors. XYZ authors responded and confirmed XYZ interactions in XYZ manuscripts.
+We contacted 122 authors. 11 authors confirmed 81 interactions (`r 81/total_number_int` %) in 21 manuscripts (`r 21/total_number_pubs` %). Despite our efforts, we could not find a way to contact the authors of 3 manuscripts.
 
 # Supplementary references
 
