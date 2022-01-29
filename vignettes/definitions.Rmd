@@ -123,7 +123,7 @@ p3 <- rbind(mutate(AmpSim(cyc = 1:40, ampl = 1.5), curve_type = "faster fibrilli
 
 ## Information on the sequence of interactor and interactee
 
-**Name of the amyloid protein**: was chosen from a [list of amyloid proteins] (https://github.com/KotulskaLab/AmyloGraph/blob/main/inst/AmyloGraph/protein_data.csv) considered by us. Every protein on the list has confirmed amyloid-like properties.
+**Name of the amyloid protein**: was chosen from a [list of amyloid proteins](https://github.com/KotulskaLab/AmyloGraph/blob/main/inst/AmyloGraph/protein_data.csv) considered by us. Every protein on the list has confirmed amyloid-like properties.
  
 **Sequence:** The sequence is a vector of amino acids. 
 
