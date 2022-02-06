@@ -18,7 +18,7 @@ amyloid proteins. It is available as an online database
 this R package. The documentation is also [available
 online](https://kotulskalab.github.io/AmyloGraph/articles/definitions.html).
 
-## Installation
+## Run AmyloGraph locally
 
 You can install the development version from
 [GitHub](https://github.com/) with:
@@ -26,6 +26,9 @@ You can install the development version from
 ``` r
 # install.packages("devtools")
 devtools::install_github("KotulskaLab/AmyloGraph")
+# then run AmyloGraph using
+library(AmyloGraph)
+AmyloGraph()
 ```
 
 ## Funding
