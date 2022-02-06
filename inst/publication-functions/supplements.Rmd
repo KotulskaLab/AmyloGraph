@@ -1,0 +1,27 @@
+---
+title: "AmyloGraph: supplementary materials"
+author: 
+  - Michał Burdukiewicz
+  - Dominik Rafacz
+  - Agnieszka Barbach
+  - Katarzyna Hubicka
+  - Laura Bąkała
+  - Anna Lassota
+  - Jakub Stecko
+  - Natalia Szymańska
+  - Jakub W. Wojciechowski
+  - Dominika Kozakiewicz
+  - Natalia Szulc
+  - Jarosław Chilimoniuk
+  - Izabela Jęśkowiak
+  - Marlena Gąsior-Głogowska
+  - Małgorzata Kotulska
+output:
+  pdf_document:
+    latex_engine: xelatex
+header-includes: 
+  - \usepackage[utf8]{inputenc}
+  - \usepackage[german, polish, english]{babel}
+---
+
+\tableofcontents
