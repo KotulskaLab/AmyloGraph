@@ -1,10 +1,13 @@
-#' @importFrom shiny markdown includeMarkdown
+#' @importFrom shiny markdown
 ui_about <- function(id) {
-  ns <- NS(id)
   div(
     id = "about",
     markdown(markdown_ag_version()),
-    includeMarkdown("manuals/about.md")
+    markdown(markdown_description()),
+    markdown(markdown_faq()),
+    markdown(markdown_citation()),
+    markdown(markdown_contact()),
+    markdown(markdown_acknowledgements())
   )
 }
 
