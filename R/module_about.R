@@ -1,8 +1,9 @@
+#' @importFrom shiny markdown includeMarkdown
 ui_about <- function(id) {
   ns <- NS(id)
   div(
     id = "about",
-    textOutput(ns("ag_version")),
+    markdown(markdown_ag_version()),
     includeMarkdown("manuals/about.md")
   )
 }
@@ -10,6 +11,6 @@ ui_about <- function(id) {
 #' @importFrom shiny moduleServer
 server_about <- function(id) {
   moduleServer(id, function(input, output, session) {
-    output[["ag_version"]] <- render_ag_version()
+    # Yep, it's empty.
   })
 }
