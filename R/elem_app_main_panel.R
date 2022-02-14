@@ -58,6 +58,5 @@ elem_tab_db_statistics <- \() tabPanel(
 elem_tab_about <- \() tabPanel(
   title = "About",
   value = "about",
-  textOutput("ag_version"),
-  includeMarkdown("manuals/about.md")
+  ui_about("about")
 )
