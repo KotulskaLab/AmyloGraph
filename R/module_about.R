@@ -1,4 +1,4 @@
-#' @importFrom shiny markdown
+#' @importFrom shiny markdown img
 ui_about <- function(id) {
   div(
     id = "about",
@@ -7,7 +7,10 @@ ui_about <- function(id) {
     markdown(markdown_faq()),
     markdown(markdown_citation()),
     markdown(markdown_contact()),
-    markdown(markdown_acknowledgements())
+    markdown(markdown_acknowledgements()),
+    img(src = "PWr-eng.png", width = "500px"),
+    br(),
+    img(src = "WCSS.png", width = "500px")
   )
 }
 
