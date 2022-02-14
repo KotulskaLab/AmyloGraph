@@ -29,7 +29,7 @@ AmyloGraph is a manually curated database on interactions between amyloid protei
 
 ## Run AmyloGraph locally
 
-You can install the  development version from [GitHub](https://github.com/) with:
+You can install the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
