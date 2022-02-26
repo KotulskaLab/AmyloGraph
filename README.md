@@ -18,11 +18,8 @@ research literature and community data submissions. To learn more about
 AmyloGraph, its usage and the process of data curation, visit our
 [online manual](https://kotulskalab.github.io/AmyloGraph/).
 
-AmyloGraph is a manually curated database on interactions between
-amyloid proteins. It is available as an online database
-<http://AmyloGraph.com/>, but its functionalities are also accessible as
-this R package. The documentation is also [available
-online](https://kotulskalab.github.io/AmyloGraph/articles/definitions.html).
+AmyloGraph is available as an online database <http://AmyloGraph.com/>,
+but its functionalities are also accessible as this R package.
 
 ## Run AmyloGraph locally
 
