@@ -24,9 +24,9 @@ jobs:
 
       - uses: r-lib/actions/setup-renv@v2
       
-      - name: Install rmarkdown package
-        run: |
-          Rscript -e 'install.packages("rmarkdown")'
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::pkgdown, local::.
       
       - name: Render Rmarkdown files and Commit Results
         run: |
