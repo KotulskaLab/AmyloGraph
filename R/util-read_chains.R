@@ -33,10 +33,9 @@ prettify_sequence_output <- \(name, sequence) {
   ret
 }
 
-#' @importFrom dplyr bind_rows
 empty_buffer <- function(reader) {
   if (length(reader[["sequence"]] > 0)) {
-    reader[["tbl"]] <- bind_rows(
+    reader[["tbl"]] <- dplyr::bind_rows(
       reader[["tbl"]],
       c(name = reader[["name"]], sequence = reader[["sequence"]])
     )
@@ -46,7 +45,6 @@ empty_buffer <- function(reader) {
   reader
 }
 
-#' @importFrom tibble tibble
 read_chains <- function(txt) {
   # If the sequences are provided as a single string
   txt <- strsplit(txt, "\n")[[1]]
@@ -55,7 +53,7 @@ read_chains <- function(txt) {
     list(
       name = character(),
       sequence = character(),
-      tbl = tibble(name = character(), sequence = character())
+      tbl = tibble::tibble(name = character(), sequence = character())
     ),
     class = "AG_sequence_reader"
   )
