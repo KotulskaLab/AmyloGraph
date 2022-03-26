@@ -61,9 +61,10 @@ render_single_interaction_attribute <- \(output, selected_interaction, attribute
       h4(header),
       selected_interaction[[attribute]] |>
         as.character() |>
-        strong() |>
-        p(),
-      if (is.na(details)) NULL else p(details)
+        # strong() |>
+        p()
+      # The line below allows for displaying comments to answers
+      # if (is.na(details)) NULL else p(details)
     )
   )
 }
