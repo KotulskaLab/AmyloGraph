@@ -37,18 +37,6 @@ linkify_uniprot <- function(uniprot_id) {
   glue("<a href='https://uniprot.org/uniprot/{uniprot_id}' target='_blank' rel='noopener noreferer''>{uniprot_id}</a>")
 }
 
-#' @importFrom glue glue
-#' @importFrom dplyr `%>%`
-prettify_sequence_output <- \(sequence) {
-  group_length <- 10
-  seq_length <- glue("Sequence length: {nchar(sequence)}")
-  indices <- seq(group_length, nchar(sequence), by = group_length) %>%
-    format(width = 10) %>%
-    paste0(collapse = " ")
-  sequence_w_spaces <- gsub(glue("(.{{{group_length}}})"), "\\1 ", sequence)
-  paste(seq_length, indices, sequence_w_spaces, sep = "\n")
-}
-
 #' @importFrom stringi stri_detect_regex
 correct_motif <- \(motif) {
   stri_detect_regex(motif, "^\\^?[ABCDEFGHIJKLMNOPQRSTUVWXYZ\\*]*\\$?$")

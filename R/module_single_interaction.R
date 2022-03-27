@@ -34,9 +34,9 @@ server_single_interaction <- function(id, interactions) {
       output[["amylograph_id"]] <- renderText(selected_interaction[["AGID"]])
       output[["reference"]] <- renderUI(HTML(renderMarkdown(text = citify(reference_data))))
       output[["interactor_name"]] <- renderText(selected_interaction[["interactor_name"]])
-      output[["interactor_sequence"]] <- renderText(prettify_sequence_output(selected_interaction[["interactor_sequence"]]))
+      output[["interactor_sequence"]] <- renderText(prettify_chains(selected_interaction[["interactor_sequence"]]))
       output[["interactee_name"]] <- renderText(selected_interaction[["interactee_name"]])
-      output[["interactee_sequence"]] <- renderText(prettify_sequence_output(selected_interaction[["interactee_sequence"]]))
+      output[["interactee_sequence"]] <- renderText(prettify_chains(selected_interaction[["interactee_sequence"]]))
       output[["aggregation_speed"]] <- render_single_interaction_attribute(
         output, selected_interaction, "aggregation_speed",
         "Is the interactor affecting interactee's aggregating speed?"
@@ -61,9 +61,10 @@ render_single_interaction_attribute <- \(output, selected_interaction, attribute
       h4(header),
       selected_interaction[[attribute]] |>
         as.character() |>
-        strong() |>
-        p(),
-      if (is.na(details)) NULL else p(details)
+        # strong() |>
+        p()
+      # The line below allows for displaying comments to answers
+      # if (is.na(details)) NULL else p(details)
     )
   )
 }

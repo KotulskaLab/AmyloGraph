@@ -25,9 +25,9 @@ ag_server <- function(ag_data) function(input, output) {
   
   server_single_interaction("single_interaction", ag_data[["interactions"]])
   server_db_statistics("db_statistics", ag_data[["interactions"]], ag_data[["nodes"]])
+  server_about("about")
   
   output[["graph"]] <- render_network(ag_data[["nodes"]], edges)
-  output[["ag_version"]] <- render_ag_version()
   
   observe_node_selection(input)
   observe_interaction_selection(input)

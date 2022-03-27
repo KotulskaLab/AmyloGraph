@@ -2,20 +2,6 @@
 title: "Terms and definitions"
 author: 
   - Michał Burdukiewicz
-  - Dominik Rafacz
-  - Agnieszka Barbach
-  - Katarzyna Hubicka
-  - Laura Bąkała
-  - Anna Lassota
-  - Jakub Stecko
-  - Natalia Szymańska
-  - Jakub W. Wojciechowski
-  - Dominika Kozakiewicz
-  - Natalia Szulc
-  - Jarosław Chilimoniuk
-  - Izabela Jęśkowiak
-  - Marlena Gąsior-Głogowska
-  - Małgorzata Kotulska
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Terms and definitions}
@@ -132,8 +118,8 @@ p3 <- rbind(mutate(AmpSim(cyc = 1:40, ampl = 1.5), curve_type = "faster fibrilli
 
 ### Descriptor 3. Presence of the heterogenous fibrils consisting of interactor and interactee molecules.
 
-1. **Yes:** applies when a) there is experimental evidence that fibrils consist of two different amyloids (labeling; immunolabeling) AND b) the mature fibrils are structurally different than fibrils formed in the presence of interactor c) the term co-aggregation/ heterogeneous fibrils/ hybrid fibrils is used to describe the aggregation process. 
-2. **No:** if the resulting amyloid fibrils have the dimension matching that of the aggregating interactee alone. a) the mature fibrils are confirmed by a microscopy technique to have the same structure as fibrils formed by the interactee without the presence of the interactor  OR b) there is no fibrillar product at all OR c) an interactee and an interactor are the same protein.
+1. **Yes:** applies when a) there is experimental evidence that fibrils consist of two different amyloids (labeling; immunolabeling) AND b) the mature fibrils are structurally different than fibrils formed in the presence of interactor OR c) the term co-aggregation/ heterogeneous fibrils/ hybrid fibrils is used to describe the aggregation process. 
+2. **No:** if the resulting amyloid fibrils have the dimension matching that of the aggregating interactee alone. a) the mature fibrils are confirmed by a microscopy technique to have the same structure as fibrils formed by the interactee without the presence of the interactor OR b) there is no fibrillar product at all OR c) an interactee and an interactor are the same protein.
 3. **No information**: there is no experimental evidence and seeding is not implied by kinetics experiments results.
 
 

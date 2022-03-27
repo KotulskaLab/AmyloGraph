@@ -21,17 +21,40 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/KotulskaLab/AmyloGraph/workflows/R-CMD-check/badge.svg)](https://github.com/KotulskaLab/AmyloGraph/actions)
 <!-- badges: end -->
 
-AmyloGraph is a manually curated database on interactions between amyloid proteins. It is available as an online database http://AmyloGraph.com/, but its functionalities are also accessible as this R package. The documentation is also [available online](https://kotulskalab.github.io/AmyloGraph/articles/definitions.html).
+```{r, echo=FALSE, results='asis'}
+cat(AmyloGraph:::markdown_description())
+```
 
-## Installation
+AmyloGraph is available as an online database http://AmyloGraph.com/, but its functionalities are also accessible as this R package. 
 
-You can install the  development version from [GitHub](https://github.com/) with:
+## Run AmyloGraph locally
+
+You can install the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("KotulskaLab/AmyloGraph")
+# then run AmyloGraph using
+library(AmyloGraph)
+AmyloGraph()
 ```
 
-## Funding
+```{r, echo=FALSE, results='asis'}
+cat(AmyloGraph:::markdown_faq())
+```
 
-AmyloGraph is partially supported by the grant no. [2019/35/B/NZ2/03997 (National Science Center)](https://projekty.ncn.gov.pl/index.php?projekt_id=459038) to Małgorzata Kotulska. Access to Wroclaw Centre for Networking and Supercomputing at Wroclaw University of Science and Technology is greatly acknowledged. We also thank Daniel Otzen (Aarhus University, Denmark) and Vytautas Smirnovas (University of Vilnus, Lithuania) for fruitful discussions.
+```{r, echo=FALSE, results='asis'}
+cat(AmyloGraph:::markdown_citation())
+```
+
+```{r, echo=FALSE, results='asis'}
+cat(AmyloGraph:::markdown_contact())
+```
+
+```{r, echo=FALSE, results='asis'}
+cat(AmyloGraph:::markdown_acknowledgements())
+```
+
+```{r, echo=FALSE, results='asis'}
+cat(AmyloGraph:::markdown_images())
+```
