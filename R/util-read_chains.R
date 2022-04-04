@@ -14,11 +14,12 @@ prettify_chains <- \(sequence) {
 #' @importFrom glue glue
 #' @importFrom dplyr `%>%`
 prettify_sequence_output <- \(name, sequence) {
-  group_length <- 10
+  group_length <- ag_option("sequence_group_length")
+  
   seq_length <- glue("Sequence length: {nchar(sequence)}")
-  indices <- if (nchar(sequence) >= 10) {
+  indices <- if (nchar(sequence) >= group_length) {
     seq(group_length, nchar(sequence), by = group_length) %>%
-      format(width = 10) %>%
+      format(width = group_length) %>%
       paste0(collapse = " ")
   } else {
     ""
