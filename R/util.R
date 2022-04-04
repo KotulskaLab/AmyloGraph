@@ -50,9 +50,11 @@ patternize_motif <- \(motif) {
                          vectorise_all = FALSE)
 }
 
+#' @importFrom purrr map_lgl some
 #' @importFrom stringi stri_detect_regex
 contains_motif <- \(sequences, motif) {
-  stri_detect_regex(sequences, patternize_motif(motif))
+  motif <- patternize_motif(motif)
+  map_lgl(sequences, ~ some(.x[["sequence"]], stri_detect_regex, motif))
 }
 
 pluralize <- \(value, plural = "s", singular = "") {
