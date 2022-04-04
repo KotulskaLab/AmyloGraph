@@ -7,7 +7,7 @@ ag_load_data <- \()
   )
 
 #' @importFrom readr read_csv
-#' @importFrom purrr map_chr
+#' @importFrom purrr map_chr map
 #' @importFrom dplyr mutate
 #' @importFrom digest digest
 #' @export
@@ -15,7 +15,9 @@ ag_data_interactions <- \()
   read_csv(system.file("AmyloGraph", "interactions_data.csv", package = "AmyloGraph"),
            col_types = "ccccfffcccccc") |>
     mutate(from_id = map_chr(interactor_name, digest),
-           to_id = map_chr(interactee_name, digest))
+           to_id = map_chr(interactee_name, digest),
+           interactor_sequence = map(interactor_sequence, read_chains),
+           interactee_sequence = map(interactee_sequence, read_chains))
   
 #' @importFrom readr read_csv
 #' @export

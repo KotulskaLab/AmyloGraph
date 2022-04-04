@@ -34,9 +34,9 @@ server_single_interaction <- function(id, interactions) {
       output[["amylograph_id"]] <- renderText(selected_interaction[["AGID"]])
       output[["reference"]] <- renderUI(HTML(renderMarkdown(text = citify(reference_data))))
       output[["interactor_name"]] <- renderText(selected_interaction[["interactor_name"]])
-      output[["interactor_sequence"]] <- renderText(prettify_chains(selected_interaction[["interactor_sequence"]]))
+      output[["interactor_sequence"]] <- renderText(prettify_chains(selected_interaction[["interactor_sequence"]][[1]]))
       output[["interactee_name"]] <- renderText(selected_interaction[["interactee_name"]])
-      output[["interactee_sequence"]] <- renderText(prettify_chains(selected_interaction[["interactee_sequence"]]))
+      output[["interactee_sequence"]] <- renderText(prettify_chains(selected_interaction[["interactee_sequence"]][[1]]))
       output[["aggregation_speed"]] <- render_single_interaction_attribute(
         output, selected_interaction, "aggregation_speed",
         "Is the interactor affecting interactee's aggregating speed?"
