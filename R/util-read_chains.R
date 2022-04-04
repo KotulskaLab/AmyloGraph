@@ -1,10 +1,9 @@
 #' @importFrom dplyr `%>%` rowwise summarize pull
-prettify_chains <- \(sequence) {
-  if (is.na(sequence)) {
+prettify_chains <- \(tbl_sq) {
+  if (nrow(tbl_sq) == 0) {
     "no sequence available"
   } else {
-    read_chains(sequence) %>%
-      rowwise() %>%
+    rowwise(tbl_sq) %>%
       summarize(seq_output = prettify_sequence_output(name, sequence)) %>%
       pull(seq_output) %>%
       paste0(collapse = "\n\n")
@@ -47,9 +46,6 @@ empty_buffer <- function(reader) {
 }
 
 read_chains <- function(txt, separator = " ") {
-  # If the sequences are provided as a single string
-  txt <- strsplit(txt, separator)[[1]]
-  
   reader <- structure(
     list(
       name = character(),
@@ -59,15 +55,20 @@ read_chains <- function(txt, separator = " ") {
     class = "AG_sequence_reader"
   )
   
-  for (line in txt) {
-    if (substr(line, 1, 1) == ">") {
-      # A new name was found
-      reader <- empty_buffer(reader)
-      reader[["name"]] <- trimws(substring(line, 2))
-    } else {
-      reader[["sequence"]] <- paste0(reader[["sequence"]], trimws(line))
+  if (!is.na(txt)) {
+    # If the sequences are provided as a single string
+    txt <- strsplit(txt, separator)[[1]]
+    
+    for (line in txt) {
+      if (substr(line, 1, 1) == ">") {
+        # A new name was found
+        reader <- empty_buffer(reader)
+        reader[["name"]] <- trimws(substring(line, 2))
+      } else {
+        reader[["sequence"]] <- paste0(reader[["sequence"]], trimws(line))
+      }
     }
+    reader <- empty_buffer(reader)
   }
-  reader <- empty_buffer(reader)
   reader[["tbl"]]
 }
