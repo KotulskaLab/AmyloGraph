@@ -45,7 +45,7 @@ empty_buffer <- function(reader) {
   reader
 }
 
-read_chains <- function(txt, separator = " ") {
+read_chains <- function(txt, separator = ag_option("chain_separator")) {
   reader <- structure(
     list(
       name = character(),
