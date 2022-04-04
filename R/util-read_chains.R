@@ -45,9 +45,9 @@ empty_buffer <- function(reader) {
   reader
 }
 
-read_chains <- function(txt) {
+read_chains <- function(txt, separator = " ") {
   # If the sequences are provided as a single string
-  txt <- strsplit(txt, "\n")[[1]]
+  txt <- strsplit(txt, separator)[[1]]
   
   reader <- structure(
     list(
