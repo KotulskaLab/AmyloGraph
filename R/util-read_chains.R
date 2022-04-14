@@ -1,10 +1,9 @@
 #' @importFrom dplyr `%>%` rowwise summarize pull
-prettify_chains <- \(sequence) {
-  if (is.na(sequence)) {
+prettify_chains <- \(tbl_sq) {
+  if (nrow(tbl_sq) == 0) {
     "no sequence available"
   } else {
-    read_chains(sequence) %>%
-      rowwise() %>%
+    rowwise(tbl_sq) %>%
       summarize(seq_output = prettify_sequence_output(name, sequence)) %>%
       pull(seq_output) %>%
       paste0(collapse = "\n\n")
@@ -14,11 +13,12 @@ prettify_chains <- \(sequence) {
 #' @importFrom glue glue
 #' @importFrom dplyr `%>%`
 prettify_sequence_output <- \(name, sequence) {
-  group_length <- 10
+  group_length <- ag_option("sequence_group_length")
+  
   seq_length <- glue("Sequence length: {nchar(sequence)}")
-  indices <- if (nchar(sequence) >= 10) {
+  indices <- if (nchar(sequence) >= group_length) {
     seq(group_length, nchar(sequence), by = group_length) %>%
-      format(width = 10) %>%
+      format(width = group_length) %>%
       paste0(collapse = " ")
   } else {
     ""
@@ -45,10 +45,7 @@ empty_buffer <- function(reader) {
   reader
 }
 
-read_chains <- function(txt) {
-  # If the sequences are provided as a single string
-  txt <- strsplit(txt, "\n")[[1]]
-  
+read_chains <- function(txt, separator = ag_option("chain_separator")) {
   reader <- structure(
     list(
       name = character(),
@@ -58,15 +55,20 @@ read_chains <- function(txt) {
     class = "AG_sequence_reader"
   )
   
-  for (line in txt) {
-    if (substr(line, 1, 1) == ">") {
-      # A new name was found
-      reader <- empty_buffer(reader)
-      reader[["name"]] <- trimws(substring(line, 2))
-    } else {
-      reader[["sequence"]] <- paste0(reader[["sequence"]], trimws(line))
+  if (!is.na(txt)) {
+    # If the sequences are provided as a single string
+    txt <- strsplit(txt, separator)[[1]]
+    
+    for (line in txt) {
+      if (substr(line, 1, 1) == ">") {
+        # A new name was found
+        reader <- empty_buffer(reader)
+        reader[["name"]] <- trimws(substring(line, 2))
+      } else {
+        reader[["sequence"]] <- paste0(reader[["sequence"]], trimws(line))
+      }
     }
+    reader <- empty_buffer(reader)
   }
-  reader <- empty_buffer(reader)
   reader[["tbl"]]
 }

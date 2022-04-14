@@ -18,7 +18,9 @@
     ag_interaction_attrs = c("aggregation_speed",
                              "elongates_by_attaching",
                              "heterogenous_fibers"),
-    ag_center_network = TRUE
+    ag_center_network = TRUE,
+    ag_sequence_group_length = 10,
+    ag_chain_separator = " "
   )
   
   unset_inds <- !(names(new_options) %in% names(prev_options))
