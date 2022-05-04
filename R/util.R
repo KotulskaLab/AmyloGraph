@@ -12,6 +12,20 @@ is_node_selected <- function(id) {
   length(id) != 0 && id != ag_option("str_null")
 }
 
+#' Wrap DOI in a link
+#' 
+#' @description Wraps DOI code in a HTML clickable link to the respective
+#' address on doi.org. Allows displaying a truncated DOI string instead of the
+#' full form.
+#' 
+#' @param doi \[\code{character()}\]\cr
+#'  DOI codes to use (as labels and links).
+#' @param truncate \[\code{logical(1)}\]\cr
+#'  Whether displayed DOI code should be truncated to the first 18 characters.
+#' 
+#' @return A string vector of the same length as `doi` parameter, each element
+#' being an `<a>` tag for respective DOI code.
+#' 
 #' @importFrom glue glue
 #' @importFrom stringr str_trunc
 linkify_doi <- function(doi, truncate = TRUE) {
