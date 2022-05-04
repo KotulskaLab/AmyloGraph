@@ -7,7 +7,7 @@
 markdown_ag_version()
 }
 \value{
-A \code{renderText} object.
+A single string.
 }
 \description{
 This function retrieves version number of currently installed

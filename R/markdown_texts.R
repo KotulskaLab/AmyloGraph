@@ -3,7 +3,7 @@
 #' @description This function retrieves version number of currently installed
 #' \pkg{AmyloGraph} package and formats it into a neatly looking sentence.
 #' 
-#' @return A \code{renderText} object.
+#' @return A single string.
 #'
 #' @importFrom utils packageVersion
 #' @importFrom glue glue
