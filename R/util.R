@@ -34,6 +34,24 @@ linkify_doi <- function(doi, truncate = TRUE) {
   glue("<a href='https://doi.org/{doi}' target='_blank' rel='noopener noreferer'>{if (truncate) str_trunc(doi, 18) else doi}</a>")
 }
 
+#' Wrap UniProt ID in a link
+#' 
+#' @description Wraps UniProt ID code in a HTML clickable link to the respective
+#' address on uniprot.org.
+#' 
+#' @param uniprot_id \[\code{character()}\]\cr
+#'  UniProt IDs to use (as labels and links).
+#' 
+#' @return A string vector of the same length as `uniprot_id` parameter, each
+#' element being an `<a>` tag for respective UniProt ID.
+#' 
+#' @seealso \code{\link{citify}()}, \code{\link{linkify_doi}()}
+#' 
+#' @importFrom glue glue
+linkify_uniprot <- function(uniprot_id) {
+  glue("<a href='https://uniprot.org/uniprot/{uniprot_id}' target='_blank' rel='noopener noreferer''>{uniprot_id}</a>")
+}
+
 
 #' @importFrom glue glue
 #' @importFrom stringr str_trunc
@@ -47,11 +65,6 @@ citify <- function(reference_row) {
   glue("{all_names}, **{title}**, {journal} {year} (doi: <a href='https://doi.org/{doi}' target='_blank' rel='noopener noreferer'>{doi}</a>)")
 }
 
-
-#' @importFrom glue glue
-linkify_uniprot <- function(uniprot_id) {
-  glue("<a href='https://uniprot.org/uniprot/{uniprot_id}' target='_blank' rel='noopener noreferer''>{uniprot_id}</a>")
-}
 
 #' @importFrom stringi stri_detect_regex
 correct_motif <- \(motif) {
