@@ -37,8 +37,8 @@ XGMML_download_handler <- \(edges) {
     content = \(file) saveNetwork(
       igraph::graph_from_data_frame(
         edges[["table"]],
-        # Will create igraph object will all nodes, even those with all interactions
-        # filtered out
+        # Will create igraph object with all nodes, even those with all
+        # interactions filtered out
         vertices = ag_data_nodes()
       ),
       name = "AmyloGraph",
