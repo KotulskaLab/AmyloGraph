@@ -54,7 +54,6 @@ linkify_uniprot <- function(uniprot_id) {
 
 
 #' @importFrom glue glue
-#' @importFrom stringr str_trunc
 #' @export
 citify <- function(reference_row) {
   all_names <- reference_row[1, "all_names", drop = TRUE]
@@ -62,7 +61,7 @@ citify <- function(reference_row) {
   journal <- reference_row[1, "journal", drop = TRUE]
   year <- reference_row[1, "year", drop = TRUE]
   doi <- reference_row[1, "doi", drop = TRUE]
-  glue("{all_names}, **{title}**, {journal} {year} (doi: <a href='https://doi.org/{doi}' target='_blank' rel='noopener noreferer'>{doi}</a>)")
+  glue("{all_names}, **{title}**, {journal} {year} (doi: {linkify_doi(doi, truncate = FALSE)})")
 }
 
 
