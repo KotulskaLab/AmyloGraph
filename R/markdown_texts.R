@@ -1,6 +1,14 @@
+#' @title Format AmyloGraph version into human-friendly string
+#' 
+#' @description This function retrieves version number of currently installed
+#' \pkg{AmyloGraph} package and formats it into a neatly looking sentence.
+#' 
+#' @return A \code{renderText} object.
+#'
 #' @importFrom utils packageVersion
+#' @importFrom glue glue
 markdown_ag_version <- function()
-  paste0("AmyloGraph version: ", packageVersion("AmyloGraph"), ".\n")
+  glue("AmyloGraph version: {packageVersion('AmyloGraph')}.\n")
 
 markdown_description <- function() {
   "
