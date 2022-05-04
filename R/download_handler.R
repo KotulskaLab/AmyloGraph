@@ -1,3 +1,5 @@
+#' @importFrom shiny downloadHandler
+#' @importFrom dplyr `%>%` slice select
 #' @importFrom glue glue
 table_download_handler <- \(input, edges, write_function, extension)  downloadHandler(
   filename = \() glue("AmyloGraph.{extension}"),
@@ -9,6 +11,7 @@ table_download_handler <- \(input, edges, write_function, extension)  downloadHa
   )
 )
 
+#' @importFrom shiny downloadHandler
 #' @importFrom BioNet saveNetwork
 XGMML_download_handler <- \(edges) {
   downloadHandler(
