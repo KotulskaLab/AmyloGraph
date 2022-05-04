@@ -22,3 +22,6 @@ Wraps DOI code in a HTML clickable link to the respective
 address on doi.org. Allows displaying a truncated DOI string instead of the
 full form.
 }
+\seealso{
+\code{\link{citify}()}, \code{\link{linkify_uniprot}()}
+}

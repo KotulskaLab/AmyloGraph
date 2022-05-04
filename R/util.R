@@ -26,6 +26,8 @@ is_node_selected <- function(id) {
 #' @return A string vector of the same length as `doi` parameter, each element
 #' being an `<a>` tag for respective DOI code.
 #' 
+#' @seealso \code{\link{citify}()}, \code{\link{linkify_uniprot}()}
+#' 
 #' @importFrom glue glue
 #' @importFrom stringr str_trunc
 linkify_doi <- function(doi, truncate = TRUE) {
