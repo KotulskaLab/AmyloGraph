@@ -11,5 +11,6 @@ A list of tags to place inside a shiny app.
 }
 \description{
 Includes \verb{<head>} and \verb{<body>} tags with Google Analytics
-cookies scripts.
+cookies scripts. Adapted from:
+https://github.com/DataScienceScotland/shiny_cookies.
 }
