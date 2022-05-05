@@ -52,15 +52,27 @@ linkify_uniprot <- function(uniprot_id) {
   glue("<a href='https://uniprot.org/uniprot/{uniprot_id}' target='_blank' rel='noopener noreferer''>{uniprot_id}</a>")
 }
 
-
+#' Generate paper citation
+#' 
+#' @description This function formats paper reference data in a human-friendly
+#' format, akin to one of those used in formatting citations.
+#' 
+#' @param reference \[\code{character matrix(1, )}\]\cr
+#'  Paper citation data with the following columns: `all_names`, `title`,
+#'  `journal`, `year`, and `doi`.
+#' 
+#' @return A single string with well-formatted citation.
+#' 
+#' @seealso \code{\link{linkify_doi}()}, \code{\link{linkify_uniprot}()}
+#' 
 #' @importFrom glue glue
 #' @export
-citify <- function(reference_row) {
-  all_names <- reference_row[1, "all_names", drop = TRUE]
-  title <- reference_row[1, "title", drop = TRUE]
-  journal <- reference_row[1, "journal", drop = TRUE]
-  year <- reference_row[1, "year", drop = TRUE]
-  doi <- reference_row[1, "doi", drop = TRUE]
+citify <- function(reference) {
+  all_names <- reference[1, "all_names", drop = TRUE]
+  title <- reference[1, "title", drop = TRUE]
+  journal <- reference[1, "journal", drop = TRUE]
+  year <- reference[1, "year", drop = TRUE]
+  doi <- reference[1, "doi", drop = TRUE]
   glue("{all_names}, **{title}**, {journal} {year} (doi: {linkify_doi(doi, truncate = FALSE)})")
 }
 
