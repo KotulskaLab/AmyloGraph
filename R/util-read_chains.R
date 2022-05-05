@@ -22,9 +22,22 @@ prettify_chains <- function(tbl_sq) {
   }
 }
 
+#' Present sequence in human-friendly format
+#' 
+#' @description Displays a sequence in a line in group of 10 (by default,
+#' configurable with `sequence_group_length` AG option), each group numbered.
+#' Prepends it with sequence length and chain name, if applicable.
+#' 
+#' @param name \[\code{character(1)}\]\cr
+#'  Chain name. If not applicable, use `NA`.
+#' @param sequence \[\code{character(1)}\]\cr
+#'  Amino acid sequence.
+#' 
+#' @return A single string with multiple lines (probably 3 or 4).
+#' 
 #' @importFrom glue glue
 #' @importFrom dplyr `%>%`
-prettify_sequence_output <- \(name, sequence) {
+prettify_sequence_output <- function(name, sequence) {
   group_length <- ag_option("sequence_group_length")
   
   seq_length <- glue("Sequence length: {nchar(sequence)}")
