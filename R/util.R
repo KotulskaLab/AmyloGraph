@@ -131,7 +131,22 @@ contains_motif <- \(sequences, motif) {
   map_lgl(sequences, ~ some(.x[["sequence"]], stri_detect_regex, motif))
 }
 
-pluralize <- \(value, plural = "s", singular = "") {
+#' Return plural or singular form
+#' 
+#' @description Returns a plural or singular form depending on whether `value`
+#' is equal 1. By default it returns plural suffix "-s" or singular empty
+#' suffix.
+#' 
+#' @param value \[\code{numeric()}\]\cr
+#'  Values to check for equality to 1.
+#' @param plural \[\code{character(1)}\]\cr
+#'  String to return if equality not satisfied.
+#' @param singular \[\code{character(1)}\]\cr
+#'  String to return if equality satisfied.
+#' 
+#' @return A vector of plural/singular values of the same length as `value`
+#' parameter.
+pluralize <- function(value, plural = "s", singular = "") {
   ifelse(value == 1, singular, plural)
 }
 
