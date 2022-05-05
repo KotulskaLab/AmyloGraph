@@ -1,3 +1,27 @@
+#' Extract AmyloGraph option
+#' 
+#' @description This function accesses the current value of a selected
+#' AmyloGraph option.
+#' 
+#' @param option \[\code{character(1)}\]\cr
+#'  Option name without leading `"ag-"`.
+#' 
+#' @details
+#' The currently available options are:
+#' \itemize{
+#'   \item `str_null`
+#'   \item `palette`
+#'   \item `side_panel_width`
+#'   \item `main_panel_width`
+#'   \item `colnames`
+#'   \item `interaction_attrs`
+#'   \item `center_network`
+#'   \item `sequence_group_length`
+#'   \item `chain_separator`
+#' }
+#' 
+#' @return Option value.
+#' 
 #' @importFrom glue glue
 ag_option <- function(option) {
   getOption(glue("ag_{option}"))
