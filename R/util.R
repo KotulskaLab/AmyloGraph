@@ -27,6 +27,16 @@ ag_option <- function(option) {
   getOption(glue("ag_{option}"))
 }
 
+#' Find AmyloGraph column names in data
+#' 
+#' @description Filters column names of a data frame or matrix which fulfill
+#' a custom role in AmyloGraph, like "interactor name".
+#' 
+#' @param data \[\code{data.frame()}\]\cr
+#'  Data, which column names are to be filtered.
+#' 
+#' @return A string vector with filtered column names.
+#' 
 #' @importFrom purrr keep
 ag_colnames <- function(data) {
   keep(ag_option("colnames"), ~ .x %in% colnames(data))
