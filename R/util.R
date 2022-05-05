@@ -160,7 +160,7 @@ pluralize <- function(value, plural = "s", singular = "") {
 #' @return A single string with JavaScript code extracted from the file.
 #' 
 #' @importFrom glue glue
-load_js_code <- \(name) {
+load_js_code <- function(name) {
   path <- system.file(c("inst", "js", glue("{name}.js")), package = "AmyloGraph")
   paste(readLines(glue("{path}/{name}.js")))
 }
