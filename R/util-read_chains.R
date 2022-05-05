@@ -1,5 +1,17 @@
+#' Present chains in human-friendly format
+#' 
+#' @description Converts a tibble with sequence data for chains of a protein to
+#' a human-readable string. If tibble is empty, returns `"no sequence available"`
+#' instead.
+#' 
+#' @param tbl_sq \[\code{data.frame()}\]\cr
+#'  Sequence data for one protein, a result of a call to
+#'  \code{\link{read_chains}()}.
+#' 
+#' @return A single string, possibly with multiple lines.
+#' 
 #' @importFrom dplyr `%>%` rowwise summarize pull
-prettify_chains <- \(tbl_sq) {
+prettify_chains <- function(tbl_sq) {
   if (nrow(tbl_sq) == 0) {
     "no sequence available"
   } else {
