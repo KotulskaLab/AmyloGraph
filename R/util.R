@@ -150,6 +150,15 @@ pluralize <- function(value, plural = "s", singular = "") {
   ifelse(value == 1, singular, plural)
 }
 
+#' Read JavaScript code from file
+#' 
+#' @description Reads JS code from `inst/js` folder inside AmyloGraph package.
+#' 
+#' @param name \[\code{character(1)}\]\cr
+#'  File name without .js extension.
+#' 
+#' @return A single string with JavaScript code extracted from the file.
+#' 
 #' @importFrom glue glue
 load_js_code <- \(name) {
   path <- system.file(c("inst", "js", glue("{name}.js")), package = "AmyloGraph")
