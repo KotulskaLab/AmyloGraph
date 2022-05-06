@@ -67,9 +67,11 @@ prettify_sequence_output <- function(name, sequence) {
 #'  Sequence reader with buffer to empty.
 #' 
 #' @return `AG_sequence_reader` with empty buffer and additional sequence data.
+#' 
+#' @importFrom dplyr bind_rows
 empty_buffer <- function(reader) {
   if (length(reader[["sequence"]] > 0)) {
-    reader[["tbl"]] <- dplyr::bind_rows(
+    reader[["tbl"]] <- bind_rows(
       reader[["tbl"]],
       c(name = reader[["name"]], sequence = reader[["sequence"]])
     )
@@ -91,12 +93,14 @@ empty_buffer <- function(reader) {
 #'  A character or string to split data into lines on.
 #' 
 #' @return A `tibble` with the following columns: `name` and `sequence`.
+#' 
+#' @importFrom tibble tibble
 read_chains <- function(txt, separator = ag_option("chain_separator")) {
   reader <- structure(
     list(
       name = character(),
       sequence = character(),
-      tbl = tibble::tibble(name = character(), sequence = character())
+      tbl = tibble(name = character(), sequence = character())
     ),
     class = "AG_sequence_reader"
   )
