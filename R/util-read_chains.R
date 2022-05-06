@@ -58,6 +58,15 @@ prettify_sequence_output <- function(name, sequence) {
   ret
 }
 
+#' Flush chain reader buffer
+#' 
+#' @description Move chain data (name and sequence) from buffer to result
+#' storage.
+#' 
+#' @param reader \[\code{AG_sequence_reader(1)}\]\cr
+#'  Sequence reader with buffer to empty.
+#' 
+#' @return `AG_sequence_reader` with empty buffer and additional sequence data.
 empty_buffer <- function(reader) {
   if (length(reader[["sequence"]] > 0)) {
     reader[["tbl"]] <- dplyr::bind_rows(
