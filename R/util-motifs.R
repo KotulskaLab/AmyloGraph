@@ -12,8 +12,18 @@ correct_motif <- function(motif) {
   stri_detect_regex(motif, "^(\\^?[ABCDEFGHIJKLMNOPQRSTUVWXYZ\\*]+\\$?)?$")
 }
 
+#' Upgrade motif to detect ambiguous letters
+#' 
+#' @description Replaces ambiguous letters (`B`, `J`, `Z`, `X`, and `*`) with
+#' a set of characters (e.g. `B` with `[BDN]`).
+#' 
+#' @param motif \[\code{character(1)}\]\cr
+#'  Motif to patternize.
+#' 
+#' @return A single string with regex-ready motif.
+#' 
 #' @importFrom stringi stri_replace_all_regex
-patternize_motif <- \(motif) {
+patternize_motif <- function(motif) {
   stri_replace_all_regex(motif, 
                          c("B", "J", "Z", "X", "\\*"),
                          c("[BDN]", "[JIL]", "[ZEQ]", "[ABCDEFGHIJKLMNOPQRSTUVWXYZ]", ".*"),
