@@ -1,5 +1,17 @@
+#' Present chains in human-friendly format
+#' 
+#' @description Converts a tibble with sequence data for chains of a protein to
+#' a human-readable string. If tibble is empty, returns `"no sequence available"`
+#' instead.
+#' 
+#' @param tbl_sq \[\code{data.frame()}\]\cr
+#'  Sequence data for one protein, a result of a call to
+#'  \code{\link{read_chains}()}.
+#' 
+#' @return A single string, possibly with multiple lines.
+#' 
 #' @importFrom dplyr `%>%` rowwise summarize pull
-prettify_chains <- \(tbl_sq) {
+prettify_chains <- function(tbl_sq) {
   if (nrow(tbl_sq) == 0) {
     "no sequence available"
   } else {
@@ -10,9 +22,22 @@ prettify_chains <- \(tbl_sq) {
   }
 }
 
+#' Present sequence in human-friendly format
+#' 
+#' @description Displays a sequence in a line in group of 10 (by default,
+#' configurable with `sequence_group_length` AG option), each group numbered.
+#' Prepends it with sequence length and chain name, if applicable.
+#' 
+#' @param name \[\code{character(1)}\]\cr
+#'  Chain name. If not applicable, use `NA`.
+#' @param sequence \[\code{character(1)}\]\cr
+#'  Amino acid sequence.
+#' 
+#' @return A single string with multiple lines (probably 3 or 4).
+#' 
 #' @importFrom glue glue
 #' @importFrom dplyr `%>%`
-prettify_sequence_output <- \(name, sequence) {
+prettify_sequence_output <- function(name, sequence) {
   group_length <- ag_option("sequence_group_length")
   
   seq_length <- glue("Sequence length: {nchar(sequence)}")
@@ -33,9 +58,20 @@ prettify_sequence_output <- \(name, sequence) {
   ret
 }
 
+#' Flush chain reader buffer
+#' 
+#' @description Move chain data (name and sequence) from buffer to result
+#' storage.
+#' 
+#' @param reader \[\code{AG_sequence_reader(1)}\]\cr
+#'  Sequence reader with buffer to empty.
+#' 
+#' @return `AG_sequence_reader` with empty buffer and additional sequence data.
+#' 
+#' @importFrom dplyr bind_rows
 empty_buffer <- function(reader) {
   if (length(reader[["sequence"]] > 0)) {
-    reader[["tbl"]] <- dplyr::bind_rows(
+    reader[["tbl"]] <- bind_rows(
       reader[["tbl"]],
       c(name = reader[["name"]], sequence = reader[["sequence"]])
     )
@@ -45,12 +81,26 @@ empty_buffer <- function(reader) {
   reader
 }
 
+#' Parse chain sequence data
+#' 
+#' @description Reads amino acid sequences and their corresponding names, if
+#' available. The input should be either in FASTA format or a single sequence
+#' without a name.
+#' 
+#' @param txt \[\code{character(1)}\]\cr
+#'  Sequence data to parse.
+#' @param separator \[\code{character(1)}\]\cr
+#'  A character or string to split data into lines on.
+#' 
+#' @return A `tibble` with the following columns: `name` and `sequence`.
+#' 
+#' @importFrom tibble tibble
 read_chains <- function(txt, separator = ag_option("chain_separator")) {
   reader <- structure(
     list(
       name = character(),
       sequence = character(),
-      tbl = tibble::tibble(name = character(), sequence = character())
+      tbl = tibble(name = character(), sequence = character())
     ),
     class = "AG_sequence_reader"
   )

@@ -19,19 +19,15 @@ test_that("protein info contains numbers of UniProt sources", {
   testServer(server_single_protein, args = server_args, {
     # FapC
     session$setInputs(select_node = "6a3c09e0b9cdfb2336adf474d763155b")
-    # expect_match(output[["info"]], "1 source found in UniProt:")
-    expect_match(output[["info"]], "1 source found:")
+    expect_match(output[["info"]], "1 source found in UniProt:")
     # PrP
     session$setInputs(select_node = "c9b292b95fb4d85e8f8912576301ef48")
-    # expect_match(output[["info"]], "3 sources found in UniProt:")
-    expect_match(output[["info"]], "3 sources found:")
+    expect_match(output[["info"]], "3 sources found in UniProt:")
     # IAPP
     session$setInputs(select_node = "b872ef5d401e16b9b1f28c1ed85c8ee7")
-    # expect_match(output[["info"]], "4 sources found in UniProt:")
-    expect_match(output[["info"]], "4 sources found:")
+    expect_match(output[["info"]], "4 sources found in UniProt:")
     # SEVI
     session$setInputs(select_node = "b33d075178020b90ecb7b1e86cd37e11")
-    # expect_match(output[["info"]], "0 sources found in UniProt")
-    expect_match(output[["info"]], "0 sources found")
+    expect_match(output[["info"]], "0 sources found in UniProt")
   })
 })
