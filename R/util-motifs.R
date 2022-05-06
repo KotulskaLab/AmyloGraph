@@ -8,8 +8,8 @@
 #' @return A single logical value.
 #' 
 #' @importFrom stringi stri_detect_regex
-correct_motif <- \(motif) {
-  stri_detect_regex(motif, "^\\^?[ABCDEFGHIJKLMNOPQRSTUVWXYZ\\*]*\\$?$")
+correct_motif <- function(motif) {
+  stri_detect_regex(motif, "^(\\^?[ABCDEFGHIJKLMNOPQRSTUVWXYZ\\*]+\\$?)?$")
 }
 
 #' @importFrom stringi stri_replace_all_regex
