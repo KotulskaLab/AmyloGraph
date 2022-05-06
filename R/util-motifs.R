@@ -1,3 +1,12 @@
+#' Check motif correctness
+#' 
+#' @description Validates a motif against a regex.
+#' 
+#' @param motif \[\code{character(1)}\]\cr
+#'  Motif to check.
+#' 
+#' @return A single logical value.
+#' 
 #' @importFrom stringi stri_detect_regex
 correct_motif <- \(motif) {
   stri_detect_regex(motif, "^\\^?[ABCDEFGHIJKLMNOPQRSTUVWXYZ\\*]*\\$?$")
