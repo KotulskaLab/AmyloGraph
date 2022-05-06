@@ -42,6 +42,15 @@ ag_colnames <- function(data) {
   keep(ag_option("colnames"), ~ .x %in% colnames(data))
 }
 
+#' Check if node is selected
+#' 
+#' @description Checks whether `id` contains any data and whether this data is
+#' not equal `str_null` AG option.
+#' 
+#' @param id \[\code{character(0) | character(1)}\]\cr
+#'  Node ID to verify.
+#' 
+#' @return A single logical value.
 is_node_selected <- function(id) {
   length(id) != 0 && id != ag_option("str_null")
 }
