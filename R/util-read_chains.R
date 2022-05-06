@@ -79,6 +79,18 @@ empty_buffer <- function(reader) {
   reader
 }
 
+#' Parse chain sequence data
+#' 
+#' @description Reads amino acid sequences and their corresponding names, if
+#' available. The input should be either in FASTA format or a single sequence
+#' without a name.
+#' 
+#' @param txt \[\code{character(1)}\]\cr
+#'  Sequence data to parse.
+#' @param separator \[\code{character(1)}\]\cr
+#'  A character or string to split data into lines on.
+#' 
+#' @return A `tibble` with the following columns: `name` and `sequence`.
 read_chains <- function(txt, separator = ag_option("chain_separator")) {
   reader <- structure(
     list(
