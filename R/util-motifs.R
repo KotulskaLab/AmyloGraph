@@ -30,9 +30,22 @@ patternize_motif <- function(motif) {
                          vectorise_all = FALSE)
 }
 
+#' Check whether sequences fit motif
+#' 
+#' @description Compare each sequence against a motif. Motif is patternized
+#' before making comparisons.
+#' 
+#' @param sequences \[\code{character()}\]\cr
+#'  Sequences to check.
+#' @param motif \[\code{character(1)}\]\cr
+#'  Motif to look for in sequences.
+#' 
+#' @return A logical vector of the same length as `sequences` vector, each
+#' element showing whether a motif was found in a sequence.
+#' 
 #' @importFrom purrr map_lgl some
 #' @importFrom stringi stri_detect_regex
-contains_motif <- \(sequences, motif) {
+contains_motif <- function(sequences, motif) {
   motif <- patternize_motif(motif)
   map_lgl(sequences, ~ some(.x[["sequence"]], stri_detect_regex, motif))
 }
