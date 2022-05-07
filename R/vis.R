@@ -17,12 +17,11 @@
 #' @importFrom visNetwork visGetEdges visRemoveEdges visUpdateEdges
 #' @importFrom dplyr `%>%`
 #' @importFrom purrr map_int
-visResetEdges <- \(graph, edges, input, selected_node_input_id,
-                   legend = FALSE)
+visResetEdges <- function(graph, edges, input, selected_node_input_id)
   graph %>%
     visGetEdges("graph_edges_") %>%
     visRemoveEdges(map_int(input[["graph_edges_"]], ~.x[["id"]]) %>% unname()) %>%
-    visUpdateEdges(edges, legend) %>%
+    visUpdateEdges(edges) %>%
     visSelectNodes(input[[selected_node_input_id]])
 
 #' @importFrom visNetwork visUnselectAll visSelectNodes
