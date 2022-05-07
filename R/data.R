@@ -13,14 +13,22 @@ ag_load_data <- function()
     proteins = ag_data_proteins()
   )
 
+#' Load AmyloGraph interactions list
+#' 
+#' @return `data.frame` coming from `interactions_data.csv` file with the
+#' following changes:
+#' * `from_id` and `to_id` are unique hashes of interactor and interactee names
+#' * `interactor_sequence` and `interactee_sequence` are transformed with
+#'   \code{\link{read_chains}()} to a vector of tibbles.
+#' 
 #' @importFrom readr read_csv
 #' @importFrom purrr map_chr map
-#' @importFrom dplyr mutate
+#' @importFrom dplyr `%>%` mutate
 #' @importFrom digest digest
 #' @export
 ag_data_interactions <- function()
   read_csv(system.file("AmyloGraph", "interactions_data.csv", package = "AmyloGraph"),
-           col_types = "ccccfffcccccc") |>
+           col_types = "ccccfffcccccc") %>%
     mutate(from_id = map_chr(interactor_name, digest),
            to_id = map_chr(interactee_name, digest),
            interactor_sequence = map(interactor_sequence, read_chains),
