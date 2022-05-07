@@ -35,8 +35,9 @@ patternize_motif <- function(motif) {
 #' @description Compare each sequence against a motif. Motif is patternized
 #' before making comparisons.
 #' 
-#' @param sequences \[\code{character()}\]\cr
-#'  Sequences to check.
+#' @param sequences \[\code{list()}\]\cr
+#'  Sequences to check, each element being a `tibble` with `name` and `sequence`
+#'  columns.
 #' @param motif \[\code{character(1)}\]\cr
 #'  Motif to look for in sequences.
 #' 

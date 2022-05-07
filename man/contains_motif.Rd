@@ -7,8 +7,9 @@
 contains_motif(sequences, motif)
 }
 \arguments{
-\item{sequences}{[\code{character()}]\cr
-Sequences to check.}
+\item{sequences}{[\code{list()}]\cr
+Sequences to check, each element being a \code{tibble} with \code{name} and \code{sequence}
+columns.}
 
 \item{motif}{[\code{character(1)}]\cr
 Motif to look for in sequences.}
