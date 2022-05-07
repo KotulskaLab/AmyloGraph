@@ -78,6 +78,15 @@ ag_data_proteins <- function()
            col_types = "ccc") %>%
     mutate(id = map_chr(name, digest))
 
+#' Build color data for question answers
+#' 
+#' @return A list with two elements:
+#' * `data`: a list of tibbles for each question; each tibble containing two
+#'   columns -- `values` (containing answers to questions) and `colors` (with
+#'   HTML color codes, all unique within a tibble),
+#' * `groups`: a list with translations between human- and computer-friendly
+#'   names for questions.
+#' 
 #' @importFrom purrr set_names map
 #' @importFrom tibble tibble tribble
 ag_data_groups <- function() {
