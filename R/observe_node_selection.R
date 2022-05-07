@@ -1,3 +1,14 @@
+#' Display single protein panel on selection
+#' 
+#' @description Displays the panel with details of a single protein when
+#' a protein (a node) is selected and hides when not. Moreover, it handles
+#' the changes to selected node of a graph.
+#' 
+#' @param input \[\code{reactivevalues()}\]\cr
+#'  An input object of the app.
+#' 
+#' @return An observer.
+#' 
 #' @importFrom shiny observe updateSelectInput NS
 #' @importFrom shinyjs toggleCssClass
 #' @importFrom visNetwork visNetworkProxy
