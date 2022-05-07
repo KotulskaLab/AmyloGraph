@@ -34,6 +34,10 @@ ag_data_interactions <- function()
            interactor_sequence = map(interactor_sequence, read_chains),
            interactee_sequence = map(interactee_sequence, read_chains))
   
+#' Load AmyloGraph references list
+#' 
+#' @return `data.frame` coming from `reference_table.csv` file with no changes.
+#' 
 #' @importFrom readr read_csv
 #' @export
 ag_references <- function()
