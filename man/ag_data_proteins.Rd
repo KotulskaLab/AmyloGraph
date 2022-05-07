@@ -10,7 +10,7 @@ ag_data_proteins()
 \code{data.frame} coming from \code{protein_data.csv} file with the
 following changes:
 \itemize{
-\item \code{id} contains unique hashes of protein names
+\item \code{id} contains unique hashes of protein names.
 }
 }
 \description{

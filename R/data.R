@@ -67,15 +67,15 @@ ag_data_nodes <- function()
 #' 
 #' @return `data.frame` coming from `protein_data.csv` file with the
 #' following changes:
-#' * `id` contains unique hashes of protein names
+#' * `id` contains unique hashes of protein names.
 #' 
 #' @importFrom readr read_csv
-#' @importFrom dplyr mutate
+#' @importFrom dplyr `%>%` mutate
 #' @importFrom purrr map_chr
 #' @importFrom digest digest
 ag_data_proteins <- function()
   read_csv(system.file("AmyloGraph", "protein_data.csv", package = "AmyloGraph"),
-           col_types = "ccc") |>
+           col_types = "ccc") %>%
     mutate(id = map_chr(name, digest))
 
 #' @importFrom purrr set_names map
@@ -95,7 +95,7 @@ ag_data_groups <- function() {
                            values)
       )
     ) |> set_names(ag_option("interaction_attrs")),
-    groups = as.list(ag_option("interaction_attrs")) |>
+    groups = as.list(ag_option("interaction_attrs")) %>%
       set_names(tolower(groups))
   )
 }
