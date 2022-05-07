@@ -44,6 +44,12 @@ ag_references <- function()
   read_csv(system.file("AmyloGraph", "reference_table.csv", package = "AmyloGraph"),
            col_types = "cccccn") 
 
+#' Build list of proteins from interactions list
+#' 
+#' @return `data.frame` with a list of proteins that interact with others,
+#' described with `label` (human-readable name), `id` (machine-readable name),
+#' and `shape` (for the purpose of drawing a graph only).
+#' 
 #' @importFrom dplyr `%>%` select 
 #' @importFrom purrr map_chr
 #' @importFrom tibble tibble
