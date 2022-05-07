@@ -21,3 +21,34 @@ test_that("correct and incorrect motifs are detected", {
   # Including ^$ without any letters between them
   expect_false(correct_motif("^$"))
 })
+
+test_that("motifs are correctly patternized", {
+  expect_equal(patternize_motif(""),
+               "")
+  expect_equal(patternize_motif("PAPLLRIQ"),
+               "PAPLLRIQ")
+  expect_equal(patternize_motif("AJGKLPS"),
+               "A[JIL]GKLPS")
+  expect_equal(patternize_motif("^AIX"),
+               "^AI[ABCDEFGHIJKLMNOPQRSTUVWXYZ]")
+  expect_equal(patternize_motif("^PIZZA$"),
+               "^PI[ZEQ][ZEQ]A$")
+  expect_equal(patternize_motif("STO*P"),
+               "STO.*P")
+})
+
+test_that("motifs are correctly detected", {
+  sq_tbl <- lapply(
+    c("PAUL", "PAULS", "WEOAUIO", "FGIOPW", "SPIOGWX"),
+    function(seq) {
+      tibble::tibble(
+        name = NA,
+        sequence = seq
+      )
+    }
+  )
+  expect_equal(
+    contains_motif(sq_tbl, "AUJ*"),
+    c(TRUE, TRUE, TRUE, FALSE, FALSE)
+  )
+})
