@@ -24,6 +24,17 @@ toggle_state_and_css <- function(selector, class, condition) observe({
   )
 })
 
+#' Observe "Download" button
+#' 
+#' @description Toggles button on and off based on whether any row is selected
+#' in a table.
+#' 
+#' @param ns \[\code{function(1)}\]\cr
+#'  Namespace-generating function that takes single string as the only argument.
+#' @param any_row_selected \[\code{reactive(logical(1))}\]\cr
+#'  A reactive value telling whether any row is selected in a table.
+#' 
+#' @importFrom glue glue
 observe_download_button <- function(ns, any_row_selected) toggle_state_and_css(
   glue("#{ns('table')} .ag-download-button"),
   "ag-download-button-disabled",
