@@ -4,7 +4,7 @@
 \alias{AGID_button}
 \title{Generate AGID buttons}
 \usage{
-AGID_button(interaction_ids, id, ns, ...)
+AGID_button(interaction_ids, ns)
 }
 \arguments{
 \item{interaction_ids}{[\code{character()}]\cr

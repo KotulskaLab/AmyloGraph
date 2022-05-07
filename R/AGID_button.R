@@ -16,13 +16,12 @@
 #' @importFrom purrr map_chr
 #' @importFrom glue glue
 #' @importFrom shiny actionButton
-AGID_button <- function(interaction_ids, id, ns, ...) {
+AGID_button <- function(interaction_ids, ns) {
   map_chr(
     interaction_ids,
     function(interaction_id) {
       as.character(actionButton(
-        # TODO: fix incorrectly generated IDs
-        glue("ns(interaction_view_selector_{interaction_id})"),
+        glue("{ns(paste0('interaction_view_selector_', interaction_id))}"),
         as.character(interaction_id),
         onclick = glue("Shiny.setInputValue('{NS('single_interaction', 'selected_interaction')}', '{interaction_id}')")
       ))
