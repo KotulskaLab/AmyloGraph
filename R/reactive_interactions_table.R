@@ -6,7 +6,7 @@ reactive_interactions_table <- function(edges, ns) reactive({
   edges[["table"]] %>% 
     mutate(doi = linkify_doi(doi),
            original_AGID = AGID,
-           AGID = AGID_button(AGID, "interaction_detail", ns)) %>% 
+           AGID = AGID_button(AGID, ns)) %>% 
     select(AGID,
            interactor_name,
            interactee_name,
