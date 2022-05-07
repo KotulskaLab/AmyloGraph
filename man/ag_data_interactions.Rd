@@ -10,7 +10,7 @@ ag_data_interactions()
 \code{data.frame} coming from \code{interactions_data.csv} file with the
 following changes:
 \itemize{
-\item \code{from_id} and \code{to_id} are unique hashes of interactor and interactee names
+\item \code{from_id} and \code{to_id} are unique hashes of interactor and interactee names,
 \item \code{interactor_sequence} and \code{interactee_sequence} are transformed with
 \code{\link{read_chains}()} to a vector of tibbles.
 }
