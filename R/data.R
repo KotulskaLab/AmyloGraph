@@ -1,9 +1,16 @@
+#' Load all AmyloGraph data
+#' 
+#' @return A list with four elements:
+#' * `interactions`: see \code{\link{ag_data_interactions}()}
+#' * `groups`: see \code{\link{ag_data_groups}()}
+#' * `nodes`: see \code{\link{ag_data_nodes}()}
+#' * `proteins`: see \code{\link{ag_data_proteins}()}
 ag_load_data <- function()
   list(
-    interactions = AmyloGraph::ag_data_interactions(),
-    groups = AmyloGraph:::ag_data_groups(),
-    nodes = AmyloGraph:::ag_data_nodes(),
-    proteins = AmyloGraph:::ag_data_proteins()
+    interactions = ag_data_interactions(),
+    groups = ag_data_groups(),
+    nodes = ag_data_nodes(),
+    proteins = ag_data_proteins()
   )
 
 #' @importFrom readr read_csv
