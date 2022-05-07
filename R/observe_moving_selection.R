@@ -23,7 +23,7 @@
 #' @importFrom shiny NS observeEvent updateTabsetPanel
 #' @importFrom dplyr `%>%` mutate filter pull cur_group_rows
 #' @importFrom DT selectRows
-observe_moving_selection <- \(input, subtables, edges, table_proxy, rvals) observeEvent(
+observe_moving_selection <- function(input, subtables, edges, table_proxy, rvals) observeEvent(
   input[[NS("single_protein", "select_in_table")]],
   {
     ns <- NS("single_protein")
