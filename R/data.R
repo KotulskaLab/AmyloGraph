@@ -1,4 +1,4 @@
-ag_load_data <- \()
+ag_load_data <- function()
   list(
     interactions = AmyloGraph::ag_data_interactions(),
     groups = AmyloGraph:::ag_data_groups(),
@@ -11,7 +11,7 @@ ag_load_data <- \()
 #' @importFrom dplyr mutate
 #' @importFrom digest digest
 #' @export
-ag_data_interactions <- \()
+ag_data_interactions <- function()
   read_csv(system.file("AmyloGraph", "interactions_data.csv", package = "AmyloGraph"),
            col_types = "ccccfffcccccc") |>
     mutate(from_id = map_chr(interactor_name, digest),
@@ -21,7 +21,7 @@ ag_data_interactions <- \()
   
 #' @importFrom readr read_csv
 #' @export
-ag_references <- \()
+ag_references <- function()
   read_csv(system.file("AmyloGraph", "reference_table.csv", package = "AmyloGraph"),
            col_types = "cccccn") 
 
@@ -29,7 +29,7 @@ ag_references <- \()
 #' @importFrom purrr map_chr
 #' @importFrom tibble tibble
 #' @importFrom digest digest
-ag_data_nodes <- \()
+ag_data_nodes <- function()
   ag_data_interactions() %>%
     select(interactor_name, interactee_name) %>% 
     unlist() %>% 
@@ -42,14 +42,14 @@ ag_data_nodes <- \()
 #' @importFrom dplyr mutate
 #' @importFrom purrr map_chr
 #' @importFrom digest digest
-ag_data_proteins <- \()
+ag_data_proteins <- function()
   read_csv(system.file("AmyloGraph", "protein_data.csv", package = "AmyloGraph"),
            col_types = "ccc") |>
     mutate(id = map_chr(name, digest))
 
 #' @importFrom purrr set_names map
 #' @importFrom tibble tibble tribble
-ag_data_groups <- \() {
+ag_data_groups <- function() {
   groups <- set_names(
     names(ag_option("colnames")),
     ag_option("colnames")
@@ -69,6 +69,6 @@ ag_data_groups <- \() {
   )
 }
 
-ag_group_labels <- \(data_groups) data_groups[["groups"]]
+ag_group_labels <- function(data_groups) data_groups[["groups"]]
 
-ag_color_map <- \(data_groups, group) data_groups[["data"]][[group]]
+ag_color_map <- function(data_groups, group) data_groups[["data"]][[group]]
