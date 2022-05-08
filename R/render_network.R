@@ -1,14 +1,22 @@
-
-
-
+#' Render visNetwork graph
+#' 
+#' @description Renders a visNetwork graph using initial AmyloGraph data. Any
+#' changes to the graph should be done through `visNetworkProxy()` inside an
+#' observer in other parts of code.
+#' 
+#' @param ag_data_nodes \[\code{data.frame()}\]\cr
+#'  Output of \code{\link{ag_data_nodes}()}, nodes to plot.
+#' @param edges \[\code{reactivevalues()}\]\cr
+#'  AmyloGraph data with "graph" element, edges to plot.
+#' 
 #' @importFrom visNetwork renderVisNetwork visNetwork visEdges visOptions visInteraction
 #' @importFrom visNetwork visEvents visIgraphLayout visExport visNodes visPhysics
 render_network <- function(ag_data_nodes, edges) {
   initial_center <- load_js_code("initial_center")
   
   renderVisNetwork({
-    # we don't want to render graph each time we modify edges
-    # instead we remove and update them in a separate observer
+    # We don't want to render graph each time we modify edges
+    # Instead we update them in a separate observer using visNetworkProxy()
     visNetwork(ag_data_nodes, isolate(edges[["graph"]]),
                width = 1600, height = 900) %>%
       visEdges(arrows = "to", 
