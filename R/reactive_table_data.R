@@ -36,10 +36,9 @@ reactive_table_data <- function(edges, ns) {
 #' @importFrom shiny reactive
 #' @importFrom dplyr select `%>%`
 #' @importFrom icecream ic
-reactive_subtable_data <- function(input, edge_data, target_id, target_variable, ns) {
+reactive_subtable_data <- function(edges, ns, input, target_id, target_variable) {
   reactive({
-    (if (input[["ignore_filters"]]) edge_data[["all"]]
-     else edge_data[["table"]]) %>%
+    (if (input[["ignore_filters"]]) edges[["all"]] else edges[["table"]]) %>%
       filter({{target_id}} == input[["select_node"]]) %>%
       arrange({{target_variable}}, doi) %>%
       mutate(doi = linkify_doi(doi),
