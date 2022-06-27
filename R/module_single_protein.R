@@ -29,9 +29,9 @@ server_single_protein <- function(id, edge_data, node_data, protein_data) {
     
     output[["info"]] <- render_protein_info(protein_data, selected_node_label)
   
-    subtables[["interactees"]] <- reactive_interactions_subtable(
+    subtables[["interactees"]] <- reactive_subtable_data(
       input, edge_data, from_id, interactee_name, NS(ns("interactees")))
-    subtables[["interactors"]] <- reactive_interactions_subtable(
+    subtables[["interactors"]] <- reactive_subtable_data(
       input, edge_data, to_id, interactor_name, NS(ns("interactors")))
     
     output[["interactees"]] <- render_interactions_subtable(subtables[["interactees"]])
