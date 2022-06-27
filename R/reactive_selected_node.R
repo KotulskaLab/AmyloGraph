@@ -1,3 +1,13 @@
+#' @title Access label of currently selected protein
+#' 
+#' @description This function extracts label from protein info.
+#' 
+#' @param selected_node_info \[\code{reactive(data.frame())}\]\cr
+#'  A row from AmyloGraph node data for a single protein.
+#' 
+#' @return A \code{reactive} object with a single string containing protein
+#' name.
+#' 
 #' @importFrom shiny reactive
 reactive_selected_node_label <- function(selected_node_info) {
   reactive({
