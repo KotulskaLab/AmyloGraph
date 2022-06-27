@@ -29,10 +29,10 @@ server_single_protein <- function(id, edge_data, node_data, protein_data) {
     
     output[["info"]] <- render_protein_info(protein_data, selected_node_label)
   
-    subtables[["interactees"]] <- reactive_interactions_subtable(
-      input, edge_data, from_id, interactee_name, NS(ns("interactees")))
-    subtables[["interactors"]] <- reactive_interactions_subtable(
-      input, edge_data, to_id, interactor_name, NS(ns("interactors")))
+    subtables[["interactees"]] <- reactive_subtable_data(
+      edge_data, NS(ns("interactees")), input, from_id, interactee_name)
+    subtables[["interactors"]] <- reactive_subtable_data(
+      edge_data, NS(ns("interactors")), input, to_id, interactor_name)
     
     output[["interactees"]] <- render_interactions_subtable(subtables[["interactees"]])
     output[["interactors"]] <- render_interactions_subtable(subtables[["interactors"]])
@@ -52,9 +52,9 @@ server_single_protein <- function(id, edge_data, node_data, protein_data) {
     observe_selecting_all(input, "interactees_select_all", interactees_proxy, subtables[["interactees"]])
     observe_selecting_all(input, "interactors_select_all", interactors_proxy, subtables[["interactors"]])
     
-    any_row_selected_and_filters_applied <- reactive_selecting_in_main_applicable(input)
+    transfer_selection_allowed <- reactive_allow_selection_transfer(input)
     
-    observe_select_in_table_button(ns, any_row_selected_and_filters_applied)
+    observe_select_in_table_button(ns, transfer_selection_allowed)
     
     subtables
   })

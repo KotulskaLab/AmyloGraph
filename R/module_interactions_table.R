@@ -21,7 +21,7 @@ server_interactions_table <- function(id, edges, rvals) {
   moduleServer(id, function(input, output, session) {
     ns <- NS(id)
     
-    interactions_table <- reactive_interactions_table(edges, ns)
+    interactions_table <- reactive_table_data(edges, ns)
     
     output[["table"]] <- render_interactions_table(interactions_table, ns, session, rvals)
     

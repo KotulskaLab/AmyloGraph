@@ -88,3 +88,18 @@ load_js_code <- function(name) {
   path <- system.file(c("inst", "js", glue("{name}.js")), package = "AmyloGraph")
   paste(readLines(glue("{path}/{name}.js")))
 }
+
+#' Label and reorder a vector
+#' 
+#' @description Sets names to a vector and then reorders it so that names are
+#' sorted alphabetically.
+#' 
+#' @param value \[\code{vector()}\]\cr
+#'  Values to label and reorder.
+#' @param label \[\code{character()}\]\cr
+#'  Names to use when labeling and reordering.
+#' 
+#' @return Reordered \code{value} vector with names.
+label_and_order <- function(value, label) {
+  setNames(value, label)[order(label)]
+}
