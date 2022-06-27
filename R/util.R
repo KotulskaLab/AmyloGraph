@@ -88,3 +88,7 @@ load_js_code <- function(name) {
   path <- system.file(c("inst", "js", glue("{name}.js")), package = "AmyloGraph")
   paste(readLines(glue("{path}/{name}.js")))
 }
+
+label_and_order <- function(value, label) {
+  setNames(value, label)[order(label)]
+}
