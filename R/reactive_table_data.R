@@ -1,3 +1,17 @@
+#' Build table data
+#' 
+#' @description Mutates filtered interaction data to contain DOI links and
+#' clickable AGIDs; then selects only columns that are displayed in the main
+#' table.
+#' 
+#' @param edges \[\code{reactivevalues()}\]\cr
+#'  AmyloGraph data with "table" element.
+#' @param ns \[code{function()}\]\cr
+#'  Namespace function to use for AGID buttons.
+#' 
+#' @return A \code{reactive} object with a \code{tibble} containing filtered
+#' interaction data. 
+#' 
 #' @importFrom shiny reactive
 #' @importFrom dplyr mutate select `%>%`
 #' @importFrom icecream ic
