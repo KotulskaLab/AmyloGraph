@@ -34,8 +34,7 @@ reactive_table_data <- function(edges, ns) {
 }
 
 #' @importFrom shiny reactive
-#' @importFrom dplyr select `%>%`
-#' @importFrom icecream ic
+#' @importFrom dplyr filter arrange mutate select `%>%`
 reactive_subtable_data <- function(edges, ns, input, target_id, target_variable) {
   reactive({
     (if (input[["ignore_filters"]]) edges[["all"]] else edges[["table"]]) %>%
