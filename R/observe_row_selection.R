@@ -24,7 +24,7 @@ toggle_state_and_css <- function(selector, class, condition) observe({
   )
 })
 
-#' Observe "Download" button
+#' Observe "Download" buttons
 #' 
 #' @description Toggles button on and off based on whether any row is selected
 #' in a table.
@@ -35,8 +35,8 @@ toggle_state_and_css <- function(selector, class, condition) observe({
 #'  A reactive value telling whether any row is selected in a table.
 #' 
 #' @importFrom glue glue
-observe_download_button <- function(ns, any_row_selected) toggle_state_and_css(
-  glue("#{ns('table')} .ag-download-button"),
+observe_download_buttons <- function(ns, any_row_selected) toggle_state_and_css(
+  glue("#{ns('button_bar')} .ag-download-button"),
   "ag-download-button-disabled",
   any_row_selected
 )
@@ -56,6 +56,13 @@ observe_download_button <- function(ns, any_row_selected) toggle_state_and_css(
 #' @importFrom glue glue
 observe_deselect_button <- function(ns, button_id, any_row_selected) toggle_state_and_css(
   glue("#{ns(button_id)}"),
+  "ag-deselection-button-disabled",
+  any_row_selected
+)
+
+#' @importFrom glue glue
+observe_deselect_buttons <- function(ns, any_row_selected) toggle_state_and_css(
+  glue("#{ns('button_bar')} .ag-deselection-button"),
   "ag-deselection-button-disabled",
   any_row_selected
 )

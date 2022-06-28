@@ -4,14 +4,14 @@
 \alias{table_download_handler}
 \title{Handle download of AmyloGraph data}
 \usage{
-table_download_handler(input, edges, write_function, extension)
+table_download_handler(input, table_data, write_function, extension)
 }
 \arguments{
 \item{input}{[\code{reactivevalues()}]\cr
 An input object of the app or a module that contains the table.}
 
-\item{edges}{[\code{reactivevalues()}]\cr
-AmyloGraph data with "table" element.}
+\item{table_data}{[\code{data.frame()}]\cr
+AmyloGraph table data.}
 
 \item{write_function}{[\code{function(1)}]\cr
 A function that transforms table data to a file.}

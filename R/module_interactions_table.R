@@ -3,11 +3,11 @@
 ui_interactions_table <- function(id) {
   ns <- NS(id)
   tagList(
-    actionButton(ns("select_all"), "Select all"),
-    actionButton(ns("deselect_all"), "Deselect all"),
-    hidden(downloadButton(ns("download_csv"))),
-    hidden(downloadButton(ns("download_xlsx"))),
-    elem_interactions_table(ns("table"))
+    ui_button_bar(
+      ns,
+      BUTTONS[c("SELECT_ALL", "DESELECT_ALL", "DOWNLOAD_CSV", "DOWNLOAD_XLSX")]
+    ),
+    dataTableOutput(ns("table"))
   )
 }
 
@@ -27,19 +27,14 @@ server_interactions_table <- function(id, edges, rvals) {
     
     table_proxy <- dataTableProxy("table")
     
-    any_row_selected <- reactive({!is.null(input[["table_rows_selected"]])})
-    
-    observe_download_button(ns, any_row_selected)
-    observe_deselect_button(ns, "deselect_all", any_row_selected)
-    observe_deselecting_all(input, "deselect_all", table_proxy)
-    observe_selecting_all(input, "select_all", table_proxy, interactions_table)
-    
-    output[["download_csv"]] <- table_download_handler(input, edges, write_csv, "csv")
-    output[["download_xlsx"]] <- table_download_handler(input, edges, write_xlsx, "xlsx")
-
-    # must be executed after assignment to the corresponding output
-    outputOptions(output, "download_csv", suspendWhenHidden = FALSE)
-    outputOptions(output, "download_xlsx", suspendWhenHidden = FALSE)
+    server_button_bar(
+      ns,
+      BUTTONS[c("SELECT_ALL", "DESELECT_ALL", "DOWNLOAD_CSV", "DOWNLOAD_XLSX")],
+      input,
+      output,
+      table_proxy = table_proxy,
+      table_data = reactive(edges[["table"]])
+    )
     
     table_proxy
   })
