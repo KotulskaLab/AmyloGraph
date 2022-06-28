@@ -1,5 +1,5 @@
 #' @importFrom DT renderDataTable
-render_interactions_table <- function(interactions_table, ns, session, rvals)
+render_interactions_table <- function(interactions_table, ns, session, selection_config) {
   renderDataTable(
     interactions_table(),
     options = list(
@@ -15,8 +15,9 @@ render_interactions_table <- function(interactions_table, ns, session, rvals)
     rownames = FALSE,
     colnames = ag_colnames(interactions_table()),
     server = FALSE,
-    selection = if (ic(rvals[["table_visited"]])) list(mode = "multiple", selected = rvals[["initially_selected"]], target = "row") else "multiple"
+    selection = selection_config()
   )
+}
 
 #' @importFrom DT renderDataTable
 #' @importFrom dplyr `%>%` filter arrange select mutate
