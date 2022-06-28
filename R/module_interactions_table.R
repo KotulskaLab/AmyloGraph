@@ -17,13 +17,15 @@ ui_interactions_table <- function(id) {
 #' @importFrom writexl write_xlsx
 #' @importFrom shinyjs toggleState
 #' @importFrom DT dataTableProxy
-server_interactions_table <- function(id, edges, rvals) {
+server_interactions_table <- function(id, edges, selection_config) {
   moduleServer(id, function(input, output, session) {
     ns <- NS(id)
     
     interactions_table <- reactive_table_data(edges, ns)
     
-    output[["table"]] <- render_interactions_table(interactions_table, ns, session, rvals)
+    output[["table"]] <- render_interactions_table(
+      interactions_table, selection_config = selection_config
+    )
     
     table_proxy <- dataTableProxy("table")
     
