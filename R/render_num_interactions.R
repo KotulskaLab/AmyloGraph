@@ -33,6 +33,17 @@ render_num_interactions_by_protein <- function(interactions, nodes) {
   )
 }
 
+#' Render a plot of interaction count by paper
+#' 
+#' @description Renders a barplot of the frequency of interaction counts for
+#' papers; this shows how many interactions are usually retrieved from a single
+#' paper.
+#' 
+#' @param interactions \[\code{data.frame()}\]\cr
+#'  AmyloGraph interaction data.
+#' @param ... \cr
+#'  Additional parameters to \code{renderPlot()}.
+#' 
 #' @importFrom dplyr `%>%` count
 #' @importFrom shiny renderPlot
 #' @importFrom ggplot2 aes ggplot geom_col scale_x_continuous scale_y_continuous 
