@@ -1,3 +1,13 @@
+#' Render a table of interaction count by protein
+#' 
+#' @description Renders a table with interaction count for each protein,
+#' arranged by protein name alphabetically.
+#' 
+#' @param interactions \[\code{data.frame()}\]\cr
+#'  AmyloGraph interaction data.
+#' @param nodes \[\code{data.frame()}\]\cr
+#'  AmyloGraph node data.
+#' 
 #' @importFrom dplyr `%>%` mutate arrange select filter 
 #' @importFrom purrr map_int
 #' @importFrom DT renderDataTable
