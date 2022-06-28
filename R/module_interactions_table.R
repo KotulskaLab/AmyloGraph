@@ -7,7 +7,7 @@ ui_interactions_table <- function(id) {
     actionButton(ns("deselect_all"), "Deselect all"),
     hidden(downloadButton(ns("download_csv"))),
     hidden(downloadButton(ns("download_xlsx"))),
-    elem_interactions_table(ns("table"))
+    dataTableOutput(ns("table"))
   )
 }
 
