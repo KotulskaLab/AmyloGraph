@@ -24,7 +24,8 @@ server_interactions_table <- function(id, edges, selection_config) {
     interactions_table <- reactive_table_data(edges, ns)
     
     output[["table"]] <- render_interactions_table(
-      interactions_table, ns, session, selection_config)
+      interactions_table, selection_config = selection_config
+    )
     
     table_proxy <- dataTableProxy("table")
     
