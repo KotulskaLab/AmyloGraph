@@ -12,7 +12,7 @@ BUTTONS <- list(
       class = "ag-download-button"
     ),
     server = \(input, output, ..., table_data) {
-      output[["download_csv"]] <- download_handler(
+      output[["download_csv"]] <- table_download_handler(
         input, table_data, write_csv, "csv"
       )
     },
@@ -25,7 +25,7 @@ BUTTONS <- list(
       class = "ag-download-button"
     ),
     server = \(input, output, ..., table_data) {
-      output[["download_xlsx"]] <- download_handler(
+      output[["download_xlsx"]] <- table_download_handler(
         input, table_data, write_xslx, "xlsx"
       )
     },

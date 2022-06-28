@@ -5,8 +5,8 @@
 #' 
 #' @param input \[\code{reactivevalues()}\]\cr
 #'  An input object of the app or a module that contains the table.
-#' @param edges \[\code{reactivevalues()}\]\cr
-#'  AmyloGraph data with "table" element.
+#' @param table_data \[\code{data.frame()}\]\cr
+#'  AmyloGraph table data.
 #' @param write_function \[\code{function(1)}\]\cr
 #'  A function that transforms table data to a file.
 #' @param extension \[\code{character(1)}\]\cr
@@ -17,11 +17,11 @@
 #' @importFrom shiny downloadHandler
 #' @importFrom dplyr `%>%` slice select
 #' @importFrom glue glue
-table_download_handler <- \(input, edges, write_function, extension)  {
+table_download_handler <- \(input, table_data, write_function, extension)  {
   downloadHandler(
     filename = \() glue("AmyloGraph.{extension}"),
     content = \(file) write_function(
-      edges[["table"]] %>%
+      table_data() %>%
         slice(input[["table_rows_selected"]]) %>%
         select(-c(from_id, to_id)),
       file
