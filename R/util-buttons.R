@@ -1,3 +1,10 @@
+define_button <- function(ui, server, tags = NULL) {
+  structure(
+    list(ui = ui, server = server, tags = tags),
+    class = "ag_button"
+  )
+}
+
 #' Collect button tags
 #' 
 #' @description This functions collects all unique tags assigned to supplied
