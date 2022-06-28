@@ -32,7 +32,7 @@ server_interactions_table <- function(id, edges, rvals) {
     observe_download_button(ns, any_row_selected)
     observe_deselect_button(ns, "deselect_all", any_row_selected)
     observe_deselecting_all(input, "deselect_all", table_proxy)
-    observe_selecting_all(input, "select_all", table_proxy, interactions_table)
+    observe_selecting_all(input, "select_all", table_proxy, "table")
     
     output[["download_csv"]] <- table_download_handler(input, edges, write_csv, "csv")
     output[["download_xlsx"]] <- table_download_handler(input, edges, write_xlsx, "xlsx")

@@ -4,7 +4,7 @@
 \alias{observe_selecting_all}
 \title{Select all rows in a table}
 \usage{
-observe_selecting_all(input, button_id, table_proxy, interactions_table)
+observe_selecting_all(input, button_id, table_proxy, table_id = "table")
 }
 \arguments{
 \item{input}{[\code{reactivevalues()}]\cr
@@ -16,8 +16,8 @@ ID of a button that triggers adding selections.}
 \item{table_proxy}{[\code{dataTableProxy(1)}]\cr
 Proxy of a table to update.}
 
-\item{interactions_table}{[\code{reactive(data.frame())}]\cr
-Observation data used in updated table.}
+\item{table_id}{[\code{character(1)}]\cr
+ID of the table, from which to read \code{_rows_all}.}
 }
 \description{
 Sets selected rows to all in a table in response to clicking
