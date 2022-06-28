@@ -20,7 +20,6 @@ render_interactions_table <- function(interactions_table, ns, session, selection
 }
 
 #' @importFrom DT renderDataTable
-#' @importFrom dplyr `%>%` filter arrange select mutate
 render_interactions_subtable <- function(interactions_subtable) {
   renderDataTable(
     interactions_subtable(),
