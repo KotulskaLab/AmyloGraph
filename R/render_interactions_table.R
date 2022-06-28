@@ -1,4 +1,4 @@
-#' @importFrom DT renderDataTable JS
+#' @importFrom DT renderDataTable
 render_interactions_table <- function(interactions_table, ns, session, rvals)
   renderDataTable(
     interactions_table(),
@@ -17,3 +17,23 @@ render_interactions_table <- function(interactions_table, ns, session, rvals)
     server = FALSE,
     selection = if (ic(rvals[["table_visited"]])) list(mode = "multiple", selected = rvals[["initially_selected"]], target = "row") else "multiple"
   )
+
+#' @importFrom DT renderDataTable
+#' @importFrom dplyr `%>%` filter arrange select mutate
+render_interactions_subtable <- function(interactions_subtable) {
+  renderDataTable(
+    interactions_subtable(),
+    options = list(
+      dom = 'rtip',
+      pageLength = 10,
+      pagingType = "simple",
+      lengthChange = FALSE,
+      # it's either index or header class, and we don't use header classes
+      columnDefs = list(list(visible = FALSE, targets = -1))
+    ),
+    escape = FALSE,
+    rownames = FALSE,
+    colnames = ag_colnames(interactions_subtable()),
+    server = FALSE
+  )
+}
