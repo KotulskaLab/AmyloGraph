@@ -18,15 +18,15 @@ BUTTONS <- list(
     },
     tags = "DOWNLOAD"
   ),
-  DOWNLOAD_XSLX = list(
+  DOWNLOAD_XLSX = list(
     ui = \(ns) downloadButton(
-      ns("download_xslx"),
+      ns("download_xlsx"),
       label = "Download selected as Excel",
       class = "ag-download-button"
     ),
     server = \(input, output, ..., table_data) {
       output[["download_xlsx"]] <- table_download_handler(
-        input, table_data, write_xslx, "xlsx"
+        input, table_data, write_xlsx, "xlsx"
       )
     },
     tags = "DOWNLOAD"
