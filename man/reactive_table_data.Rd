@@ -10,7 +10,7 @@ reactive_table_data(edges, ns)
 \item{edges}{[\code{reactivevalues()}]\cr
 AmyloGraph data with "table" element.}
 
-\item{ns}{[code{function()}]\cr
+\item{ns}{[code{function(1)}]\cr
 Namespace function to use for AGID buttons.}
 }
 \value{
