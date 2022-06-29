@@ -130,6 +130,7 @@ p3 <- rbind(mutate(AmpSim(cyc = 1:40, ampl = 1.5), curve_type = "faster fibrilli
 **Sequence:** The sequence is a vector of amino acids. 
 
 1. In the case when the exact sequence is not known, we provide the longest possible precursor from UniProt.
+2. If protein is available only in a complex or was isolated (for example, purified from isolated spleen amyloid fibrils), we consider sequence as unavailable.
 3. If interactee or interactor are mutants/fragments of an amyloid protein, we provide only the sequence of the mutant/fragment and not the wild type protein.
 4. We consider sequences that have modified amino acids (e.g., methylated), but we do not include this information in the sequence.
 5. We do NOT consider mutants that instead of standard amino acids have a) non-biogenic amino acids (e.g., tyramine) b) non-amino acid linkers. 
