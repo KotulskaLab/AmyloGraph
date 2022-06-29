@@ -28,7 +28,6 @@ reactive_table_data <- function(edges, ns) {
              heterogenous_fibers,
              doi,
              original_AGID)
-    # original_AGID must be last for column invisibility to work correctly
   })
 }
 
@@ -63,6 +62,5 @@ reactive_subtable_data <- function(edges, ns, input, target_id, target_variable)
              original_AGID = AGID,
              AGID = AGID_button(AGID, ns)) %>%
       select(AGID, .data[[target_variable]], doi, original_AGID)
-    # original_AGID must be last for column invisibility to work correctly
   })
 }
