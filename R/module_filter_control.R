@@ -1,7 +1,5 @@
-#' @importFrom htmltools div
-#' @importFrom shinyhelper helper
-#' @importFrom shiny selectInput NS tagList
 #' @importFrom purrr imap
+#' @importFrom shinyhelper helper
 ui_filter_control <- function(id, data_groups) {
   div(
     id = "filter_control",
@@ -9,31 +7,38 @@ ui_filter_control <- function(id, data_groups) {
       selectInput(
         inputId = NS(id, "label_group"),
         label = "Group edges by",
-        choices = c(none = ag_option("str_null"), 
-                    ag_group_labels(data_groups)),
-        multiple = FALSE),
+        choices = add_none(ag_group_labels(data_groups)),
+        multiple = FALSE
+      ),
       type = "markdown",
-      content = "label_group"),
+      content = "label_group"
+    ),
     do.call(
       tagList,
-      imap(ag_group_labels(data_groups),
-           ~ filterCheckboxInput(NS(id, .x),
-                                 ag_color_map(data_groups, .x)[["values"]],
-                                 .y))
+      imap(
+        ag_group_labels(data_groups),
+        ~ filterCheckboxInput(
+          NS(id, .x),
+          ag_color_map(data_groups, .x)[["values"]],
+          .y
+        )
+      )
     ),
     uiOutput(outputId = NS(id, "incorrect_motif_message")),
-    helper(textInput(NS(id, "motif"), "Filter by motif", placeholder = "^LXXA"),
-           type = "markdown",
-           content = "motif")
+    helper(
+      textInput(NS(id, "motif"), "Filter by motif", placeholder = "^LXXA"),
+      type = "markdown",
+      content = "motif"
+    )
   )
 }
 
-#' @importFrom shiny moduleServer observe reactiveValues validate need
-#' @importFrom shinyjs toggleCssClass
-#' @importFrom purrr set_names map when walk
-#' @importFrom dplyr `%>%` filter group_by summarize cur_group_id mutate select
+#' @importFrom dplyr filter group_by summarize cur_group_id mutate select
 #' @importFrom glue glue_collapse
+#' @importFrom icecream ic
+#' @importFrom purrr set_names map when walk
 #' @importFrom rlang sym expr
+#' @importFrom shinyjs toggleCssClass
 server_filter_control <- function(id, data_interactions, data_groups) {
   moduleServer(id, function(input, output, session) {
     observe({
@@ -64,7 +69,7 @@ server_filter_control <- function(id, data_interactions, data_groups) {
       if (is_motif_correct() && nchar(input[["motif"]]) > 0) {
         interactions_filtered_by_group() %>%
           filter(contains_motif(interactor_sequence, input[["motif"]]) |
-                 contains_motif(interactee_sequence, input[["motif"]]))
+                   contains_motif(interactee_sequence, input[["motif"]]))
       } else {
         interactions_filtered_by_group()
       }

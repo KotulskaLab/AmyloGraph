@@ -10,8 +10,6 @@
 #' 
 #' @return Value to use as `selection` parameter in `renderDataTable()`, either
 #' a list or a string.
-#' 
-#' @importFrom shiny reactive
 reactive_selection_config <- function(rvals) {
   reactive({
     if (rvals[["table_visited"]]) {

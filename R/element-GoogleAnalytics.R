@@ -5,8 +5,6 @@
 #' https://github.com/DataScienceScotland/shiny_cookies.
 #' 
 #' @return A list of tags to place inside a shiny app.
-#' 
-#' @importFrom shiny tagList tags includeHTML
 GoogleAnalytics <- function() {
   tagList(
     tags$head(includeHTML("./www/head-ga.html")),

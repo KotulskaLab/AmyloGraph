@@ -1,4 +1,3 @@
-#' @importFrom shiny markdown img
 ui_about <- function(id) {
   div(
     id = "about",
@@ -14,7 +13,6 @@ ui_about <- function(id) {
   )
 }
 
-#' @importFrom shiny moduleServer
 server_about <- function(id) {
   moduleServer(id, function(input, output, session) {
     # Yep, it's empty.

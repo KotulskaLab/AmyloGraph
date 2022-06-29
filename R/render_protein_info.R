@@ -12,9 +12,8 @@
 #' 
 #' @return A \code{renderText} object.
 #'
-#' @importFrom shiny renderText req
-#' @importFrom dplyr `%>%` filter
-#' @importFrom glue glue glue_data
+#' @importFrom dplyr filter
+#' @importFrom glue glue_data
 render_protein_info <- \(selected_node_label, protein_data) renderText({
   req(selected_node_label())
   filtered_data <- protein_data %>%

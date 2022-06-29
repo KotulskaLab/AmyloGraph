@@ -18,10 +18,7 @@
 #'  Reactive values handling the problem of setting selection in a table that
 #'  wasn't displayed previously.
 #' 
-#' @return An observer.
-#' 
-#' @importFrom shiny NS observeEvent updateTabsetPanel
-#' @importFrom dplyr `%>%` mutate filter pull cur_group_rows
+#' @importFrom dplyr mutate filter pull cur_group_rows
 #' @importFrom DT selectRows
 observe_moving_selection <- function(input, subtables, edges, table_proxy, rvals) observeEvent(
   input[[NS("single_protein", "select_in_table")]],

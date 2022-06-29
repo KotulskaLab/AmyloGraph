@@ -10,7 +10,7 @@
 #' 
 #' @return A single string, possibly with multiple lines.
 #' 
-#' @importFrom dplyr `%>%` rowwise summarize pull
+#' @importFrom dplyr rowwise summarize pull
 prettify_chains <- function(tbl_sq) {
   if (nrow(tbl_sq) == 0) {
     "no sequence available"
@@ -34,9 +34,6 @@ prettify_chains <- function(tbl_sq) {
 #'  Amino acid sequence.
 #' 
 #' @return A single string with multiple lines (probably 3 or 4).
-#' 
-#' @importFrom glue glue
-#' @importFrom dplyr `%>%`
 prettify_sequence_output <- function(name, sequence) {
   group_length <- ag_option("sequence_group_length")
   
@@ -94,7 +91,7 @@ empty_buffer <- function(reader) {
 #' 
 #' @return A `tibble` with the following columns: `name` and `sequence`.
 #' 
-#' @importFrom tibble tibble
+#' @importFrom dplyr tibble
 read_chains <- function(txt, separator = ag_option("chain_separator")) {
   reader <- structure(
     list(

@@ -8,9 +8,9 @@
 #' @param nodes \[\code{data.frame()}\]\cr
 #'  AmyloGraph node data.
 #' 
-#' @importFrom dplyr `%>%` mutate arrange select filter 
-#' @importFrom purrr map_int
+#' @importFrom dplyr mutate arrange select filter
 #' @importFrom DT renderDataTable
+#' @importFrom purrr map_int
 render_num_interactions_by_protein <- function(interactions, nodes) {
   interaction_data <- nodes %>%
     mutate(n =  map_int(
@@ -44,8 +44,7 @@ render_num_interactions_by_protein <- function(interactions, nodes) {
 #' @param ... \cr
 #'  Additional parameters to \code{renderPlot()}.
 #' 
-#' @importFrom dplyr `%>%` count
-#' @importFrom shiny renderPlot
+#' @importFrom dplyr count
 #' @importFrom ggplot2 aes ggplot geom_col scale_x_continuous scale_y_continuous 
 #' theme_bw
 render_num_interactions_by_paper <- function(interactions, ...) {

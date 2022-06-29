@@ -10,9 +10,6 @@ observe_interaction_selection(input)
 \item{input}{[\code{reactivevalues()}]\cr
 An input object of the app.}
 }
-\value{
-An observer that moves the user to the "Single interaction" tab.
-}
 \description{
 Updates tabset panel to show "Single interaction" tab on the
 tab list and moves the user there if an interaction is selected. If an

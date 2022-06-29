@@ -15,7 +15,6 @@
 #' @return The same proxy as in `graph` parameter, but updated.
 #' 
 #' @importFrom visNetwork visGetEdges visRemoveEdges visUpdateEdges
-#' @importFrom dplyr `%>%`
 #' @importFrom purrr map_int
 visResetEdges <- function(graph, edges, input, selected_node_input_id)
   graph %>%
