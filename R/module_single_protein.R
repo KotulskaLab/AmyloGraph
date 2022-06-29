@@ -33,26 +33,27 @@ server_single_protein <- function(id, edge_data, node_data, protein_data) {
     subtables[["interactors"]] <- reactive_subtable_data(
       edge_data, NS(ns("interactors")), input, "to_id", "interactor_name")
     
-    output[["interactees-table"]] <- render_interactions_subtable(subtables[["interactees"]])
-    output[["interactors-table"]] <- render_interactions_subtable(subtables[["interactors"]])
+    server_table(
+      "interactees",
+      BUTTONS[c("SELECT_ALL", "DESELECT_ALL")],
+      edge_data,
+      table_data_func = function(edges, ns) {
+        reactive_subtable_data(edges, ns, input, "from_id", "interactee_name")
+      },
+      render_table_func = render_interactions_subtable
+    )
     
-    interactees_proxy <- dataTableProxy("interactees-table")
-    interactors_proxy <- dataTableProxy("interactors-table")
-    
-    interactees_any_row_selected <- reactive({!is.null(input[["interactees-table_rows_selected"]])})
-    interactors_any_row_selected <- reactive({!is.null(input[["interactors-table_rows_selected"]])})
-    
-    observe_deselect_button(ns, "interactees-deselect_all", interactees_any_row_selected)
-    observe_deselect_button(ns, "interactors-deselect_all", interactors_any_row_selected)
-    
-    observe_deselecting_all(input, "interactees-deselect_all", interactees_proxy)
-    observe_deselecting_all(input, "interactors-deselect_all", interactors_proxy)
-    
-    observe_selecting_all(input, "interactees-select_all", interactees_proxy, "interactees-table")
-    observe_selecting_all(input, "interactors-select_all", interactors_proxy, "interactors-table")
+    server_table(
+      "interactors",
+      BUTTONS[c("SELECT_ALL", "DESELECT_ALL")],
+      edge_data,
+      table_data_func = function(edges, ns) {
+        reactive_subtable_data(edges, ns, input, "to_id", "interactor_name")
+      },
+      render_table_func = render_interactions_subtable
+    )
     
     transfer_selection_allowed <- reactive_allow_selection_transfer(input)
-    
     observe_select_in_table_button(ns, transfer_selection_allowed)
     
     subtables
