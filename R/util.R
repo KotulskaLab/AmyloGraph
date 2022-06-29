@@ -103,3 +103,8 @@ load_js_code <- function(name) {
 label_and_order <- function(value, label) {
   setNames(value, label)[order(label)]
 }
+
+#' @importFrom purrr set_names
+invert_names <- function(value) {
+  set_names(names(value), value)
+}

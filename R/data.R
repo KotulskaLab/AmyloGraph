@@ -90,21 +90,19 @@ ag_data_proteins <- function()
 #' @importFrom purrr set_names map
 #' @importFrom tibble tibble tribble
 ag_data_groups <- function() {
-  groups <- set_names(
-    names(ag_option("colnames")),
-    ag_option("colnames")
-  )[ag_option("interaction_attrs")]
+  interaction_attrs <- ag_option("interaction_attrs")
+  groups <- invert_names(ag_option("colnames"))[interaction_attrs]
   
   list(
     data = map(
-      ag_option("interaction_attrs"),
+      interaction_attrs,
       ~ tibble(
         values = sort(unique(ag_data_interactions()[[.x]])),
         colors = set_names(ag_option("palette")[seq_along(values)], 
                            values)
       )
-    ) |> set_names(ag_option("interaction_attrs")),
-    groups = as.list(ag_option("interaction_attrs")) %>%
+    ) %>% set_names(interaction_attrs),
+    groups = as.list(interaction_attrs) %>%
       set_names(tolower(groups))
   )
 }
