@@ -4,16 +4,16 @@
 \alias{render_protein_info}
 \title{Render list of protein sources}
 \usage{
-render_protein_info(protein_data, selected_node_label)
+render_protein_info(selected_node_label, protein_data)
 }
 \arguments{
-\item{protein_data}{[\code{data.frame}]\cr
-A list of source organisms and their UniProt IDs for all proteins in the
-database.}
-
 \item{selected_node_label}{[\code{reactive(character(1))}]\cr
 A label (i.e. human-readable name) of a protein currently selected on the
 graph.}
+
+\item{protein_data}{[\code{data.frame}]\cr
+A list of source organisms and their UniProt IDs for all proteins in the
+database.}
 }
 \value{
 A \code{renderText} object.

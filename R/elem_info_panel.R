@@ -32,18 +32,12 @@ elem_info_node_selected <- \(ns) fillCol(
     id = ns("tabs"),
     tabPanel(
       title = "Interactees",
-      ui_button_bar(
-        NS(ns("interactees")),
-        BUTTONS[c("SELECT_ALL", "DESELECT_ALL")]
-      ),
-      dataTableOutput(ns("interactees"))),
+      ui_table(ns("interactees"), BUTTONS[c("SELECT_ALL", "DESELECT_ALL")])
+    ),
     tabPanel(
-      ui_button_bar(
-        NS(ns("interactors")),
-        BUTTONS[c("SELECT_ALL", "DESELECT_ALL")]
-      ),
       title = "Interactors",
-      dataTableOutput(ns("interactors"))),
+      ui_table(ns("interactors"), BUTTONS[c("SELECT_ALL", "DESELECT_ALL")])
+    ),
     type = "pills"
   ),
   flex = c(2, 1, NA, 9)

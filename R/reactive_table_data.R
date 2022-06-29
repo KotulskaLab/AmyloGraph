@@ -59,12 +59,12 @@ reactive_table_data <- function(edges, ns) {
 reactive_subtable_data <- function(edges, ns, input, target_id, target_variable) {
   reactive({
     (if (input[["ignore_filters"]]) edges[["all"]] else edges[["table"]]) %>%
-      filter({{target_id}} == input[["select_node"]]) %>%
-      arrange({{target_variable}}, doi) %>%
+      filter(.data[[target_id]] == input[["select_node"]]) %>%
+      arrange(.data[[target_variable]], doi) %>%
       mutate(doi = linkify_doi(doi),
              original_AGID = AGID,
              AGID = AGID_button(AGID, ns)) %>%
-      select(AGID, {{target_variable}}, doi, original_AGID)
+      select(AGID, .data[[target_variable]], doi, original_AGID)
     # original_AGID must be last for column invisibility to work correctly
   })
 }
