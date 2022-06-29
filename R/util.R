@@ -104,6 +104,16 @@ label_and_order <- function(value, label) {
   setNames(value, label)[order(label)]
 }
 
+#' Swap values and names
+#' 
+#' @description Swaps values and names of a vector.
+#' 
+#' @param value \[\code{vector()}\]\cr
+#'  Named vector with elements that should be coercible to a character vector,
+#'  preferably strings.
+#' 
+#' @return A character vector.
+#' 
 #' @importFrom purrr set_names
 invert_names <- function(value) {
   set_names(names(value), value)
