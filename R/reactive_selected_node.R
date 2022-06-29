@@ -11,8 +11,7 @@
 #' @return A \code{reactive} object with a single string containing protein
 #' name.
 #' 
-#' @importFrom shiny reactive req
-#' @importFrom dplyr `%>%` filter pull
+#' @importFrom dplyr filter pull
 reactive_selected_node_label <- function(input, node_data) {
   reactive({
     req(input[["select_node"]])

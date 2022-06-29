@@ -5,9 +5,6 @@
 #' @param edges \[\code{reactivevalues()}\]\cr
 #'  AmyloGraph data with "graph" element.
 #' 
-#' @return An observer.
-#' 
-#' @importFrom shiny observe NS
 #' @importFrom visNetwork visNetworkProxy
 observe_edges_change <- function(input, edges) {
   observe({

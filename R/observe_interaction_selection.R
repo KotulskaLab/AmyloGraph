@@ -6,10 +6,6 @@
 #' 
 #' @param input \[\code{reactivevalues()}\]\cr
 #'  An input object of the app.
-#' 
-#' @return An observer that moves the user to the "Single interaction" tab.
-#' 
-#' @importFrom shiny observe NS req updateTabsetPanel hideTab showTab
 observe_interaction_selection <- function(input) {
   observe({
     if (is.null(input[[NS("single_interaction", "selected_interaction")]])) {

@@ -1,4 +1,4 @@
-#' @importFrom shiny NS
+#' @importFrom DT dataTableOutput
 ui_db_statistics <- function(id) {
   ns <- NS(id)
   tagList(
@@ -12,8 +12,6 @@ ui_db_statistics <- function(id) {
   )
 }
 
-#' @importFrom shiny moduleServer renderText
-#' @importFrom glue glue
 server_db_statistics <- function(id, interactions, data_nodes) {
   moduleServer(id, function(input, output, session) {
     output[["num_publications"]] <- renderText(

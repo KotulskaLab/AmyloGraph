@@ -35,8 +35,6 @@ toggle_state_and_css <- function(selector, class, condition) observe({
 #'  A reactive value telling whether any row is selected in a table.
 #' 
 #' @rdname observe-disable-buttons
-#' 
-#' @importFrom glue glue
 observe_download_buttons <- function(ns, any_row_selected) toggle_state_and_css(
   glue("#{ns('button_bar')} .ag-download-button"),
   "ag-download-button-disabled",
@@ -44,8 +42,6 @@ observe_download_buttons <- function(ns, any_row_selected) toggle_state_and_css(
 )
 
 #' @rdname observe-disable-buttons
-#' 
-#' @importFrom glue glue
 observe_deselect_buttons <- function(ns, any_row_selected) toggle_state_and_css(
   glue("#{ns('button_bar')} .ag-deselection-button"),
   "ag-deselection-button-disabled",
@@ -61,8 +57,6 @@ observe_deselect_buttons <- function(ns, any_row_selected) toggle_state_and_css(
 #'  Namespace-generating function that takes single string as the only argument.
 #' @param any_row_selected \[\code{reactive(logical(1))}\]\cr
 #'  A reactive value telling whether any row is selected in a table.
-#' 
-#' @importFrom glue glue
 observe_select_in_table_button <- function(ns, any_row_selected) toggle_state_and_css(
   glue("#{ns('select_in_table')}"),
   "ag-moveselection-button-disabled",

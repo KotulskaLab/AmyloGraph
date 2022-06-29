@@ -7,9 +7,6 @@
 #' @param input \[\code{reactivevalues()}\]\cr
 #'  An input object of the app.
 #' 
-#' @return An observer.
-#' 
-#' @importFrom shiny observe updateSelectInput NS
 #' @importFrom shinyjs toggleCssClass
 #' @importFrom visNetwork visNetworkProxy
 observe_node_selection <- function(input) {

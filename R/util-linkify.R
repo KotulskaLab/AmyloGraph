@@ -14,7 +14,6 @@
 #' 
 #' @seealso \code{\link{citify}()}, \code{\link{linkify_uniprot}()}
 #' 
-#' @importFrom glue glue
 #' @importFrom stringr str_trunc
 linkify_doi <- function(doi, truncate = TRUE) {
   glue("<a href='https://doi.org/{doi}' target='_blank' rel='noopener noreferer'>{if (truncate) str_trunc(doi, 18) else doi}</a>")
@@ -32,8 +31,6 @@ linkify_doi <- function(doi, truncate = TRUE) {
 #' element being an `<a>` tag for respective UniProt ID.
 #' 
 #' @seealso \code{\link{citify}()}, \code{\link{linkify_doi}()}
-#' 
-#' @importFrom glue glue
 linkify_uniprot <- function(uniprot_id) {
   glue("<a href='https://uniprot.org/uniprot/{uniprot_id}' target='_blank' rel='noopener noreferer''>{uniprot_id}</a>")
 }
@@ -51,7 +48,6 @@ linkify_uniprot <- function(uniprot_id) {
 #' 
 #' @seealso \code{\link{linkify_doi}()}, \code{\link{linkify_uniprot}()}
 #' 
-#' @importFrom glue glue
 #' @export
 citify <- function(reference) {
   all_names <- reference[1, "all_names", drop = TRUE]

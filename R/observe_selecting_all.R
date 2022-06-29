@@ -11,7 +11,6 @@
 #'  Proxy of a table to update.
 #' 
 #' @importFrom DT selectRows
-#' @importFrom shiny observeEvent
 observe_deselecting_all <- function(input, button_id, table_proxy) {
   observeEvent(
     input[[button_id]],
@@ -32,7 +31,6 @@ observe_deselecting_all <- function(input, button_id, table_proxy) {
 #'  Proxy of a table to update.
 #' 
 #' @importFrom DT selectRows
-#' @importFrom shiny observeEvent
 observe_selecting_all <- function(input, button_id, table_proxy) {
   observeEvent(
     input[[button_id]],

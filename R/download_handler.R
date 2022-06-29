@@ -14,13 +14,11 @@
 #' 
 #' @return A `downloadHandler` object.
 #' 
-#' @importFrom shiny downloadHandler
-#' @importFrom dplyr `%>%` slice select
-#' @importFrom glue glue
-table_download_handler <- \(input, table_data, write_function, extension)  {
+#' @importFrom dplyr select slice
+table_download_handler <- function(input, table_data, write_function, extension)  {
   downloadHandler(
-    filename = \() glue("AmyloGraph.{extension}"),
-    content = \(file) write_function(
+    filename = function() glue("AmyloGraph.{extension}"),
+    content = function(file) write_function(
       table_data() %>%
         slice(input[["table_rows_selected"]]) %>%
         select(-c(from_id, to_id)),
@@ -39,13 +37,13 @@ table_download_handler <- \(input, table_data, write_function, extension)  {
 #' 
 #' @return A `downloadHandler` object.
 #' 
-#' @importFrom shiny downloadHandler
 #' @importFrom BioNet saveNetwork
-XGMML_download_handler <- \(edges) {
+#' @importFrom igraph graph_from_data_frame
+XGMML_download_handler <- function(edges) {
   downloadHandler(
-    filename = \() "AmyloGraph.XGMML",
-    content = \(file) saveNetwork(
-      igraph::graph_from_data_frame(
+    filename = function() "AmyloGraph.XGMML",
+    content = function(file) saveNetwork(
+      graph_from_data_frame(
         edges[["table"]],
         vertices = ag_data_nodes()
       ),

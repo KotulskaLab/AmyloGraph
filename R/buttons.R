@@ -1,7 +1,6 @@
 # Predefined buttons
 
 # TODO: use define_button() after replacing BUTTONS list with a function
-#' @importFrom shiny downloadButton actionButton
 #' @importFrom readr write_csv
 #' @importFrom writexl write_xlsx
 BUTTONS <- list(

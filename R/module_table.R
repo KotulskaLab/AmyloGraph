@@ -1,4 +1,3 @@
-#' @importFrom shiny NS tagList
 #' @importFrom DT dataTableOutput
 ui_table <- function(id, buttons, ...) {
   ns <- NS(id)
@@ -8,7 +7,6 @@ ui_table <- function(id, buttons, ...) {
   )
 }
 
-#' @importFrom shiny moduleServer NS
 #' @importFrom DT dataTableProxy
 server_table <- function(id, buttons, edges, table_data_func, render_table_func, ...) {
   moduleServer(id, function(input, output, session) {

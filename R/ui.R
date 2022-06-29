@@ -1,7 +1,4 @@
 #' @importFrom shinyjs useShinyjs
-#' @importFrom htmltools div img
-#' @importFrom shiny sidebarLayout sidebarPanel tabsetPanel tabPanel fillPage fillCol fillRow
-#' @importFrom visNetwork visNetworkOutput
 ag_ui <- function(ag_data) fillPage(
   useShinyjs(),
   GoogleAnalytics(),

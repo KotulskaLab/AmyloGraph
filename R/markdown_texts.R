@@ -5,7 +5,7 @@
 #' 
 #' @return A single string.
 #'
-#' @importFrom utils packageVersion
+#' @importFrom utils packageVersion packageDescription asDateBuilt
 markdown_ag_version <- function()
   glue("AmyloGraph version: {packageVersion('AmyloGraph')}. ",
        "Last built {asDateBuilt(packageDescription('AmyloGraph', fields = 'Built'))}.",
