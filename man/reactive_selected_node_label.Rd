@@ -4,16 +4,20 @@
 \alias{reactive_selected_node_label}
 \title{Access label of currently selected protein}
 \usage{
-reactive_selected_node_label(selected_node_info)
+reactive_selected_node_label(input, node_data)
 }
 \arguments{
-\item{selected_node_info}{[\code{reactive(data.frame())}]\cr
-A row from AmyloGraph node data for a single protein.}
+\item{input}{[\code{reactivevalues()}]\cr
+An input object of the app or a module that contains the protein selector.}
+
+\item{node_data}{[\code{data.frame()}]\cr
+AmyloGraph node data.}
 }
 \value{
 A \code{reactive} object with a single string containing protein
 name.
 }
 \description{
-This function extracts label from protein info.
+This function extracts label of the protein selected in one of
+the available selectors (drop-down list or clicking on graph node).
 }
