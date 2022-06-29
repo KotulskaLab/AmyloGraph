@@ -1,5 +1,3 @@
-#' @importFrom shiny NS
-#' @importFrom htmltools div
 #' @importFrom purrr map exec
 ui_button_bar <- function(ns, buttons) {
   exec(div, id = ns("button_bar"), class = "ag-button-bar",
@@ -7,7 +5,6 @@ ui_button_bar <- function(ns, buttons) {
 }
 
 #' @importFrom purrr exec walk
-#' @importFrom shiny reactive
 server_button_bar <- function(ns, buttons, input, output, ...) {
   args <- list(...)
   any_row_selected <- reactive(!is.null(input[["table_rows_selected"]]))

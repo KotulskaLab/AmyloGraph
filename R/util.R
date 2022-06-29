@@ -21,8 +21,6 @@
 #' }
 #' 
 #' @return Option value.
-#' 
-#' @importFrom glue glue
 ag_option <- function(option) {
   getOption(glue("ag_{option}"))
 }
@@ -82,8 +80,6 @@ pluralize <- function(value, plural = "s", singular = "") {
 #'  File name without .js extension.
 #' 
 #' @return A single string with JavaScript code extracted from the file.
-#' 
-#' @importFrom glue glue
 load_js_code <- function(name) {
   path <- system.file(c("inst", "js", glue("{name}.js")), package = "AmyloGraph")
   paste(readLines(glue("{path}/{name}.js")))
@@ -102,4 +98,30 @@ load_js_code <- function(name) {
 #' @return Reordered \code{value} vector with names.
 label_and_order <- function(value, label) {
   setNames(value, label)[order(label)]
+}
+
+#' Swap values and names
+#' 
+#' @description Swaps values and names of a vector.
+#' 
+#' @param value \[\code{named vector()}\]\cr
+#'  Named vector with elements that should be coercible to a character vector,
+#'  preferably strings.
+#' 
+#' @return A character vector.
+invert_names <- function(value) {
+  setNames(names(value), value)
+}
+
+#' Add NULL to choices
+#' 
+#' @description Adds string-encoded NULL labeled as "none" to a vector of
+#' choices. This is due to NULL not being able to be an element of a vector.
+#' 
+#' @param choices \[\code{character()}\]\cr
+#'  Choices to augment with NULL.
+#' 
+#' @return A `character` vector with NULL option prepended to `choices`.
+add_none <- function(choices) {
+  c(none = ag_option("str_null"), choices)
 }

@@ -13,9 +13,6 @@ An input object of the app or a module that contains the graph.}
 \item{edges}{[\code{reactivevalues()}]\cr
 AmyloGraph data with "graph" element.}
 }
-\value{
-An observer.
-}
 \description{
 Observes graph edges changing
 }

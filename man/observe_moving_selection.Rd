@@ -24,9 +24,6 @@ Proxy of the main table (target table).}
 Reactive values handling the problem of setting selection in a table that
 wasn't displayed previously.}
 }
-\value{
-An observer.
-}
 \description{
 On "select" button click collects all selected interactions in
 both subtables in single protein panel. Then finds these interactions in the

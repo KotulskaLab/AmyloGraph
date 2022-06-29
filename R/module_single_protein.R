@@ -1,9 +1,3 @@
-#' @importFrom htmltools div
-#' @importFrom shinyhelper helper
-#' @importFrom shiny selectInput NS uiOutput tabsetPanel tabPanel 
-#' @importFrom DT dataTableOutput
-#' @importFrom purrr set_names
-#' @importFrom glue glue
 ui_single_protein <- function(id, node_data) {
   ns <- NS(id)
   div(
@@ -14,7 +8,6 @@ ui_single_protein <- function(id, node_data) {
   )
 }
 
-#' @importFrom shiny moduleServer 
 server_single_protein <- function(id, edge_data, node_data, protein_data) {
   moduleServer(id, function(input, output, session) {
     ns <- NS(id)

@@ -21,10 +21,10 @@ ag_load_data <- function()
 #' * `interactor_sequence` and `interactee_sequence` are transformed with
 #'   \code{\link{read_chains}()} to a vector of tibbles.
 #' 
-#' @importFrom readr read_csv
-#' @importFrom purrr map_chr map
-#' @importFrom dplyr `%>%` mutate
 #' @importFrom digest digest
+#' @importFrom dplyr mutate
+#' @importFrom purrr map_chr map
+#' @importFrom readr read_csv
 #' @export
 ag_data_interactions <- function()
   read_csv(system.file("AmyloGraph", "interactions_data.csv", package = "AmyloGraph"),
@@ -50,10 +50,9 @@ ag_references <- function()
 #' described with `label` (human-readable name), `id` (machine-readable name),
 #' and `shape` (for the purpose of drawing a graph only).
 #' 
-#' @importFrom dplyr `%>%` select 
-#' @importFrom purrr map_chr
-#' @importFrom tibble tibble
 #' @importFrom digest digest
+#' @importFrom dplyr select tibble
+#' @importFrom purrr map_chr
 ag_data_nodes <- function()
   ag_data_interactions() %>%
     select(interactor_name, interactee_name) %>% 
@@ -69,10 +68,10 @@ ag_data_nodes <- function()
 #' following changes:
 #' * `id` contains unique hashes of protein names.
 #' 
-#' @importFrom readr read_csv
-#' @importFrom dplyr `%>%` mutate
-#' @importFrom purrr map_chr
 #' @importFrom digest digest
+#' @importFrom dplyr mutate
+#' @importFrom purrr map_chr
+#' @importFrom readr read_csv
 ag_data_proteins <- function()
   read_csv(system.file("AmyloGraph", "protein_data.csv", package = "AmyloGraph"),
            col_types = "ccc") %>%
@@ -87,24 +86,22 @@ ag_data_proteins <- function()
 #' * `groups`: a list with translations between human- and computer-friendly
 #'   names for questions.
 #' 
+#' @importFrom dplyr tibble
 #' @importFrom purrr set_names map
-#' @importFrom tibble tibble tribble
 ag_data_groups <- function() {
-  groups <- set_names(
-    names(ag_option("colnames")),
-    ag_option("colnames")
-  )[ag_option("interaction_attrs")]
+  interaction_attrs <- ag_option("interaction_attrs")
+  groups <- invert_names(ag_option("colnames"))[interaction_attrs]
   
   list(
     data = map(
-      ag_option("interaction_attrs"),
+      interaction_attrs,
       ~ tibble(
         values = sort(unique(ag_data_interactions()[[.x]])),
         colors = set_names(ag_option("palette")[seq_along(values)], 
                            values)
       )
-    ) |> set_names(ag_option("interaction_attrs")),
-    groups = as.list(ag_option("interaction_attrs")) %>%
+    ) %>% set_names(interaction_attrs),
+    groups = as.list(interaction_attrs) %>%
       set_names(tolower(groups))
   )
 }

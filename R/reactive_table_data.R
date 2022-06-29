@@ -12,8 +12,7 @@
 #' @return A \code{reactive} object with a \code{tibble} containing filtered
 #' interaction data.
 #' 
-#' @importFrom shiny reactive
-#' @importFrom dplyr mutate select `%>%`
+#' @importFrom dplyr mutate select
 #' @importFrom icecream ic
 reactive_table_data <- function(edges, ns) {
   reactive({
@@ -29,7 +28,6 @@ reactive_table_data <- function(edges, ns) {
              heterogenous_fibers,
              doi,
              original_AGID)
-    # original_AGID must be last for column invisibility to work correctly
   })
 }
 
@@ -54,8 +52,7 @@ reactive_table_data <- function(edges, ns) {
 #' interaction data for a single protein, either with interactors or
 #' interactees (depends on selected target ID).
 #' 
-#' @importFrom shiny reactive
-#' @importFrom dplyr filter arrange mutate select `%>%`
+#' @importFrom dplyr filter arrange mutate select
 reactive_subtable_data <- function(edges, ns, input, target_id, target_variable) {
   reactive({
     (if (input[["ignore_filters"]]) edges[["all"]] else edges[["table"]]) %>%
@@ -65,6 +62,5 @@ reactive_subtable_data <- function(edges, ns, input, target_id, target_variable)
              original_AGID = AGID,
              AGID = AGID_button(AGID, ns)) %>%
       select(AGID, .data[[target_variable]], doi, original_AGID)
-    # original_AGID must be last for column invisibility to work correctly
   })
 }

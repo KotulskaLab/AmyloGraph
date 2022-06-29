@@ -10,8 +10,6 @@
 #' 
 #' @return A \code{reactive} object with a single boolean describing whether
 #' transfering selection is allowed.
-#' 
-#' @importFrom shiny reactive
 reactive_allow_selection_transfer <- function(input) {
   reactive({
     (!is.null(input[["interactees-table_rows_selected"]]) ||

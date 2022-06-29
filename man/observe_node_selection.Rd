@@ -10,9 +10,6 @@ observe_node_selection(input)
 \item{input}{[\code{reactivevalues()}]\cr
 An input object of the app.}
 }
-\value{
-An observer.
-}
 \description{
 Displays the panel with details of a single protein when
 a protein (a node) is selected and hides when not. Moreover, it handles

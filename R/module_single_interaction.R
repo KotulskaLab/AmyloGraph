@@ -1,4 +1,3 @@
-#' @importFrom shiny NS
 ui_single_interaction <- function(id) {
   ns <- NS(id)
   div(
@@ -19,7 +18,6 @@ ui_single_interaction <- function(id) {
 }
 
 #' @importFrom markdown renderMarkdown
-#' @importFrom shiny moduleServer
 server_single_interaction <- function(id, interactions) {
   moduleServer(id, function(input, output, session) {
     observe({
@@ -32,7 +30,6 @@ server_single_interaction <- function(id, interactions) {
         slice(1)
       
       output[["amylograph_id"]] <- renderText(selected_interaction[["AGID"]])
-      output[["reference"]] <- renderUI(HTML(renderMarkdown(text = citify(reference_data))))
       output[["interactor_name"]] <- renderText(selected_interaction[["interactor_name"]])
       output[["interactor_sequence"]] <- renderText(prettify_chains(selected_interaction[["interactor_sequence"]][[1]]))
       output[["interactee_name"]] <- renderText(selected_interaction[["interactee_name"]])
@@ -49,11 +46,11 @@ server_single_interaction <- function(id, interactions) {
         output, selected_interaction, "heterogenous_fibers",
         "Is interaction resulting in heterogeneous fibrils consisting of interactor and interactee molecules?"
       )
+      output[["reference"]] <- renderUI(HTML(renderMarkdown(text = citify(reference_data))))
     })
   })
 }
 
-#' @importFrom glue glue
 render_single_interaction_attribute <- \(output, selected_interaction, attribute, header) {
   details <- selected_interaction[[glue("{attribute}_details")]]
   output[[attribute]] <- renderUI(

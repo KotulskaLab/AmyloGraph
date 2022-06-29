@@ -9,8 +9,8 @@
 #' @param edges \[\code{reactivevalues()}\]\cr
 #'  AmyloGraph data with "graph" element, edges to plot.
 #' 
-#' @importFrom visNetwork renderVisNetwork visNetwork visEdges visOptions visInteraction
-#' @importFrom visNetwork visEvents visIgraphLayout visExport visNodes visPhysics
+#' @importFrom visNetwork renderVisNetwork visNetwork visEdges visOptions
+#'  visInteraction visEvents visIgraphLayout visExport visNodes visPhysics
 render_network <- function(ag_data_nodes, edges) {
   initial_center <- load_js_code("initial_center")
   

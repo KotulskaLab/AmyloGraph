@@ -4,8 +4,7 @@ default_table_options <- list(
   scrollCollapse = TRUE,
   pageLength = 10,
   lengthMenu = list(c(10, 25, 50, 100, -1), c("10", "25", "50", "100", "All")),
-  # it's either index or header class, and we don't use header classes
-  columnDefs = list(list(visible = FALSE, targets = -1))
+  columnDefs = list(list(visible = FALSE, targets = "original_AGID"))
 )
 
 #' @importFrom DT renderDataTable
