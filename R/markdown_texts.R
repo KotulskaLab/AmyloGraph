@@ -1,7 +1,23 @@
+#' @title Format AmyloGraph version into human-friendly string
+#' 
+#' @description This function retrieves version number of currently installed
+#' \pkg{AmyloGraph} package and formats it into a neatly looking sentence.
+#' 
+#' @return A single string.
+#'
 #' @importFrom utils packageVersion
+#' @importFrom glue glue
 markdown_ag_version <- function()
-  paste0("AmyloGraph version: ", packageVersion("AmyloGraph"), ".\n")
+  glue("AmyloGraph version: {packageVersion('AmyloGraph')}.\n")
 
+#' @title Access AmyloGraph section as a string
+#' 
+#' @description This function retrieves a markdown string with a specific
+#' section.
+#' 
+#' @return A single string.
+#' 
+#' @rdname md-section
 markdown_description <- function() {
   "
 AmyloGraph is a database of interactions between amyloid proteins. Curators of AmyloGraph manually
@@ -10,6 +26,7 @@ more about AmyloGraph, its usage and the process of data curation, visit our
 [online manual](https://kotulskalab.github.io/AmyloGraph/)."
 }
 
+#' @rdname md-section
 markdown_faq <- function() {
   "
 ## Frequently asked questions
@@ -26,15 +43,17 @@ these measures, we are still prone to errors. Please send an email to
 Remember to mention their AmyloGraph IDs."
 }
 
+#' @rdname md-section
 markdown_citation <- function() {
   "
 ## Citation (coming soon)
 
-Burdukiewicz M, Rafacz D, Barbach A, Hubicka K, Bakala M, Lassota A, Stecko J, Szymanska N,
+Burdukiewicz M, Rafacz D, Barbach A, Hubicka K, Bakala L, Lassota A, Stecko J, Szymanska N,
 Wojciechowski J, Kozakiewicz D, Szulc N, Chilimoniuk J, Jeskowiak I, Gasior-Glogowska M,
 Kotulska M (2020). AmyloGraph: A comprehensive database of amyloid-amyloid interactions. XXXYYY, doi."
 }
 
+#' @rdname md-section
 markdown_contact <- function() {
   "
 ## Contact
@@ -43,6 +62,7 @@ For general questions or problems with the data or database, please email
 [Michal Burdukiewicz](mailto:michalburdukiewicz@gmail.com)."
 }
 
+#' @rdname md-section
 markdown_acknowledgements <- function() {
   "
 ## Acknowledgements
@@ -55,6 +75,7 @@ Wroclaw University of Science and Technology is greatly acknowledged. We also th
 discussions."
 }
 
+#' @rdname md-section
 markdown_images <- function() {
   "
 <img src='inst/AmyloGraph/www/PWr-eng.png' style='width: 500px'>

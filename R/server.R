@@ -18,7 +18,17 @@ ag_server <- function(ag_data) function(input, output) {
   
   edges <- server_filter_control("filter_control", ag_data[["interactions"]], ag_data[["groups"]])
   subtables <- server_single_protein("single_protein", edges, ag_data[["nodes"]], ag_data[["proteins"]])
-  table_proxy <- server_interactions_table("interactions_table", edges, rvals)
+  # TODO: extract function call below as a separate function that takes
+  #  edges and id as only arguments
+  table_proxy <- server_table(
+    "interactions_table",
+    BUTTONS[c("SELECT_ALL", "DESELECT_ALL", "DOWNLOAD_CSV", "DOWNLOAD_XLSX")],
+    edges,
+    table_data_func = reactive_table_data,
+    render_table_func = render_interactions_table,
+    selection_config = reactive_selection_config(rvals),
+    table_data = reactive(edges[["table"]])
+  )
   
   # TODO: place it somewhere else
   output[["download_xgmml"]] <- XGMML_download_handler(edges)
