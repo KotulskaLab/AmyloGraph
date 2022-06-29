@@ -113,8 +113,11 @@ label_and_order <- function(value, label) {
 #'  preferably strings.
 #' 
 #' @return A character vector.
-#' 
-#' @importFrom purrr set_names
 invert_names <- function(value) {
-  set_names(names(value), value)
+  setNames(names(value), value)
+}
+
+add_none <- function(choices) {
+  # Null value encoded as text, because NULL cannot be an element of a vector
+  c(none = ag_option("str_null"), choices)
 }

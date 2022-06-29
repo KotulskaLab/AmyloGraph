@@ -9,8 +9,7 @@ ui_filter_control <- function(id, data_groups) {
       selectInput(
         inputId = NS(id, "label_group"),
         label = "Group edges by",
-        choices = c(none = ag_option("str_null"), 
-                    ag_group_labels(data_groups)),
+        choices = add_none(ag_group_labels(data_groups)),
         multiple = FALSE),
       type = "markdown",
       content = "label_group"),
