@@ -108,7 +108,7 @@ label_and_order <- function(value, label) {
 #' 
 #' @description Swaps values and names of a vector.
 #' 
-#' @param value \[\code{vector()}\]\cr
+#' @param value \[\code{named vector()}\]\cr
 #'  Named vector with elements that should be coercible to a character vector,
 #'  preferably strings.
 #' 
@@ -117,7 +117,15 @@ invert_names <- function(value) {
   setNames(names(value), value)
 }
 
+#' Add NULL to choices
+#' 
+#' @description Adds string-encoded NULL labeled as "none" to a vector of
+#' choices. This is due to NULL not being able to be an element of a vector.
+#' 
+#' @param choices \[\code{character()}\]\cr
+#'  Choices to augment with NULL.
+#' 
+#' @return A `character` vector with NULL option prepended to `choices`.
 add_none <- function(choices) {
-  # Null value encoded as text, because NULL cannot be an element of a vector
   c(none = ag_option("str_null"), choices)
 }

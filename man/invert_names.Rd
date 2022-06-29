@@ -7,7 +7,7 @@
 invert_names(value)
 }
 \arguments{
-\item{value}{[\code{vector()}]\cr
+\item{value}{[\code{named vector()}]\cr
 Named vector with elements that should be coercible to a character vector,
 preferably strings.}
 }
