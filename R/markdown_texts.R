@@ -6,9 +6,10 @@
 #' @return A single string.
 #'
 #' @importFrom utils packageVersion
-#' @importFrom glue glue
 markdown_ag_version <- function()
-  glue("AmyloGraph version: {packageVersion('AmyloGraph')}.\n")
+  glue("AmyloGraph version: {packageVersion('AmyloGraph')}. ",
+       "Last built {asDateBuilt(packageDescription('AmyloGraph', fields = 'Built'))}.",
+       "\n")
 
 #' @title Access AmyloGraph section as a string
 #' 
