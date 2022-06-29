@@ -8,7 +8,7 @@
 #' @importFrom utils packageVersion packageDescription asDateBuilt
 markdown_ag_version <- function()
   glue("AmyloGraph version: {packageVersion('AmyloGraph')}. ",
-       "Last built {asDateBuilt(packageDescription('AmyloGraph', fields = 'Built'))}.",
+       "Last built: {asDateBuilt(packageDescription('AmyloGraph', fields = 'Built'))}.",
        "\n")
 
 #' @title Access AmyloGraph section as a string
@@ -32,11 +32,11 @@ markdown_faq <- function() {
   "
 ## Frequently asked questions
 
-#### How can I submit my own data?
+**How can I submit my own data?**
 
 The submission form is [available online](https://forms.gle/7sJCBQdhkCxHdBhD7).
 
-#### Why interactions reported in my publications are wrongly annotated?
+**Why interactions reported in my publications are wrongly annotated?**
 
 We try our best by implementing [a rigorous and transparent two-step data curation procedure](https://kotulskalab.github.io/AmyloGraph/articles/definitions.html#initial-curation), but despite
 these measures, we are still prone to errors. Please send an email to

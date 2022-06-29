@@ -2,12 +2,12 @@
 ui_db_statistics <- function(id) {
   ns <- NS(id)
   tagList(
-    h3("Summary"),
+    h2("Summary"),
     textOutput(ns("num_publications")),
     textOutput(ns("num_interactions")),
-    h3("Interactions by protein"),
+    h2("Interactions by protein"),
     dataTableOutput(ns("num_interactions_by_protein")),
-    h3("Interactions by paper"),
+    h2("Interactions by paper"),
     plotOutput(ns("num_interactions_by_paper"))
   )
 }
