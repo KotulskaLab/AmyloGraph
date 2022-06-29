@@ -6,7 +6,7 @@
 #' 
 #' @param edges \[\code{reactivevalues()}\]\cr
 #'  AmyloGraph data with "table" element.
-#' @param ns \[code{function()}\]\cr
+#' @param ns \[code{function(1)}\]\cr
 #'  Namespace function to use for AGID buttons.
 #' 
 #' @return A \code{reactive} object with a \code{tibble} containing filtered
@@ -41,13 +41,13 @@ reactive_table_data <- function(edges, ns) {
 #' 
 #' @param edges \[\code{reactivevalues()}\]\cr
 #'  AmyloGraph data with "table" element.
-#' @param ns \[code{function()}\]\cr
+#' @param ns \[code{function(1)}\]\cr
 #'  Namespace function to use for AGID buttons.
 #' @param input \[\code{reactivevalues()}\]\cr
 #'  An input object of the app or a module that contains the protein selector.
-#' @param target_id \[\code{NSE(1)}\]\cr
+#' @param target_id \[\code{character(1)}\]\cr
 #'  ID column name to use.
-#' @param target_variable \[\code{NSE(1)}\]\cr
+#' @param target_variable \[\code{character(1)}\]\cr
 #'  Protein name column to use.
 #' 
 #' @return A \code{reactive} object with a \code{tibble} containing filtered

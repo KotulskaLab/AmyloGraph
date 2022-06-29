@@ -30,16 +30,12 @@ observe_deselecting_all <- function(input, button_id, table_proxy) {
 #'  ID of a button that triggers adding selections.
 #' @param table_proxy \[\code{dataTableProxy(1)}\]\cr
 #'  Proxy of a table to update.
-#' @param table_id \[\code{character(1)}\]\cr
-#'  ID of the table, from which to read \code{_rows_all}.
 #' 
 #' @importFrom DT selectRows
 #' @importFrom shiny observeEvent
-observe_selecting_all <- function(input, button_id, table_proxy,
-                                  table_id = "table") {
+observe_selecting_all <- function(input, button_id, table_proxy) {
   observeEvent(
     input[[button_id]],
-    # TODO: remove glue after making sure that table_id is always "table"
-    selectRows(table_proxy, input[[glue::glue("{table_id}_rows_all")]])
+    selectRows(table_proxy, input[["table_rows_all"]])
   )
 }

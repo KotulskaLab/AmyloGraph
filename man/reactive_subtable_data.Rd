@@ -10,16 +10,16 @@ reactive_subtable_data(edges, ns, input, target_id, target_variable)
 \item{edges}{[\code{reactivevalues()}]\cr
 AmyloGraph data with "table" element.}
 
-\item{ns}{[code{function()}]\cr
+\item{ns}{[code{function(1)}]\cr
 Namespace function to use for AGID buttons.}
 
 \item{input}{[\code{reactivevalues()}]\cr
 An input object of the app or a module that contains the protein selector.}
 
-\item{target_id}{[\code{NSE(1)}]\cr
+\item{target_id}{[\code{character(1)}]\cr
 ID column name to use.}
 
-\item{target_variable}{[\code{NSE(1)}]\cr
+\item{target_variable}{[\code{character(1)}]\cr
 Protein name column to use.}
 }
 \value{

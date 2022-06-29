@@ -24,7 +24,7 @@ toggle_state_and_css <- function(selector, class, condition) observe({
   )
 })
 
-#' Observe "Download" buttons
+#' Observe buttons to disable/enable them
 #' 
 #' @description Toggles button on and off based on whether any row is selected
 #' in a table.
@@ -33,6 +33,8 @@ toggle_state_and_css <- function(selector, class, condition) observe({
 #'  Namespace-generating function that takes single string as the only argument.
 #' @param any_row_selected \[\code{reactive(logical(1))}\]\cr
 #'  A reactive value telling whether any row is selected in a table.
+#' 
+#' @rdname observe-disable-buttons
 #' 
 #' @importFrom glue glue
 observe_download_buttons <- function(ns, any_row_selected) toggle_state_and_css(
@@ -41,25 +43,8 @@ observe_download_buttons <- function(ns, any_row_selected) toggle_state_and_css(
   any_row_selected
 )
 
-#' Observe "Deselect" button
+#' @rdname observe-disable-buttons
 #' 
-#' @description Toggles button on and off based on whether any row is selected
-#' in a table.
-#' 
-#' @param ns \[\code{function(1)}\]\cr
-#'  Namespace-generating function that takes single string as the only argument.
-#' @param button_id \[\code{character(1)}\]\cr
-#'  ID of the "Deselect" button to observe.
-#' @param any_row_selected \[\code{reactive(logical(1))}\]\cr
-#'  A reactive value telling whether any row is selected in a table.
-#' 
-#' @importFrom glue glue
-observe_deselect_button <- function(ns, button_id, any_row_selected) toggle_state_and_css(
-  glue("#{ns(button_id)}"),
-  "ag-deselection-button-disabled",
-  any_row_selected
-)
-
 #' @importFrom glue glue
 observe_deselect_buttons <- function(ns, any_row_selected) toggle_state_and_css(
   glue("#{ns('button_bar')} .ag-deselection-button"),
