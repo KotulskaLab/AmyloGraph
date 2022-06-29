@@ -15,7 +15,9 @@ Authors@R: c(person("Michal", "Burdukiewicz",
            role = c("ctb")))
 Description: An interactive database on interactions between amyloid proteins.
 License: MIT + file LICENSE
-Depends: R (>= 3.5.0)
+Depends:
+    R (>= 3.5.0),
+    shiny
 Imports: 
     digest,
     dplyr,
@@ -25,11 +27,11 @@ Imports:
     htmltools,
     icecream (>= 0.1.1),
     igraph,
+    markdown,
     purrr,
     readr,
     rlang,
     shinyjs,
-    shiny,
     shinyhelper,
     stringr,
     stringi,
