@@ -1,7 +1,7 @@
 ui_single_interaction <- function(id) {
   ns <- NS(id)
   div(
-    textOutput(ns("amylograph_id"), container = h2),
+    textOutput(ns("amylograph_id"), container = h1),
     h2("Interactor:"),
     textOutput(ns("interactor_name")),
     verbatimTextOutput(ns("interactor_sequence")),
@@ -12,7 +12,7 @@ ui_single_interaction <- function(id) {
     uiOutput(ns("aggregation_speed")),
     uiOutput(ns("elongates_by_attaching")),
     uiOutput(ns("heterogenous_fibers")),
-    h4("Reference"),
+    h2("Reference"),
     uiOutput(ns("reference")),
   )
 }
@@ -35,15 +35,15 @@ server_single_interaction <- function(id, interactions) {
       output[["interactee_name"]] <- renderText(selected_interaction[["interactee_name"]])
       output[["interactee_sequence"]] <- renderText(prettify_chains(selected_interaction[["interactee_sequence"]][[1]]))
       output[["aggregation_speed"]] <- render_single_interaction_attribute(
-        output, selected_interaction, "aggregation_speed",
+        selected_interaction, "aggregation_speed",
         "Is the interactor affecting interactee's aggregating speed?"
       )
       output[["elongates_by_attaching"]] <- render_single_interaction_attribute(
-        output, selected_interaction, "elongates_by_attaching",
+        selected_interaction, "elongates_by_attaching",
         "If interactee is still forming fibrils after the interaction, do fibrils of interactee elongates by attaching to monomers/oligomers/fibrils of interactor?"
       )
       output[["heterogenous_fibers"]] <- render_single_interaction_attribute(
-        output, selected_interaction, "heterogenous_fibers",
+        selected_interaction, "heterogenous_fibers",
         "Is interaction resulting in heterogeneous fibrils consisting of interactor and interactee molecules?"
       )
       output[["reference"]] <- renderUI(HTML(renderMarkdown(text = citify(reference_data))))
@@ -51,15 +51,12 @@ server_single_interaction <- function(id, interactions) {
   })
 }
 
-render_single_interaction_attribute <- \(output, selected_interaction, attribute, header) {
-  details <- selected_interaction[[glue("{attribute}_details")]]
-  output[[attribute]] <- renderUI(
+render_single_interaction_attribute <- function(selected_interaction, attribute, header) {
+  # details <- selected_interaction[[glue("{attribute}_details")]]
+  renderUI(
     div(
-      h4(header),
-      selected_interaction[[attribute]] |>
-        as.character() |>
-        # strong() |>
-        p()
+      strong(header),
+      p(as.character(selected_interaction[[attribute]]))
       # The line below allows for displaying comments to answers
       # if (is.na(details)) NULL else p(details)
     )
