@@ -34,14 +34,14 @@ server_single_protein <- function(id, edge_data, node_data, protein_data) {
     subtables[["interactors"]] <- reactive_subtable_data(
       edge_data, NS(ns("interactors")), input, to_id, interactor_name)
     
-    output[["interactees"]] <- render_interactions_subtable(subtables[["interactees"]])
-    output[["interactors"]] <- render_interactions_subtable(subtables[["interactors"]])
+    output[["interactees-table"]] <- render_interactions_subtable(subtables[["interactees"]])
+    output[["interactors-table"]] <- render_interactions_subtable(subtables[["interactors"]])
     
-    interactees_proxy <- dataTableProxy("interactees")
-    interactors_proxy <- dataTableProxy("interactors")
+    interactees_proxy <- dataTableProxy("interactees-table")
+    interactors_proxy <- dataTableProxy("interactors-table")
     
-    interactees_any_row_selected <- reactive({!is.null(input[["interactees_rows_selected"]])})
-    interactors_any_row_selected <- reactive({!is.null(input[["interactors_rows_selected"]])})
+    interactees_any_row_selected <- reactive({!is.null(input[["interactees-table_rows_selected"]])})
+    interactors_any_row_selected <- reactive({!is.null(input[["interactors-table_rows_selected"]])})
     
     observe_deselect_button(ns, "interactees-deselect_all", interactees_any_row_selected)
     observe_deselect_button(ns, "interactors-deselect_all", interactors_any_row_selected)
@@ -49,8 +49,8 @@ server_single_protein <- function(id, edge_data, node_data, protein_data) {
     observe_deselecting_all(input, "interactees-deselect_all", interactees_proxy)
     observe_deselecting_all(input, "interactors-deselect_all", interactors_proxy)
     
-    observe_selecting_all(input, "interactees-select_all", interactees_proxy, "interactees")
-    observe_selecting_all(input, "interactors-select_all", interactors_proxy, "interactors")
+    observe_selecting_all(input, "interactees-select_all", interactees_proxy, "interactees-table")
+    observe_selecting_all(input, "interactors-select_all", interactors_proxy, "interactors-table")
     
     transfer_selection_allowed <- reactive_allow_selection_transfer(input)
     
