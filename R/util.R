@@ -125,3 +125,9 @@ invert_names <- function(value) {
 add_none <- function(choices) {
   c(none = ag_option("str_null"), choices)
 }
+
+if_null_else <- function(value,
+                         yes = function(value) NULL,
+                         no = function(value) value) {
+  if (is.null(value)) yes(value) else no(value)
+}
