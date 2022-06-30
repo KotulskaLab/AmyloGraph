@@ -41,7 +41,7 @@ table_download_handler <- function(input, table_data, write_function, extension)
 #' @importFrom igraph graph_from_data_frame
 XGMML_download_handler <- function(edges) {
   downloadHandler(
-    filename = function() "AmyloGraph.XGMML",
+    filename = function() "AmyloGraph",
     content = function(file) saveNetwork(
       graph_from_data_frame(
         edges[["table"]],
