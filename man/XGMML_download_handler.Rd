@@ -15,6 +15,6 @@ A \code{downloadHandler} object.
 }
 \description{
 Creates a download handler that can be inserted into an app and
-used to download AmyloGraph datain XGMML format. All proteins are used as
+used to download AmyloGraph data in XGMML format. All proteins are used as
 nodes, even is all its interactions are filtered out.
 }

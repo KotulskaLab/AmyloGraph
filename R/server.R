@@ -25,14 +25,16 @@ ag_server <- function(ag_data) function(input, output) {
     table_data = reactive(edges[["table"]])
   )
   
-  # TODO: place it somewhere else
-  output[["download_xgmml"]] <- XGMML_download_handler(edges)
-  
   server_single_interaction("single_interaction", ag_data[["interactions"]])
   server_db_statistics("db_statistics", ag_data[["interactions"]], ag_data[["nodes"]])
   server_about("about")
   
   output[["graph"]] <- render_network(ag_data[["nodes"]], edges)
+  output[["download_xgmml"]] <- render_XGMML_download("download_xgmml", edges)
+  node_positions <- reactive_node_positions(input, "graph")
+  output[["download_html"]] <- render_HTML_download(
+    "download_html", node_positions, ag_data[["nodes"]], ag_data[["interactions"]]
+  )
   
   observe_node_selection(input)
   observe_interaction_selection(input)

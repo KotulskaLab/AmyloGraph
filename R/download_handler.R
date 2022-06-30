@@ -1,4 +1,4 @@
-#' @title Handle download of AmyloGraph data
+#' Handle download of AmyloGraph data
 #' 
 #' @description Creates a download handler that can be inserted into an app and
 #' used to download AmyloGraph data in various formats.
@@ -26,10 +26,10 @@ table_download_handler <- function(input, table_data, write_function, extension)
     )
   )
 }
-#' @title Handle download of AmyloGraph data to XGMML
+#' Handle download of AmyloGraph data to XGMML
 #' 
 #' @description Creates a download handler that can be inserted into an app and
-#' used to download AmyloGraph datain XGMML format. All proteins are used as
+#' used to download AmyloGraph data in XGMML format. All proteins are used as
 #' nodes, even is all its interactions are filtered out.
 #' 
 #' @param edges \[\code{reactivevalues()}\]\cr
@@ -41,7 +41,7 @@ table_download_handler <- function(input, table_data, write_function, extension)
 #' @importFrom igraph graph_from_data_frame
 XGMML_download_handler <- function(edges) {
   downloadHandler(
-    filename = function() "AmyloGraph.XGMML",
+    filename = function() "AmyloGraph",
     content = function(file) saveNetwork(
       graph_from_data_frame(
         edges[["table"]],
@@ -51,5 +51,39 @@ XGMML_download_handler <- function(edges) {
       file = file,
       type = "XGMML"
     )
+  )
+}
+
+#' Handle download of AmyloGraph network to HTML
+#' 
+#' @description Creates a download handler that can be inserted into an app and
+#' used to download AmyloGraph network data in HTML format.
+#' 
+#' @param node_positions \[\code{reactive(data.frame())}\]\cr
+#'  Table of node positions with `x`, `y`, and `id` columns.
+#' @param nodes \[\code{data.frame()}\]\cr
+#'  AmyloGraph node data.
+#' @param edges \[\code{data.frame()}\]\cr
+#'  AmyloGraph edge data.
+#' 
+#' @return A `downloadHandler` object.
+#' 
+#' @importFrom dplyr mutate
+#' @importFrom visNetwork visSave
+HTML_download_handler <- function(node_positions, nodes, edges) {
+  downloadHandler(
+    filename = function() "AmyloGraph.html",
+    content = function(file) {
+      node_positions <- node_positions()
+      if (!is.null(node_positions)) {
+        nodes <- merge(nodes, node_positions, by = "id", all = TRUE)
+      }
+      
+      edges <- edges %>%
+        mutate(from = from_id, to = to_id)
+      
+      visAGNetwork(nodes, edges) %>%
+        visSave(file)
+    }
   )
 }
