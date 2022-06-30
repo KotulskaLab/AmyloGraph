@@ -1,3 +1,15 @@
+#' Create visNetwork with AmyloGraph defaults
+#' 
+#' @description Creates visNetwork with a set of defaults specific to
+#' AmyloGraph.
+#' 
+#' @param edges \[\code{data.frame()}\]\cr
+#'  AmyloGraph node data.
+#' @param edges \[\code{data.frame()}\]\cr
+#'  AmyloGraph edge data.
+#' 
+#' @return A `visNetwork` object that can be further modified.
+#' 
 #' @importFrom visNetwork visNetwork visEdges visNodes visIgraphLayout
 #'  visPhysics visOptions visInteraction
 visAGNetwork <- function(nodes, edges) {
