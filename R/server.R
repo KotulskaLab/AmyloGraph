@@ -25,14 +25,22 @@ ag_server <- function(ag_data) function(input, output) {
     table_data = reactive(edges[["table"]])
   )
   
-  # TODO: place it somewhere else
-  output[["download_xgmml"]] <- XGMML_download_handler(edges)
-  
   server_single_interaction("single_interaction", ag_data[["interactions"]])
   server_db_statistics("db_statistics", ag_data[["interactions"]], ag_data[["nodes"]])
   server_about("about")
   
   output[["graph"]] <- render_network(ag_data[["nodes"]], edges)
+  # TODO: place it somewhere else
+  insertUI(
+    "#downloadgraph",
+    where = "afterEnd",
+    ui = downloadButton(
+      "download_xgmml",
+      label = "Download network as XGMML",
+      class = "ag-download-button"
+    )
+  )
+  output[["download_xgmml"]] <- XGMML_download_handler(edges)
   
   observe_node_selection(input)
   observe_interaction_selection(input)
