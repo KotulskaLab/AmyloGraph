@@ -133,7 +133,7 @@ add_none <- function(choices) {
 #' 
 #' @param value \[\code{any}\]\cr
 #'  Value to compare to `NULL`.
-#' @param code \[\function(1)\]\cr
+#' @param code \[\code{function(1)}\]\cr
 #'  Function that takes `value` as first (unnamed) parameter, executed if
 #'  `value` is not `NULL`.
 #' @param ... \cr

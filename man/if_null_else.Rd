@@ -10,7 +10,7 @@ if_null_else(value, code = identity, ...)
 \item{value}{[\code{any}]\cr
 Value to compare to \code{NULL}.}
 
-\item{code}{[\function(1)]\cr
+\item{code}{[\code{function(1)}]\cr
 Function that takes \code{value} as first (unnamed) parameter, executed if
 \code{value} is not \code{NULL}.}
 
