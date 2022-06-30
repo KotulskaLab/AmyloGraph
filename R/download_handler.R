@@ -53,3 +53,24 @@ XGMML_download_handler <- function(edges) {
     )
   )
 }
+
+#' @importFrom dplyr mutate
+#' @importFrom visNetwork visSave
+HTML_download_handler <- function(node_positions, nodes, edges) {
+  downloadHandler(
+    filename = function() "AmyloGraph.html",
+    content = function(file) {
+      node_positions <- node_positions()
+      
+      if (!is.null(node_positions)) {
+        nodes <- merge(nodes, node_positions, by = "id", all = TRUE)
+      }
+      
+      edges <- edges %>%
+        mutate(from = from_id, to = to_id)
+      
+      visAGNetwork(nodes, edges) %>%
+        visSave(file)
+    }
+  )
+}
