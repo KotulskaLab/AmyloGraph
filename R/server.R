@@ -30,17 +30,7 @@ ag_server <- function(ag_data) function(input, output) {
   server_about("about")
   
   output[["graph"]] <- render_network(ag_data[["nodes"]], edges)
-  # TODO: place it somewhere else
-  insertUI(
-    "#downloadgraph",
-    where = "afterEnd",
-    ui = downloadButton(
-      "download_xgmml",
-      label = "Download network as XGMML",
-      class = "ag-download-button"
-    )
-  )
-  output[["download_xgmml"]] <- XGMML_download_handler(edges)
+  output[["download_xgmml"]] <- render_XGMML_download("download_xgmml", edges)
   
   observe_node_selection(input)
   observe_interaction_selection(input)
