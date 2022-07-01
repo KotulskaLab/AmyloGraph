@@ -13,6 +13,12 @@ ui_filter_control <- function(id, data_groups) {
       type = "markdown",
       content = "label_group"
     ),
+    uiOutput(outputId = NS(id, "incorrect_motif_message")),
+    helper(
+      textInput(NS(id, "motif"), "Filter by motif", placeholder = "^LXXA"),
+      type = "markdown",
+      content = "motif"
+    ),
     do.call(
       tagList,
       imap(
@@ -23,12 +29,6 @@ ui_filter_control <- function(id, data_groups) {
           .y
         )
       )
-    ),
-    uiOutput(outputId = NS(id, "incorrect_motif_message")),
-    helper(
-      textInput(NS(id, "motif"), "Filter by motif", placeholder = "^LXXA"),
-      type = "markdown",
-      content = "motif"
     )
   )
 }
