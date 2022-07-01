@@ -38,13 +38,18 @@ table_download_handler <- function(input, table_data, write_function, extension)
 #' @return A `downloadHandler` object.
 #' 
 #' @importFrom BioNet saveNetwork
+#' @importFrom dplyr mutate
 #' @importFrom igraph graph_from_data_frame
 XGMML_download_handler <- function(edges) {
   downloadHandler(
     filename = function() "AmyloGraph",
     content = function(file) saveNetwork(
       graph_from_data_frame(
-        edges[["table"]],
+        edges[["table"]] %>%
+          mutate(
+            interactor_sequence = map_chr(interactor_sequence, deparse_chains),
+            interactee_sequence = map_chr(interactee_sequence, deparse_chains)
+          ),
         vertices = ag_data_nodes()
       ),
       name = "AmyloGraph",
