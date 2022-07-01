@@ -93,6 +93,13 @@ empty_buffer <- function(reader) {
 #' 
 #' @importFrom dplyr tibble
 read_chains <- function(txt, separator = ag_option("chain_separator")) {
+  if (!grepl(separator, txt)) {
+    return(tibble(
+      name = NA,
+      sequence = txt
+    ))
+  }
+  
   reader <- structure(
     list(
       name = character(),
