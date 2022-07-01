@@ -27,10 +27,7 @@ elem_tab_interactions_graph <- function(data_nodes)
 elem_panel_interactions_graph <- function()
   div(
     id = "panel_interactions_graph",
-    visNetworkOutput("graph", height = "calc(100% - 30px)", width = "100%"),
-    downloadButton("download_xgmml",
-                   label = "Download network as XGMML",
-                   class = "ag-download-button")
+    visNetworkOutput("graph", height = "calc(100% - 30px)", width = "100%")
   )
 
 elem_panel_single_protein <- function(data_nodes)

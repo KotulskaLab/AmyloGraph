@@ -125,3 +125,21 @@ invert_names <- function(value) {
 add_none <- function(choices) {
   c(none = ag_option("str_null"), choices)
 }
+
+#' Execute code if not NULL
+#' 
+#' @description Checks input value for equality to `NULL` and executes the code
+#' only if this equality is not satisfied.
+#' 
+#' @param value \[\code{any}\]\cr
+#'  Value to compare to `NULL`.
+#' @param code \[\code{function(1)}\]\cr
+#'  Function that takes `value` as first (unnamed) parameter, executed if
+#'  `value` is not `NULL`.
+#' @param ... \cr
+#'  Other parameters passed to `code()`.
+#' 
+#' @return `NULL` if input is `NULL`, return value of `code()` otherwise.
+if_null_else <- function(value, code = identity, ...) {
+  if (is.null(value)) NULL else code(value, ...)
+}

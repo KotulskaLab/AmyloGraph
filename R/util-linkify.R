@@ -32,7 +32,15 @@ linkify_doi <- function(doi, truncate = TRUE) {
 #' 
 #' @seealso \code{\link{citify}()}, \code{\link{linkify_doi}()}
 linkify_uniprot <- function(uniprot_id) {
-  glue("<a href='https://uniprot.org/uniprot/{uniprot_id}' target='_blank' rel='noopener noreferer''>{uniprot_id}</a>")
+  ifelse(
+    grepl(
+      # Does uniprot_id match UniProt ID regex?
+      "[OPQ][0-9][A-Z0-9]{3}[0-9]|[A-NR-Z][0-9]([A-Z][A-Z0-9]{2}[0-9]){1,2}",
+      uniprot_id
+    ),
+    glue("<a href='https://uniprot.org/uniprot/{uniprot_id}' target='_blank' rel='noopener noreferer''>{uniprot_id}</a>"),
+    uniprot_id
+  )
 }
 
 #' Generate paper citation
