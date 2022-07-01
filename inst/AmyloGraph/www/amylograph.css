@@ -196,7 +196,7 @@ button.dt-button.active:not(.disabled) {
   height: 100%;
 }
 
-#filter_control-incorrect_motif_message {
+.ag-motif-incorrect {
   text-align: center;
   background: red;
   color: white;

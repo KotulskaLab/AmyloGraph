@@ -14,12 +14,7 @@ ui_filter_control <- function(id, data_groups) {
       type = "markdown",
       content = "label_group"
     ),
-    uiOutput(outputId = ns("incorrect_motif_message")),
-    helper(
-      textInput(ns("motif"), "Filter by motif", placeholder = "^LXXA"),
-      type = "markdown",
-      content = "motif"
-    ),
+    ui_motif_filter(ns("motif")),
     do.call(
       tagList,
       imap(
@@ -48,6 +43,8 @@ server_filter_control <- function(id, data_interactions, data_groups) {
                             input[["label_group"]] == .x))
     })
     
+    motif <- server_motif_filter("motif")
+    
     ret <- reactiveValues(
       table = NULL,
       graph = NULL,
@@ -62,22 +59,14 @@ server_filter_control <- function(id, data_interactions, data_groups) {
         )
     })
     
-    is_motif_correct <- reactive({
-      correct_motif(input[["motif"]])
-    })
-    
     interactions_filtered_by_motif <- reactive({
-      if (is_motif_correct() && nchar(input[["motif"]]) > 0) {
+      if (is_valid(motif()) && nchar(motif()) > 0) {
         interactions_filtered_by_group() %>%
-          filter(contains_motif(interactor_sequence, input[["motif"]]) |
-                   contains_motif(interactee_sequence, input[["motif"]]))
+          filter(contains_motif(interactor_sequence, motif()) |
+                   contains_motif(interactee_sequence, motif()))
       } else {
         interactions_filtered_by_group()
       }
-    })
-    
-    output[["incorrect_motif_message"]] <- renderUI({
-      if (is_motif_correct()) HTML("") else HTML("Incorrect motif provided!")
     })
     
     observe({
