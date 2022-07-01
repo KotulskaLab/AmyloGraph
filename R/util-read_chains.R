@@ -119,3 +119,17 @@ read_chains <- function(txt, separator = ag_option("chain_separator")) {
   }
   reader[["tbl"]]
 }
+
+#' @importFrom glue glue_collapse glue_data
+deparse_chains <- function(tbl_sq, separator = ag_option("chain_separator")) {
+  if (nrow(tbl_sq) == 0) {
+    ""
+  } else if (nrow(tbl_sq) == 1 && is.na(tbl_sq[["name"]])) {
+    tbl_sq[["sequence"]]
+  } else {
+    glue_collapse(
+      glue_data(tbl_sq, ">{name}{separator}{sequence}"),
+      sep = separator
+    )
+  }
+}
