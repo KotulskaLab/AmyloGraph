@@ -1,4 +1,4 @@
-render_XGMML_download <- function(id, edge_data) {
+render_XGMML_download <- function(id, edges) {
   insertUI(
     "#downloadgraph",
     where = "afterEnd",
