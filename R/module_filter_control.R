@@ -1,11 +1,12 @@
 #' @importFrom purrr imap
 #' @importFrom shinyhelper helper
 ui_filter_control <- function(id, data_groups) {
+  ns <- NS(id)
   div(
-    id = "filter_control",
+    id = id,
     helper(
       selectInput(
-        inputId = NS(id, "label_group"),
+        inputId = ns("label_group"),
         label = "Group edges by",
         choices = add_none(ag_group_labels(data_groups)),
         multiple = FALSE
@@ -13,9 +14,9 @@ ui_filter_control <- function(id, data_groups) {
       type = "markdown",
       content = "label_group"
     ),
-    uiOutput(outputId = NS(id, "incorrect_motif_message")),
+    uiOutput(outputId = ns("incorrect_motif_message")),
     helper(
-      textInput(NS(id, "motif"), "Filter by motif", placeholder = "^LXXA"),
+      textInput(ns("motif"), "Filter by motif", placeholder = "^LXXA"),
       type = "markdown",
       content = "motif"
     ),
@@ -24,7 +25,7 @@ ui_filter_control <- function(id, data_groups) {
       imap(
         ag_group_labels(data_groups),
         ~ filterCheckboxInput(
-          NS(id, .x),
+          ns(.x),
           ag_color_map(data_groups, .x)[["values"]],
           .y
         )
