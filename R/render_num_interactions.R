@@ -1,26 +1,3 @@
-#' @importFrom dplyr filter
-count_interactions <- function(protein_id, interactions) {
-  interactions %>%
-    filter(from_id == protein_id | to_id == protein_id) %>%
-    nrow()
-}
-
-#' @importFrom dplyr filter pull n_distinct
-count_unique_interactors <- function(protein_id, interactions) {
-  interactions %>%
-    filter(to_id == protein_id) %>%
-    pull(from_id) %>%
-    n_distinct()
-}
-
-#' @importFrom dplyr filter pull n_distinct
-count_unique_interactees <- function(protein_id, interactions) {
-  interactions %>%
-    filter(from_id == protein_id) %>%
-    pull(to_id) %>%
-    n_distinct()
-}
-
 #' Render a table of interaction count by protein
 #' 
 #' @description Renders a table with interaction count for each protein,
@@ -81,4 +58,53 @@ render_num_interactions_by_paper <- function(interactions, ...) {
       scale_y_continuous("Number of publications") +
       theme_bw(base_size = 14)
   }, ...)
+}
+
+#' Count interactions for a protein
+#' 
+#' @description Counts number of interactions in AmyloGraph database for a given
+#' protein.
+#' 
+#' @param protein_id \[\code{character(1)}\]\cr
+#'  ID of protein interactions are counted for.
+#' @param interactions \[\code{data.frame()}\]\cr
+#'  AmyloGraph interaction data.
+#' 
+#' @return An `integer` count of interactions.
+#' 
+#' @importFrom dplyr filter
+count_interactions <- function(protein_id, interactions) {
+  interactions %>%
+    filter(from_id == protein_id | to_id == protein_id) %>%
+    nrow()
+}
+
+#' Count unique interacting proteins
+#' 
+#' @description Counts number of unique interactors/interactees in AmyloGraph
+#' database for a given protein.
+#' 
+#' @param protein_id \[\code{character(1)}\]\cr
+#'  ID of protein interactions are counted for.
+#' @param interactions \[\code{data.frame()}\]\cr
+#'  AmyloGraph interaction data.
+#' 
+#' @return An `integer` count of distinct protein interacting.
+#' 
+#' @rdname count-unique-interacts
+#' @importFrom dplyr filter pull n_distinct
+count_unique_interactors <- function(protein_id, interactions) {
+  interactions %>%
+    filter(to_id == protein_id) %>%
+    pull(from_id) %>%
+    n_distinct()
+}
+
+#' @rdname count-unique-interacts
+#' @importFrom dplyr filter pull n_distinct
+count_unique_interactees <- function(protein_id, interactions) {
+  interactions %>%
+    filter(from_id == protein_id) %>%
+    pull(to_id) %>%
+    n_distinct()
 }
