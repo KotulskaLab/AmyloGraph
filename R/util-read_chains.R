@@ -119,3 +119,30 @@ read_chains <- function(txt, separator = ag_option("chain_separator")) {
   }
   reader[["tbl"]]
 }
+
+#' Revert chain tibbles to strings
+#' 
+#' @description Deparses chain data tibbles back to strings, depending on the
+#' structure of the tibble; plain sequence if there's only one row and `name`
+#' column is `NA`, a FASTA-like format otherwise.
+#' 
+#' @param tbl_sq \[\code{tibble()}\]\cr
+#'  Sequence data for one protein.
+#' @param separator \[\code{character(1)}\]\cr
+#'  A character or string to join lines of data with.
+#' 
+#' @return A character vector with FASTA-like entries or plain sequences.
+#' 
+#' @importFrom glue glue_collapse glue_data
+deparse_chains <- function(tbl_sq, separator = ag_option("chain_separator")) {
+  if (nrow(tbl_sq) == 0) {
+    ""
+  } else if (nrow(tbl_sq) == 1 && is.na(tbl_sq[["name"]])) {
+    tbl_sq[["sequence"]]
+  } else {
+    glue_collapse(
+      glue_data(tbl_sq, ">{name}{separator}{sequence}"),
+      sep = separator
+    )
+  }
+}
