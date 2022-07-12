@@ -8,19 +8,18 @@
 #' @param nodes \[\code{data.frame()}\]\cr
 #'  AmyloGraph node data.
 #' 
-#' @importFrom dplyr mutate arrange select filter
+#' @importFrom dplyr mutate arrange select
 #' @importFrom DT renderDataTable
 #' @importFrom purrr map_int
 render_num_interactions_by_protein <- function(interactions, nodes) {
   interaction_data <- nodes %>%
-    mutate(n =  map_int(
-      nodes[["id"]],
-      \(id) interactions %>%
-        filter(from_id == id | to_id == id) %>%
-        nrow()
-    )) %>%
+    mutate(
+      n = map_int(nodes[["id"]], count_interactions, interactions),
+      n_ors = map_int(nodes[["id"]], count_unique_interactors, interactions),
+      n_ees = map_int(nodes[["id"]], count_unique_interactees, interactions)
+    ) %>%
     arrange(label) %>%
-    select(label, n)
+    select(label, n, n_ors, n_ees)
   
   renderDataTable(
     interaction_data,
@@ -29,7 +28,8 @@ render_num_interactions_by_protein <- function(interactions, nodes) {
       paging = FALSE
     ),
     rownames = FALSE,
-    colnames = c("Protein" = "label", "Interaction count" = "n")
+    colnames = c("Protein" = "label", "Interaction count" = "n",
+                 "Unique interactors" = "n_ors", "Unique interactees" = "n_ees")
   )
 }
 
@@ -58,4 +58,53 @@ render_num_interactions_by_paper <- function(interactions, ...) {
       scale_y_continuous("Number of publications") +
       theme_bw(base_size = 14)
   }, ...)
+}
+
+#' Count interactions for a protein
+#' 
+#' @description Counts number of interactions in AmyloGraph database for a given
+#' protein.
+#' 
+#' @param protein_id \[\code{character(1)}\]\cr
+#'  ID of protein interactions are counted for.
+#' @param interactions \[\code{data.frame()}\]\cr
+#'  AmyloGraph interaction data.
+#' 
+#' @return An `integer` count of interactions.
+#' 
+#' @importFrom dplyr filter
+count_interactions <- function(protein_id, interactions) {
+  interactions %>%
+    filter(from_id == protein_id | to_id == protein_id) %>%
+    nrow()
+}
+
+#' Count unique interacting proteins
+#' 
+#' @description Counts number of unique interactors/interactees in AmyloGraph
+#' database for a given protein.
+#' 
+#' @param protein_id \[\code{character(1)}\]\cr
+#'  ID of protein interactions are counted for.
+#' @param interactions \[\code{data.frame()}\]\cr
+#'  AmyloGraph interaction data.
+#' 
+#' @return An `integer` count of distinct protein interacting.
+#' 
+#' @rdname count-unique-interacts
+#' @importFrom dplyr filter pull n_distinct
+count_unique_interactors <- function(protein_id, interactions) {
+  interactions %>%
+    filter(to_id == protein_id) %>%
+    pull(from_id) %>%
+    n_distinct()
+}
+
+#' @rdname count-unique-interacts
+#' @importFrom dplyr filter pull n_distinct
+count_unique_interactees <- function(protein_id, interactions) {
+  interactions %>%
+    filter(from_id == protein_id) %>%
+    pull(to_id) %>%
+    n_distinct()
 }

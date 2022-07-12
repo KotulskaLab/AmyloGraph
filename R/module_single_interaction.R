@@ -26,7 +26,8 @@ server_single_interaction <- function(id, interactions) {
       selected_interaction <- interactions %>%
         filter(AGID == input[["selected_interaction"]])
       
-      reference_data <- filter(ag_references(), doi == selected_interaction[["doi"]]) %>% 
+      reference_data <- ag_references() %>%
+        filter(doi == tolower(selected_interaction[["doi"]])) %>% 
         slice(1)
       
       output[["amylograph_id"]] <- renderText(selected_interaction[["AGID"]])
