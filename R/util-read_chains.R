@@ -34,20 +34,45 @@ prettify_chains <- function(tbl_sq) {
 #'  Amino acid sequence.
 #' 
 #' @return A single string with multiple lines (probably 3 or 4).
+#' 
+#' @importFrom purrr pluck map2
+#' @importFrom stringi stri_extract_all_regex stri_join_list
 prettify_sequence_output <- function(name, sequence) {
+  line_length <- ag_option("sequence_line_length")
   group_length <- ag_option("sequence_group_length")
+  seq_length <- nchar(sequence)
   
-  seq_length <- glue("Sequence length: {nchar(sequence)}")
-  indices <- if (nchar(sequence) >= group_length) {
-    seq(group_length, nchar(sequence), by = group_length) %>%
-      format(width = group_length) %>%
-      paste0(collapse = " ")
+  # A vector with as many elements as there are lines
+  ret_sequence <- sequence %>%
+    stri_extract_all_regex(glue(".{{1,{line_length}}}")) %>%
+    pluck(1) %>%
+    stri_extract_all_regex(glue(".{{1,{group_length}}}")) %>%
+    stri_join_list(sep = " ")
+  
+  ret_indices <- if (seq_length >= group_length) {
+    indices_from <- seq(group_length, seq_length, by = line_length)
+    indices_to <- seq_length
+    if (seq_length >= line_length) {
+      indices_to <- c(seq(line_length, seq_length, by = line_length), indices_to)
+    }
+    if (length(indices_from) < length(indices_to)) {
+      indices_from <- c(indices_from, Inf)
+    }
+    indices <- map2(indices_from, indices_to, ~ {
+      if (.x < .y) {
+        seq(.x, .y, by = group_length) %>%
+          format(width = group_length)
+      } else {
+        ""
+      }
+    })
+    stri_join_list(indices, sep = " ")
   } else {
     ""
   }
-  sequence_w_spaces <- gsub(glue("(.{{{group_length}}})"), "\\1 ", sequence)
   
-  ret <- paste(seq_length, indices, sequence_w_spaces, sep = "\n")
+  ret <- paste(ret_indices, ret_sequence, sep = "\n", collapse = "\n")
+  ret <- glue("Sequence length: {seq_length}\n{ret}")
   if (!is.na(name)) {
     chain <- glue("Chain: {name}")
     ret <- paste(chain, ret, sep = "\n")
