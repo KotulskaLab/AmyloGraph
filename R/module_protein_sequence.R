@@ -10,7 +10,7 @@ ui_protein_sequence <- function(id) {
 
 #' @importFrom purrr pluck
 #' @importFrom stringi stri_trans_totitle
-server_protein_sequence <- function(id, protein_role, interaction) {
+server_protein_sequence <- function(id, interaction, protein_role = id) {
   moduleServer(id, function(input, output, session) {
     output[["header"]] <- glue("{protein_role}:") %>%
       stri_trans_totitle() %>%

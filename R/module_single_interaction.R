@@ -24,12 +24,12 @@ server_single_interaction <- function(id, interactions) {
         filter(AGID == input[["selected_interaction"]])
     })
     
-    server_protein_sequence("interactor", "interactor", interaction)
-    server_protein_sequence("interactee", "interactee", interaction)
+    server_protein_sequence("interactor", interaction)
+    server_protein_sequence("interactee", interaction)
     
-    server_protein_property("aggregation_speed", "aggregation_speed", interaction)
-    server_protein_property("elongates_by_attaching", "elongates_by_attaching", interaction)
-    server_protein_property("heterogenous_fibers", "heterogenous_fibers", interaction)
+    server_protein_property("aggregation_speed", interaction)
+    server_protein_property("elongates_by_attaching", interaction)
+    server_protein_property("heterogenous_fibers", interaction)
     
     observe({
       req(input[["selected_interaction"]])
