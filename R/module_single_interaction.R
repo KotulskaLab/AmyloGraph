@@ -14,7 +14,6 @@ ui_single_interaction <- function(id) {
 }
 
 #' @importFrom dplyr filter
-#' @importFrom markdown renderMarkdown
 #' @importFrom purrr pluck
 server_single_interaction <- function(id, interactions) {
   moduleServer(id, function(input, output, session) {

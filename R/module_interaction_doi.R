@@ -6,6 +6,9 @@ ui_interaction_doi <- function(id) {
   )
 }
 
+#' @importFrom dplyr filter
+#' @importFrom markdown renderMarkdown
+#' @importFrom purrr pluck
 server_interaction_doi <- function(id, interaction) {
   moduleServer(id, function(input, output, session) {
     observe({
