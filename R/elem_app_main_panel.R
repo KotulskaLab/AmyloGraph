@@ -12,26 +12,17 @@ elem_app_main_panel <- function()
     id = "main_panel"
   )
 
+#' @importFrom visNetwork visNetworkOutput
 elem_tab_interactions_graph <- function()
   tabPanel(
     title = "Graph",
     value = "graph",
     div(
       id = "tab_interactions_graph",
-      elem_panel_interactions_graph(),
-      elem_panel_single_protein()
+      visNetworkOutput("graph", height = "calc(100% - 10px)", width = "100%"),
+      ui_single_protein("single_protein")
     )
   )
-
-#' @importFrom visNetwork visNetworkOutput
-elem_panel_interactions_graph <- function()
-  div(
-    id = "panel_interactions_graph",
-    visNetworkOutput("graph", height = "calc(100% - 30px)", width = "100%")
-  )
-
-elem_panel_single_protein <- function()
-  ui_single_protein("single_protein")
 
 elem_tab_interactions_table <- function()
   tabPanel(
