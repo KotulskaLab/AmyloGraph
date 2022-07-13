@@ -42,15 +42,3 @@ server_single_interaction <- function(id, interactions) {
     })
   })
 }
-
-render_single_interaction_attribute <- function(selected_interaction, attribute, header) {
-  # details <- selected_interaction[[glue("{attribute}_details")]]
-  renderUI(
-    div(
-      strong(header),
-      p(as.character(selected_interaction()[[attribute]]))
-      # The line below allows for displaying comments to answers
-      # if (is.na(details)) NULL else p(details)
-    )
-  )
-}
