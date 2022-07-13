@@ -20,6 +20,7 @@
                              "heterogenous_fibers"),
     ag_center_network = TRUE,
     ag_sequence_group_length = 10,
+    ag_sequence_line_length = 80,
     ag_chain_separator = " "
   )
   
@@ -28,6 +29,7 @@
     options(new_options[unset_inds])
   }
   
+  rlang::run_on_load()
   icecream::ic_disable()
   invisible()
 }

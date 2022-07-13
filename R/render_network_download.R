@@ -11,7 +11,7 @@ render_XGMML_download <- function(id, edges) {
   XGMML_download_handler(edges)
 }
 
-render_HTML_download <- function(id, node_positions, nodes, edges) {
+render_HTML_download <- function(id, node_positions) {
   insertUI(
     "#downloadgraph",
     where = "afterEnd",
@@ -21,5 +21,5 @@ render_HTML_download <- function(id, node_positions, nodes, edges) {
       class = "ag-download-button"
     )
   )
-  HTML_download_handler(node_positions, nodes, edges)
+  HTML_download_handler(node_positions)
 }

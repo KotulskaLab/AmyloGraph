@@ -12,10 +12,10 @@
 #' name.
 #' 
 #' @importFrom dplyr filter pull
-reactive_selected_node_label <- function(input, node_data) {
+reactive_selected_node_label <- function(input) {
   reactive({
     req(input[["select_node"]])
-    node_data %>%
+    ag_data_nodes %>%
       filter(id == input[["select_node"]]) %>%
       pull(label)
   })

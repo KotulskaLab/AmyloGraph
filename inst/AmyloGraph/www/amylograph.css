@@ -72,6 +72,11 @@ button.dt-button.active:not(.disabled) {
   box-shadow: inset 1px 1px 3px #444;
 }
 
+/* VISNETWORK ELEMENTS */
+
+#maindivgraph > div > hr {
+  display: none;
+}
 
 /* SHINY CLASSES */
 
@@ -106,7 +111,7 @@ button.dt-button.active:not(.disabled) {
   padding: 10px;
 }
 
-#tab_interactions_graph, #panel_interactions_graph {
+#tab_interactions_graph {
   width: 100%;
   height: 100%;
 }

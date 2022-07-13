@@ -4,7 +4,7 @@
 \alias{render_protein_info}
 \title{Render list of protein sources}
 \usage{
-render_protein_info(selected_node_label, protein_data)
+render_protein_info(selected_node_label)
 }
 \arguments{
 \item{selected_node_label}{[\code{reactive(character(1))}]\cr

@@ -11,13 +11,13 @@
 #' 
 #' @importFrom visNetwork renderVisNetwork visNetwork visEdges visOptions
 #'  visInteraction visEvents visIgraphLayout visExport visNodes visPhysics
-render_network <- function(ag_data_nodes, edges) {
+render_network <- function(edges) {
   initial_center <- load_js_code("initial_center")
   
   renderVisNetwork({
     # We don't want to render graph each time we modify edges
     # Instead we update them in a separate observer using visNetworkProxy()
-    visAGNetwork(ag_data_nodes, isolate(edges[["graph"]])) %>%
+    visAGNetwork(isolate(edges[["graph"]])) %>%
       visEvents(
         selectNode = glue("function(nodes){
                   Shiny.setInputValue('<<NS('single_protein', 'select_node')>>', nodes.nodes[0]);
