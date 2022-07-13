@@ -1,6 +1,4 @@
-ag_data <- AmyloGraph:::ag_load_data()
-
-ui <- AmyloGraph:::ag_ui(ag_data)
-server <- AmyloGraph:::ag_server(ag_data)
+ui <- AmyloGraph:::ag_ui()
+server <- AmyloGraph:::ag_server()
 
 shinyApp(ui = ui, server = server)

@@ -1,5 +1,5 @@
 #' @importFrom shinyjs useShinyjs
-ag_ui <- function(ag_data) fillPage(
+ag_ui <- function() fillPage(
   useShinyjs(),
   GoogleAnalytics(),
   elem_app_body(),

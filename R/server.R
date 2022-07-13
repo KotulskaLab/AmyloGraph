@@ -1,5 +1,5 @@
 #' @importFrom shinyhelper observe_helpers
-ag_server <- function(ag_data) function(input, output) {
+ag_server <- function() function(input, output) {
   observe_helpers(help_dir = "manuals")
   
   rvals <- reactiveValues(
