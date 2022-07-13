@@ -29,6 +29,7 @@
     options(new_options[unset_inds])
   }
   
+  rlang::run_on_load()
   icecream::ic_disable()
   invisible()
 }
