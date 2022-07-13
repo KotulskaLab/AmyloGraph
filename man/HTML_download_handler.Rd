@@ -4,7 +4,7 @@
 \alias{HTML_download_handler}
 \title{Handle download of AmyloGraph network to HTML}
 \usage{
-HTML_download_handler(node_positions, nodes, edges)
+HTML_download_handler(node_positions, nodes)
 }
 \arguments{
 \item{node_positions}{[\code{reactive(data.frame())}]\cr

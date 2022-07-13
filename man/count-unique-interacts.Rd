@@ -5,9 +5,9 @@
 \alias{count_unique_interactees}
 \title{Count unique interacting proteins}
 \usage{
-count_unique_interactors(protein_id, interactions)
+count_unique_interactors(protein_id)
 
-count_unique_interactees(protein_id, interactions)
+count_unique_interactees(protein_id)
 }
 \arguments{
 \item{protein_id}{[\code{character(1)}]\cr

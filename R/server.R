@@ -11,7 +11,7 @@ ag_server <- function(ag_data) function(input, output) {
     if (input[["tabset_panel"]] == "table") rvals[["table_visited"]] <- TRUE
   })
   
-  edges <- server_filter_control("filter_control", ag_data[["interactions"]], ag_data[["groups"]])
+  edges <- server_filter_control("filter_control", ag_data[["groups"]])
   subtables <- server_single_protein("single_protein", edges, ag_data[["nodes"]], ag_data[["proteins"]])
   # TODO: extract function call below as a separate function that takes
   #  edges and id as only arguments
@@ -25,15 +25,15 @@ ag_server <- function(ag_data) function(input, output) {
     table_data = reactive(edges[["table"]])
   )
   
-  server_single_interaction("single_interaction", ag_data[["interactions"]])
-  server_db_statistics("db_statistics", ag_data[["interactions"]], ag_data[["nodes"]])
+  server_single_interaction("single_interaction")
+  server_db_statistics("db_statistics", ag_data[["nodes"]])
   server_about("about")
   
   output[["graph"]] <- render_network(ag_data[["nodes"]], edges)
   output[["download_xgmml"]] <- render_XGMML_download("download_xgmml", edges)
   node_positions <- reactive_node_positions(input, "graph")
   output[["download_html"]] <- render_HTML_download(
-    "download_html", node_positions, ag_data[["nodes"]], ag_data[["interactions"]]
+    "download_html", node_positions, ag_data[["nodes"]]
   )
   
   observe_node_selection(input)

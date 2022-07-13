@@ -75,7 +75,7 @@ XGMML_download_handler <- function(edges) {
 #' 
 #' @importFrom dplyr mutate
 #' @importFrom visNetwork visSave
-HTML_download_handler <- function(node_positions, nodes, edges) {
+HTML_download_handler <- function(node_positions, nodes) {
   downloadHandler(
     filename = function() "AmyloGraph.html",
     content = function(file) {
@@ -84,7 +84,7 @@ HTML_download_handler <- function(node_positions, nodes, edges) {
         nodes <- merge(nodes, node_positions, by = "id", all = TRUE)
       }
       
-      edges <- edges %>%
+      edges <- ag_data_interactions %>%
         mutate(from = from_id, to = to_id)
       
       visAGNetwork(nodes, edges) %>%

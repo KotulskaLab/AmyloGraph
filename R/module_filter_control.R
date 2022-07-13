@@ -35,7 +35,7 @@ ui_filter_control <- function(id, data_groups) {
 #' @importFrom purrr set_names map when walk
 #' @importFrom rlang sym expr
 #' @importFrom shinyjs toggleCssClass
-server_filter_control <- function(id, data_interactions, data_groups) {
+server_filter_control <- function(id, data_groups) {
   moduleServer(id, function(input, output, session) {
     observe({
       walk(ag_group_labels(data_groups),
@@ -48,11 +48,11 @@ server_filter_control <- function(id, data_interactions, data_groups) {
     ret <- reactiveValues(
       table = NULL,
       graph = NULL,
-      all = data_interactions
+      all = ag_data_interactions
     )
     
     interactions_filtered_by_group <- reactive({
-      data_interactions %>%
+      ag_data_interactions %>%
         filter(!!!map(
           ag_group_labels(data_groups) %>% set_names(NULL),
           ~ expr(!!sym(.) %in% !!input[[.]]))
