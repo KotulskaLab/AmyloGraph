@@ -4,16 +4,7 @@ ui_filter_control <- function(id) {
   ns <- NS(id)
   div(
     id = id,
-    helper(
-      selectInput(
-        inputId = ns("label_group"),
-        label = "Group edges by",
-        choices = add_none(ag_data_group_labels),
-        multiple = FALSE
-      ),
-      type = "markdown",
-      content = "label_group"
-    ),
+    ui_group_edges(ns("group_edges")),
     ui_motif_filter(ns("motif")),
     do.call(
       tagList,
@@ -37,13 +28,14 @@ ui_filter_control <- function(id) {
 #' @importFrom shinyjs toggleCssClass
 server_filter_control <- function(id) {
   moduleServer(id, function(input, output, session) {
+    group <- server_group_edges("group_edges")
+    motif <- server_motif_filter("motif")
+    
     observe({
       walk(ag_data_group_labels,
            ~ toggleCssClass(.x, "filter_checkbox_active",
-                            input[["label_group"]] == .x))
+                            group() == .x))
     })
-    
-    motif <- server_motif_filter("motif")
     
     ret <- reactiveValues(
       table = NULL,
@@ -73,20 +65,15 @@ server_filter_control <- function(id) {
     })
     
     observe({
-      label_group <- input[["label_group"]] %>%
-        when(
-          . == ag_option("str_null") ~ "",
-          ~ .
-        )
-      
       ret[["graph"]] <- ret[["table"]] %>%
-        group_by(to_id, from_id, !!sym(label_group)) %>%
+        group_by(to_id, from_id, !!sym(group())) %>%
         summarize(
           title = glue_collapse(unique(doi), sep = ", ", last = " and "),
           id = cur_group_id(),
-          .groups = "drop") %>% 
-        mutate(color = ag_data_color_map[[label_group]][!!sym(label_group)]) %>%
-        select(id, from = from_id, to = to_id, title, any_of(c("color", label_group)))
+          .groups = "drop"
+        ) %>% 
+        mutate(color = ag_data_color_map[[group()]][!!sym(group())]) %>%
+        select(id, from = from_id, to = to_id, title, any_of(c("color", group())))
     })
     
     ret
