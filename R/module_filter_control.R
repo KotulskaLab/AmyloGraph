@@ -8,7 +8,7 @@ ui_filter_control <- function(id) {
       selectInput(
         inputId = ns("label_group"),
         label = "Group edges by",
-        choices = add_none(ag_group_labels()),
+        choices = add_none(ag_data_group_labels),
         multiple = FALSE
       ),
       type = "markdown",
@@ -18,10 +18,10 @@ ui_filter_control <- function(id) {
     do.call(
       tagList,
       imap(
-        ag_group_labels(),
+        ag_data_group_labels,
         ~ filterCheckboxInput(
           ns(.x),
-          ag_color_map(.x)[["values"]],
+          ag_data_attribute_values[[.x]],
           .y
         )
       )
@@ -38,7 +38,7 @@ ui_filter_control <- function(id) {
 server_filter_control <- function(id) {
   moduleServer(id, function(input, output, session) {
     observe({
-      walk(ag_group_labels(),
+      walk(ag_data_group_labels,
            ~ toggleCssClass(.x, "filter_checkbox_active",
                             input[["label_group"]] == .x))
     })
@@ -53,7 +53,7 @@ server_filter_control <- function(id) {
     interactions_filtered_by_group <- reactive({
       ag_data_interactions %>%
         filter(!!!map(
-          ag_group_labels() %>% set_names(NULL),
+          ag_data_group_labels %>% set_names(NULL),
           ~ expr(!!sym(.) %in% !!input[[.]]))
         )
     })
@@ -85,7 +85,7 @@ server_filter_control <- function(id) {
           title = glue_collapse(unique(doi), sep = ", ", last = " and "),
           id = cur_group_id(),
           .groups = "drop") %>% 
-        mutate(color = ag_color_map(label_group)[["colors"]][!!sym(label_group)]) %>%
+        mutate(color = ag_data_color_map[[label_group]][!!sym(label_group)]) %>%
         select(id, from = from_id, to = to_id, title, any_of(c("color", label_group)))
     })
     
