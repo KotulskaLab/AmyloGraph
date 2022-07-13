@@ -9,12 +9,13 @@ ui_single_interaction <- function(id) {
     ui_interaction_property(ns("elongates_by_attaching")),
     ui_interaction_property(ns("heterogenous_fibers")),
     h2("Reference"),
-    uiOutput(ns("reference")),
+    ui_interaction_doi(ns("doi"))
   )
 }
 
 #' @importFrom dplyr filter
 #' @importFrom markdown renderMarkdown
+#' @importFrom purrr pluck
 server_single_interaction <- function(id, interactions) {
   moduleServer(id, function(input, output, session) {
     interaction <- reactive({
@@ -31,14 +32,14 @@ server_single_interaction <- function(id, interactions) {
     server_interaction_property("elongates_by_attaching", interaction)
     server_interaction_property("heterogenous_fibers", interaction)
     
+    server_interaction_doi("doi", interaction)
+    
     observe({
       req(interaction())
       
-      output[["amylograph_id"]] <- renderText(interaction()[["AGID"]])
-      
-      reference_data <- ag_references() %>%
-        filter(doi == tolower(interaction()[["doi"]]))
-      output[["reference"]] <- renderUI(HTML(renderMarkdown(text = citify(reference_data))))
+      output[["amylograph_id"]] <- interaction() %>%
+        pluck("AGID") %>%
+        renderText()
     })
   })
 }
