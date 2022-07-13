@@ -1,6 +1,6 @@
 #' @importFrom purrr imap
 #' @importFrom shinyhelper helper
-ui_filter_control <- function(id, data_groups) {
+ui_filter_control <- function(id) {
   ns <- NS(id)
   div(
     id = id,
@@ -8,7 +8,7 @@ ui_filter_control <- function(id, data_groups) {
       selectInput(
         inputId = ns("label_group"),
         label = "Group edges by",
-        choices = add_none(ag_group_labels(data_groups)),
+        choices = add_none(ag_group_labels()),
         multiple = FALSE
       ),
       type = "markdown",
@@ -18,10 +18,10 @@ ui_filter_control <- function(id, data_groups) {
     do.call(
       tagList,
       imap(
-        ag_group_labels(data_groups),
+        ag_group_labels(),
         ~ filterCheckboxInput(
           ns(.x),
-          ag_color_map(data_groups, .x)[["values"]],
+          ag_color_map(.x)[["values"]],
           .y
         )
       )
@@ -35,10 +35,10 @@ ui_filter_control <- function(id, data_groups) {
 #' @importFrom purrr set_names map when walk
 #' @importFrom rlang sym expr
 #' @importFrom shinyjs toggleCssClass
-server_filter_control <- function(id, data_groups) {
+server_filter_control <- function(id) {
   moduleServer(id, function(input, output, session) {
     observe({
-      walk(ag_group_labels(data_groups),
+      walk(ag_group_labels(),
            ~ toggleCssClass(.x, "filter_checkbox_active",
                             input[["label_group"]] == .x))
     })
@@ -54,7 +54,7 @@ server_filter_control <- function(id, data_groups) {
     interactions_filtered_by_group <- reactive({
       ag_data_interactions %>%
         filter(!!!map(
-          ag_group_labels(data_groups) %>% set_names(NULL),
+          ag_group_labels() %>% set_names(NULL),
           ~ expr(!!sym(.) %in% !!input[[.]]))
         )
     })
@@ -86,7 +86,7 @@ server_filter_control <- function(id, data_groups) {
           title = glue_collapse(unique(doi), sep = ", ", last = " and "),
           id = cur_group_id(),
           .groups = "drop") %>% 
-        mutate(color = ag_color_map(data_groups, label_group)[["colors"]][!!sym(label_group)]) %>%
+        mutate(color = ag_color_map(label_group)[["colors"]][!!sym(label_group)]) %>%
         select(id, from = from_id, to = to_id, title, any_of(c("color", label_group)))
     })
     

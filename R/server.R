@@ -11,7 +11,7 @@ ag_server <- function(ag_data) function(input, output) {
     if (input[["tabset_panel"]] == "table") rvals[["table_visited"]] <- TRUE
   })
   
-  edges <- server_filter_control("filter_control", ag_data[["groups"]])
+  edges <- server_filter_control("filter_control")
   subtables <- server_single_protein("single_protein", edges)
   # TODO: extract function call below as a separate function that takes
   #  edges and id as only arguments

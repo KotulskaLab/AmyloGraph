@@ -45,6 +45,38 @@ rlang::on_load({
            shape = "box")
 })
 
+#' Build color data for question answers
+#' 
+#' @return A list with two elements:
+#' * `data`: a list of tibbles for each question; each tibble containing two
+#'   columns -- `values` (containing answers to questions) and `colors` (with
+#'   HTML color codes, all unique within a tibble),
+#' * `groups`: a list with translations between human- and computer-friendly
+#'   names for questions.
+#' 
+#' @importFrom dplyr tibble
+#' @importFrom purrr set_names map
+ag_data_groups <- NULL
+
+rlang::on_load({
+  ag_data_groups <- {
+    interaction_attrs <- ag_option("interaction_attrs")
+    groups <- invert_names(ag_option("colnames"))[interaction_attrs]
+    
+    list(
+      data = map(
+        interaction_attrs,
+        ~ tibble(
+          values = sort(unique(ag_data_interactions[[.x]])),
+          colors = set_names(ag_option("palette")[seq_along(values)], values)
+        )
+      ) %>% set_names(interaction_attrs),
+      groups = as.list(interaction_attrs) %>%
+        set_names(tolower(groups))
+    )
+  }
+})
+
 #' AmyloGraph proteins list
 #' 
 #' @return `data.frame` coming from `protein_data.csv` file with the
