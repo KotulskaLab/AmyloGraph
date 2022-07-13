@@ -1,4 +1,4 @@
-ui_protein_property <- function(id) {
+ui_interaction_property <- function(id) {
   ns <- NS(id)
   div(
     textOutput(ns("question"), container = strong),
@@ -8,7 +8,7 @@ ui_protein_property <- function(id) {
 }
 
 #' @importFrom purrr pluck
-server_protein_property <- function(id, interaction, attribute = id) {
+server_interaction_property <- function(id, interaction, attribute = id) {
   moduleServer(id, function(input, output, session) {
     output[["question"]] <- text_question_attribute(attribute) %>%
       renderText()
