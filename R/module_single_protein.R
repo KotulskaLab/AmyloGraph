@@ -1,14 +1,14 @@
-ui_single_protein <- function(id, node_data) {
+ui_single_protein <- function(id) {
   ns <- NS(id)
   div(
     id = "panel_single_protein",
     class = "panel_contracted",
-    elem_select_node(ns("select_node"), node_data),
+    elem_select_node(ns("select_node")),
     elem_info_panel(ns)
   )
 }
 
-server_single_protein <- function(id, edge_data, node_data, protein_data) {
+server_single_protein <- function(id, edge_data) {
   moduleServer(id, function(input, output, session) {
     ns <- NS(id)
     
@@ -17,8 +17,8 @@ server_single_protein <- function(id, edge_data, node_data, protein_data) {
       interactors = NULL
     )
     
-    output[["info"]] <- reactive_selected_node_label(input, node_data) %>%
-      render_protein_info(protein_data)
+    output[["info"]] <- reactive_selected_node_label(input) %>%
+      render_protein_info()
   
     subtables[["interactees"]] <- reactive_subtable_data(
       edge_data, NS(ns("interactees")), input, "from_id", "interactee_name")

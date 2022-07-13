@@ -4,7 +4,7 @@
 \alias{count_interactions}
 \title{Count interactions for a protein}
 \usage{
-count_interactions(protein_id, interactions)
+count_interactions(protein_id)
 }
 \arguments{
 \item{protein_id}{[\code{character(1)}]\cr

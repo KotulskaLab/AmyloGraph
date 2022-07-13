@@ -4,7 +4,7 @@
 \alias{render_num_interactions_by_protein}
 \title{Render a table of interaction count by protein}
 \usage{
-render_num_interactions_by_protein(interactions, nodes)
+render_num_interactions_by_protein()
 }
 \arguments{
 \item{interactions}{[\code{data.frame()}]\cr

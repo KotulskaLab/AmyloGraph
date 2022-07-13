@@ -4,14 +4,14 @@
 \alias{render_network}
 \title{Render visNetwork graph}
 \usage{
-render_network(ag_data_nodes, edges)
+render_network(edges)
 }
 \arguments{
-\item{ag_data_nodes}{[\code{data.frame()}]\cr
-Output of \code{\link{ag_data_nodes}()}, nodes to plot.}
-
 \item{edges}{[\code{reactivevalues()}]\cr
 AmyloGraph data with "graph" element, edges to plot.}
+
+\item{ag_data_nodes}{[\code{data.frame()}]\cr
+Output of \code{\link{ag_data_nodes}()}, nodes to plot.}
 }
 \description{
 Renders a visNetwork graph using initial AmyloGraph data. Any

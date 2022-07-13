@@ -12,7 +12,7 @@
 #' 
 #' @importFrom visNetwork visNetwork visEdges visNodes visIgraphLayout
 #'  visPhysics visOptions visInteraction
-visAGNetwork <- function(nodes, edges) {
+visAGNetwork <- function(edges, nodes = ag_data_nodes) {
   visNetwork(nodes = nodes, edges = edges, width = 1600, height = 900) %>%
     visEdges(arrows = "to",
              width = 2,

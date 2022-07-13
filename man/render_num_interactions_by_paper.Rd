@@ -4,14 +4,14 @@
 \alias{render_num_interactions_by_paper}
 \title{Render a plot of interaction count by paper}
 \usage{
-render_num_interactions_by_paper(interactions, ...)
+render_num_interactions_by_paper(...)
 }
 \arguments{
-\item{interactions}{[\code{data.frame()}]\cr
-AmyloGraph interaction data.}
-
 \item{...}{\cr
 Additional parameters to \code{renderPlot()}.}
+
+\item{interactions}{[\code{data.frame()}]\cr
+AmyloGraph interaction data.}
 }
 \description{
 Renders a barplot of the frequency of interaction counts for

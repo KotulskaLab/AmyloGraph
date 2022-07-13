@@ -1,5 +1,5 @@
 #' @importFrom shinyhelper observe_helpers
-ag_server <- function(ag_data) function(input, output) {
+ag_server <- function() function(input, output) {
   observe_helpers(help_dir = "manuals")
   
   rvals <- reactiveValues(
@@ -11,8 +11,8 @@ ag_server <- function(ag_data) function(input, output) {
     if (input[["tabset_panel"]] == "table") rvals[["table_visited"]] <- TRUE
   })
   
-  edges <- server_filter_control("filter_control", ag_data[["interactions"]], ag_data[["groups"]])
-  subtables <- server_single_protein("single_protein", edges, ag_data[["nodes"]], ag_data[["proteins"]])
+  edges <- server_filter_control("filter_control")
+  subtables <- server_single_protein("single_protein", edges)
   # TODO: extract function call below as a separate function that takes
   #  edges and id as only arguments
   table_proxy <- server_table(
@@ -25,16 +25,14 @@ ag_server <- function(ag_data) function(input, output) {
     table_data = reactive(edges[["table"]])
   )
   
-  server_single_interaction("single_interaction", ag_data[["interactions"]])
-  server_db_statistics("db_statistics", ag_data[["interactions"]], ag_data[["nodes"]])
+  server_single_interaction("single_interaction")
+  server_db_statistics("db_statistics")
   server_about("about")
   
-  output[["graph"]] <- render_network(ag_data[["nodes"]], edges)
+  output[["graph"]] <- render_network(edges)
   output[["download_xgmml"]] <- render_XGMML_download("download_xgmml", edges)
   node_positions <- reactive_node_positions(input, "graph")
-  output[["download_html"]] <- render_HTML_download(
-    "download_html", node_positions, ag_data[["nodes"]], ag_data[["interactions"]]
-  )
+  output[["download_html"]] <- render_HTML_download("download_html", node_positions)
   
   observe_node_selection(input)
   observe_interaction_selection(input)

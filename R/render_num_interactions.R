@@ -11,12 +11,12 @@
 #' @importFrom dplyr mutate arrange select
 #' @importFrom DT renderDataTable
 #' @importFrom purrr map_int
-render_num_interactions_by_protein <- function(interactions, nodes) {
-  interaction_data <- nodes %>%
+render_num_interactions_by_protein <- function() {
+  interaction_data <- ag_data_nodes %>%
     mutate(
-      n = map_int(nodes[["id"]], count_interactions, interactions),
-      n_ors = map_int(nodes[["id"]], count_unique_interactors, interactions),
-      n_ees = map_int(nodes[["id"]], count_unique_interactees, interactions)
+      n = map_int(ag_data_nodes[["id"]], count_interactions),
+      n_ors = map_int(ag_data_nodes[["id"]], count_unique_interactors),
+      n_ees = map_int(ag_data_nodes[["id"]], count_unique_interactees)
     ) %>%
     arrange(label) %>%
     select(label, n, n_ors, n_ees)
@@ -47,9 +47,9 @@ render_num_interactions_by_protein <- function(interactions, nodes) {
 #' @importFrom dplyr count
 #' @importFrom ggplot2 aes ggplot geom_col scale_x_continuous scale_y_continuous 
 #' theme_bw
-render_num_interactions_by_paper <- function(interactions, ...) {
+render_num_interactions_by_paper <- function(...) {
   renderPlot({
-    interactions %>%
+    ag_data_interactions %>%
       count(doi) %>%
       count(n, name = "frequency") %>%
       ggplot(aes(x = n, y = frequency)) +
@@ -73,8 +73,8 @@ render_num_interactions_by_paper <- function(interactions, ...) {
 #' @return An `integer` count of interactions.
 #' 
 #' @importFrom dplyr filter
-count_interactions <- function(protein_id, interactions) {
-  interactions %>%
+count_interactions <- function(protein_id) {
+  ag_data_interactions %>%
     filter(from_id == protein_id | to_id == protein_id) %>%
     nrow()
 }
@@ -93,8 +93,8 @@ count_interactions <- function(protein_id, interactions) {
 #' 
 #' @rdname count-unique-interacts
 #' @importFrom dplyr filter pull n_distinct
-count_unique_interactors <- function(protein_id, interactions) {
-  interactions %>%
+count_unique_interactors <- function(protein_id) {
+  ag_data_interactions %>%
     filter(to_id == protein_id) %>%
     pull(from_id) %>%
     n_distinct()
@@ -102,8 +102,8 @@ count_unique_interactors <- function(protein_id, interactions) {
 
 #' @rdname count-unique-interacts
 #' @importFrom dplyr filter pull n_distinct
-count_unique_interactees <- function(protein_id, interactions) {
-  interactions %>%
+count_unique_interactees <- function(protein_id) {
+  ag_data_interactions %>%
     filter(from_id == protein_id) %>%
     pull(to_id) %>%
     n_distinct()

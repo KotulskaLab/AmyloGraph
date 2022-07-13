@@ -55,7 +55,7 @@ reactive_table_data <- function(edges, ns) {
 #' @importFrom dplyr filter arrange mutate select
 reactive_subtable_data <- function(edges, ns, input, target_id, target_variable) {
   reactive({
-    (if (input[["ignore_filters"]]) edges[["all"]] else edges[["table"]]) %>%
+    (if (input[["ignore_filters"]]) ag_data_interactions else edges[["table"]]) %>%
       filter(.data[[target_id]] == input[["select_node"]]) %>%
       arrange(.data[[target_variable]], doi) %>%
       mutate(doi = linkify_doi(doi),

@@ -12,19 +12,19 @@ ui_db_statistics <- function(id) {
   )
 }
 
-server_db_statistics <- function(id, interactions, data_nodes) {
+server_db_statistics <- function(id) {
   moduleServer(id, function(input, output, session) {
     output[["num_publications"]] <- renderText(
-      glue("Number of publications: {length(unique(interactions[['doi']]))}")
+      glue("Number of publications: {length(unique(ag_data_interactions[['doi']]))}")
     )
     output[["num_interactions"]] <- renderText(
-      glue("Number of interactions: {nrow(interactions)}")
+      glue("Number of interactions: {nrow(ag_data_interactions)}")
     )
     
     output[["num_interactions_by_protein"]] <-
-      render_num_interactions_by_protein(interactions, data_nodes)
+      render_num_interactions_by_protein()
     
     output[["num_interactions_by_paper"]] <-
-      render_num_interactions_by_paper(interactions, height = 440, width = 840)
+      render_num_interactions_by_paper(height = 440, width = 840)
   })
 }

@@ -15,12 +15,12 @@ ui_single_interaction <- function(id) {
 
 #' @importFrom dplyr filter
 #' @importFrom purrr pluck
-server_single_interaction <- function(id, interactions) {
+server_single_interaction <- function(id) {
   moduleServer(id, function(input, output, session) {
     interaction <- reactive({
       req(input[["selected_interaction"]])
       
-      interactions %>%
+      ag_data_interactions %>%
         filter(AGID == input[["selected_interaction"]])
     })
     
