@@ -1,3 +1,13 @@
+#' Access human-readable question text
+#' 
+#' @description Returns a well-formatted question asked when gathering data
+#' about interactions.
+#' 
+#' @param attribute \[\code{character(1)}\]\cr
+#'  An internal name of an interaction attribute.
+#' 
+#' @return A single string with a human-readable question.
+#' 
 #' @importFrom purrr when
 text_question_attribute <- function(attribute) {
   attribute %>%
