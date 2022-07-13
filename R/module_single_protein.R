@@ -8,7 +8,7 @@ ui_single_protein <- function(id, node_data) {
   )
 }
 
-server_single_protein <- function(id, edge_data, node_data, protein_data) {
+server_single_protein <- function(id, edge_data, node_data) {
   moduleServer(id, function(input, output, session) {
     ns <- NS(id)
     
@@ -18,7 +18,7 @@ server_single_protein <- function(id, edge_data, node_data, protein_data) {
     )
     
     output[["info"]] <- reactive_selected_node_label(input, node_data) %>%
-      render_protein_info(protein_data)
+      render_protein_info()
   
     subtables[["interactees"]] <- reactive_subtable_data(
       edge_data, NS(ns("interactees")), input, "from_id", "interactee_name")

@@ -14,9 +14,9 @@
 #'
 #' @importFrom dplyr filter
 #' @importFrom glue glue_data
-render_protein_info <- \(selected_node_label, protein_data) renderText({
+render_protein_info <- function(selected_node_label) renderText({
   req(selected_node_label())
-  filtered_data <- protein_data %>%
+  filtered_data <- ag_data_proteins %>%
     filter(name == selected_node_label())
   c(
     glue("{nrow(filtered_data)} source{pluralize(nrow(filtered_data))} found in UniProt:<br>"),

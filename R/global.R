@@ -24,6 +24,26 @@ rlang::on_load({
            interactee_sequence = map(interactee_sequence, read_chains))
 })
 
+#' AmyloGraph proteins list
+#' 
+#' @return `data.frame` coming from `protein_data.csv` file with the
+#' following changes:
+#' * `id` contains unique hashes of protein names.
+#' 
+#' @importFrom digest digest
+#' @importFrom dplyr mutate
+#' @importFrom purrr map_chr
+#' @importFrom readr read_csv
+ag_data_proteins <- NULL
+
+rlang::on_load({
+  ag_data_proteins <- read_csv(
+    system.file("AmyloGraph", "protein_data.csv", package = "AmyloGraph"),
+    col_types = "ccc"
+  ) %>%
+    mutate(id = map_chr(name, digest))
+})
+
 #' AmyloGraph references list
 #' 
 #' @return `data.frame` coming from `reference_table.csv` file with no changes.

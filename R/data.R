@@ -8,8 +8,7 @@
 ag_load_data <- function()
   list(
     groups = ag_data_groups(),
-    nodes = ag_data_nodes(),
-    proteins = ag_data_proteins()
+    nodes = ag_data_nodes()
   )
 
 #' Build list of proteins from interactions list
@@ -29,21 +28,6 @@ ag_data_nodes <- function()
     tibble(label = .,
            id = map_chr(label, digest),
            shape = "box")
-
-#' Load AmyloGraph proteins list
-#' 
-#' @return `data.frame` coming from `protein_data.csv` file with the
-#' following changes:
-#' * `id` contains unique hashes of protein names.
-#' 
-#' @importFrom digest digest
-#' @importFrom dplyr mutate
-#' @importFrom purrr map_chr
-#' @importFrom readr read_csv
-ag_data_proteins <- function()
-  read_csv(system.file("AmyloGraph", "protein_data.csv", package = "AmyloGraph"),
-           col_types = "ccc") %>%
-    mutate(id = map_chr(name, digest))
 
 #' Build color data for question answers
 #' 
