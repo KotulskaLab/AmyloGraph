@@ -47,8 +47,7 @@ server_filter_control <- function(id) {
     
     ret <- reactiveValues(
       table = NULL,
-      graph = NULL,
-      all = ag_data_interactions
+      graph = NULL
     )
     
     interactions_filtered_by_group <- reactive({
