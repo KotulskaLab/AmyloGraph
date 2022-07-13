@@ -11,12 +11,12 @@
 #' @importFrom dplyr mutate arrange select
 #' @importFrom DT renderDataTable
 #' @importFrom purrr map_int
-render_num_interactions_by_protein <- function(nodes) {
-  interaction_data <- nodes %>%
+render_num_interactions_by_protein <- function() {
+  interaction_data <- ag_data_nodes %>%
     mutate(
-      n = map_int(nodes[["id"]], count_interactions),
-      n_ors = map_int(nodes[["id"]], count_unique_interactors),
-      n_ees = map_int(nodes[["id"]], count_unique_interactees)
+      n = map_int(ag_data_nodes[["id"]], count_interactions),
+      n_ors = map_int(ag_data_nodes[["id"]], count_unique_interactors),
+      n_ees = map_int(ag_data_nodes[["id"]], count_unique_interactees)
     ) %>%
     arrange(label) %>%
     select(label, n, n_ors, n_ees)

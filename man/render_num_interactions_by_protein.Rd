@@ -4,14 +4,14 @@
 \alias{render_num_interactions_by_protein}
 \title{Render a table of interaction count by protein}
 \usage{
-render_num_interactions_by_protein(nodes)
+render_num_interactions_by_protein()
 }
 \arguments{
-\item{nodes}{[\code{data.frame()}]\cr
-AmyloGraph node data.}
-
 \item{interactions}{[\code{data.frame()}]\cr
 AmyloGraph interaction data.}
+
+\item{nodes}{[\code{data.frame()}]\cr
+AmyloGraph node data.}
 }
 \description{
 Renders a table with interaction count for each protein,

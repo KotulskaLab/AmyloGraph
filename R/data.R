@@ -7,27 +7,8 @@
 #' * `proteins`: see \code{\link{ag_data_proteins}()}
 ag_load_data <- function()
   list(
-    groups = ag_data_groups(),
-    nodes = ag_data_nodes()
+    groups = ag_data_groups()
   )
-
-#' Build list of proteins from interactions list
-#' 
-#' @return `data.frame` with a list of proteins that interact with others,
-#' described with `label` (human-readable name), `id` (machine-readable name),
-#' and `shape` (for the purpose of drawing a graph only).
-#' 
-#' @importFrom digest digest
-#' @importFrom dplyr select tibble
-#' @importFrom purrr map_chr
-ag_data_nodes <- function()
-  ag_data_interactions %>%
-    select(interactor_name, interactee_name) %>% 
-    unlist() %>% 
-    unique() %>% 
-    tibble(label = .,
-           id = map_chr(label, digest),
-           shape = "box")
 
 #' Build color data for question answers
 #' 

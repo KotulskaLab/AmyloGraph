@@ -1,9 +1,9 @@
-elem_app_main_panel <- function(data_nodes)
+elem_app_main_panel <- function()
   fillCol(
     tabsetPanel(
       id = "tabset_panel",
       type = "pills",
-      elem_tab_interactions_graph(data_nodes),
+      elem_tab_interactions_graph(),
       elem_tab_interactions_table(),
       elem_tab_single_interaction(),
       elem_tab_db_statistics(),
@@ -12,14 +12,14 @@ elem_app_main_panel <- function(data_nodes)
     id = "main_panel"
   )
 
-elem_tab_interactions_graph <- function(data_nodes)
+elem_tab_interactions_graph <- function()
   tabPanel(
     title = "Graph",
     value = "graph",
     div(
       id = "tab_interactions_graph",
       elem_panel_interactions_graph(),
-      elem_panel_single_protein(data_nodes)
+      elem_panel_single_protein()
     )
   )
 
@@ -30,8 +30,8 @@ elem_panel_interactions_graph <- function()
     visNetworkOutput("graph", height = "calc(100% - 30px)", width = "100%")
   )
 
-elem_panel_single_protein <- function(data_nodes)
-  ui_single_protein("single_protein", data_nodes)
+elem_panel_single_protein <- function()
+  ui_single_protein("single_protein")
 
 elem_tab_interactions_table <- function()
   tabPanel(

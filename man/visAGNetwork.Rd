@@ -4,7 +4,7 @@
 \alias{visAGNetwork}
 \title{Create visNetwork with AmyloGraph defaults}
 \usage{
-visAGNetwork(nodes, edges)
+visAGNetwork(edges, nodes = ag_data_nodes)
 }
 \arguments{
 \item{edges}{[\code{data.frame()}]\cr

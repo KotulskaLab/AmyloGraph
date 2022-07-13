@@ -4,7 +4,7 @@
 \alias{reactive_selected_node_label}
 \title{Access label of currently selected protein}
 \usage{
-reactive_selected_node_label(input, node_data)
+reactive_selected_node_label(input)
 }
 \arguments{
 \item{input}{[\code{reactivevalues()}]\cr

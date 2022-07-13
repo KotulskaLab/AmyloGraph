@@ -12,7 +12,7 @@ ui_db_statistics <- function(id) {
   )
 }
 
-server_db_statistics <- function(id, data_nodes) {
+server_db_statistics <- function(id) {
   moduleServer(id, function(input, output, session) {
     output[["num_publications"]] <- renderText(
       glue("Number of publications: {length(unique(ag_data_interactions[['doi']]))}")
@@ -22,7 +22,7 @@ server_db_statistics <- function(id, data_nodes) {
     )
     
     output[["num_interactions_by_protein"]] <-
-      render_num_interactions_by_protein(data_nodes)
+      render_num_interactions_by_protein()
     
     output[["num_interactions_by_paper"]] <-
       render_num_interactions_by_paper(height = 440, width = 840)

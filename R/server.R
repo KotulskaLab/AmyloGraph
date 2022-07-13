@@ -12,7 +12,7 @@ ag_server <- function(ag_data) function(input, output) {
   })
   
   edges <- server_filter_control("filter_control", ag_data[["groups"]])
-  subtables <- server_single_protein("single_protein", edges, ag_data[["nodes"]])
+  subtables <- server_single_protein("single_protein", edges)
   # TODO: extract function call below as a separate function that takes
   #  edges and id as only arguments
   table_proxy <- server_table(
@@ -26,15 +26,13 @@ ag_server <- function(ag_data) function(input, output) {
   )
   
   server_single_interaction("single_interaction")
-  server_db_statistics("db_statistics", ag_data[["nodes"]])
+  server_db_statistics("db_statistics")
   server_about("about")
   
-  output[["graph"]] <- render_network(ag_data[["nodes"]], edges)
+  output[["graph"]] <- render_network(edges)
   output[["download_xgmml"]] <- render_XGMML_download("download_xgmml", edges)
   node_positions <- reactive_node_positions(input, "graph")
-  output[["download_html"]] <- render_HTML_download(
-    "download_html", node_positions, ag_data[["nodes"]]
-  )
+  output[["download_html"]] <- render_HTML_download("download_html", node_positions)
   
   observe_node_selection(input)
   observe_interaction_selection(input)
