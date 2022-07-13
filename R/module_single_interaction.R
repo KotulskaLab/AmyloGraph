@@ -2,64 +2,43 @@ ui_single_interaction <- function(id) {
   ns <- NS(id)
   div(
     textOutput(ns("amylograph_id"), container = h1),
-    h2("Interactor:"),
-    textOutput(ns("interactor_name")),
-    verbatimTextOutput(ns("interactor_sequence")),
-    h2("Interactee:"),
-    textOutput(ns("interactee_name")),
-    verbatimTextOutput(ns("interactee_sequence")),
+    ui_protein_sequence(ns("interactor")),
+    ui_protein_sequence(ns("interactee")),
     h2("Properties:"),
-    uiOutput(ns("aggregation_speed")),
-    uiOutput(ns("elongates_by_attaching")),
-    uiOutput(ns("heterogenous_fibers")),
+    ui_interaction_property(ns("aggregation_speed")),
+    ui_interaction_property(ns("elongates_by_attaching")),
+    ui_interaction_property(ns("heterogenous_fibers")),
     h2("Reference"),
-    uiOutput(ns("reference")),
+    ui_interaction_doi(ns("doi"))
   )
 }
 
-#' @importFrom markdown renderMarkdown
+#' @importFrom dplyr filter
+#' @importFrom purrr pluck
 server_single_interaction <- function(id, interactions) {
   moduleServer(id, function(input, output, session) {
-    observe({
+    interaction <- reactive({
       req(input[["selected_interaction"]])
       
-      selected_interaction <- interactions %>%
+      interactions %>%
         filter(AGID == input[["selected_interaction"]])
+    })
+    
+    server_protein_sequence("interactor", interaction)
+    server_protein_sequence("interactee", interaction)
+    
+    server_interaction_property("aggregation_speed", interaction)
+    server_interaction_property("elongates_by_attaching", interaction)
+    server_interaction_property("heterogenous_fibers", interaction)
+    
+    server_interaction_doi("doi", interaction)
+    
+    observe({
+      req(interaction())
       
-      reference_data <- ag_references() %>%
-        filter(doi == tolower(selected_interaction[["doi"]])) %>% 
-        slice(1)
-      
-      output[["amylograph_id"]] <- renderText(selected_interaction[["AGID"]])
-      output[["interactor_name"]] <- renderText(selected_interaction[["interactor_name"]])
-      output[["interactor_sequence"]] <- renderText(prettify_chains(selected_interaction[["interactor_sequence"]][[1]]))
-      output[["interactee_name"]] <- renderText(selected_interaction[["interactee_name"]])
-      output[["interactee_sequence"]] <- renderText(prettify_chains(selected_interaction[["interactee_sequence"]][[1]]))
-      output[["aggregation_speed"]] <- render_single_interaction_attribute(
-        selected_interaction, "aggregation_speed",
-        "Is the interactor affecting interactee's aggregating speed?"
-      )
-      output[["elongates_by_attaching"]] <- render_single_interaction_attribute(
-        selected_interaction, "elongates_by_attaching",
-        "If interactee is still forming fibrils after the interaction, do fibrils of interactee elongates by attaching to monomers/oligomers/fibrils of interactor?"
-      )
-      output[["heterogenous_fibers"]] <- render_single_interaction_attribute(
-        selected_interaction, "heterogenous_fibers",
-        "Is interaction resulting in heterogeneous fibrils consisting of interactor and interactee molecules?"
-      )
-      output[["reference"]] <- renderUI(HTML(renderMarkdown(text = citify(reference_data))))
+      output[["amylograph_id"]] <- interaction() %>%
+        pluck("AGID") %>%
+        renderText()
     })
   })
-}
-
-render_single_interaction_attribute <- function(selected_interaction, attribute, header) {
-  # details <- selected_interaction[[glue("{attribute}_details")]]
-  renderUI(
-    div(
-      strong(header),
-      p(as.character(selected_interaction[[attribute]]))
-      # The line below allows for displaying comments to answers
-      # if (is.na(details)) NULL else p(details)
-    )
-  )
 }
