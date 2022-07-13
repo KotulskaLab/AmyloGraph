@@ -32,7 +32,7 @@ ui_filter_control <- function(id) {
 #' @importFrom dplyr filter group_by summarize cur_group_id mutate select
 #' @importFrom glue glue_collapse
 #' @importFrom icecream ic
-#' @importFrom purrr set_names map when walk
+#' @importFrom purrr map when walk
 #' @importFrom rlang sym expr
 #' @importFrom shinyjs toggleCssClass
 server_filter_control <- function(id) {
@@ -53,7 +53,7 @@ server_filter_control <- function(id) {
     interactions_filtered_by_group <- reactive({
       ag_data_interactions %>%
         filter(!!!map(
-          ag_data_group_labels %>% set_names(NULL),
+          unname(ag_data_group_labels),
           ~ expr(!!sym(.) %in% !!input[[.]]))
         )
     })
