@@ -2,7 +2,7 @@
 
 export(AmyloGraph)
 export(ag_data_interactions)
-export(ag_references)
+export(ag_data_references)
 export(citify)
 import(shiny, except = c(dataTableOutput, renderDataTable))
 importFrom(BioNet,saveNetwork)

@@ -18,7 +18,7 @@ server_interaction_doi <- function(id, interaction) {
         pluck("doi") %>%
         tolower()
       
-      output[["reference"]] <- ag_references() %>%
+      output[["reference"]] <- ag_data_references %>%
         filter(doi == doi) %>%
         citify() %>%
         renderMarkdown(text = .) %>%

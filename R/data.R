@@ -12,16 +12,6 @@ ag_load_data <- function()
     proteins = ag_data_proteins()
   )
 
-#' Load AmyloGraph references list
-#' 
-#' @return `data.frame` coming from `reference_table.csv` file with no changes.
-#' 
-#' @importFrom readr read_csv
-#' @export
-ag_references <- function()
-  read_csv(system.file("AmyloGraph", "reference_table.csv", package = "AmyloGraph"),
-           col_types = "cccccn") 
-
 #' Build list of proteins from interactions list
 #' 
 #' @return `data.frame` with a list of proteins that interact with others,

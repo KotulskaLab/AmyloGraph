@@ -23,3 +23,18 @@ rlang::on_load({
            interactor_sequence = map(interactor_sequence, read_chains),
            interactee_sequence = map(interactee_sequence, read_chains))
 })
+
+#' AmyloGraph references list
+#' 
+#' @return `data.frame` coming from `reference_table.csv` file with no changes.
+#' 
+#' @importFrom readr read_csv
+#' @export
+ag_data_references <- NULL
+
+rlang::on_load({
+  ag_data_references <- read_csv(
+    system.file("AmyloGraph", "reference_table.csv", package = "AmyloGraph"),
+    col_types = "cccccn"
+  )
+})
