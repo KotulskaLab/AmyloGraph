@@ -17,27 +17,27 @@ ui_single_interaction <- function(id) {
 #' @importFrom markdown renderMarkdown
 server_single_interaction <- function(id, interactions) {
   moduleServer(id, function(input, output, session) {
-    selected_interaction <- reactive({
+    interaction <- reactive({
       req(input[["selected_interaction"]])
       
       interactions %>%
         filter(AGID == input[["selected_interaction"]])
     })
     
-    server_protein_sequence("interactor", "interactor", selected_interaction)
-    server_protein_sequence("interactee", "interactee", selected_interaction)
+    server_protein_sequence("interactor", "interactor", interaction)
+    server_protein_sequence("interactee", "interactee", interaction)
     
-    server_protein_property("aggregation_speed", "aggregation_speed", selected_interaction)
-    server_protein_property("elongates_by_attaching", "elongates_by_attaching", selected_interaction)
-    server_protein_property("heterogenous_fibers", "heterogenous_fibers", selected_interaction)
+    server_protein_property("aggregation_speed", "aggregation_speed", interaction)
+    server_protein_property("elongates_by_attaching", "elongates_by_attaching", interaction)
+    server_protein_property("heterogenous_fibers", "heterogenous_fibers", interaction)
     
     observe({
       req(input[["selected_interaction"]])
       
       reference_data <- ag_references() %>%
-        filter(doi == tolower(selected_interaction()[["doi"]]))
+        filter(doi == tolower(interaction()[["doi"]]))
       
-      output[["amylograph_id"]] <- renderText(selected_interaction()[["AGID"]])
+      output[["amylograph_id"]] <- renderText(interaction()[["AGID"]])
       output[["reference"]] <- renderUI(HTML(renderMarkdown(text = citify(reference_data))))
     })
   })
