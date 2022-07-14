@@ -19,6 +19,7 @@ AGID_button <- function(interaction_ids, ns) {
     interaction_ids,
     function(interaction_id) {
       as.character(actionButton(
+        # TODO: do we need a unique ID for each button or a non-random ID at all?
         glue("{ns(paste0('interaction_view_selector_', interaction_id))}"),
         as.character(interaction_id),
         onclick = glue("Shiny.setInputValue('{NS('single_interaction', 'selected_interaction')}', '{interaction_id}')")
