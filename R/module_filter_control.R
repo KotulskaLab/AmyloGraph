@@ -66,7 +66,7 @@ server_filter_control <- function(id) {
       ret[["table"]] <- ic(interactions_filtered_by_motif())
     })
     
-    graph_data <- reactive_graph_data(ret, group)
+    graph_data <- reactive_graph_data(reactive(ret[["table"]]), group)
     
     observe({
       ret[["graph"]] <- graph_data()

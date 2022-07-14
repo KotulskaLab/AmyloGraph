@@ -3,7 +3,7 @@
 #' @importFrom rlang sym
 reactive_graph_data <- function(data, group) {
   reactive({
-    data[["table"]] %>%
+    data() %>%
       group_by(to_id, from_id, !!sym(group())) %>%
       summarize(
         title = glue_collapse(unique(doi), sep = ", ", last = " and "),
