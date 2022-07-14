@@ -20,10 +20,9 @@ ui_filter_control <- function(id) {
   )
 }
 
-#' @importFrom dplyr filter group_by summarize cur_group_id mutate select
-#' @importFrom glue glue_collapse
+#' @importFrom dplyr filter
 #' @importFrom icecream ic
-#' @importFrom purrr map when walk
+#' @importFrom purrr map walk
 #' @importFrom rlang sym expr
 #' @importFrom shinyjs toggleCssClass
 server_filter_control <- function(id) {
@@ -67,17 +66,10 @@ server_filter_control <- function(id) {
       ret[["table"]] <- ic(interactions_filtered_by_motif())
     })
     
-    # TODO: rewrite with verb functions for clarity
+    graph_data <- reactive_graph_data(ret, group)
+    
     observe({
-      ret[["graph"]] <- ret[["table"]] %>%
-        group_by(to_id, from_id, !!sym(group())) %>%
-        summarize(
-          title = glue_collapse(unique(doi), sep = ", ", last = " and "),
-          id = cur_group_id(),
-          .groups = "drop"
-        ) %>% 
-        mutate(color = ag_data_color_map[[group()]][!!sym(group())]) %>%
-        select(id, from = from_id, to = to_id, title, any_of(c("color", group())))
+      ret[["graph"]] <- graph_data()
     })
     
     ret
