@@ -1,5 +1,4 @@
 #' @importFrom purrr imap
-#' @importFrom shinyhelper helper
 ui_filter_control <- function(id) {
   ns <- NS(id)
   div(
@@ -20,10 +19,7 @@ ui_filter_control <- function(id) {
   )
 }
 
-#' @importFrom dplyr filter
-#' @importFrom icecream ic
-#' @importFrom purrr map walk
-#' @importFrom rlang sym expr
+#' @importFrom purrr walk
 #' @importFrom shinyjs toggleCssClass
 server_filter_control <- function(id) {
   moduleServer(id, function(input, output, session) {
@@ -37,38 +33,16 @@ server_filter_control <- function(id) {
                             group() == .x))
     })
     
+    base_data <- reactive_base_data(input, motif)
+    graph_data <- reactive_graph_data(base_data, group)
+    
     ret <- reactiveValues(
       table = NULL,
       graph = NULL
     )
     
-    # TODO: rewrite the code using verb functions so that the result can be
-    #  assigned to ret[["table"]] without intermediate variables
-    interactions_filtered_by_group <- reactive({
-      ag_data_interactions %>%
-        filter(!!!map(
-          unname(ag_data_group_labels),
-          ~ expr(!!sym(.) %in% !!input[[.]]))
-        )
-    })
-    
-    interactions_filtered_by_motif <- reactive({
-      if (is_valid(motif()) && nchar(motif()) > 0) {
-        interactions_filtered_by_group() %>%
-          filter(contains_motif(interactor_sequence, motif()) |
-                   contains_motif(interactee_sequence, motif()))
-      } else {
-        interactions_filtered_by_group()
-      }
-    })
-    
     observe({
-      ret[["table"]] <- ic(interactions_filtered_by_motif())
-    })
-    
-    graph_data <- reactive_graph_data(reactive(ret[["table"]]), group)
-    
-    observe({
+      ret[["table"]] <- base_data()
       ret[["graph"]] <- graph_data()
     })
     
