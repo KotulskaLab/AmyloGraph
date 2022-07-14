@@ -1,5 +1,6 @@
 #' @importFrom shinyhelper helper
 filterCheckboxInput <- function(id, label_values, pretty_name)
+  # TODO: get pretty names from some function instead of from a parameter
   helper(
     tagAppendAttributes(
       checkboxGroupInput(

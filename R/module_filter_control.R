@@ -31,6 +31,7 @@ server_filter_control <- function(id) {
     group <- server_group_edges("group_edges")
     motif <- server_motif_filter("motif")
     
+    # TODO: extract as observer
     observe({
       walk(ag_data_group_labels,
            ~ toggleCssClass(.x, "filter_checkbox_active",
@@ -42,6 +43,8 @@ server_filter_control <- function(id) {
       graph = NULL
     )
     
+    # TODO: rewrite the code using verb functions so that the result can be
+    #  assigned to ret[["table"]] without intermediate variables
     interactions_filtered_by_group <- reactive({
       ag_data_interactions %>%
         filter(!!!map(
@@ -64,6 +67,7 @@ server_filter_control <- function(id) {
       ret[["table"]] <- ic(interactions_filtered_by_motif())
     })
     
+    # TODO: rewrite with verb functions for clarity
     observe({
       ret[["graph"]] <- ret[["table"]] %>%
         group_by(to_id, from_id, !!sym(group())) %>%
