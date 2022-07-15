@@ -36,6 +36,7 @@ server_filter_control <- function(id) {
     base_data <- reactive_base_data(input, motif)
     graph_data <- reactive_graph_data(base_data, group)
     
+    # TODO: return list of reactives instead and extract them using %<-% or sth
     ret <- reactiveValues(
       table = NULL,
       graph = NULL
