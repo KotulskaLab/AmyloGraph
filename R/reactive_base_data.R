@@ -1,10 +1,11 @@
-reactive_base_data <- function(aggregation_speed, elongates_by_attaching,
-                               heterogenous_fibers, motif) {
+#' @importFrom purrr reduce
+reactive_base_data <- function(motif, ...) {
   reactive({
-    ag_data_interactions %>%
-      filter_by_attribute(aggregation_speed()) %>%
-      filter_by_attribute(elongates_by_attaching()) %>%
-      filter_by_attribute(heterogenous_fibers()) %>%
+    reduce(
+      list(...),
+      ~ filter_by_attribute(.x, .y()),
+      .init = ag_data_interactions
+    ) %>%
       filter_by_motif(motif())
   })
 }

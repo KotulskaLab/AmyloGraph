@@ -16,9 +16,10 @@ server_filter_control <- function(id) {
   moduleServer(id, function(input, output, session) {
     group <- server_group_edges("group_edges")
     motif <- server_motif_filter("motif")
-    aggregation_speed <- server_attribute_filter("aggregation_speed")
-    elongates_by_attaching <- server_attribute_filter("elongates_by_attaching")
-    heterogenous_fibers <- server_attribute_filter("heterogenous_fibers")
+    
+    attr_1 <- server_attribute_filter("aggregation_speed")
+    attr_2 <- server_attribute_filter("elongates_by_attaching")
+    attr_3 <- server_attribute_filter("heterogenous_fibers")
     
     # TODO: extract as observer
     observe({
@@ -30,8 +31,7 @@ server_filter_control <- function(id) {
            )
     })
     
-    base_data <- reactive_base_data(aggregation_speed, elongates_by_attaching,
-                                    heterogenous_fibers, motif)
+    base_data <- reactive_base_data(motif, attr_1, attr_2, attr_3)
     graph_data <- reactive_graph_data(base_data, group)
     
     # TODO: return list of reactives instead and extract them using %<-% or sth
