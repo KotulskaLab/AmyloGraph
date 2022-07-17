@@ -9,7 +9,7 @@ server_attribute_filter <- function(id, attribute = id) {
       structure(
         if (is.null(input[["filter"]])) character() else input[["filter"]],
         attribute = attribute,
-        class = "ag_attr_values"
+        class = c("ag_attr_values", "character")
       )
     })
   })
