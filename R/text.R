@@ -31,9 +31,9 @@ text_question_attribute <- function(attribute) {
 text_label_attribute <- function(attribute) {
   switch(
     attribute,
-    "aggregation_speed" = "fibrillization speed",
-    "elongates_by_attaching" = "physical binding",
-    "heterogenous_fibers" = "heterogenous fibers",
+    "aggregation_speed" = "Fibrillization speed",
+    "elongates_by_attaching" = "Physical binding",
+    "heterogenous_fibers" = "Heterogenous fibers",
     stop(glue("Unknown attribute '{attribute}', no label found."))
   )
 }
