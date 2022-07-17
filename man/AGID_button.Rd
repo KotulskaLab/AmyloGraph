@@ -4,19 +4,15 @@
 \alias{AGID_button}
 \title{Generate AGID buttons}
 \usage{
-AGID_button(interaction_ids, ns)
+AGID_button(interaction_ids)
 }
 \arguments{
 \item{interaction_ids}{[\code{character()}]\cr
 AGIDs to use for buttons.}
-
-\item{ns}{[\code{function(1)}]\cr
-Namespace-generating function that takes single string as the only argument.
-This is the namespace buttons should be placed in.}
 }
 \value{
 A \code{character} vector the same length as \code{interaction_ids}, each
-element being a string representation
+element being a string representation of a button.
 }
 \description{
 Generates a vector of AGID buttons, where AGID codes are labels
