@@ -10,8 +10,6 @@ ui_filter_control <- function(id) {
   )
 }
 
-#' @importFrom purrr walk
-#' @importFrom shinyjs toggleCssClass
 server_filter_control <- function(id) {
   moduleServer(id, function(input, output, session) {
     group <- server_group_edges("group_edges")
