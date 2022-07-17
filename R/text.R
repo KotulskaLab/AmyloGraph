@@ -20,6 +20,14 @@ text_question_attribute <- function(attribute) {
   )
 }
 
+#' Access human-readable attribute label
+#' 
+#' @description Returns a well-formatted label for an interaction attribute.
+#' 
+#' @param attribute \[\code{character(1)}\]\cr
+#'  An internal name of an interaction attribute.
+#' 
+#' @return A single string with a human-readable label.
 text_label_attribute <- function(attribute) {
   switch(
     attribute,
