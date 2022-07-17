@@ -9,6 +9,17 @@ reactive_base_data <- function(aggregation_speed, elongates_by_attaching,
   })
 }
 
+#' Filter by an attribute
+#' 
+#' @description Filters data by attribute answer.
+#' 
+#' @param data \[\code{tibble()}\]\cr
+#'  Data to modify.
+#' @param values \[\code{ag_attr_values()}\]\cr
+#'  Attribute filter values to keep.
+#' 
+#' @return A `tibble` with filtered observations.
+#' 
 #' @importFrom dplyr filter
 #' @importFrom rlang sym
 filter_by_attribute <- function(data, values) {
@@ -16,6 +27,18 @@ filter_by_attribute <- function(data, values) {
     filter(!!sym(attr(values, "attribute", exact = TRUE)) %in% values)
 }
 
+#' Filter by motif
+#' 
+#' @description Filters data on a motif. Either `interactor_sequence` or
+#' `interactee_sequence` must contain given motif.
+#' 
+#' @param data \[\code{tibble()}\]\cr
+#'  Data to modify.
+#' @param motif \[\code{ag_motif}\]\cr
+#'  Motif to filter on.
+#' 
+#' @return A `tibble` with filtered observations.
+#' 
 #' @importFrom dplyr filter
 filter_by_motif <- function(data, motif) {
   if (is_valid(motif) && nchar(motif) > 0) {
