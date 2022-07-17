@@ -3,8 +3,16 @@ ui_attribute_filter <- function(id, attribute) {
   filterCheckboxInput(ns("filter"), attribute)
 }
 
-server_attribute_filter <- function(id, attribute = id) {
+server_attribute_filter <- function(id, group, attribute = id) {
   moduleServer(id, function(input, output, session) {
+    observe({
+      toggleCssClass(
+        id = "filter",
+        class = "filter_checkbox_active",
+        condition = group() == attribute
+      )
+    })
+    
     reactive({
       structure(
         if (is.null(input[["filter"]])) character() else input[["filter"]],

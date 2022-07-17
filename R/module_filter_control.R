@@ -17,19 +17,9 @@ server_filter_control <- function(id) {
     group <- server_group_edges("group_edges")
     motif <- server_motif_filter("motif")
     
-    attr_1 <- server_attribute_filter("aggregation_speed")
-    attr_2 <- server_attribute_filter("elongates_by_attaching")
-    attr_3 <- server_attribute_filter("heterogenous_fibers")
-    
-    # TODO: extract as observer
-    observe({
-      walk(ag_data_group_labels,
-           ~ toggleCssClass(
-             id = NS(.x, "filter"),
-             class = "filter_checkbox_active",
-             condition = group() == .x)
-           )
-    })
+    attr_1 <- server_attribute_filter("aggregation_speed", group)
+    attr_2 <- server_attribute_filter("elongates_by_attaching", group)
+    attr_3 <- server_attribute_filter("heterogenous_fibers", group)
     
     base_data <- reactive_base_data(motif, attr_1, attr_2, attr_3)
     graph_data <- reactive_graph_data(base_data, group)
