@@ -2,18 +2,18 @@ reactive_base_data <- function(aggregation_speed, elongates_by_attaching,
                                heterogenous_fibers, motif) {
   reactive({
     ag_data_interactions %>%
-      filter_by_attribute(aggregation_speed(), "aggregation_speed") %>%
-      filter_by_attribute(elongates_by_attaching(), "elongates_by_attaching") %>%
-      filter_by_attribute(heterogenous_fibers(), "heterogenous_fibers") %>%
+      filter_by_attribute(aggregation_speed()) %>%
+      filter_by_attribute(elongates_by_attaching()) %>%
+      filter_by_attribute(heterogenous_fibers()) %>%
       filter_by_motif(motif())
   })
 }
 
 #' @importFrom dplyr filter
 #' @importFrom rlang sym
-filter_by_attribute <- function(data, values, label) {
+filter_by_attribute <- function(data, values) {
   data %>%
-    filter(!!sym(label) %in% values)
+    filter(!!sym(attr(values, "attribute", exact = TRUE)) %in% values)
 }
 
 #' @importFrom dplyr filter
