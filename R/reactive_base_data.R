@@ -1,3 +1,16 @@
+#' Generate base tabular data
+#' 
+#' @description Applies a set of filters to `ag_data_interactions` based on
+#' a set of attribute value filters and motif filter.
+#' 
+#' @param motif \[\code{reactive(ag_motif(1))}\]\cr
+#'  Motif to filter on.
+#' @param ... \[\code{reactive(ag_attr_values())}\]\cr
+#'  Attribute value filters to apply.
+#' 
+#' @return A \code{reactive} object with a \code{tibble} containing filtered
+#' base tabular data.
+#' 
 #' @importFrom purrr reduce
 reactive_base_data <- function(motif, ...) {
   reactive({
@@ -35,7 +48,7 @@ filter_by_attribute <- function(data, values) {
 #' 
 #' @param data \[\code{tibble()}\]\cr
 #'  Data to modify.
-#' @param motif \[\code{ag_motif}\]\cr
+#' @param motif \[\code{ag_motif(1)}\]\cr
 #'  Motif to filter on.
 #' 
 #' @return A `tibble` with filtered observations.

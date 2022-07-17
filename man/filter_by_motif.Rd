@@ -10,7 +10,7 @@ filter_by_motif(data, motif)
 \item{data}{[\code{tibble()}]\cr
 Data to modify.}
 
-\item{motif}{[\code{ag_motif}]\cr
+\item{motif}{[\code{ag_motif(1)}]\cr
 Motif to filter on.}
 }
 \value{
