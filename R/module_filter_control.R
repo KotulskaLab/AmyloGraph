@@ -10,28 +10,16 @@ ui_filter_control <- function(id) {
   )
 }
 
-#' @importFrom purrr walk
-#' @importFrom shinyjs toggleCssClass
 server_filter_control <- function(id) {
   moduleServer(id, function(input, output, session) {
     group <- server_group_edges("group_edges")
     motif <- server_motif_filter("motif")
-    aggregation_speed <- server_attribute_filter("aggregation_speed")
-    elongates_by_attaching <- server_attribute_filter("elongates_by_attaching")
-    heterogenous_fibers <- server_attribute_filter("heterogenous_fibers")
     
-    # TODO: extract as observer
-    observe({
-      walk(ag_data_group_labels,
-           ~ toggleCssClass(
-             id = NS(.x, "filter"),
-             class = "filter_checkbox_active",
-             condition = group() == .x)
-           )
-    })
+    attr_1 <- server_attribute_filter("aggregation_speed", group)
+    attr_2 <- server_attribute_filter("elongates_by_attaching", group)
+    attr_3 <- server_attribute_filter("heterogenous_fibers", group)
     
-    base_data <- reactive_base_data(aggregation_speed, elongates_by_attaching,
-                                    heterogenous_fibers, motif)
+    base_data <- reactive_base_data(motif, attr_1, attr_2, attr_3)
     graph_data <- reactive_graph_data(base_data, group)
     
     # TODO: return list of reactives instead and extract them using %<-% or sth

@@ -45,7 +45,7 @@ rlang::on_load({
            shape = "box")
 })
 
-#' @importFrom purrr map
+#' @importFrom purrr map map_chr
 #' @rdname ag_data_attributes
 ag_data_group_labels <- NULL
 
@@ -57,12 +57,11 @@ ag_data_color_map <- NULL
 
 rlang::on_load({
   interaction_attrs <- ag_option("interaction_attrs")
-  attribute_groups <- tolower(
-    invert_names(ag_option("colnames"))[interaction_attrs]
-  )
   
-  ag_data_group_labels <- as.list(interaction_attrs) %>%
-    setNames(attribute_groups)
+  ag_data_group_labels <- interaction_attrs %>%
+    map_chr(text_label_attribute) %>%
+    setNames(interaction_attrs) %>%
+    invert_names()
   
   # TODO: implement & use napply() or nmap() for named return
   ag_data_attribute_values <- setNames(map(
@@ -75,7 +74,7 @@ rlang::on_load({
     ~ setNames(ag_option("palette")[seq_along(.x)], .x)
   )
   
-  rm(interaction_attrs, attribute_groups)
+  rm(interaction_attrs)
 })
 
 #' AmyloGraph proteins list
