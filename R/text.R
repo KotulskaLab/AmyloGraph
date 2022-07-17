@@ -19,3 +19,13 @@ text_question_attribute <- function(attribute) {
     stop(glue("Unknown attribute '{attribute}', no question found."))
   )
 }
+
+text_label_attribute <- function(attribute) {
+  switch(
+    attribute,
+    "aggregation_speed" = "fibrillization speed",
+    "elongates_by_attaching" = "physical binding",
+    "heterogenous_fibers" = "heterogenous fibers",
+    stop(glue("Unknown attribute '{attribute}', no label found."))
+  )
+}
