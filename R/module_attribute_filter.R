@@ -5,13 +5,7 @@ ui_attribute_filter <- function(id, attribute) {
 
 server_attribute_filter <- function(id, group, attribute = id) {
   moduleServer(id, function(input, output, session) {
-    observe({
-      toggleCssClass(
-        id = "filter",
-        class = "filter_checkbox_active",
-        condition = group() == attribute
-      )
-    })
+    observe_filter_active(group, attribute)
     
     reactive({
       structure(
