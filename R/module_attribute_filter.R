@@ -7,10 +7,14 @@ ui_attribute_filter <- function(id, attribute) {
   )
 }
 
-server_attribute_filter <- function(id) {
+server_attribute_filter <- function(id, attribute = id) {
   moduleServer(id, function(input, output, session) {
     reactive({
-      input[["filter"]]
+      structure(
+        input[["filter"]],
+        attribute = attribute,
+        class = "ag_attr_values"
+      )
     })
   })
 }
