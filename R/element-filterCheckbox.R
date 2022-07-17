@@ -1,12 +1,11 @@
 #' @importFrom shinyhelper helper
 filterCheckboxInput <- function(id, attribute) {
-  label <- tolower(text_label_attribute(attribute))
   attr_values <- ag_data_attribute_values[[attribute]]
   helper(
     tagAppendAttributes(
       checkboxGroupInput(
         inputId = id,
-        label = glue("Filter by \"{label}\":"),
+        label = glue("Filter by \"{text_label_attribute(attribute)}\":"),
         choices = attr_values,
         selected = attr_values
       ),
