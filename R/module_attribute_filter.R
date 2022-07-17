@@ -11,7 +11,7 @@ server_attribute_filter <- function(id, attribute = id) {
   moduleServer(id, function(input, output, session) {
     reactive({
       structure(
-        input[["filter"]],
+        if (is.null(input[["filter"]])) character() else input[["filter"]],
         attribute = attribute,
         class = "ag_attr_values"
       )
