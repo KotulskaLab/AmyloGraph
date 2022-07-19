@@ -17,17 +17,16 @@
 reactive_table_data <- function(edges, ns) {
   reactive({
     ic(edges[["table"]]) %>% 
-      mutate(doi = linkify_doi(doi),
-             original_AGID = AGID,
-             AGID = AGID_button(AGID, ns)) %>% 
-      select(AGID,
+      mutate(doi = linkify_doi(doi)) %>% 
+      # TODO: change other code to avoid AGID = AGID_button & original_AGID = AGID
+      select(AGID = AGID_button,
              interactor_name,
              interactee_name,
              aggregation_speed,
              elongates_by_attaching,
              heterogenous_fibers,
              doi,
-             original_AGID)
+             original_AGID = AGID)
   })
 }
 
@@ -58,9 +57,7 @@ reactive_subtable_data <- function(edges, ns, input, target_id, target_variable)
     (if (input[["ignore_filters"]]) ag_data_interactions else edges[["table"]]) %>%
       filter(.data[[target_id]] == input[["select_node"]]) %>%
       arrange(.data[[target_variable]], doi) %>%
-      mutate(doi = linkify_doi(doi),
-             original_AGID = AGID,
-             AGID = AGID_button(AGID, ns)) %>%
-      select(AGID, .data[[target_variable]], doi, original_AGID)
+      mutate(doi = linkify_doi(doi)) %>%
+      select(AGID = AGID_button, .data[[target_variable]], doi, original_AGID = AGID)
   })
 }

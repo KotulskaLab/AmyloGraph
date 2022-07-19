@@ -5,7 +5,7 @@
 \alias{ag_data_interactions}
 \title{AmyloGraph interactions list}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 883 rows and 15 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 883 rows and 16 columns.
 }
 \usage{
 ag_data_interactions

@@ -21,7 +21,8 @@ rlang::on_load({
     mutate(from_id = map_chr(interactor_name, digest),
            to_id = map_chr(interactee_name, digest),
            interactor_sequence = map(interactor_sequence, read_chains),
-           interactee_sequence = map(interactee_sequence, read_chains))
+           interactee_sequence = map(interactee_sequence, read_chains),
+           AGID_button = AGID_button(AGID))
 })
 
 #' Build list of proteins from interactions list
