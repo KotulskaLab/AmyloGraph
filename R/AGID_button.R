@@ -6,24 +6,21 @@
 #' 
 #' @param interaction_ids \[\code{character()}\]\cr
 #'  AGIDs to use for buttons.
-#' @param ns \[\code{function(1)}\]\cr
-#'  Namespace-generating function that takes single string as the only argument.
-#'  This is the namespace buttons should be placed in.
 #' 
 #' @return A `character` vector the same length as `interaction_ids`, each
-#' element being a string representation
+#' element being a string representation of a button.
 #' 
-#' @importFrom purrr map_chr
-AGID_button <- function(interaction_ids, ns) {
-  map_chr(
+#' @importFrom purrr map2_chr
+#' @importFrom stringi stri_rand_strings
+AGID_button <- function(interaction_ids) {
+  target_input <- NS('single_interaction', 'selected_interaction')
+  map2_chr(
     interaction_ids,
-    function(interaction_id) {
-      as.character(actionButton(
-        # TODO: do we need a unique ID for each button or a non-random ID at all?
-        glue("{ns(paste0('interaction_view_selector_', interaction_id))}"),
-        as.character(interaction_id),
-        onclick = glue("Shiny.setInputValue('{NS('single_interaction', 'selected_interaction')}', '{interaction_id}')")
-      ))
-    }
+    stri_rand_strings(length(interaction_ids), 24),
+    ~ as.character(actionButton(
+      inputId = .y,
+      label = .x,
+      onclick = glue("Shiny.setInputValue('{target_input}', '{.x}')")
+    ))
   )
 }
