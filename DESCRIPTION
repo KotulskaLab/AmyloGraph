@@ -30,7 +30,7 @@ Imports:
     markdown,
     purrr,
     readr,
-    rlang,
+    rlang (>= 1.0.0),
     shinyhelper,
     shinyjs,
     stringr,
