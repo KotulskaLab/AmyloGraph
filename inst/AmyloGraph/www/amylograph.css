@@ -154,18 +154,26 @@ button.dt-button.active:not(.disabled) {
 
 .filter_checkbox div.checkbox label {
   width: 100%;
-  padding-left: 30px;
-  --border-color: 140, 140, 140;
+  padding: 3px 0 3px 30px;
+  --border-color: 204, 204, 204;
   --background-alpha: 0.1;
-  border: 5px solid rgba(var(--border-color), 1);
+  border: 1px solid rgba(var(--border-color), 1);
+  border-radius: 4px;
   background-color: rgba(var(--border-color), var(--background-alpha));
 }
 
-.filter_checkbox_active div.checkbox label { --background-alpha: 0.8; }
+.filter_checkbox_active div.checkbox label {
+  --background-alpha: 0.6;
+  padding: 0 0 0 30px;
+  border-width: 4px;
+}
 
 .filter_checkbox_active div.checkbox:nth-child(1) label { --border-color: 249,  86,  79; }
 .filter_checkbox_active div.checkbox:nth-child(2) label { --border-color: 164, 176, 245; }
-.filter_checkbox_active div.checkbox:nth-child(3) label { --border-color:  79,  56,  36; }
+.filter_checkbox_active div.checkbox:nth-child(3) label {
+  color: white;
+  --border-color:  79,  56,  36;
+}
 .filter_checkbox_active div.checkbox:nth-child(4) label { --border-color:   0, 204, 102; }
 .filter_checkbox_active div.checkbox:nth-child(5) label { --border-color: 179,  63,  98; }
 .filter_checkbox_active div.checkbox:nth-child(6) label { --border-color: 243, 198, 119; }
