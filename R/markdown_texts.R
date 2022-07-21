@@ -45,9 +45,20 @@ Remember to mention their AmyloGraph IDs."
 }
 
 #' @rdname md-section
+markdown_download <- function() {
+  "
+  ## Download
+  
+  Interaction data in AmyloGraph can be downloaded in a [.csv format](https://raw.githubusercontent.com/KotulskaLab/AmyloGraph/main/inst/AmyloGraph/interactions_data.csv). 
+  However, you can also use database locally as an R package. For more information, visit [our repository](https://github.com/KotulskaLab/AmyloGraph).
+
+  "
+}
+
+#' @rdname md-section
 markdown_citation <- function() {
   "
-## Citation (coming soon)
+## Citation
 
 Burdukiewicz M, Rafacz D, Barbach A, Hubicka K, Bakala L, Lassota A, Stecko J, Szymanska N,
 Wojciechowski J, Kozakiewicz D, Szulc N, Chilimoniuk J, Jeskowiak I, Gasior-Glogowska M,
