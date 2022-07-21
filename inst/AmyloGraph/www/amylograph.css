@@ -19,7 +19,6 @@ a.paginate_button {
   color: var(--col-dark) !important;
   background-color: var(--col-main-2) !important;
   border-color: #adc0d0 !important;
-  background-image: linear-gradient(to bottom, #dbefff 0%, #9eb7cc 100%) !important;
   border-radius: 4px !important;
   
   display: inline-block;
@@ -101,6 +100,7 @@ button.dt-button.active:not(.disabled) {
 
 #filter_control {
   padding-right: 10px;
+  padding-bottom: 50px;
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
