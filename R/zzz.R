@@ -29,7 +29,70 @@
     options(new_options[unset_inds])
   }
   
-  rlang::run_on_load()
+  if (packageVersion("rlang") >= "1.0.0") {
+    rlang::run_on_load()
+  } else {
+    assign("ag_data_interactions", {
+      readr::read_csv(
+        system.file("AmyloGraph", "interactions_data.csv", package = "AmyloGraph"),
+        col_types = "ccccfffcccccc"
+      ) |>
+        dplyr::mutate(from_id = purrr::map_chr(interactor_name, digest::digest),
+                      to_id = purrr::map_chr(interactee_name, digest::digest),
+                      interactor_sequence = purrr::map(interactor_sequence, read_chains),
+                      interactee_sequence = purrr::map(interactee_sequence, read_chains),
+                      AGID_button = AGID_button(AGID))
+    }, envir = parent.env(environment()))
+    
+    interaction_attrs <- getOption("ag_interaction_attrs")
+    
+    assign("ag_data_nodes", {
+      ag_data_interactions |>
+        dplyr::select(interactor_name, interactee_name) |>
+        unlist() %>% 
+        unique() %>% 
+        dplyr::tibble(label = .,
+                      id = purrr::map_chr(label, digest::digest),
+                      shape = "box")
+    }, envir = parent.env(environment()))
+    
+    assign("ag_data_group_labels", {
+      interaction_attrs %>%
+        purrr::map_chr(text_label_attribute) %>%
+        setNames(interaction_attrs) %>%
+        invert_names()
+    }, envir = parent.env(environment()))
+    
+    assign("ag_data_attribute_values", {
+      setNames(purrr::map(
+        interaction_attrs,
+        ~ sort(unique(ag_data_interactions[[.x]]))
+      ), interaction_attrs)
+    }, envir = parent.env(environment()))
+    
+    assign("ag_data_color_map", {
+      purrr::map(
+        ag_data_attribute_values,
+        ~ setNames(getOption("ag_palette")[seq_along(.x)], .x)
+      )
+    }, envir = parent.env(environment()))
+    
+    assign("ag_data_proteins", {
+      readr::read_csv(
+        system.file("AmyloGraph", "protein_data.csv", package = "AmyloGraph"),
+        col_types = "ccc"
+      ) |>
+        dplyr::mutate(id = purrr::map_chr(name, digest::digest))
+    }, envir = parent.env(environment()))
+    
+    assign("ag_data_references", {
+      readr::read_csv(
+        system.file("AmyloGraph", "reference_table.csv", package = "AmyloGraph"),
+        col_types = "cccccn"
+      )
+    }, envir = parent.env(environment()))
+  }
+  
   icecream::ic_disable()
   invisible()
 }
