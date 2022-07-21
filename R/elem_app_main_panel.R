@@ -3,13 +3,14 @@ elem_app_main_panel <- function()
     tabsetPanel(
       id = "tabset_panel",
       type = "pills",
+      elem_tab_about(),
       elem_tab_interactions_graph(),
       elem_tab_interactions_table(),
       elem_tab_single_interaction(),
-      elem_tab_db_statistics(),
-      elem_tab_about()
+      elem_tab_db_statistics()
     ),
-    id = "main_panel"
+    id = "main_panel",
+    selected = "about"
   )
 
 #' @importFrom visNetwork visNetworkOutput
