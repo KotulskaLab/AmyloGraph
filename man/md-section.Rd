@@ -3,6 +3,7 @@
 \name{markdown_description}
 \alias{markdown_description}
 \alias{markdown_faq}
+\alias{markdown_download}
 \alias{markdown_citation}
 \alias{markdown_contact}
 \alias{markdown_acknowledgements}
@@ -12,6 +13,8 @@
 markdown_description()
 
 markdown_faq()
+
+markdown_download()
 
 markdown_citation()
 
