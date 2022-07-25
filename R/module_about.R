@@ -3,6 +3,7 @@ ui_about <- function(id) {
     id = "about",
     markdown(markdown_ag_version()),
     markdown(markdown_description()),
+    markdown(markdown_download()),
     markdown(markdown_faq()),
     markdown(markdown_citation()),
     markdown(markdown_contact()),
