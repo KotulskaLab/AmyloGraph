@@ -57,7 +57,11 @@ a.paginate_button:hover {
 button.disabled,
 a.disabled,
 button.disabled:hover,
-a.disabled:hover {
+a.disabled:hover,
+button[disabled],
+a[disabled],
+button[disabled]:hover,
+a[disabled]:hover {
   color: #8A8A8A !important;
   background-color: #F4F4F4 !important;
   border-color: #b9b9b9 !important;
@@ -74,6 +78,7 @@ button.dt-button.active:not(.disabled) {
 #CookiebotWidget button.CookiebotWidget-logo,
 #CookiebotWidget button.CookiebotWidget-logo:hover {
   background-color: transparent !important;
+  background-image: none !important;
   border-color: transparent !important;
 }
 
