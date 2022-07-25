@@ -16,7 +16,6 @@ elem_info_no_node_selected <- function(ns)
 elem_info_node_selected <- function(ns)
   fillCol(
     id = "protein_details",
-    htmlOutput(ns("info")),
     helper(
       checkboxInput(
         ns("ignore_filters"),
@@ -34,6 +33,10 @@ elem_info_node_selected <- function(ns)
     tabsetPanel(
       id = ns("tabs"),
       tabPanel(
+        title = "Sources",
+        htmlOutput(ns("info"))
+      ),
+      tabPanel(
         title = "Interactees",
         ui_table(ns("interactees"), BUTTONS[c("SELECT_ALL", "DESELECT_ALL")])
       ),
@@ -43,5 +46,5 @@ elem_info_node_selected <- function(ns)
       ),
       type = "pills"
     ),
-    flex = c(2, 1, NA, 9)
+    flex = c(NA, NA, 11)
   )
