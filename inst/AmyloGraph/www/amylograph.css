@@ -82,6 +82,10 @@ button.dt-button.active:not(.disabled) {
   border-color: transparent !important;
 }
 
+#CookiebotWidget button.CookiebotWidget-show-consent-details {
+  padding: 6px 12px;
+}
+
 /* VISNETWORK ELEMENTS */
 
 #maindivgraph > div > hr {
