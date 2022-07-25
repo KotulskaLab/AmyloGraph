@@ -30,9 +30,7 @@ ag_server <- function() function(input, output) {
   server_about("about")
   
   output[["graph"]] <- render_network(edges)
-  output[["download_xgmml"]] <- render_XGMML_download("download_xgmml", edges)
-  node_positions <- reactive_node_positions(input, "graph")
-  output[["download_html"]] <- render_HTML_download("download_html", node_positions)
+  observe_graph_buttons(input, output, tabs_visited, edges)
   
   observe_node_selection(input)
   observe_interaction_selection(input)
