@@ -71,6 +71,12 @@ button.dt-button.active:not(.disabled) {
   box-shadow: inset 1px 1px 3px #444;
 }
 
+#CookiebotWidget button.CookiebotWidget-logo,
+#CookiebotWidget button.CookiebotWidget-logo:hover {
+  background-color: transparent !important;
+  border-color: transparent !important;
+}
+
 /* VISNETWORK ELEMENTS */
 
 #maindivgraph > div > hr {
