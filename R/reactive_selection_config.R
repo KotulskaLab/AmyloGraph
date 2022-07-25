@@ -10,12 +10,12 @@
 #' 
 #' @return Value to use as `selection` parameter in `renderDataTable()`, either
 #' a list or a string.
-reactive_selection_config <- function(rvals) {
+reactive_selection_config <- function(tabs_visited, initial_selection) {
   reactive({
-    if (rvals[["table_visited"]]) {
+    if (tabs_visited[["table"]]) {
       list(
         mode = "multiple",
-        selected = rvals[["initially_selected"]],
+        selected = initial_selection(),
         target = "row"
       )
     } else {

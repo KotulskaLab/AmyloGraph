@@ -4,7 +4,14 @@
 \alias{observe_moving_selection}
 \title{Copy selections in subtables to main table}
 \usage{
-observe_moving_selection(input, subtables, edges, table_proxy, rvals)
+observe_moving_selection(
+  input,
+  subtables,
+  edges,
+  table_proxy,
+  tabs_visited,
+  initial_selection
+)
 }
 \arguments{
 \item{input}{[\code{reactivevalues()}]\cr

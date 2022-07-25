@@ -2,14 +2,14 @@
 ag_server <- function() function(input, output) {
   observe_helpers(help_dir = "manuals")
   
-  rvals <- reactiveValues(
-    table_visited = FALSE,
-    initally_selected = NULL
+  tabs_visited <- reactiveValues(
+    graph = FALSE,
+    table = FALSE
   )
   
-  observeEvent(input[["tabset_panel"]], {
-    if (input[["tabset_panel"]] == "table") rvals[["table_visited"]] <- TRUE
-  })
+  initial_selection <- reactiveVal(NULL)
+  
+  observe_tab_visited(tabs_visited, reactive({ input[["tabset_panel"]] }))
   
   edges <- server_filter_control("filter_control")
   subtables <- server_single_protein("single_protein", edges)
@@ -21,7 +21,7 @@ ag_server <- function() function(input, output) {
     edges,
     table_data_func = reactive_table_data,
     render_table_func = render_interactions_table,
-    selection_config = reactive_selection_config(rvals),
+    selection_config = reactive_selection_config(tabs_visited, initial_selection),
     table_data = reactive(edges[["table"]])
   )
   
@@ -37,5 +37,7 @@ ag_server <- function() function(input, output) {
   observe_node_selection(input)
   observe_interaction_selection(input)
   observe_edges_change(input, edges)
-  observe_moving_selection(input, subtables, edges, table_proxy, rvals)
+  observe_moving_selection(
+    input, subtables, edges, table_proxy, tabs_visited, initial_selection
+  )
 }

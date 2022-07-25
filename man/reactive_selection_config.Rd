@@ -4,7 +4,7 @@
 \alias{reactive_selection_config}
 \title{Construct DT selection config}
 \usage{
-reactive_selection_config(rvals)
+reactive_selection_config(tabs_visited, initial_selection)
 }
 \arguments{
 \item{rvals}{[\code{reactivevalues()}]\cr
