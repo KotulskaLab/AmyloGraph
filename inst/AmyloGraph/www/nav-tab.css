@@ -16,7 +16,7 @@
   --border-color: 204, 204, 204;
   color: black;
   border: 1px solid rgb(var(--border-color));
-  background-color: rgba(var(--border-color), 1);
+  background-color: rgba(var(--border-color), 0.1);
   padding: 0.4em 0.8em;
 }
 
