@@ -1,3 +1,5 @@
+@import "nav-tab.css";
+
 :root {
   --col-main-1: #7B1E7A;
   --col-main-2: #F3C677;
@@ -93,19 +95,6 @@ button.dt-button.active:not(.disabled) {
 }
 
 /* SHINY CLASSES */
-
-.tab-content {
-  /* 52 == height of tabbable (42) + 10 px of margin*/ 
-  height: calc(100% - 52px);
-  overflow-y: auto;
-  margin: 10px 0px;
-  padding: 0px 10px;
-}
-
-.tab-content > * {
-  /* 20px because margins; 2px remains a mystery  */
-  height: calc(100% - 22px);
-}
 
 .shinyhelper-container {
   right: 15px !important;
@@ -208,21 +197,6 @@ button.dt-button.active:not(.disabled) {
 #single_protein-ifelse-neg {
   /* 60 px -- size left for selector of protein */
   height: calc(100% - 60px);
-}
-
-#main_panel {
-  padding: 10px;
-}
-
-#tabset_panel,
-#single_protein-tabs {
-  height: 42px;
-  background-color: var(--col-bg);
-  border-radius: 5px;
-}
-
-#main_panel > * > * > .tabbable {
-  height: 100%;
 }
 
 .ag-motif-incorrect {
