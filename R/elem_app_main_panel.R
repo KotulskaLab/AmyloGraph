@@ -9,8 +9,7 @@ elem_app_main_panel <- function()
       elem_tab_single_interaction(),
       elem_tab_db_statistics()
     ),
-    id = "main_panel",
-    selected = "about"
+    id = "main_panel"
   )
 
 #' @importFrom visNetwork visNetworkOutput
