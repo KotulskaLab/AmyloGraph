@@ -35,6 +35,11 @@
 }
 
 .tab-content {
+  /*
+  Added manual height due to the graph not centering
+  52px is the height of #tabset_panel
+  */
+  height: calc(100% - 52px);
   overflow-y: auto;
   padding: 0px 10px;
   margin: 10px 0px;
