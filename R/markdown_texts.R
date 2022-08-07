@@ -88,6 +88,21 @@ discussions."
 }
 
 #' @rdname md-section
+markdown_yttutorial <- function() {
+  "
+## Video tutorial
+
+To learn more about AmyloGraph, watch our introductory video:"
+}
+
+html_yttutorial <- function() {
+'<iframe width="560" height="315" src="https://www.youtube.com/embed/3sZ8g7BaDoA" 
+title="YouTube video player" frameborder="0" 
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+allowfullscreen></iframe>'
+}
+
+#' @rdname md-section
 markdown_images <- function() {
   "
 <img src='inst/AmyloGraph/www/PWr-eng.png' style='width: 500px'>
