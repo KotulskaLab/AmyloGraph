@@ -105,6 +105,6 @@ allowfullscreen></iframe>'
 #' @rdname md-section
 markdown_images <- function() {
   "
-<img src='inst/AmyloGraph/www/PWr-eng.png' style='width: 500px'>
-<img src='inst/AmyloGraph/www/WCSS.png' style='width: 500px'>"
+<img src='vignettes/figures/PWr-eng.png' style='width: 500px'>
+<img src='vignettes/figures/WCSS.png' style='width: 500px'>"
 }
