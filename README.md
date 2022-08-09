@@ -36,12 +36,12 @@ AmyloGraph()
 
 ## Frequently asked questions
 
-#### How can I submit my own data?
+**How can I submit my own data?**
 
 The submission form is [available
 online](https://forms.gle/7sJCBQdhkCxHdBhD7).
 
-#### Why interactions reported in my publications are wrongly annotated?
+**Why interactions reported in my publications are wrongly annotated?**
 
 We try our best by implementing [a rigorous and transparent two-step
 data curation
@@ -51,9 +51,9 @@ email to [Michal Burdukiewicz](mailto:michalburdukiewicz@gmail.com) with
 correctly annotated interactions. Remember to mention their AmyloGraph
 IDs.
 
-## Citation (coming soon)
+## Citation
 
-Burdukiewicz M, Rafacz D, Barbach A, Hubicka K, Bakala M, Lassota A,
+Burdukiewicz M, Rafacz D, Barbach A, Hubicka K, Bakala L, Lassota A,
 Stecko J, Szymanska N, Wojciechowski J, Kozakiewicz D, Szulc N,
 Chilimoniuk J, Jeskowiak I, Gasior-Glogowska M, Kotulska M (2020).
 AmyloGraph: A comprehensive database of amyloid-amyloid interactions.
@@ -69,11 +69,11 @@ email [Michal Burdukiewicz](mailto:michalburdukiewicz@gmail.com).
 AmyloGraph is partially supported by the grant no. [2019/35/B/NZ2/03997
 (National Science
 Center)](https://projekty.ncn.gov.pl/index.php?projekt_id=459038) to
-Małgorzata Kotulska. Access to Wroclaw Centre for Networking and
+Malgorzata Kotulska. Access to Wroclaw Centre for Networking and
 Supercomputing at Wroclaw University of Science and Technology is
 greatly acknowledged. We also thank Daniel Otzen (Aarhus University,
 Denmark) and Vytautas Smirnovas (University of Vilnus, Lithuania) for
 fruitful discussions.
 
-<img src='inst/AmyloGraph/www/PWr-eng.png' style='width: 500px'>
-<img src='inst/AmyloGraph/www/WCSS.png' style='width: 500px'>
+<img src='vignettes/figures/PWr-eng.png' style='width: 500px'>
+<img src='vignettes/figures/WCSS.png' style='width: 500px'>
