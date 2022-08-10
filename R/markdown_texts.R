@@ -96,10 +96,9 @@ To learn more about AmyloGraph, watch our introductory video:"
 }
 
 html_yttutorial <- function() {
-'<iframe width="560" height="315" src="https://www.youtube.com/embed/3sZ8g7BaDoA" 
-title="YouTube video player" frameborder="0" 
-allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-allowfullscreen></iframe>'
+  tags$iframe(width="560", height="315", src="https://www.youtube.com/embed/3sZ8g7BaDoA", 
+              frameborder="0", allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture", 
+              allowfullscreen = NA)
 }
 
 #' @rdname md-section
