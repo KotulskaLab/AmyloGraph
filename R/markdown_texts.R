@@ -104,6 +104,6 @@ html_yttutorial <- function() {
 #' @rdname md-section
 markdown_images <- function() {
   "
-<img src='vignettes/figures/PWr-eng.png' style='width: 500px'>
-<img src='vignettes/figures/WCSS.png' style='width: 500px'>"
+<img src='man/figures/PWr-eng.png' style='width: 500px'>
+<img src='man/figures/WCSS.png' style='width: 500px'>"
 }

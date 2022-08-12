@@ -145,7 +145,7 @@ The source sequence may be not identical to the interactor’s or interactee’s
 # Data acquisition
 
 ```{r,echo=FALSE}
-dat <- AmyloGraph::ag_data_interactions()
+dat <- AmyloGraph::ag_data_interactions
 
 total_number_pubs <- length(unique(dat[["doi"]]))
 total_number_int <- nrow(dat)
@@ -246,7 +246,7 @@ Some exemplary motifs:
 The articles listed below are the sources of curated data in the AmyloGraph database.
 
 ```{r,echo=FALSE,results='asis'}
-all_refs <- arrange(AmyloGraph::ag_references(), nm)
+all_refs <- arrange(AmyloGraph::ag_data_references, nm)
 
 tmp <- lapply(1L:nrow(all_refs), function(ith_ref_id) {
   cat("1. ", AmyloGraph::citify(all_refs[ith_ref_id, ]), ".\n\n", sep = "")
