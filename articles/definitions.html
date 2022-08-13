@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">AmyloGraph</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.4.12</span>
       </span>
     </div>
 
@@ -43,7 +43,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -180,6 +180,7 @@ Comparison of ThT curves.
 <p><strong>Sequence:</strong> The sequence is a vector of amino acids.</p>
 <ol style="list-style-type: decimal">
 <li>In the case when the exact sequence is not known, we provide the longest possible precursor from UniProt.</li>
+<li>If protein is available only in a complex or was isolated (for example, purified from isolated spleen amyloid fibrils), we consider sequence as unavailable.</li>
 <li>If interactee or interactor are mutants/fragments of an amyloid protein, we provide only the sequence of the mutant/fragment and not the wild type protein.</li>
 <li>We consider sequences that have modified amino acids (e.g., methylated), but we do not include this information in the sequence.</li>
 <li>We do NOT consider mutants that instead of standard amino acids have a) non-biogenic amino acids (e.g., tyramine) b) non-amino acid linkers.</li>
@@ -242,6 +243,27 @@ Number of manuscripts, proteins and interactions during the different stages of 
 </h3>
 <p>We consulted the final result of the validation with the authors of manuscripts reporting given interactions. To do so, we contacted corresponding author. In the case of more than two corresponding authors, we took the very last author of the publication. If the corresponding author was not available, we tried to contact the first authors’ of the publication. If somebody authored more then one manuscript we contacted this author about all of the reported interactions.</p>
 <p>We contacted 122 authors. 11 authors confirmed 81 interactions (9.17 %) in 21 manuscripts (12.14 %). Despite our efforts, we could not find a way to contact the authors of three manuscripts.</p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="usage-of-amylograph">Usage of AmyloGraph<a class="anchor" aria-label="anchor" href="#usage-of-amylograph"></a>
+</h2>
+<div class="section level3">
+<h3 id="filter-by-motif">Filter by motif<a class="anchor" aria-label="anchor" href="#filter-by-motif"></a>
+</h3>
+<p>Data in AmyloGraph can be filtered using an amino acid motif. A motif that should appear in either interactor’s or interactee’s sequence. Only interactions between those sequences will be displayed on the graph and in the table.</p>
+<p>A motif should consist of the letters representing amino acids with possibility of using the following ambiguous letters: * “B” – either “D” or “N” * “J” – either “I” or “L” * “Z” – either “E” or “Q” * “X” – any standard amino acid</p>
+<p>Additionally, the character "*" may be used for a subsequence of any (possibly distinct) amino acids of any length. The character “^” may be used as the first character of a motif to mark the beginning of the sequence. Similarly, “$” may be used as the last character of a motif to mark the end of a sequence.</p>
+<p>Some exemplary motifs:</p>
+<ul>
+<li>“A” – any sequence containing “A”</li>
+<li>“GLAAALGA” – any sequence containing “GLAAALGA”</li>
+<li>“^AAAAA” – any sequence starting with “AAAAA”</li>
+<li>“AXXXA” – any sequence containing two “A”s with exactly three amino acids between them</li>
+<li>"A*A" – any sequence containing two “A”s and any number of any amino acids between them</li>
+<li>"^A*GG$" – any sequence starting with a single “A” and ending with a double “G”</li>
+<li>“^AG$” – a sequence that is exactly “AG”</li>
+</ul>
 </div>
 </div>
 <div class="section level2">
@@ -443,7 +465,7 @@ Number of manuscripts, proteins and interactions during the different stages of 
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>

@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">AmyloGraph</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.4.12</span>
       </span>
     </div>
 
@@ -43,7 +43,7 @@
   <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -74,23 +74,42 @@
 <div class="page-header"><h1 id="amylograph">AmyloGraph<a class="anchor" aria-label="anchor" href="#amylograph"></a>
 </h1></div>
 <!-- badges: start -->
-
-<p>AmyloGraph is a manually curated database on interactions between amyloid proteins. It is available as an online database <a href="http://AmyloGraph.com/" class="external-link uri">http://AmyloGraph.com/</a>, but its functionalities are also accessible as this R package. The documentation is also <a href="https://kotulskalab.github.io/AmyloGraph/articles/definitions.html" class="external-link">available online</a>.</p>
+<p>AmyloGraph is a database of interactions between amyloid proteins. Curators of AmyloGraph manually gather data from the the published research literature and community data submissions. To learn more about AmyloGraph, its usage and the process of data curation, visit our <a href="https://kotulskalab.github.io/AmyloGraph/" class="external-link">online manual</a>.</p>
+<p>AmyloGraph is available as an online database <a href="http://AmyloGraph.com/" class="external-link uri">http://AmyloGraph.com/</a>, but its functionalities are also accessible as this R package.</p>
 <div class="section level2">
 <h2 id="run-amylograph-locally">Run AmyloGraph locally<a class="anchor" aria-label="anchor" href="#run-amylograph-locally"></a>
 </h2>
 <p>You can install the development version from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"KotulskaLab/AmyloGraph"</span><span class="op">)</span>
-<span class="co"># then run AmyloGraph using</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">AmyloGraph</span><span class="op">)</span>
-<span class="fu">AmyloGraph</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"KotulskaLab/AmyloGraph"</span><span class="op">)</span></span>
+<span><span class="co"># then run AmyloGraph using</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">AmyloGraph</span><span class="op">)</span></span>
+<span><span class="fu">AmyloGraph</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="funding">Funding<a class="anchor" aria-label="anchor" href="#funding"></a>
+<h2 id="frequently-asked-questions">Frequently asked questions<a class="anchor" aria-label="anchor" href="#frequently-asked-questions"></a>
+</h2>
+<p><strong>How can I submit my own data?</strong></p>
+<p>The submission form is <a href="https://forms.gle/7sJCBQdhkCxHdBhD7" class="external-link">available online</a>.</p>
+<p><strong>Why interactions reported in my publications are wrongly annotated?</strong></p>
+<p>We try our best by implementing <a href="https://kotulskalab.github.io/AmyloGraph/articles/definitions.html#initial-curation" class="external-link">a rigorous and transparent two-step data curation procedure</a>, but despite these measures, we are still prone to errors. Please send an email to <a href="mailto:michalburdukiewicz@gmail.com">Michal Burdukiewicz</a> with correctly annotated interactions. Remember to mention their AmyloGraph IDs.</p>
+</div>
+<div class="section level2">
+<h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
+</h2>
+<p>Burdukiewicz M, Rafacz D, Barbach A, Hubicka K, Bakala L, Lassota A, Stecko J, Szymanska N, Wojciechowski J, Kozakiewicz D, Szulc N, Chilimoniuk J, Jeskowiak I, Gasior-Glogowska M, Kotulska M (2020). AmyloGraph: A comprehensive database of amyloid-amyloid interactions. XXXYYY, doi.</p>
+</div>
+<div class="section level2">
+<h2 id="contact">Contact<a class="anchor" aria-label="anchor" href="#contact"></a>
+</h2>
+<p>For general questions or problems with the data or database, please email <a href="mailto:michalburdukiewicz@gmail.com">Michal Burdukiewicz</a>.</p>
+</div>
+<div class="section level2">
+<h2 id="acknowledgements">Acknowledgements<a class="anchor" aria-label="anchor" href="#acknowledgements"></a>
 </h2>
 <p>AmyloGraph is partially supported by the grant no. <a href="https://projekty.ncn.gov.pl/index.php?projekt_id=459038" class="external-link">2019/35/B/NZ2/03997 (National Science Center)</a> to Małgorzata Kotulska. Access to Wroclaw Centre for Networking and Supercomputing at Wroclaw University of Science and Technology is greatly acknowledged. We also thank Daniel Otzen (Aarhus University, Denmark) and Vytautas Smirnovas (University of Vilnus, Lithuania) for fruitful discussions.</p>
+<p><img src="reference/figures/PWr-eng.png" style="width: 500px"><img src="reference/figures/WCSS.png" style="width: 500px"></p>
 </div>
 </div>
   </div>
@@ -109,6 +128,7 @@
 <ul class="list-unstyled">
 <li><a href="CONTRIBUTING.html">Contributing guide</a></li>
 <li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
+<li><a href="SUPPORT.html">Getting help</a></li>
 </ul>
 </div>
 
@@ -147,7 +167,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
