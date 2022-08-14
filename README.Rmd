@@ -52,6 +52,11 @@ cat(AmyloGraph:::markdown_contact())
 ```
 
 ```{r, echo=FALSE, results='asis'}
+cat(AmyloGraph:::markdown_yttutorial())
+cat(htmltools::renderTags(AmyloGraph:::html_yttutorial())[["html"]])
+```
+
+```{r, echo=FALSE, results='asis'}
 cat(AmyloGraph:::markdown_acknowledgements())
 ```
 
