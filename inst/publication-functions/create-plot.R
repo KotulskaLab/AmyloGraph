@@ -8,7 +8,7 @@ font_add_google("Lato")
 showtext_auto()
 
 dat <- data.frame(interactions = c(NA, NA, 863, 883, 883),
-                  manuscripts = c(24, 364, 185, 173, 173),
+                  manuscripts = c(24, 364, 185, 172, 172),
                   step = c("In-house collection", "Extended search", 
                            "Initial\ncuration", "Validation", "Contact with authors"),
                   stage = c("A) Pre-screen of manuscripts",

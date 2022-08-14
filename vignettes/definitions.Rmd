@@ -191,7 +191,7 @@ The final list covers `r total_number_int` interactions between `r total_number_
 ```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.width=8,fig.cap="Number of manuscripts, proteins and interactions during the different stages of data curation."}
 data.frame(interactions = c(NA, 863, 883),
            proteins = c(NA, 49, 47),
-           manuscripts = c(364, 185, 173),
+           manuscripts = c(364, 185, 172),
            stage = c("Manuscript\ncollection", "Initial\ncuration", "Validation")) %>% 
   mutate(stage = factor(stage, levels = unique(stage))) %>% 
   pivot_longer(cols = -stage) %>% 
