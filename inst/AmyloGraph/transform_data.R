@@ -80,20 +80,22 @@ all_names <- sapply(doi_df[["data"]][["author"]], function(x) {
 
 # for some reason, crossref fails to return 10.3109/13506129.2011.630761 and it has to be added manually
 
-Larsson_df <- data.frame(doi = "10.3109/13506129.2011.630761",
-           nm = "Larsson",
-           all_names = "Annika Larsson, Susanna Malmström, Per Westermark",
-           title = "Signs of cross-seeding: aortic medin amyloid as a trigger for protein AA deposition",
-           journal = "Amyloid",
-           year = 2011)
+get_year <- function(x) {
+  as.numeric(sapply(strsplit(x, "-"), first))
+}
+
+years <- select(doi_df[["data"]], doi, published.print, published.online) %>% 
+  mutate(published.print = get_year(published.print),
+         published.online = get_year(published.online)) %>% 
+  group_by(doi) %>% 
+  mutate(year = min(published.print, published.online, na.rm = TRUE)) %>% 
+  pull(year)
 
 data.frame(doi = doi_df[["data"]][["doi"]],
            nm = sapply(nms, function(i) i[["family"]]),
            all_names = all_names, 
            title = remove_breaklines(doi_df[["data"]][["title"]]),
            journal = doi_df[["data"]][["container.title"]],
-           year = doi_df[["data"]][["deposited"]]) %>% 
-  mutate(year = as.numeric(sapply(strsplit(year, "-"), function(i) i[[1]]))) %>% 
-  rbind(Larsson_df) %>% 
+           year = years) %>% 
   write.csv("inst/AmyloGraph/reference_table.csv",
             row.names = FALSE, fileEncoding = "UTF-8")
