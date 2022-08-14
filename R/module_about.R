@@ -5,6 +5,8 @@ ui_about <- function(id) {
     markdown(markdown_description()),
     markdown(markdown_download()),
     markdown(markdown_faq()),
+    markdown(markdown_yttutorial()),
+    html_yttutorial(),
     markdown(markdown_citation()),
     markdown(markdown_contact()),
     markdown(markdown_acknowledgements()),
