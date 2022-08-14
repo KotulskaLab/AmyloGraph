@@ -14,12 +14,15 @@ server_interaction_doi <- function(id, interaction) {
     observe({
       req(interaction())
       
-      doi <- interaction() %>%
+      single_doi <- interaction() %>%
         pluck("doi") %>%
         tolower()
       
+      ag_data_references %>%
+        filter(doi == single_doi) %>% 
+        print
       output[["reference"]] <- ag_data_references %>%
-        filter(doi == doi) %>%
+        filter(doi == single_doi) %>%
         citify() %>%
         renderMarkdown(text = .) %>%
         HTML() %>%
