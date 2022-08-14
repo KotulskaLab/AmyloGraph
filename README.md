@@ -69,7 +69,7 @@ email [Michal Burdukiewicz](mailto:michalburdukiewicz@gmail.com).
 To learn more about AmyloGraph, watch our introductory video:
 
 [![AmyloGraph
-tutorial](http://img.youtube.com/vi/3sZ8g7BaDoA/0.jpg)](https://www.youtube.com/embed/3sZ8g7BaDoA "AmyloGraph tutorial")
+tutorial](http://img.youtube.com/vi/3sZ8g7BaDoA/0.jpg)](https://www.youtube.com/watch?v=3sZ8g7BaDoA "AmyloGraph tutorial")
 
 ## Acknowledgements
 
