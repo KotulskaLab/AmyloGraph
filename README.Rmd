@@ -55,7 +55,7 @@ cat(AmyloGraph:::markdown_contact())
 cat(AmyloGraph:::markdown_yttutorial())
 ```
 
-[![AmyloGraph tutorial](http://img.youtube.com/vi/3sZ8g7BaDoA/0.jpg)](https://www.youtube.com/embed/3sZ8g7BaDoA "AmyloGraph tutorial")
+[![AmyloGraph tutorial](http://img.youtube.com/vi/3sZ8g7BaDoA/0.jpg)](https://www.youtube.com/watch?v=3sZ8g7BaDoA "AmyloGraph tutorial")
 
 ```{r, echo=FALSE, results='asis'}
 cat(AmyloGraph:::markdown_acknowledgements())
