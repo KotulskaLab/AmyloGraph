@@ -5,10 +5,11 @@
 
 <!-- badges: start -->
 
+<!-- [![CRAN
+status](https://www.r-pkg.org/badges/version/AmyloGraph2)](https://CRAN.R-project.org/package=AmyloGraph2)-->
+
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-[![CRAN
-status](https://www.r-pkg.org/badges/version/AmyloGraph2)](https://CRAN.R-project.org/package=AmyloGraph2)
 [![R-CMD-check](https://github.com/KotulskaLab/AmyloGraph/workflows/R-CMD-check/badge.svg)](https://github.com/KotulskaLab/AmyloGraph/actions)
 <!-- badges: end -->
 
