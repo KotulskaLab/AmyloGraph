@@ -40,6 +40,7 @@ Imports:
     XML
 Suggests: 
     chipPCR,
+    ggh4x,
     knitr,
     patchwork,
     rmarkdown,
