@@ -266,4 +266,3 @@ tmp <- lapply(1L:nrow(all_refs), function(ith_ref_id) {
   cat("1. ", AmyloGraph::citify(all_refs[ith_ref_id, ]), ".\n\n", sep = "")
 })
 ```
-

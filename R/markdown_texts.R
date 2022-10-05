@@ -62,7 +62,8 @@ markdown_citation <- function() {
 
 Burdukiewicz M, Rafacz D, Barbach A, Hubicka K, Bakala L, Lassota A, Stecko J, Szymanska N,
 Wojciechowski J, Kozakiewicz D, Szulc N, Chilimoniuk J, Jeskowiak I, Gasior-Glogowska M,
-Kotulska M (2020). AmyloGraph: A comprehensive database of amyloid-amyloid interactions. XXXYYY, doi."
+Kotulska M (2022). AmyloGraph: A comprehensive database of amyloid-amyloid interactions. 
+Nucleic Acid Research, 10.1093/nar/gkac882"
 }
 
 #' @rdname md-section
