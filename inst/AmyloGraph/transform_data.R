@@ -78,8 +78,6 @@ all_names <- sapply(doi_df[["data"]][["author"]], function(x) {
 })
 #sapply(nms, function(i) paste0(substr(i[["given"]], 0, 1), " ", i[["family"]], " et al."))) %>% 
 
-# for some reason, crossref fails to return 10.3109/13506129.2011.630761 and it has to be added manually
-
 get_year <- function(x) {
   as.numeric(sapply(strsplit(x, "-"), first))
 }
