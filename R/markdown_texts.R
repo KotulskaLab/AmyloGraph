@@ -62,7 +62,8 @@ markdown_citation <- function() {
 
 Burdukiewicz M, Rafacz D, Barbach A, Hubicka K, Bakala L, Lassota A, Stecko J, Szymanska N,
 Wojciechowski J, Kozakiewicz D, Szulc N, Chilimoniuk J, Jeskowiak I, Gasior-Glogowska M,
-Kotulska M (2020). AmyloGraph: A comprehensive database of amyloid-amyloid interactions. XXXYYY, doi."
+Kotulska M (2022). AmyloGraph: A comprehensive database of amyloid-amyloid interactions. 
+Nucleic Acid Research, [10.1093/nar/gkac882](https://doi.org/10.1093/nar/gkac882)."
 }
 
 #' @rdname md-section
@@ -88,8 +89,22 @@ discussions."
 }
 
 #' @rdname md-section
+markdown_yttutorial <- function() {
+  "
+## Video tutorial
+
+To learn more about AmyloGraph, watch our introductory video:"
+}
+
+html_yttutorial <- function() {
+  tags$iframe(width="560", height="315", src="https://www.youtube.com/embed/3sZ8g7BaDoA", 
+              frameborder="0", allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture", 
+              allowfullscreen = NA, `data-cookieconsent`="ignore")
+}
+
+#' @rdname md-section
 markdown_images <- function() {
   "
-<img src='inst/AmyloGraph/www/PWr-eng.png' style='width: 500px'>
-<img src='inst/AmyloGraph/www/WCSS.png' style='width: 500px'>"
+<img src='man/figures/PWr-eng.png' style='width: 500px'>
+<img src='man/figures/WCSS.png' style='width: 500px'>"
 }

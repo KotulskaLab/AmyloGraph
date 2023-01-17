@@ -7,6 +7,7 @@
 \alias{markdown_citation}
 \alias{markdown_contact}
 \alias{markdown_acknowledgements}
+\alias{markdown_yttutorial}
 \alias{markdown_images}
 \title{Access AmyloGraph section as a string}
 \usage{
@@ -21,6 +22,8 @@ markdown_citation()
 markdown_contact()
 
 markdown_acknowledgements()
+
+markdown_yttutorial()
 
 markdown_images()
 }

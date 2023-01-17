@@ -4,5 +4,7 @@
 .Ruserdata
 AmyloGraph-app.Rproj
 inst/doc
+inst/publication-functions/curation-plot.pdf
+inst/publication-functions/supplements.pdf
 /doc/
 /Meta/

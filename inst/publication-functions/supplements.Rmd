@@ -22,6 +22,7 @@ output:
 header-includes: 
   - \usepackage[utf8]{inputenc}
   - \usepackage[german, polish, english]{babel}
+  - \renewcommand{\thefigure}{S\arabic{figure}}
 ---
 
 \tableofcontents

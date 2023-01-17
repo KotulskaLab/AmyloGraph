@@ -20,6 +20,7 @@ library(dplyr)
 library(ggplot2)
 library(patchwork)
 library(tidyr)
+library(ggh4x)
 ```
 
 
@@ -145,7 +146,7 @@ The source sequence may be not identical to the interactor’s or interactee’s
 # Data acquisition
 
 ```{r,echo=FALSE}
-dat <- AmyloGraph::ag_data_interactions()
+dat <- AmyloGraph::ag_data_interactions
 
 total_number_pubs <- length(unique(dat[["doi"]]))
 total_number_int <- nrow(dat)
@@ -189,23 +190,36 @@ They reviewed interaction records similarly to during the initial curation step.
 The final list covers `r total_number_int` interactions between `r total_number_prot` proteins described in `r total_number_pubs` manuscripts. 
 
 ```{r,echo=FALSE,message=FALSE,warning=FALSE,fig.width=8,fig.cap="Number of manuscripts, proteins and interactions during the different stages of data curation."}
-data.frame(interactions = c(NA, 863, 883),
-           proteins = c(NA, 49, 47),
-           manuscripts = c(364, 185, 173),
-           stage = c("Manuscript\ncollection", "Initial\ncuration", "Validation")) %>% 
-  mutate(stage = factor(stage, levels = unique(stage))) %>% 
-  pivot_longer(cols = -stage) %>% 
+dat <- data.frame(interactions = c(NA, NA, 863, 883, 883),
+                  manuscripts = c(24, 364, 185, 172, 172),
+                  step = c("In-house collection", "Extended search", 
+                           "Initial\ncuration", "Validation", "Contact with authors"),
+                  stage = c("A) Pre-screen of manuscripts",
+                            "A) Pre-screen of manuscripts",
+                            "B) Manual curation", "B) Manual curation",
+                            "C) Independent validation")) %>% 
+  mutate(stage = factor(stage, levels = unique(stage)),
+         step = factor(step, levels = unique(step))) %>% 
+  pivot_longer(cols = c(interactions, manuscripts)) %>% 
   na.omit() %>% 
   mutate(name = factor(name, 
-                       levels = c("manuscripts", "proteins", "interactions"),
-                       labels = c("Manuscripts", "Proteins", "Interactions"))) %>% 
-  ggplot(aes(x = stage, y = value, label = value)) +
-  geom_col() +
-  geom_label(aes(y = value*0.5)) +
-  scale_x_discrete("Stage of curation", na.translate = FALSE) +
+                       levels = c("manuscripts", "interactions"),
+                       labels = c("Manuscripts", "Interactions")))
+
+ggplot(dat, aes(x = "a", y = value, label = value, fill = name)) +
+  geom_col(position = position_dodge(width = 1)) + 
+  geom_label(aes(y = ifelse(value < 50, value + 70, value/2)), 
+             position = position_dodge(width = 1), show.legend = FALSE) +
+  scale_x_discrete("") +
   scale_y_continuous("Count") +
-  facet_wrap(~ name, scales = "free") +
-  theme_bw()
+  scale_fill_manual("", values = c("#f1a340", "#998ec3")) +
+  facet_nested_wrap(~ stage + step, scales = "free_x", nrow = 1) +
+  theme_bw() +
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        panel.grid.major.x = element_blank(),
+        legend.position = "bottom")
+
 ```
 
 
@@ -246,10 +260,9 @@ Some exemplary motifs:
 The articles listed below are the sources of curated data in the AmyloGraph database.
 
 ```{r,echo=FALSE,results='asis'}
-all_refs <- arrange(AmyloGraph::ag_references(), nm)
+all_refs <- arrange(AmyloGraph::ag_data_references, nm)
 
 tmp <- lapply(1L:nrow(all_refs), function(ith_ref_id) {
   cat("1. ", AmyloGraph::citify(all_refs[ith_ref_id, ]), ".\n\n", sep = "")
 })
 ```
-

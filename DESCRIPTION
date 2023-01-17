@@ -1,6 +1,6 @@
 Package: AmyloGraph
 Title: AmyloGraph: a comprehensive database of amyloid-amyloid interactions
-Version: 0.4.12
+Version: 0.5.0
 Authors@R: c(person("Michal", "Burdukiewicz", 
            email = "michalburdukiewicz@gmail.com", 
            comment = c(ORCID = "0000-0001-8926-582X"),
@@ -40,11 +40,14 @@ Imports:
     XML
 Suggests: 
     chipPCR,
+    ggh4x,
     knitr,
     patchwork,
+    rcrossref (>= 1.2.9),
     rmarkdown,
     shinytest,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    tidyr
 Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true

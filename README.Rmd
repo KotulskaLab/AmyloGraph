@@ -8,7 +8,7 @@ output: github_document
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "man/figures/README-",
+  fig.path = "man/figures/",
   out.width = "100%"
 )
 ```
@@ -50,6 +50,12 @@ cat(AmyloGraph:::markdown_citation())
 ```{r, echo=FALSE, results='asis'}
 cat(AmyloGraph:::markdown_contact())
 ```
+
+```{r, echo=FALSE, results='asis'}
+cat(AmyloGraph:::markdown_yttutorial())
+```
+
+[![AmyloGraph tutorial](http://img.youtube.com/vi/3sZ8g7BaDoA/0.jpg)](https://www.youtube.com/watch?v=3sZ8g7BaDoA "AmyloGraph tutorial")
 
 ```{r, echo=FALSE, results='asis'}
 cat(AmyloGraph:::markdown_acknowledgements())

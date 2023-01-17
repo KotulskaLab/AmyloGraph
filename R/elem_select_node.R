@@ -11,6 +11,6 @@ elem_select_node <- function(id)
         )),
         multiple = FALSE),
       type = "markdown",
-      content = "label_group"
+      content = "select_node"
     )
   )
