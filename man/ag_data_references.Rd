@@ -5,7 +5,7 @@
 \alias{ag_data_references}
 \title{AmyloGraph references list}
 \format{
-An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 173 rows and 6 columns.
+An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 171 rows and 6 columns.
 }
 \usage{
 ag_data_references

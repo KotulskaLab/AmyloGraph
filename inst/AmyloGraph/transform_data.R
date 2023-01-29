@@ -13,10 +13,6 @@ degreekize <- function(names)
 
 remove_breaklines <- function(text) stri_replace_all_fixed(text, "\n", " ")
 
-sequentize <- function(sequences) sequences %>%
-  stri_replace_all_regex("[0-9]| ", "") %>%
-  stri_trans_toupper
-
 substitute_with_na <- function(sequences) sequences %>%
   ifelse(. %in% c("sequence unavailable (protein complex)", "sequence unavailable"),
          NA_character_, .)
@@ -47,8 +43,8 @@ readRDS("inst/AmyloGraph/AmyloGraph.RDS") %>%
   mutate(across(ends_with("sequence"), substitute_with_na)) %>%
   mutate(interactor_name = degreekize(interactor_name),
          interactee_name = degreekize(interactee_name),
-         interactor_sequence = sequentize(interactor_sequence),
-         interactee_sequence = sequentize(interactee_sequence),
+         interactor_sequence = interactor_sequence,
+         interactee_sequence = interactee_sequence,
          aggregation_speed_details = degreekize(aggregation_speed_details),
          elongates_by_attaching_details = degreekize(elongates_by_attaching_details),
          heterogenous_fibers_details = degreekize(heterogenous_fibers_details),
