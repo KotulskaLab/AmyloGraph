@@ -14,14 +14,18 @@
 #' 
 #' @return A `downloadHandler` object.
 #' 
-#' @importFrom dplyr select slice
+#' @importFrom dplyr relocate select slice
+#' @importFrom purrr map_chr
 table_download_handler <- function(input, table_data, write_function, extension)  {
   downloadHandler(
     filename = function() glue("AmyloGraph.{extension}"),
     content = function(file) write_function(
       table_data() %>%
         slice(input[["table_rows_selected"]]) %>%
-        select(-c(from_id, to_id)),
+        mutate(interactor_sequence = map_chr(interactor_sequence, deparse_chains),
+               interactee_sequence = map_chr(interactee_sequence, deparse_chains)) %>%
+        select(-c(from_id, to_id, AGID_button)) %>%
+        relocate(AGID),
       file
     )
   )

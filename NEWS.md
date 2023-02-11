@@ -1,3 +1,11 @@
+# AmyloGraph 0.5.2
+
+Fixes:
+
+* Sequences are now included in CSV and XLSX export.
+* HTML buttons are not exported anymore.
+* AGID column was relocated to the first position.
+
 # AmyloGraph 0.3.0
 
 Functionalities:
