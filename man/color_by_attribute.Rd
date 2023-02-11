@@ -17,5 +17,5 @@ Name of a currently selected attribute (if none, empty string).}
 A \code{tibble} with additional \code{color} column of character type.
 }
 \description{
-
+Add colors depending on attribute value
 }
