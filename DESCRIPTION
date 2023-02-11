@@ -1,6 +1,6 @@
 Package: AmyloGraph
 Title: AmyloGraph: a comprehensive database of amyloid-amyloid interactions
-Version: 0.5.1
+Version: 0.5.2
 Authors@R: c(person("Michal", "Burdukiewicz", 
            email = "michalburdukiewicz@gmail.com", 
            comment = c(ORCID = "0000-0001-8926-582X"),
@@ -52,5 +52,5 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.3
 VignetteBuilder: knitr
