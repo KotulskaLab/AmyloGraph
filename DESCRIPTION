@@ -43,7 +43,7 @@ Suggests:
     ggh4x,
     knitr,
     patchwork,
-    rcrossref (>= 1.2.9),
+    rcrossref,
     rmarkdown,
     shinytest,
     testthat (>= 3.0.0),
